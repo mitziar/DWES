@@ -22,26 +22,28 @@
     <div class="jumbotron" style="background-color: bisque;">
       <div class="container">
         <h1><a href="../../../index.html">Desarrollo Web en Entorno Servidor</a></h1>
-        <h2><center>Pirámide</center></h2>
+        <h2><center>Rombo</center></h2>
       </div>
     </div>
 
     <div class="container">
         <div class="row">
-            <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a>/Ejercicio 1</h4>
+            <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a>/Ejercicio 2</h4>
         </div>
       <!-- Example row of columns -->
     <div class="row">
     <pre>
     Realiza un programa utilizando bucles que muestre la siguiente figura teniendo en cuenta el numero de filas que pase el usuario por la URL
     Figura: 
-                *
-               ***
-              ***** 
+                 *
+                ***
+               *****
+                ***
+                 *
     </pre>
     <?php
         $filas = $_GET['filas'];
-        for ($i=1;$i<=$filas;$i++){
+        for ($i=1;$i<=$filas/2+1;$i++){
             for($blanco=1;$blanco<=$filas-$i;$blanco++){
                 print("&nbsp;");
             }
@@ -50,7 +52,15 @@
             }  
             echo"<br>";
         }
-        
+        for ($i=$filas/2-1;$i>=0;$i--){
+            for($blanco=$filas/2+$i;$blanco>=0;$blanco--){
+                print("&nbsp;");
+            }
+            for($asterisco=$i/2+1;$asterisco>=0;$asterisco--){
+                print("*");
+            }  
+            echo"<br>";
+        }
     ?>
     </div> <!-- /container -->
     <footer class="container" style="background-color: bisque;">

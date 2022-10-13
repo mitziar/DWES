@@ -13,7 +13,9 @@
 <link rel="stylesheet" href="">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
     <title>DWES-Itziar</title>
+
 
   </head>
 
@@ -21,40 +23,28 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" style="background-color: bisque;">
       <div class="container">
-        <h1><a href="../../../index.html">Desarrollo Web en Entorno Servidor</a></h1>
-        <h2><center>Pirámide</center></h2>
+        <h1><a href="../index.html">Desarrollo Web en Entorno Servidor</a></h1>
+        <h2><center>Tema 3</center></h2>
       </div>
     </div>
 
     <div class="container">
-        <div class="row">
-            <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a>/Ejercicio 1</h4>
-        </div>
       <!-- Example row of columns -->
-    <div class="row">
-    <pre>
-    Realiza un programa utilizando bucles que muestre la siguiente figura teniendo en cuenta el numero de filas que pase el usuario por la URL
-    Figura: 
-                *
-               ***
-              ***** 
-    </pre>
-    <?php
-        $filas = $_GET['filas'];
-        for ($i=1;$i<=$filas;$i++){
-            for($blanco=1;$blanco<=$filas-$i;$blanco++){
-                print("&nbsp;");
-            }
-            for($asterisco=1;$asterisco<=$i*2-1;$asterisco++){
-                print("*");
-            }  
-            echo"<br>";
-        }
-        
-    ?>
-    </div> <!-- /container -->
-    <footer class="container" style="background-color: bisque;">
-    <p><center>Página de Itziar</center></p>
-    </footer>
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Código de clase</h2>
+          <p>Archivos con prácticas de clase</p>
+          <p><a class="btn btn-default" href="Codigo clase/index.html" role="button">Ver »</a></p>
+      </div>
+      <div class="col-md-4">
+        <h2>Prácticas</h2>
+        <p>Prácticas para entregar</p>
+        <p><a class="btn btn-default" href="Practicas/index.html" role="button">Ver »</a></p>
+    </div>
+      </div> <!-- /container -->
+      <footer class="container" style="background-color: bisque;">
+        <p><center>Página de Itziar</center></p>
+      </footer>
     
+
 </body></html>
