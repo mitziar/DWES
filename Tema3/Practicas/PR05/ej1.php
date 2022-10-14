@@ -41,8 +41,8 @@
         $datos= array(2,5,9,7,6,3,1,5,4,8,3,2,6,9,3,5,1,2,3);
 
         sort($datos,SORT_NUMERIC)
-        foreach ($datos as $clave) {
-         
+        foreach ($datos as $clave => $value) {
+         echo " Clave ".$clave." Value ".$value;
         }
     ?>
     </div> <!-- /container -->

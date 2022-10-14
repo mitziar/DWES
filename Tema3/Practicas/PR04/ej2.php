@@ -43,24 +43,28 @@
     </pre>
     <?php
         $filas = $_GET['filas'];
-        for ($i=1;$i<=$filas/2+1;$i++){
-            for($blanco=1;$blanco<=$filas-$i;$blanco++){
-                print("&nbsp;");
+        $superior=0;
+        $inferiro=0;
+        //Calcular las filas del triangulo superior
+        
+            $superior=(int)($filas/2+1);
+            $inferiro=(int)($filas/2);
+        
+        //recorrer superior
+        for ($i=1;$i<=$superior;$i++){
+            //escribir los espacios tiene que se igual al numero de filas menos la fila en la que estoy
+            for($blanco=1; $blanco<=$superior-$i;$blanco++){
+                echo "&nbsp;";
             }
-            for($asterisco=1;$asterisco<=$i*2-1;$asterisco++){
-                print("*");
-            }  
-            echo"<br>";
-        }
-        for ($i=$filas/2-1;$i>=0;$i--){
-            for($blanco=$filas/2+$i;$blanco>=0;$blanco--){
-                print("&nbsp;");
+            //en el for tengo que sumar de dos en dos
+            for($asterisco=1;$asterisco<=$i*2-1;$asterisco+=2)
+            {
+                echo "*";
             }
-            for($asterisco=$i/2+1;$asterisco>=0;$asterisco--){
-                print("*");
-            }  
-            echo"<br>";
+            echo "<br>";
         }
+        
+           
     ?>
     </div> <!-- /container -->
     <footer class="container" style="background-color: bisque;">
