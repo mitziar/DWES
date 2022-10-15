@@ -22,13 +22,13 @@
     <div class="jumbotron" style="background-color: bisque;">
       <div class="container">
         <h1><a href="../../../index.html">Desarrollo Web en Entorno Servidor</a></h1>
-        <h2><center>Pirámide</center></h2>
+        <h2><center>Ejercicio 1</center></h2>
       </div>
     </div>
 
     <div class="container">
         <div class="row">
-            <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a>/Ejercicio 1</h4>
+            <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a><a href="index.html">/P04</a>/Ejercicio 1</h4>
         </div>
       <!-- Example row of columns -->
     <div class="row">

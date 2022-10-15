@@ -22,61 +22,38 @@
     <div class="jumbotron" style="background-color: bisque;">
       <div class="container">
         <h1><a href="../../../index.html">Desarrollo Web en Entorno Servidor</a></h1>
-        <h2><center>Ejercicio 2</center></h2>
+        <h2><center>Ejercicio 4</center></h2>
       </div>
     </div>
 
     <div class="container">
         <div class="row">
-            <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a><a href="index.html">/PR04</a>/Ejercicio 2</h4>
+            <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a><a href="index.html">/PR04</a>/Ejercicio 4</h4>
         </div>
       <!-- Example row of columns -->
     <div class="row">
     <pre>
-    Realiza un programa utilizando bucles que muestre la siguiente figura teniendo en cuenta el numero de filas que pase el usuario por la URL
-    Figura: 
-                 *
-                ***
-               *****
-                ***
-                 *
+    Programa que pasado un valor por la URL de un producto con 2 decimales y posteriormente un valor con el que pagar por encima 
+    (Valor del producto 6.33€ y ha pagado con 10€). Muestra el número mínimo de monedas con las que puedes devolver el cambio
     </pre>
     <?php
-        $filas = $_GET['filas'];
-        $superior=0;
-        $inferiro=0;
-        //Calcular las filas del triangulo superior
+        $precio=floatval($_GET['producto']);
+        $entrega=floatval($_GET['pago']);
+        $total="";
+        $resto=0;
+        
+        $devolucion=$entrega-$precio;
 
-            $superior=(int)($filas/2+1);
-            $inferiro=(int)($filas/2);
-
-        //recorrer superior
-        for ($i=1;$i<=$superior;$i++){
-            //escribir los espacios tiene que se igual al numero de filas menos la fila en la que estoy
-            for($blanco=1; $blanco<=$superior-$i;$blanco++){
-                echo "&nbsp;";
-            }
-            //en el for tengo que sumar de dos en dos
-            for($asterisco=1;$asterisco<=$i*2-1;$asterisco+=2)
-            {
-                echo "*";
-            }
-            echo "<br>";
+        //de dos euros
+        $monedaMayor=intval($devolucion/2);
+        echo $monedaMayor." dos euros ";
+        $resto=$devolucion%2.00;
+        if($monedaMayor>0 && $devolucion%2.00==0){
+            $total=$monedaMayor." monedas de 2 euros";
+            $precio+=2.00;
+            
         }
-        //recorrer inferior
-        for ($i=1;$i<=$inferiro;$i++){
-            //escribir los espacios tiene que se igual al numero de filas menos la fila en la que estoy
-            for($blanco=1; $blanco<=$i*2-1;$blanco+=2){
-                echo "&nbsp;";
-            }
-            //en el for tengo que sumar de dos en dos
-            for($asterisco=0;$asterisco<=$inferiro-$i;$asterisco++)
-            {
-                echo "*";
-            }
-            echo "<br>";
-        }
-           
+        echo " un euros ".$resto;
     ?>
     </div> <!-- /container -->
     <footer class="container" style="background-color: bisque;">
