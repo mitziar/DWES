@@ -40,20 +40,21 @@
         $precio=floatval($_GET['producto']);
         $entrega=floatval($_GET['pago']);
         $total="";
-        $resto=0;
-        
+        $decimal=0;
+        $monedasDisponibles= array (2=>" monedas de 2 euros." , 1=>"monedas de 1 euro.",0.50=> " monedas de 50 centimos.",0.20=>" monedas de 20 centimos."  , 0.10=>" monedas de 10 centimos.",0.05=>" monedas de 5 centimos.",0.02=>" monedas de 2 centimos.",0.01=>" monedas de 1 centimo.");
         $devolucion=$entrega-$precio;
 
-        //de dos euros
-        $monedaMayor=intval($devolucion/2);
-        echo $monedaMayor." dos euros ";
-        $resto=$devolucion%2.00;
-        if($monedaMayor>0 && $devolucion%2.00==0){
-            $total=$monedaMayor." monedas de 2 euros";
-            $precio+=2.00;
-            
+        foreach ($monedasDisponibles as $key => $value) {
+          if($devolucion > 0){
+            $total=$total." ".intval($devolucion/$key)." ".$value."<br>";
+
+            echo $total." total<br>";
+            $devolucion =  $devolucion - $key;
+            echo $devolucion." devolucion<br>";
+          }
         }
-        echo " un euros ".$resto;
+        
+        echo "Las monedas devueltas son: ".$total;
     ?>
     </div> <!-- /container -->
     <footer class="container" style="background-color: bisque;">

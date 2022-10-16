@@ -21,34 +21,42 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" style="background-color: bisque;">
       <div class="container">
-        <h1><a href="../../index.html">Desarrollo Web en Entorno Servidor</a></h1>
-        <h2><center>Práctica 04</center></h2>
+        <h1><a href="../../../index.html">Desarrollo Web en Entorno Servidor</a></h1>
+        <h2><center>Ejercicio 1</center></h2>
       </div>
     </div>
 
     <div class="container">
         <div class="row">
-            <h4><a href="../../">Tema 3</a><a href="../">/Practicas</a>/PR05-Practica05</h4>
+        <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a><a href="index.html">/PR05</a>/Ejercicio 1</h4>
         </div>
       <!-- Example row of columns -->
     <div class="row">
-                <div class="col-md-4">
-          <h2>Ejercicio 1</h2>
-            <p>Escribe un programa que dado un array, ordénalo y devuelve otro array sin que haya elementos repetidos</p>
-            <p><a class="btn btn-default" href="ej1.php" role="button">Ver »</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Ejercicio 2</h2>
-            <p>Escribe un programa que dado un array devuelva la posición donde haya el valor 3 y cambie el
-              valor por el número de la posición</p>
-            <p><a class="btn btn-default" href="ej2.php" role="button">Ver »</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Ejercicio 3</h2>
-            <p>Escribe un programa que pida por pantalla el tamaño de una matriz (Ej lado=4). Rellene de la siguiente manera.</p>
-            <p><a class="btn btn-default" href="ej3.php?dato=4" role="button">Ver »</a></p>
-        </div>
+    <pre>
+    Escribe un programa que dado un array devuelva la posición donde haya el valor 3 y cambie el
+    valor por el número de la posición
 
+        datos=[2,5,9,7,6,3,1,5,4,8,3,2,6,9,3,5,1,2,3]
+    </pre>
+    <?php
+        $datos= array(2,5,9,7,6,3,1,5,4,8,3,2,6,9,3,5,1,2,3);
+
+        echo "Array sin transformar: ";
+        foreach ($datos as $value) {
+            echo $value;
+        }
+        echo "<br>";
+        foreach ($datos as $clave =>$value) {
+            if($value == 3){
+                echo "El número 3 está en la posición ".$clave."<br>";
+                $datos[$clave]=$clave;
+            }
+        }
+        echo "Array transformado: ";
+        foreach ($datos as $value) {
+            echo $value."-";
+        }
+    ?>
     </div> <!-- /container -->
     <footer class="container" style="background-color: bisque;">
     <p><center>Página de Itziar</center></p>

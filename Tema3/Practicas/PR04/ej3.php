@@ -59,19 +59,9 @@
             //en el for tengo que sumar de dos en dos
             for($asterisco=0;$asterisco<=$i*2-1;$asterisco+=2)
             {
-                //if($i>2 && $asterisco==$i-1)
-                //{
-                //   echo "&nbsp;";
-                //}else{
-                //    echo "*";
-                //}
-                if($i>2 && $i-2==$asterisco)
-                {
-                    
-                    for($j=1;$j<=$i-2;$j++){
-                        echo "&nbsp;";
-                    }
-                    
+                if($i>2 && $asterisco>0 && $asterisco<$i*2-1){
+
+                    echo "&nbsp;";
                 }else{
                     echo "*";
                 }
@@ -87,14 +77,8 @@
             //en el for tengo que sumar de dos en dos
             for($asterisco=0;$asterisco<=$inferiro-$i;$asterisco++)
             {
-                
-                if($i>2&&$asterisco==$i)
-                {
-                    for($j=0;$j<$i;$j++){
-                        echo "&nbsp;";
-                        $asterisco++;
-                    }
-                    echo "*";
+                if($i<2 && ($asterisco>0 && $asterisco < $inferiro-$i)){
+                    echo "&nbsp;";
                 }else{
                     echo "*";
                 }

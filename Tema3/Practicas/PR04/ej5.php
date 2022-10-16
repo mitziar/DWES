@@ -21,34 +21,31 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" style="background-color: bisque;">
       <div class="container">
-        <h1><a href="../../index.html">Desarrollo Web en Entorno Servidor</a></h1>
-        <h2><center>Práctica 04</center></h2>
+        <h1><a href="../../../index.html">Desarrollo Web en Entorno Servidor</a></h1>
+        <h2><center>Ejercicio 5</center></h2>
       </div>
     </div>
 
     <div class="container">
         <div class="row">
-            <h4><a href="../../">Tema 3</a><a href="../">/Practicas</a>/PR05-Practica05</h4>
+            <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a><a href="index.html">/PR04</a>/Ejercicio 5</h4>
         </div>
       <!-- Example row of columns -->
     <div class="row">
-                <div class="col-md-4">
-          <h2>Ejercicio 1</h2>
-            <p>Escribe un programa que dado un array, ordénalo y devuelve otro array sin que haya elementos repetidos</p>
-            <p><a class="btn btn-default" href="ej1.php" role="button">Ver »</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Ejercicio 2</h2>
-            <p>Escribe un programa que dado un array devuelva la posición donde haya el valor 3 y cambie el
-              valor por el número de la posición</p>
-            <p><a class="btn btn-default" href="ej2.php" role="button">Ver »</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Ejercicio 3</h2>
-            <p>Escribe un programa que pida por pantalla el tamaño de una matriz (Ej lado=4). Rellene de la siguiente manera.</p>
-            <p><a class="btn btn-default" href="ej3.php?dato=4" role="button">Ver »</a></p>
-        </div>
+    <pre>
+    Programa que pasado un año por la URL indica si es bisiesto o no.
+    </pre>
+    <?php
+        $ano=(int)$_GET['ano'];
 
+        if( ($ano%4==0 && $ano%100!=0)||$ano%400==0){
+
+            echo "El año ".$ano." sí es un año bisiesto";
+
+        }else{
+            echo "El año ".$ano." no es un año bisiesto";
+        }
+    ?>
     </div> <!-- /container -->
     <footer class="container" style="background-color: bisque;">
     <p><center>Página de Itziar</center></p>

@@ -22,13 +22,13 @@
     <div class="jumbotron" style="background-color: bisque;">
       <div class="container">
         <h1><a href="../../../index.html">Desarrollo Web en Entorno Servidor</a></h1>
-        <h2><center>Pirámide</center></h2>
+        <h2><center>Ejercicio 1</center></h2>
       </div>
     </div>
 
     <div class="container">
         <div class="row">
-            <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a>/Ejercicio 1</h4>
+        <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a><a href="index.html">/PR05</a>/Ejercicio 1</h4>
         </div>
       <!-- Example row of columns -->
     <div class="row">
@@ -37,12 +37,26 @@
 
         datos=[2,5,9,7,6,3,1,5,4,8,3,2,6,9,3,5,1,2,3]
     </pre>
- 
+    <?php
         $datos= array(2,5,9,7,6,3,1,5,4,8,3,2,6,9,3,5,1,2,3);
+        $solucion=array();
+        $existe=0;
 
-        sort($datos,SORT_NUMERIC)
-        foreach ($datos as $clave => $value) {
-         echo " Clave ".$clave." Value ".$value;
+
+        sort($datos,SORT_NUMERIC);
+        echo "Array ordenado: ";
+        foreach ($datos as $clave) {
+          echo $clave;
+        }
+        echo "<br>";
+        foreach ($datos as $clave) {
+          if(in_array($clave,$solucion)==0){
+            array_push($solucion,$clave);
+          }
+        }
+        echo "Array sin números repetidos: ";
+        foreach ($solucion as $clave) {
+          echo $clave;
         }
     ?>
     </div> <!-- /container -->

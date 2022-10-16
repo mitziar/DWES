@@ -21,37 +21,58 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" style="background-color: bisque;">
       <div class="container">
-        <h1><a href="../../index.html">Desarrollo Web en Entorno Servidor</a></h1>
-        <h2><center>Práctica 04</center></h2>
+        <h1><a href="../../../index.html">Desarrollo Web en Entorno Servidor</a></h1>
+        <h2><center>Ejercicio 1</center></h2>
       </div>
     </div>
 
     <div class="container">
         <div class="row">
-            <h4><a href="../../">Tema 3</a><a href="../">/Practicas</a>/PR05-Practica05</h4>
+        <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a><a href="index.html">/PR05</a>/Ejercicio 1</h4>
         </div>
       <!-- Example row of columns -->
     <div class="row">
-                <div class="col-md-4">
-          <h2>Ejercicio 1</h2>
-            <p>Escribe un programa que dado un array, ordénalo y devuelve otro array sin que haya elementos repetidos</p>
-            <p><a class="btn btn-default" href="ej1.php" role="button">Ver »</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Ejercicio 2</h2>
-            <p>Escribe un programa que dado un array devuelva la posición donde haya el valor 3 y cambie el
-              valor por el número de la posición</p>
-            <p><a class="btn btn-default" href="ej2.php" role="button">Ver »</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Ejercicio 3</h2>
-            <p>Escribe un programa que pida por pantalla el tamaño de una matriz (Ej lado=4). Rellene de la siguiente manera.</p>
-            <p><a class="btn btn-default" href="ej3.php?dato=4" role="button">Ver »</a></p>
-        </div>
+    <pre>
+    Escribe un programa que pida por pantalla el tamaño de una matriz (Ej lado=4). Rellene de la siguiente manera:
 
+        1 | 1 | 1 | 1
+        1 | 2 | 3 | 4
+        1 | 3 | 6 | 10
+        1 | 4 |10 | 20
+    </pre>
+    <form name="formulario" method="get" action="ej3.php">
+    <label for="dato">Introduza el lado:</label>
+    <input name="dato" >
+    <input type="submit"/>
+    </form>
+    <?php
+        $lado = $_GET['dato'];
+        $matriz = array(array());
+        for($i=0;$i<$lado;$i++){
+            $matriz[0][$i] = 1;
+        }
+        for($i=0;$i<$lado;$i++){
+            $matriz[$i][0] = 1;
+        }
+
+   
+        for ($i=1;$i<$lado;$i++){
+            for ($j=1;$j<$lado;$j++){
+                $matriz[$i][$j]= $matriz[$i-1][$j] +$matriz [$i][$j-1];
+            }
+        }
+
+        for ($i=0;$i<$lado;$i++){
+            for ($j=0;$j<$lado;$j++){
+                echo "&nbsp;".$matriz[$i][$j]."&nbsp;|";
+            }
+            echo "<br>";
+        }
+
+    ?>
     </div> <!-- /container -->
     <footer class="container" style="background-color: bisque;">
     <p><center>Página de Itziar</center></p>
     </footer>
-    
+
 </body></html>
