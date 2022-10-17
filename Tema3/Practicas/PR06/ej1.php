@@ -85,8 +85,7 @@
         );
         echo "<table><tr><th>Equipos<th>";
         $contador=0;
-    
-        
+            
         //pintar cabeceras
         foreach ($liga as $key => $value) {            
             echo "<th>".$key."</th>";
