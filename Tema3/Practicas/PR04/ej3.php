@@ -49,7 +49,7 @@
 
             $superior=(int)($filas/2+1);
             $inferiro=(int)($filas/2);
-
+        
         //recorrer superior
         for ($i=1;$i<=$superior;$i++){
             //escribir los espacios tiene que se igual al numero de filas menos la fila en la que estoy
@@ -57,34 +57,36 @@
                 echo "&nbsp;";
             }
             //en el for tengo que sumar de dos en dos
-            for($asterisco=0;$asterisco<=$i*2-1;$asterisco+=2)
+            for($asterisco=1;$asterisco<=$i*2-1;$asterisco++)
             {
-                if($i>2 && $asterisco>0 && $asterisco<$i*2-1){
-
-                    echo "&nbsp;";
-                }else{
+                if($asterisco==1 || $asterisco==$i*2-1){
+               
                     echo "*";
+                }else{
+                    echo "&nbsp;";
                 }
             }
             echo "<br>";
         }
-        //recorrer inferior
-        for ($i=1;$i<=$inferiro;$i++){
-            //escribir los espacios tiene que se igual al numero de filas menos la fila en la que estoy
-            for($blanco=1; $blanco<=$i*2-1;$blanco+=2){
+      
+       //recorrer inferior
+       for ($i=0;$i<$inferiro;$i++){
+        //escribir los espacios tiene que se igual al numero de filas menos la fila en la que estoy
+        for($blanco=1; $blanco<=$i*2+1;$blanco+=2){
+            echo "&nbsp;";
+        }
+        //en el for tengo que sumar de dos en dos
+        for($asterisco=1;$asterisco<=($inferiro-$i)*2 -1;$asterisco++)
+        {
+            if($asterisco==1 ||$asterisco== ($inferiro-$i)*2 -1){
+               
+                echo "*";
+            }else{
                 echo "&nbsp;";
             }
-            //en el for tengo que sumar de dos en dos
-            for($asterisco=0;$asterisco<=$inferiro-$i;$asterisco++)
-            {
-                if($i<2 && ($asterisco>0 && $asterisco < $inferiro-$i)){
-                    echo "&nbsp;";
-                }else{
-                    echo "*";
-                }
-            }  
-            echo "<br>";
         }
+        echo "<br>";
+    }
            
     ?>
     </div> <!-- /container -->

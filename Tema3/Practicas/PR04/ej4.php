@@ -37,20 +37,19 @@
     (Valor del producto 6.33€ y ha pagado con 10€). Muestra el número mínimo de monedas con las que puedes devolver el cambio
     </pre>
     <?php
-        $precio=floatval($_GET['producto']);
-        $entrega=floatval($_GET['pago']);
+        $precio=floatval($_GET['producto'])*100;
+        $entrega=floatval($_GET['pago'])*100;
         $total="";
         $decimal=0;
-        $monedasDisponibles= array (2=>" monedas de 2 euros." , 1=>"monedas de 1 euro.",0.50=> " monedas de 50 centimos.",0.20=>" monedas de 20 centimos."  , 0.10=>" monedas de 10 centimos.",0.05=>" monedas de 5 centimos.",0.02=>" monedas de 2 centimos.",0.01=>" monedas de 1 centimo.");
+        $monedasDisponibles= array (200=>" monedas de 2 euros." , 100=>"monedas de 1 euro.",50=> " monedas de 50 centimos.",20=>" monedas de 20 centimos."  , 10=>" monedas de 10 centimos.",5=>" monedas de 5 centimos.",2=>" monedas de 2 centimos.",1=>" monedas de 1 centimo.");
         $devolucion=$entrega-$precio;
 
         foreach ($monedasDisponibles as $key => $value) {
-          if($devolucion > 0){
-            $total=$total." ".intval($devolucion/$key)." ".$value."<br>";
+          if($devolucion > 0 && $devolucion >= $key){
 
-            echo $total." total<br>";
+            $total=$total." ".intval($devolucion/$key)." ".$value;
             $devolucion =  $devolucion - $key;
-            echo $devolucion." devolucion<br>";
+
           }
         }
         
