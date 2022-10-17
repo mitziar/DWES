@@ -85,19 +85,31 @@
         );
         echo "<table><tr><th>Equipos<th>";
         $contador=0;
-        for($i=0;$i<count($liga);$i++){
-            echo ""
-        }
-        
+    
         
         //pintar cabeceras
         foreach ($liga as $key => $value) {            
             echo "<th>".$key."</th>";
-           foreach ($value as $clave => $valor) {
-             //echo "<tr><td>".$valor[1][$clave]."</td></tr>";
-           }
+            $contador++;
         }
-       // echo "<table><th>".$key."<th></table>";
+        echo "</tr>";
+        foreach ($liga as $key => $local) {
+            echo "<tr><td>".$key."</td>";
+            foreach ($local as $clave => $visitante) {
+                echo "<td>";
+                foreach ($visitante as $k => $v) {
+       
+                    //if("Zamora"==$key){
+                    //    echo "vacio";
+                    // }else{
+                         echo $v;
+                   // }
+               }
+                echo "</td>";
+            }
+            echo "</tr>";
+        }
+        echo "</table>";
     ?>
     </div> <!-- /container -->
     <footer class="container" style="background-color: bisque;">
