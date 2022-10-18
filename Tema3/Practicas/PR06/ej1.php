@@ -83,32 +83,101 @@
                 )
             ),
         );
-        echo "<table><tr><th>Equipos<th>";
+        echo "<table border='1'><tr><th>Equipos</th>";
         $contador=0;
+        $locales=array();
             
         //pintar cabeceras
         foreach ($liga as $key => $value) {            
             echo "<th>".$key."</th>";
+            $locales[$contador]=$key;
             $contador++;
         }
         echo "</tr>";
+        $contador=0;
         foreach ($liga as $key => $local) {
             echo "<tr><td>".$key."</td>";
+            $contador=0;
             foreach ($local as $clave => $visitante) {
-                echo "<td>";
+                if($key==$locales[$contador])
+                    {
+                        echo "<td></td>";
+                        
+                    }
+                    echo "<td>";
                 foreach ($visitante as $k => $v) {
-       
-                    //if("Zamora"==$key){
-                    //    echo "vacio";
-                    // }else{
+
+                        echo "<p>";
                          echo $v;
-                   // }
+                         echo "</p>";
                }
-                echo "</td>";
+               echo "</td>";
+               $contador++;
             }
             echo "</tr>";
         }
         echo "</table>";
+
+        $resultados=array();
+        foreach ($liga as $key => $local) {           
+                    $resultados[$key]= array("puntos"=>0,"gF"=>0,"gC"=>0);  
+        }
+
+        echo "<table border='1'><tr><th>Equipos</th><th>Puntos</th><th>Goles a favor</th><th>Goles en contra</th></tr>";
+         
+        foreach ($resultados as $clave => $value)
+        {
+             echo "<tr>";
+             echo "<td>".$clave."</td>";
+
+             foreach ($value as $key => $value) {
+                echo "<td>".$value."</td>";
+             }
+             echo"</tr>";
+
+            }
+        echo "</table>";
+
+
+        foreach ($liga as $local => $partidos) {    
+       
+            foreach ($partidos as $visitante => $resultadosP) {
+                    $goles=explode("-",$resultadosP["Resultado"]);
+                    if($goles[0]>$goles[1]){
+                        $resultados[$local]["puntos"]+=3;
+                    }else if($goles[0]<$goles[1]){
+                        $resultados[$visitante]["puntos"]+=3;
+
+                    }else{
+                        $resultados[$local]["puntos"]+=1;
+                        $resultados[$visitante]["puntos"]+=1;
+                    }
+                    $resultados[$local]["gF"]+=$goles[0];
+                    $resultados[$local]["gC"]+=$goles[1];
+            }
+        }
+
+        echo "<table border='1'><tr><th>Equipos</th><th>Puntos</th><th>Goles a favor</th><th>Goles en contra</th></tr>";
+         
+        foreach ($resultados as $clave => $value)
+        {
+             echo "<tr>";
+             echo "<td>".$clave."</td>";
+
+             foreach ($value as $key => $value) {
+                echo "<td>".$value."</td>";
+             }
+             echo"</tr>";
+
+            }
+        echo "</table>";
+
+            
+
+
+
+
+         
     ?>
     </div> <!-- /container -->
     <footer class="container" style="background-color: bisque;">
