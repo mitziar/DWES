@@ -135,6 +135,8 @@
                     }
                     $resultados[$local]["gF"]+=$goles[0];
                     $resultados[$local]["gC"]+=$goles[1];
+                    $resultados[$visitante]["gF"]+=$goles[1];
+                    $resultados[$visitante]["gC"]+=$goles[0];
             }
         }
         echo "<h2> Tabla de puntos y goles de la liga</h2>";
