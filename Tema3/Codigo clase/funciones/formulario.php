@@ -1,3 +1,6 @@
+<?php
+    require("./validaFormularioFunciones.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,20 +10,40 @@
     <title>Formulario</title>
 </head>
 <body>
-    <form action="./recibe.php" method="post" enctype="multipart/form-data">
+    <form action="./formulario.php" method="post" enctype="multipart/form-data">
         <p>
             <label for="idNombre">Nombre</label>
-            <input type="text" name="nombre" id="idNombre" placeholder="Nombre">
+            <input type="text" name="nombre" id="idNombre" placeholder="Nombre"  value="<?php
+            if (vacio("nombre") && enviado()){//si el nombre está vacio y el formulario ha sido enviado         
+                    echo $_REQUEST["nombre"];
+                }
+
+            ?>">
         </p>
         <p>
             <label for="idPass">Contraseña</label>
-            <input type="password" name="pass" id="idPass">
+            <input type="password" name="pass" id="idPass" value="<?php
+            if (vacio("password") && enviado()){//si el nombre está vacio y el formulario ha sido enviado         
+                    echo $_REQUEST["pass"];
+                }
+            ?>">
         </p>
         <p><b>Genero</b>
             <label for="idMasculino">Masculino</label>
-            <input type="radio" name="genero" id="idMasculino" value="masculino">
+            <input type="radio" name="genero" id="idMasculino" value="masculino"
+            <?php
+                if(enviado() && existe("genero") && $_REQUEST["genero"]=="masculino"){
+                    echo "checked";
+                }
+            ?>
+            >
             <label for="idFemenino">Femenino</label>
-            <input type="radio" name="genero" id="idFemenino" value="femenino">
+            <input type="radio" name="genero" id="idFemenino" value="femenino"<?php
+                if(enviado() && existe("genero") && $_REQUEST["genero"]=="femenino"){
+                    echo "checked";
+                }
+            ?>
+            >
         </p>
 
         <p><b>Asignaturas</b>
@@ -40,7 +63,8 @@
 
         <input type="file" name="fichero" id="idFichero">
 
-        <input type="submit" value="Enviar">
+        <input type="submit" value="Enviar" name="enviar">
     </form>
+
 </body>
 </html>     

@@ -69,4 +69,5 @@ function rellenaArry(&$array){
 function cambioLado($objeto,$lado){
     $objeto->lado = $lado;
 }
+
 ?>
