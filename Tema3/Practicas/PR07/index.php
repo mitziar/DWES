@@ -1,4 +1,7 @@
-<html lang="en"><head>
+<?php
+include('funciones.php');
+?>
+<html lang="es"><head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,42 +24,41 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" style="background-color: bisque;">
       <div class="container">
-        <h1><a href="../../index.html">Desarrollo Web en Entorno Servidor</a></h1>
-        <h2><center>Prácticas</center></h2>
+        <h1><a href="../../../index.html">Desarrollo Web en Entorno Servidor</a></h1>
+        <h2><center>Ejercicio 1</center></h2>
       </div>
     </div>
 
     <div class="container">
         <div class="row">
-            <h4><a href="../">Tema 3</a>/Prácticas</h4>
+            <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a>/PR07/Ejercicio 1</h4>
         </div>
       <!-- Example row of columns -->
     <div class="row">
-        <div class="col-md-4">
-            <h2>PR04-Practica04</h2>
-            <p>Dibujar figuras, cambio de monedas, etc.</p>
-            <p><a class="btn btn-default" href="PR04/index.html" role="button">Ver »</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>PR05-Practica05</h2>
-            <p>Arrays</p>
-            <p><a class="btn btn-default" href="PR05/index.html" role="button">Ver »</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>PR06-Practica06</h2>
-          <p>Tabla Liga</p>
-          <p><a class="btn btn-default" href="PR06/index.html" role="button">Ver »</a></p>
-      </div>
-      <div class="col-md-4">
-        <h2>PR07-Practica07</h2>
-        <p>Funciones br(), p($cadena), etc.</p>
-        <p><a class="btn btn-default" href="PR07/index.php" role="button">Ver »</a></p>
-    </div>
-    <div class="col-md-4">
-      <h2>PR08-Practica08</h2>
-      <p>Formulario y validaciones</p>
-      <p><a class="btn btn-default" href="PR08/formulario.php" role="button">Ver »</a></p>
-  </div>
+        <?php
+        echo '<p> Esto es un párrafo al que añado br y...'.br();
+        echo '... y continuo escribiendo.</p>';
+
+        echo "ahora pruebo la funcion h1 con la palabra Título".h1("Título");
+
+        $cadena = "hola mundo";
+        echo "ahora pruebo la funcion p($cadena) con la $cadena= hola mundo.";
+        
+        echo br().p($cadena);
+        echo br();
+        echo p("muestro la función self()");
+        echo br();
+        self();
+        echo br();
+        echo p("ahora pruebo la función dni() con el numero 71029173");
+        echo br();
+        echo p("la letra es: ").letraDni('71029173').br();
+        $lista=array();
+        generarAleatorios($lista,1,10,5,false);
+        echo p("Los datos del array aleatorio son: ").br();
+        print_r($lista);
+        ?>
+
     </div> <!-- /container -->
     <footer class="container" style="background-color: bisque;">
     <p><center>Página de Itziar</center></p>

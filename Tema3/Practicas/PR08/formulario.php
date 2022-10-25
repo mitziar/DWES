@@ -32,7 +32,10 @@
     </div>
 
     <div class="container">
-      <!-- Example row of columns -->
+    <div class="row">
+            <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a>/PR08/Formulario plantilla</h4>
+    </div>
+        <h3>Formulario plantilla</h3><hr>
       <form action="formulario.php" method="post">
         <p>
             <!-- Pongo el for = que el id para que cuando selecione el label el input tome el foco-->
@@ -108,20 +111,24 @@
             ?>">
         </p>
         <p>
-            <label for="radioObligatorio">Radio Obligatorio</label>
-            <input type="radio" name="radioObligatorio" id="idRadio1" value="opcion1"><label for="idRadio1"<?php
+            <label for="radioObligatorio">Radio Obligatorio: </label>
+            <input type="radio" name="radioObligatorio" id="idRadio1" value="opcion1" <?php
                 if(enviado() && existe("radioObligatorio") && $_REQUEST["radioObligatorio"]=="opcion1"){
                     echo "checked";
                 }
-            ?>
-            >>Opcion1</label>
-            <input type="radio" name="radioObligatorio" id="idRadio2" value="opcion2"><label for="idRadio2">Opcion2</label>
-            <input type="radio" name="radioObligatorio" id="idRadio3" value="opcion3"><label for="idRadio3">Opcion3</label>
-            <?php
-                if(!vacio('radioObligatorio') && enviado()){
-                    echo $_REQUEST['radioObligatorio'];
+            ?>><label for="idRadio1">Opcion1</label>
+
+            <input type="radio" name="radioObligatorio" id="idRadio2" value="opcion2"<?php
+                if(enviado() && existe("radioObligatorio") && $_REQUEST["radioObligatorio"]=="opcion2"){
+                    echo "checked";
                 }
-            ?>
+            ?>><label for="idRadio2">Opcion2</label>
+            <input type="radio" name="radioObligatorio" id="idRadio3" value="opcion3"<?php
+                if(enviado() && existe("radioObligatorio") && $_REQUEST["radioObligatorio"]=="opcion3"){
+                    echo "checked";
+                }
+            ?>><label for="idRadio3">Opcion3</label>
+
         </p>
         <p>
             <label for="eligeOpcion">Elige una opción:</label>
