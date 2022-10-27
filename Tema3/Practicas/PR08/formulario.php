@@ -13,7 +13,7 @@
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-<link rel="stylesheet" href="">
+<link rel="stylesheet" href="css/estilos.css">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
@@ -36,7 +36,7 @@
             <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a>/PR08/Formulario plantilla</h4>
     </div>
         <h3>Formulario plantilla</h3><hr>
-      <form action="formulario.php" method="post">
+      <form action="formulario.php" method="post" enctype="multipart/form-data>
         <p>
             <!-- Pongo el for = que el id para que cuando selecione el label el input tome el foco-->
             <label for="idAlfabetico">Alfabético</label>
@@ -49,7 +49,7 @@
             if (vacio('alfabetico') && enviado())
             {//si el nombre está vacio y el formulario ha sido enviado                 
             ?>
-            <label>Debe introducir nombre</label>
+            <span>Debe introducir nombre</span>
             <?php
              }
         ?>
@@ -74,7 +74,7 @@
             if (vacio('alfanumerico') && enviado())
             {//si el nombre está vacio y el formulario ha sido enviado                 
             ?>
-            <label>Debe introducir alfanumerico</label>
+            <span>Debe introducir alfanumerico</span>
             <?php
              }
         ?>
@@ -98,7 +98,7 @@
             if (vacio('fecha') && enviado())
             {//si el nombre está vacio y el formulario ha sido enviado                 
             ?>
-            <label>Debe introducir fecha</label>
+            <span>Debe introducir fecha</span>
             <?php
              }
         ?>
@@ -128,41 +128,148 @@
                     echo "checked";
                 }
             ?>><label for="idRadio3">Opcion3</label>
-
+                <?php
+                if(enviado() && !existe("radioObligatorio")  ){
+                    echo "<span>Seleccione un radio<span>";
+                }
+                ?>
         </p>
         <p>
             <label for="eligeOpcion">Elige una opción:</label>
             <select name="eligeOpcion" id="idEligeOpcion">
                 <option value="0">Seleccione</option>
-                <option value="1">Primero</option>
-                <option value="2">Segundo</option>
+                <option value="1" <?php
+                    if(existe('eligeOpcion') && enviado() && $_REQUEST['eligeOpcion']==1){
+                        echo " selected";
+                    }?>>Primero</option>
+                <option value="2"<?php
+                    if(existe('eligeOpcion') && enviado() && $_REQUEST['eligeOpcion']==2){
+                        echo " selected";
+                    }?>>Segundo</option>
             </select>
+                <?php
+                    if((existe('eligeOpcion') && enviado() && $_REQUEST['eligeOpcion']==0) || (!existe('eligeOpcion') && enviado()) ){
+                        echo "<span>Seleccione una opcion<span>";
+                    }
+                ?>
         </p>
         <br>
         <p>
             <label for="checkboxElige">Elige al menos 1 y máximo 3: </label>
-            <input type="checkbox" name="checkboxElige" id="idCheckbox1"><label for="idCheckbox1">Check1</label>
-            <input type="checkbox" name="checkboxElige" id="idCheckbox2"><label for="idCheckbox2">Check2</label>
-            <input type="checkbox" name="checkboxElige" id="idCheckbox3"><label for="idCheckbox3">Check3</label>
-            <input type="checkbox" name="checkboxElige" id="idCheckbox4"><label for="idCheckbox4">Check4</label>
-            <input type="checkbox" name="checkboxElige" id="idCheckbox5"><label for="idCheckbox5">Check5</label>
-            <input type="checkbox" name="checkboxElige" id="idCheckbox6"><label for="idCheckbox6">Check6</label>
+            <input type="checkbox" name="checkboxElige[]" id="idCheckbox1" value="checkbox1"<?php
+            if(enviado()&&existe('checkboxElige')){
+                foreach ($_REQUEST['checkboxElige'] as $key) {
+                    if($key=='checkbox1')
+                        echo "checked";
+                }
+            }
+            ?>><label for="idCheckbox1">Check1</label>
+            <input type="checkbox" name="checkboxElige[]" id="idCheckbox2"value="checkbox2"<?php
+            if(enviado()&&existe('checkboxElige')){
+                foreach ($_REQUEST['checkboxElige'] as $key) {
+                    if($key=='checkbox2')
+                        echo "checked";
+                }
+            }
+            ?>><label for="idCheckbox2">Check2</label>
+            <input type="checkbox" name="checkboxElige[]" id="idCheckbox3"value="checkbox3"<?php
+            if(enviado()&&existe('checkboxElige')){
+                foreach ($_REQUEST['checkboxElige'] as $key) {
+                    if($key=='checkbox3')
+                        echo "checked";
+                }
+            }
+            ?>><label for="idCheckbox3">Check3</label>
+            <input type="checkbox" name="checkboxElige[]" id="idCheckbox4"value="checkbox4"<?php
+            if(enviado()&&existe('checkboxElige')){
+                foreach ($_REQUEST['checkboxElige'] as $key) {
+                    if($key=='checkbox4')
+                        echo "checked";
+                }
+            }
+            ?>><label for="idCheckbox4">Check4</label>
+            <input type="checkbox" name="checkboxElige[]" id="idCheckbox5"value="checkbox5"<?php
+            if(enviado()&&existe('checkboxElige')){
+                foreach ($_REQUEST['checkboxElige'] as $key) {
+                    if($key=='checkbox5')
+                        echo "checked";
+                }
+            }
+            ?>><label for="idCheckbox5">Check5</label>
+            <input type="checkbox" name="checkboxElige[]" id="idCheckbox6"value="checkbox6"<?php
+            if(enviado()&&existe('checkboxElige')){
+                foreach ($_REQUEST['checkboxElige'] as $key) {
+                    if($key=='checkbox6')
+                        echo "checked";
+                }
+            }
+            ?>><label for="idCheckbox6">Check6</label>
+            <?php
+            if(enviado()&&!existe('checkboxElige')){
+                echo '<span>Seleccione opcion</span>';
+            }
+            ?>
         </p>
         <p>
             <label for="idNumeroTelefono">Nº Teléfono</label>
-            <input type="number" name="numeroTelefono" id="idNumeroTelefono">
+            <input type="number" name="numeroTelefono" id="idNumeroTelefono" value=<?php
+            if(enviado() && !vacio('numeroTelefono')){
+                echo $_REQUEST['numeroTelefono'];}
+            ?>><?php
+            if(enviado() && vacio('numeroTelefono')){
+
+                echo "<span>Introduce telefono<span>";
+            }
+            ?>
         </p>
         <p>
             <label for="idEmaill">Email</label>
-            <input type="text" name="email" id="idEmail" placeholder="alguien@email.com">
+            <input type="text" name="email" id="idEmail" placeholder="alguien@email.com" value=<?php
+                if(enviado() && existe('email')){
+                    echo $_REQUEST['email'];
+                }
+            ?>>
+            <?php
+                if (enviado() && vacio('email')){
+                    echo "<span>Introduce email<span>";
+                }
+            ?>
         </p>
         <p>
             <label for="idPass">Contraseña</label>
-            <input type="password" name="pass" id="idPass">
+            <input type="password" name="pass" id="idPass" value=<?php
+            if(enviado() && existe('pass')){
+                echo $_REQUEST['pass'];
+            }
+            ?>><?php
+            if(enviado() && vacio('pass')){
+                echo "<span>Introduce contraseña<span>";
+            }
+            ?>
         </p>
         <p>
             <label for="idDocumento">Subir documento</label>
-            <input type="file" name="docuemnto" id="idDocumento">
+            <input type="file" name="documento" id="idDocumento"><?php
+            if(enviado() && existe('documento')){
+                $rutaGuardado = "./uploads/";
+               
+                // Se le establece el nombre al archivo a guardar
+                $rutaConNombreFichero = $rutaGuardado .  $_FILES[$_REQUEST['documento']]['name'];
+
+                // Si se mueve el fichero del sitio temporal a la ruta especificada...
+               // if(move_uploaded_file($_FILES[$_REQUEST['documento']]['tmp_name'],$rutaConNombreFichero))
+                //{
+                 //   echo "<br>El fichero se ha guardado correctamente.<br>";
+                 //   print_r();
+
+                //}
+            }
+            ?>
+            <?php
+            if(enviado() && vacio('documento')){
+                echo "<span>Introduce documento<span>";
+            }
+            ?>
         </p>
         <p>
             <input type="submit" value="Enviar" name="enviar">
