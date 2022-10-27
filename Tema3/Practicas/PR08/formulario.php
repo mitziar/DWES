@@ -140,13 +140,13 @@
         </p>
         <br>
         <p>
-            <label for="checkboxElige">Elige al menos 1 y máximo 3</label>
-            <input type="checkbox" name="checkboxElige" id="idCheckbox1"><label for="idCheckbox1">Check1</label></input>
-            <input type="checkbox" name="checkboxElige" id="idCheckbox2"><label for="idCheckbox2">Check2</label></input>
-            <input type="checkbox" name="checkboxElige" id="idCheckbox3"><label for="idCheckbox3">Check3</label></input>
-            <input type="checkbox" name="checkboxElige" id="idCheckbox4"><label for="idCheckbox4">Check4</label></input>
-            <input type="checkbox" name="checkboxElige" id="idCheckbox5"><label for="idCheckbox5">Check5</label></input>
-            <input type="checkbox" name="checkboxElige" id="idCheckbox6"><label for="idCheckbox6">Check6</label></input>
+            <label for="checkboxElige">Elige al menos 1 y máximo 3: </label>
+            <input type="checkbox" name="checkboxElige" id="idCheckbox1"><label for="idCheckbox1">Check1</label>
+            <input type="checkbox" name="checkboxElige" id="idCheckbox2"><label for="idCheckbox2">Check2</label>
+            <input type="checkbox" name="checkboxElige" id="idCheckbox3"><label for="idCheckbox3">Check3</label>
+            <input type="checkbox" name="checkboxElige" id="idCheckbox4"><label for="idCheckbox4">Check4</label>
+            <input type="checkbox" name="checkboxElige" id="idCheckbox5"><label for="idCheckbox5">Check5</label>
+            <input type="checkbox" name="checkboxElige" id="idCheckbox6"><label for="idCheckbox6">Check6</label>
         </p>
         <p>
             <label for="idNumeroTelefono">Nº Teléfono</label>
