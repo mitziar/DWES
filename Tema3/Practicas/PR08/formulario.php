@@ -35,14 +35,8 @@
     <div class="row">
             <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a>/PR08/Formulario plantilla</h4>
     </div>
-    
-        <?php
-        if(enviado() && validado()){
-            
-        }?>
-            
-                    <h3>Formulario plantilla</h3><hr>
-      <form action="formulario.php" method="post" enctype="multipart/form-data">
+        <h3>Formulario plantilla</h3><hr>
+      <form action="formulario.php" method="post" enctype="multipart/form-data>
         <p>
             <!-- Pongo el for = que el id para que cuando selecione el label el input tome el foco-->
             <label for="idAlfabetico">Alfabético</label>
@@ -60,69 +54,69 @@
              }
         ?>
 
-        </p>
-        <p>
-            <label for="idAlfabeticoOpcional">Alfabético Opcional</label>
-            <input type="text" name="alfabeticoOpcional" id="idAlfabeticoOpcional"value="<?php
-            if (!vacio('alfabeticoOpcional') && enviado()){//si el nombre no está vacio y el formulario ha sido enviado         
-                    echo $_REQUEST['alfabeticoOpcional'];//el value es
-                }
-            ?>">
-        </p>
-        <p>
-            <label for="idAlfanumerico">Alfanumérico</label>
-            <input type="text" name="alfanumerico" id="idAlfanumerico" value="<?php
-            if (!vacio('alfanumerico') && enviado()){//si el nombre no está vacio y el formulario ha sido enviado         
-                    echo $_REQUEST['alfanumerico'];//el value es
-                }
-            ?>">
-            <?php
-            if (vacio('alfanumerico') && enviado())
-            {//si el nombre está vacio y el formulario ha sido enviado                 
-            ?>
-            <span>Debe introducir alfanumerico</span>
-            <?php
-             }
-        ?>
-        </p>
-        <p>
-            <label for="idAlfanumericoOpcional">Alfanumérico Opcional</label>
-            <input type="text" name="alfanumericoOpcional" id="idAlfanumericoOpcional" value="<?php
-            if (!vacio('alfanumericoOpcional') && enviado()){//si el nombre no está vacio y el formulario ha sido enviado         
-                    echo $_REQUEST['alfanumericoOpcional'];//el value es
-                }
-            ?>">
-        </p>
-        <p>
-            <label for="idFecha">Fecha</label>
-            <input type="date" name="fecha" id="idFecha" value="<?php
-            if (!vacio('fecha') && enviado()){//si el nombre no está vacio y el formulario ha sido enviado         
-                    echo $_REQUEST['fecha'];//el value es
-                }
-            ?>">
-            <?php
-            if (vacio('fecha') && enviado())
-            {//si el nombre está vacio y el formulario ha sido enviado                 
-            ?>
-            <span>Debe introducir fecha</span>
-            <?php
-             }
-        ?>
-        </p>
-        <p>
-            <label for="idFechaOpcional">Fecha Opcional</label>
-            <input type="date" name="fechaOpcional" id="idFechaOpcional" value="<?php
-            if(!vacio('fechaOpcional')&&enviado())
-                echo $_REQUEST['fechaOpcional'];
-            ?>">
-        </p>
-        <p>
-            <label for="radioObligatorio">Radio Obligatorio: </label>
-            <input type="radio" name="radioObligatorio" id="idRadio1" value="opcion1" <?php
-                if(enviado() && existe("radioObligatorio") && $_REQUEST["radioObligatorio"]=="opcion1"){
-                    echo "checked";
-                }
-            ?>><label for="idRadio1">Opcion1</label>
+                </p>
+                <p>
+                    <label for="idAlfabeticoOpcional">Alfabético Opcional</label>
+                    <input type="text" name="alfabeticoOpcional" id="idAlfabeticoOpcional"value="<?php
+                    if (!vacio('alfabeticoOpcional') && enviado()){//si el nombre no está vacio y el formulario ha sido enviado         
+                            echo $_REQUEST['alfabeticoOpcional'];//el value es
+                        }
+                    ?>">
+                </p>
+                <p>
+                    <label for="idAlfanumerico">Alfanumérico</label>
+                    <input type="text" name="alfanumerico" id="idAlfanumerico" value="<?php
+                    if (!vacio('alfanumerico') && enviado()){//si el nombre no está vacio y el formulario ha sido enviado         
+                            echo $_REQUEST['alfanumerico'];//el value es
+                        }
+                    ?>">
+                    <?php
+                    if (vacio('alfanumerico') && enviado())
+                    {//si el nombre está vacio y el formulario ha sido enviado                 
+                    ?>
+                    <span>Debe introducir alfanumerico</span>
+                    <?php
+                    }
+                ?>
+                </p>
+                <p>
+                    <label for="idAlfanumericoOpcional">Alfanumérico Opcional</label>
+                    <input type="text" name="alfanumericoOpcional" id="idAlfanumericoOpcional" value="<?php
+                    if (!vacio('alfanumericoOpcional') && enviado()){//si el nombre no está vacio y el formulario ha sido enviado         
+                            echo $_REQUEST['alfanumericoOpcional'];//el value es
+                        }
+                    ?>">
+                </p>
+                <p>
+                    <label for="idFecha">Fecha</label>
+                    <input type="date" name="fecha" id="idFecha" value="<?php
+                    if (!vacio('fecha') && enviado()){//si el nombre no está vacio y el formulario ha sido enviado         
+                            echo $_REQUEST['fecha'];//el value es
+                        }
+                    ?>">
+                    <?php
+                    if (vacio('fecha') && enviado())
+                    {//si el nombre está vacio y el formulario ha sido enviado                 
+                    ?>
+                    <span>Debe introducir fecha</span>
+                    <?php
+                    }
+                ?>
+                </p>
+                <p>
+                    <label for="idFechaOpcional">Fecha Opcional</label>
+                    <input type="date" name="fechaOpcional" id="idFechaOpcional" value="<?php
+                    if(!vacio('fechaOpcional')&&enviado())
+                        echo $_REQUEST['fechaOpcional'];
+                    ?>">
+                </p>
+                <p>
+                    <label for="radioObligatorio">Radio Obligatorio: </label>
+                    <input type="radio" name="radioObligatorio" id="idRadio1" value="opcion1" <?php
+                        if(enviado() && existe("radioObligatorio") && $_REQUEST["radioObligatorio"]=="opcion1"){
+                            echo "checked";
+                        }
+                    ?>><label for="idRadio1">Opcion1</label>
 
             <input type="radio" name="radioObligatorio" id="idRadio2" value="opcion2"<?php
                 if(enviado() && existe("radioObligatorio") && $_REQUEST["radioObligatorio"]=="opcion2"){
@@ -211,23 +205,20 @@
             }
             ?>><label for="idCheckbox6">Check6</label>
             <?php
-            if(enviado()&&(!existe('checkboxElige') || (count($_REQUEST['checkboxElige'])<1 || count($_REQUEST['checkboxElige'])>3))){
-                echo '<span>Seleccione opcion: Mínimo 1 y máximo 3</span>';
+            if(enviado()&&!existe('checkboxElige')){
+                echo '<span>Seleccione opcion</span>';
             }
             ?>
         </p>
         <p>
             <label for="idNumeroTelefono">Nº Teléfono</label>
-            <input type="text" name="numeroTelefono" id="idNumeroTelefono" value=<?php
-            if(enviado() && existe('numeroTelefono') && is_numeric($_REQUEST['numeroTelefono'])==true){
+            <input type="number" name="numeroTelefono" id="idNumeroTelefono" value=<?php
+            if(enviado() && !vacio('numeroTelefono')){
                 echo $_REQUEST['numeroTelefono'];}
             ?>><?php
             if(enviado() && vacio('numeroTelefono')){
 
                 echo "<span>Introduce telefono<span>";
-            }elseif(enviado() && existe('numeroTelefono') && is_numeric($_REQUEST['numeroTelefono'])==false){
-
-                echo "<span> Introduce números para el telefono<span>";
             }
             ?>
         </p>
@@ -258,25 +249,26 @@
         </p>
         <p>
             <label for="idDocumento">Subir documento</label>
-            <input type="file" name="documento" id="idDocumento">
+            <input type="file" name="documento" id="idDocumento"><?php
+            if(enviado() && existe('documento')){
+                $rutaGuardado = "./uploads/";
+               
+                // Se le establece el nombre al archivo a guardar
+                $rutaConNombreFichero = $rutaGuardado .  $_FILES[$_REQUEST['documento']]['name'];
+
+                // Si se mueve el fichero del sitio temporal a la ruta especificada...
+               // if(move_uploaded_file($_FILES[$_REQUEST['documento']]['tmp_name'],$rutaConNombreFichero))
+                //{
+                 //   echo "<br>El fichero se ha guardado correctamente.<br>";
+                 //   print_r();
+
+                //}
+            }
+            ?>
             <?php
-
-                if(enviado() && isset($_FILES)){
-                    $rutaGuardado = "./uploads/";
-
-                    // Se le establece el nombre al archivo a guardar
-                    $rutaConNombreFichero = $rutaGuardado .  $_FILES['documento']['name'];
-
-                    // Si se mueve el fichero del sitio temporal a la ruta especificada...
-                    if(move_uploaded_file( $_FILES['documento']['tmp_name'],$rutaConNombreFichero))
-                    {
-                    echo "<br>El fichero se ha guardado correctamente.<br>";
-                    echo "<img src='" . $rutaConNombreFichero . "' alt='Imagen' width='100px' height='100px'>";
-                    }
-                }
-                if(enviado() && empty($_FILES)){
-                    echo "<span>Introduce documento<span>";
-                }
+            if(enviado() && vacio('documento')){
+                echo "<span>Introduce documento<span>";
+            }
             ?>
         </p>
         <p>
@@ -287,7 +279,5 @@
     <footer class="container" style="background-color: bisque;">
     <p><center>Página de Itziar</center></p>
     </footer>
-    
-
 </body>
 </html>
