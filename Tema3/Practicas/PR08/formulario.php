@@ -212,7 +212,7 @@
             ?>><label for="idCheckbox6">Check6</label>
             <?php
             if(enviado()&&(!existe('checkboxElige') || (count($_REQUEST['checkboxElige'])<1 || count($_REQUEST['checkboxElige'])>3))){
-                echo '<span>Seleccione opcion</span>';
+                echo '<span>Seleccione opcion: Mínimo 1 y máximo 3</span>';
             }
             ?>
         </p>
@@ -225,8 +225,7 @@
             if(enviado() && vacio('numeroTelefono')){
 
                 echo "<span>Introduce telefono<span>";
-            }
-            if(enviado() && existe('numeroTelefono') && is_numeric($_REQUEST['numeroTelefono'])==false){
+            }elseif(enviado() && existe('numeroTelefono') && is_numeric($_REQUEST['numeroTelefono'])==false){
 
                 echo "<span> Introduce números para el telefono<span>";
             }
