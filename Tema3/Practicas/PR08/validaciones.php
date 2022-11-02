@@ -18,5 +18,8 @@
         }
         return false;
     }
+    function validado(){
+        return false;
+    }
 
 ?>

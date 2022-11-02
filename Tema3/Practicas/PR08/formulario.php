@@ -35,8 +35,14 @@
     <div class="row">
             <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a>/PR08/Formulario plantilla</h4>
     </div>
-        <h3>Formulario plantilla</h3><hr>
-      <form action="formulario.php" method="post" enctype="multipart/form-data>
+    
+        <?php
+        if(enviado() && validado()){
+            
+        }?>
+            
+                    <h3>Formulario plantilla</h3><hr>
+      <form action="formulario.php" method="post" enctype="multipart/form-data">
         <p>
             <!-- Pongo el for = que el id para que cuando selecione el label el input tome el foco-->
             <label for="idAlfabetico">Alfabético</label>
@@ -205,20 +211,24 @@
             }
             ?>><label for="idCheckbox6">Check6</label>
             <?php
-            if(enviado()&&!existe('checkboxElige')){
+            if(enviado()&&(!existe('checkboxElige') || (count($_REQUEST['checkboxElige'])<1 || count($_REQUEST['checkboxElige'])>3))){
                 echo '<span>Seleccione opcion</span>';
             }
             ?>
         </p>
         <p>
             <label for="idNumeroTelefono">Nº Teléfono</label>
-            <input type="number" name="numeroTelefono" id="idNumeroTelefono" value=<?php
-            if(enviado() && !vacio('numeroTelefono')){
+            <input type="text" name="numeroTelefono" id="idNumeroTelefono" value=<?php
+            if(enviado() && existe('numeroTelefono') && is_numeric($_REQUEST['numeroTelefono'])==true){
                 echo $_REQUEST['numeroTelefono'];}
             ?>><?php
             if(enviado() && vacio('numeroTelefono')){
 
                 echo "<span>Introduce telefono<span>";
+            }
+            if(enviado() && existe('numeroTelefono') && is_numeric($_REQUEST['numeroTelefono'])==false){
+
+                echo "<span> Introduce números para el telefono<span>";
             }
             ?>
         </p>
@@ -249,26 +259,25 @@
         </p>
         <p>
             <label for="idDocumento">Subir documento</label>
-            <input type="file" name="documento" id="idDocumento"><?php
-            if(enviado() && existe('documento')){
-                $rutaGuardado = "./uploads/";
-               
-                // Se le establece el nombre al archivo a guardar
-                $rutaConNombreFichero = $rutaGuardado .  $_FILES[$_REQUEST['documento']]['name'];
-
-                // Si se mueve el fichero del sitio temporal a la ruta especificada...
-               // if(move_uploaded_file($_FILES[$_REQUEST['documento']]['tmp_name'],$rutaConNombreFichero))
-                //{
-                 //   echo "<br>El fichero se ha guardado correctamente.<br>";
-                 //   print_r();
-
-                //}
-            }
-            ?>
+            <input type="file" name="documento" id="idDocumento">
             <?php
-            if(enviado() && vacio('documento')){
-                echo "<span>Introduce documento<span>";
-            }
+
+                if(enviado() && isset($_FILES)){
+                    $rutaGuardado = "./uploads/";
+
+                    // Se le establece el nombre al archivo a guardar
+                    $rutaConNombreFichero = $rutaGuardado .  $_FILES['documento']['name'];
+
+                    // Si se mueve el fichero del sitio temporal a la ruta especificada...
+                    if(move_uploaded_file( $_FILES['documento']['tmp_name'],$rutaConNombreFichero))
+                    {
+                    echo "<br>El fichero se ha guardado correctamente.<br>";
+                    echo "<img src='" . $rutaConNombreFichero . "' alt='Imagen' width='100px' height='100px'>";
+                    }
+                }
+                if(enviado() && empty($_FILES)){
+                    echo "<span>Introduce documento<span>";
+                }
             ?>
         </p>
         <p>
