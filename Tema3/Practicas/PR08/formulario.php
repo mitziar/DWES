@@ -40,15 +40,18 @@
         if(validado()){//es vacio que no lo pinte
             echo "<h3>Datos del formulario</h3><hr>";
             foreach($_REQUEST as $key => $value){
-                if($key=='checkboxElige'){
-                    echo '<label>Valores chequeados: </label>';
-                    foreach($value as $valor){
-                        echo $valor." ";
+                if(!vacio($key)){
+                    if($key=='checkboxElige'){
+                        echo '<label>Valores chequeados: </label>';
+                        foreach($value as $valor){
+                            echo $valor." ";
+                        }
+                        echo '<br>';
+                    }else{
+                        echo "<label>".$key.": </label>".$value."<br>";
                     }
-                    echo '<br>';
-                }else{
-                    echo "<label>".$key.": </label>".$value."<br>";
                 }
+               
             }
             
         }else{?>

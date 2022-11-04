@@ -25,23 +25,31 @@ function validado()
 {
     $errores = array();
     if (enviado()) {
-        foreach ($_REQUEST as $key => $value) {
-            if ($key == 'checkboxElige') {
-                if (count($value) < 1 || count($value) > 3) {
-                    array_push($errores, $key);
-                }
-            } else if ($key == 'radioObligatorio' || $key == 'eligeOpcion' || $key == 'email' || $key == 'pass') {
-                if (!existe($key)) {
-                    array_push($errores, $key);
-                }
-            } else {
-                if (!str_contains($key,'Opcional')) {
-                    if (vacio($key)) {
-                        array_push($errores, $key);
+            if(!existe('checkboxElige')){
+                array_push($errores,'checkboxElige');
+            }elseif(!existe('radioObligatorio')){
+                array_push($errores,'radioObligatorio');
+            }else{
+                foreach ($_REQUEST as $key => $value) {
+                
+                    if ($key == 'checkboxElige') {
+                        
+                        if (count($value) < 1 || count($value) > 3) {
+                            array_push($errores, $key);
+                        }
+                    } else if ($key == 'radioObligatorio' || $key == 'eligeOpcion' || $key == 'email' || $key == 'pass') {
+                        if (vacio($key)) {
+                            array_push($errores, $key);
+                        }
+                    } else {
+                        if (!str_contains($key,'Opcional')) {
+                            if (vacio($key)) {
+                                array_push($errores, $key);
+                            }
+                        }
                     }
                 }
             }
-        }
         if (count($errores) == 0) {
             return true;
         } else {
@@ -51,5 +59,4 @@ function validado()
         return false;
     }
 }
-
 ?>
