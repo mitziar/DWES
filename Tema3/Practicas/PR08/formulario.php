@@ -37,13 +37,15 @@
     </div>
     
         <?php
-        if(validado()){
+        if(validado()){//es vacio que no lo pinte
             echo "<h3>Datos del formulario</h3><hr>";
             foreach($_REQUEST as $key => $value){
                 if($key=='checkboxElige'){
+                    echo '<label>Valores chequeados: </label>';
                     foreach($value as $valor){
-                        echo "<label>".$value.": </label>".$valor."<br>";
+                        echo $valor." ";
                     }
+                    echo '<br>';
                 }else{
                     echo "<label>".$key.": </label>".$value."<br>";
                 }
