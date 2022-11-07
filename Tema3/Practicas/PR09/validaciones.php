@@ -18,4 +18,21 @@
         }
         return false;
     }
+    function esFechaValida($fecha){
+        if (strtotime($fecha)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    function esMayorEdad($edad){
+        $fechaHoy= new DateTime("now");
+        $fechaUsuario = new DateTime(strtotime($_REQUEST['fecha']));
+
+        if($fechaHoy->diff($fechaUsuario)<18){
+            return false;
+        }else{
+            return true;
+        }
+    }
 ?>

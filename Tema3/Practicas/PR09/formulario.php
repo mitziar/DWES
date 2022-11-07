@@ -42,10 +42,10 @@
         <form action="formulario.php" method="post" enctype="multipart/form-data">
             <p>
                 <!-- Pongo el for = que el id para que cuando selecione el label el input tome el foco-->
-                <label for="nombre">Nombre</label>
+                <label for="idNombre">Nombre</label>
                 <input type="text" name="nombre" id="idNombre" value="<?php
-                $patron='/\D{3}/';
-                if (!vacio('nombre') && preg_match($patron,$_REQUEST['nombre'])>1){//si el nombre no está vacio y el formulario ha sido enviado         
+                $patron='/\D{3,}/';
+                if (!vacio('nombre') && preg_match($patron,$_REQUEST['nombre']) && enviado()){//si el nombre no está vacio y el formulario ha sido enviado         
                         echo $_REQUEST['nombre'];//el value es
                     }
                 ?>">
@@ -55,16 +55,20 @@
                     ?>
                     <span>Debe introducir el nombre</span>
                     <?php
+                    }elseif(existe('nombre') && !preg_match($patron,$_REQUEST['nombre'])){
+                        ?>
+                        <span>El nombre debe contener 3 caracteres mínimo</span>
+                        <?php
                     }
                 ?>
             </p>
             <p>
                 <!-- Pongo el for = que el id para que cuando selecione el label el input tome el foco-->
-                <label for="apellidos">Apellidos</label>
-                <input type="text" name="nombre" id="idNombre" value="<?php
-                $patron='//';
+                <label for="idApellidos">Apellidos</label>
+                <input type="text" name="apellidos" id="idApellidos" value="<?php
+                $patron='/\D{3,}(\s)\D{3,}/';
                 if (!vacio('apellidos') && preg_match($patron,$_REQUEST['apellidos'])){//si el nombre no está vacio y el formulario ha sido enviado         
-                        echo $_REQUEST['nombre'];//el value es
+                        echo $_REQUEST['apellidos'];//el value es
                     }
                 ?>">
                 <?php
@@ -73,37 +77,33 @@
                     ?>
                     <span>Debe introducir los apellidos</span>
                     <?php
+                    }elseif(existe('apellidos') && !preg_match($patron,$_REQUEST['apellidos'])){
+                        ?>
+                        <span>Cada apellido debe tener al menos 3 caracteres y un espacio entre cada apellido</span>
+                        <?php
                     }
-                ?>
-            </p>
-            <p>
-                <label for="idPass">Contraseña</label>
-                <input type="password" name="pass" id="idPass" value=<?php
-                if(enviado() && existe('pass')){
-                    echo $_REQUEST['pass'];
-                }
-                ?>><?php
-                if(enviado() && vacio('pass')){
-                    echo "<span>Introduce contraseña<span>";
-                }
+                
                 ?>
             </p>
             <p>
 
                 <label for="idFecha">Fecha</label>
-                <input type="date" name="fecha" id="idFecha" value="<?php
-                if (!vacio('fecha') && enviado()){//si el nombre no está vacio y el formulario ha sido enviado         
+                <input type="tex" name="fecha" id="idFecha" placeholder="AAAA-MM-DD"value="<?php
+                $patron='/\d{4}(\-)\d{2}(\-)\d{2}/';
+                if (!vacio('fecha') && enviado() && preg_match($patron,$_REQUEST['fecha']) && esFechaValida($_REQUEST['fecha']) && esMayorEdad($_REQUEST['fecha'])){
                         echo $_REQUEST['fecha'];//el value es
                     }
                 ?>">
                 <?php
                 if (vacio('fecha') && enviado())
-                {//si el nombre está vacio y el formulario ha sido enviado                 
+                {             
                 ?>
                 <span>Debe introducir fecha</span>
                 <?php
-                }
-            ?>
+                }elseif(enviado() && existe('fecha') && (!esMayorEdad($_REQUEST['fecha']) || !esFechaValida($_REQUEST['fecha']))){
+                ?><span>Introducir fecha válida</span><?php
+                    }
+                ?>
             </p>
             <p>
                 <label for="dni">DNI</label>
@@ -116,7 +116,7 @@
                     if (vacio('dni') && enviado())
                     {//si el nombre está vacio y el formulario ha sido enviado                 
                     ?>
-                    <span>Debe introducir alfanumerico</span>
+                    <span>Debe introducir DNI</span>
                     <?php
                     }
                 ?>
