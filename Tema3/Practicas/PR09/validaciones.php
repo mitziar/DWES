@@ -26,7 +26,7 @@
         }
     }
     function esMayorEdad($edad){
-        $fechaHoy= new DateTime("now");
+        $fechaHoy= new DateTime();
         $fechaUsuario = new DateTime(strtotime($_REQUEST['fecha']));
 
         if($fechaHoy->diff($fechaUsuario)<18){
