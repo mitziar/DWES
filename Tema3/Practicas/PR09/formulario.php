@@ -33,13 +33,11 @@
 
     <div class="container">
     <div class="row">
-            <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a>/PR08/Formulario y expresiones regulares</h4>
+            <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a>/PR09-Formulario y expresiones regulares</h4>
     </div>
-    
-       
-            
+   
         <h3>Formulario y expresiones regulares</h3><hr>
-        <form action="formulario.php" method="post" enctype="multipart/form-data">
+        <form action="formulario.php" method="get" enctype="multipart/form-data">
             <p>
                 <!-- Pongo el for = que el id para que cuando selecione el label el input tome el foco-->
                 <label for="idNombre">Nombre</label>
@@ -90,7 +88,8 @@
                 <label for="idFecha">Fecha</label>
                 <input type="tex" name="fecha" id="idFecha" placeholder="AAAA-MM-DD"value="<?php
                 $patron='/\d{4}(\-)\d{2}(\-)\d{2}/';
-                if (!vacio('fecha') && enviado() && preg_match($patron,$_REQUEST['fecha']) && esFechaValida($_REQUEST['fecha']) && esMayorEdad($_REQUEST['fecha'])){
+
+                if (existe('fecha') && enviado() && preg_match($patron,$_REQUEST['fecha']) && esFechaValida('fecha')){
                         echo $_REQUEST['fecha'];//el value es
                     }
                 ?>">
@@ -100,15 +99,17 @@
                 ?>
                 <span>Debe introducir fecha</span>
                 <?php
-                }elseif(enviado() && existe('fecha') && (!esMayorEdad($_REQUEST['fecha']) || !esFechaValida($_REQUEST['fecha']))){
+                }elseif(enviado() && !esFechaValida('fecha')){
                 ?><span>Introducir fecha válida</span><?php
                     }
                 ?>
             </p>
             <p>
                 <label for="dni">DNI</label>
-                <input type="text" name="dni" id="idDni" value="<?php
-                if (!vacio('dni') && enviado()){//si el nombre no está vacio y el formulario ha sido enviado         
+                <input type="text" name="dni" id="idDni" placeholder="12345678P"value="<?php
+                $patron = '/^[0-9]{8}[A-Z]{1}$/';
+
+                if (!vacio('dni') && enviado() && preg_match($patron,$_REQUEST['dni'])){//si el nombre no está vacio y el formulario ha sido enviado         
                         echo $_REQUEST['dni'];//el value es
                     }
                 ?>">
@@ -118,19 +119,26 @@
                     ?>
                     <span>Debe introducir DNI</span>
                     <?php
+                    }elseif(vacio('dni') && enviado() && !preg_match($patron,$_REQUEST['dni'])){
+                    ?><span>Introduzca un DNI válido</span><?php
                     }
                 ?>
             </p>
             <p>
-                <label for="idEmaill">Email</label>
+                <label for="idEmail">Email</label>
+                <?php
+                $patron="/^\D{3,}(@)\D{3,}(\.)\D{2,}$/";
+                ?>
                 <input type="text" name="email" id="idEmail" placeholder="alguien@email.com" value=<?php
-                    if(enviado() && existe('email')){
+                    if(enviado() && existe('email') && preg_match($patron,$_REQUEST['email'])){
                         echo $_REQUEST['email'];
                     }
                 ?>>
                 <?php
                     if (enviado() && vacio('email')){
                         echo "<span>Introduce email<span>";
+                    }elseif(enviado() && existe('email') && !preg_match($patron,$_REQUEST['email'])){
+                        ?><span>Introduzca email válido</span><?php
                     }
                 ?>
             </p>

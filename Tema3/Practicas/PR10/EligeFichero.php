@@ -31,7 +31,7 @@
 
     <div class="container">
     <div class="row">
-            <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a>/PR010/Ficheros</h4>
+            <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a>/PR010-Ficheros</h4>
     </div>
     <div class="row">
         <form action="EligeFichero.php" method="get">
@@ -48,8 +48,6 @@
                                 //redirige a otra página 
                                 header('Location: ./leer.php?fichero='.$_REQUEST['nombre']);
                                 exit();
-                            
-                            
                         }
                     }
                     if(empty($_REQUEST['nombre']) && isset($_REQUEST['editar'])){

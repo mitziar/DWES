@@ -19,17 +19,19 @@
         return false;
     }
     function esFechaValida($fecha){
-        if (strtotime($fecha)){
-            return true;
+        if (strtotime($_REQUEST[$fecha])){
+            esMayorEdad($_REQUEST[$fecha]);
         }else{
             return false;
         }
     }
     function esMayorEdad($edad){
         $fechaHoy= new DateTime();
-        $fechaUsuario = new DateTime(strtotime($_REQUEST['fecha']));
+        $fechaUsuario = new DateTime($edad);
+        
+        $diferencia = $fechaHoy->diff($fechaUsuario);
 
-        if($fechaHoy->diff($fechaUsuario)<18){
+        if(($diferencia->y)>=18){
             return false;
         }else{
             return true;
