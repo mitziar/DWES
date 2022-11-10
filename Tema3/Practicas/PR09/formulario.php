@@ -84,6 +84,49 @@
                 ?>
             </p>
             <p>
+                <!-- Pongo el for = que el id para que cuando selecione el label el input tome el foco-->
+                <label for="idContrasena">Contraseña</label>
+                <input type="password" name="contrasena" id="idContrasena" value="<?php
+                $patron='/[A-Z]+[a-z]+[0-9]+/';
+                if (!vacio('contrasena') && preg_match($patron,$_REQUEST['contrasena']) && enviado()){//si el nombre no está vacio y el formulario ha sido enviado         
+                        echo $_REQUEST['contrasena'];//el value es
+                    }
+                ?>">
+                <?php
+                    if (vacio('contrasena') && enviado())
+                    {//si el nombre está vacio y el formulario ha sido enviado                 
+                    ?>
+                    <span>Debe introducir una contraseña</span>
+                    <?php
+                    }elseif(existe('contrasena') && !preg_match($patron,$_REQUEST['contrasena'])){
+                        ?>
+                        <span>La contraseña debe contener al menos una mayúscula, una minúscula y un número</span>
+                        <?php
+                    }
+                ?>
+            </p>
+            <p>
+                <!-- Pongo el for = que el id para que cuando selecione el label el input tome el foco-->
+                <label for="idContrasena">Contraseña</label>
+                <input type="password" name="contrasenaRepetida" id="idContrasenaRepetida" value="<?php
+                if (!vacio('contrasenaRepetida') && enviado() && ($_REQUEST['contrasena']===$_REQUEST['contrasenaRepetida'])){//si el nombre no está vacio y el formulario ha sido enviado         
+                        echo $_REQUEST['contrasenaRepetida'];//el value es
+                    }
+                ?>">
+                <?php
+                    if (vacio('contrasenaRepetida') && enviado())
+                    {//si el nombre está vacio y el formulario ha sido enviado                 
+                    ?>
+                    <span>Introduce repetir contraseña</span>
+                    <?php
+                    }elseif(existe('contrasenaRepetida') && !($_REQUEST['contrasena']===$_REQUEST['contrasenaRepetida'])){
+                        ?>
+                        <span>No coinciden las contraseña</span>
+                        <?php
+                    }
+                ?>
+            </p>
+            <p>
 
                 <label for="idFecha">Fecha</label>
                 <input type="tex" name="fecha" id="idFecha" placeholder="AAAA-MM-DD"value="<?php
@@ -105,7 +148,7 @@
                 ?>
             </p>
             <p>
-                <label for="dni">DNI</label>
+                <label for="idDni">DNI</label>
                 <input type="text" name="dni" id="idDni" placeholder="12345678P"value="<?php
                 $patron = '/^[0-9]{8}[A-Z]{1}$/';
 
@@ -127,7 +170,7 @@
             <p>
                 <label for="idEmail">Email</label>
                 <?php
-                $patron="/^\D{3,}(@)\D{3,}(\.)\D{2,}$/";
+                $patron="/^\D+(@)\D+(\.)\D{2,}$/";
                 ?>
                 <input type="text" name="email" id="idEmail" placeholder="alguien@email.com" value=<?php
                     if(enviado() && existe('email') && preg_match($patron,$_REQUEST['email'])){
@@ -139,6 +182,36 @@
                         echo "<span>Introduce email<span>";
                     }elseif(enviado() && existe('email') && !preg_match($patron,$_REQUEST['email'])){
                         ?><span>Introduzca email válido</span><?php
+                    }
+                ?>
+            </p>
+            <p>
+                <label for='idImagen'>Introducir imagen (*.jpg,*.png,*.bmp): </label>
+                <input type="file" name="imagen" id="idImagen">
+                <?php
+
+                    if(enviado() && empty($_FILES)){
+                        echo "<span>Introduce documento</span>";
+                    }
+                    if(existe('fichero')&& enviado()){
+                        echo "<img src='" . $_REQUEST['fichero']. "' alt='Imagen' width='100px' height='100px'>";
+                        echo "<input type='hidden' name='fichero' value='".$_REQUEST['fichero']."'>";
+                    }
+                    if(isset($_FILES) && enviado()){
+                        $patron='/^[\D|\d]+(\.)(jpg)|(bmp)|(png)$/';
+                       
+                        if( !existe('fichero') && preg_match($patron,$_FILES['imagen']['name'])){
+                            $directorio='./uploads/';
+                            $rutaImagen=$directorio.$_FILES['imagen']['name'];
+                            if(move_uploaded_file($_FILES['imagen']['tmp_name'],$rutaImagen)){
+                                echo "<input type='hidden' name='fichero' value='".$rutaImagen."'>";
+                                echo "<img src='" . $rutaImagen. "' alt='Imagen' width='100px' height='100px'>";
+                            }else{
+                                echo "<span>No se ha podido guardar el documento</span>";
+                            }
+                        }elseif(existe('fichero') && !preg_match($patron,$_FILES['imagen']['name'])){
+                            echo "<span>El documento no tiene un formato válido</span>";
+                        }
                     }
                 ?>
             </p>

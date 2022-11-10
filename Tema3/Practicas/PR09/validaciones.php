@@ -40,7 +40,8 @@
     function letraDni($dni){
         $letras = array('T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E');
 
-        if($letras[substr($dni,0,8)%23] == substr($dni,8,1)){
+
+        if($letras[intval(substr($_REQUEST[$dni],0,8))%23] == substr($_REQUEST[$dni],8,1)){
             return true;
         }
         return false;
