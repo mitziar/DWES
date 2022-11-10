@@ -37,7 +37,6 @@
             $nombre=$_REQUEST['fichero'];
         ?>
         <form action="leer.php" method="get"><?php
-        echo $nombre;
                     if(isset($_REQUEST['editar'])){
                         header('Location: ./editar.php?fichero='.$nombre);
                         exit();
@@ -46,7 +45,8 @@
                         exit(); 
                     }
             ?>
-            <textarea><?php 
+            <input type="hidden" name="fichero" value="<? echo $nombre?>">
+            <textarea readonly><?php 
                 if(!file_exists('miarchivo.txt')){
                     echo "<br><H2>El fichero no existe</H2>";
                 }else{
@@ -54,7 +54,7 @@
                         echo "<h2>No se ha podido abrir. No such file or directorio</h2>";
                     }else{
                         //miestras pueda leer una linea en el fichero
-                        while($lea = fgets($fp,filesize('miarchivo.txt'))){
+                        while($lea = fgets($fp,filesize($nombre))){
                             echo $lea;
                         }
                         fclose($fp);

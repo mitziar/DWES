@@ -20,7 +20,7 @@
     }
     function esFechaValida($fecha){
         if (strtotime($_REQUEST[$fecha])){
-            esMayorEdad($_REQUEST[$fecha]);
+            return esMayorEdad($_REQUEST[$fecha]);
         }else{
             return false;
         }
@@ -32,9 +32,17 @@
         $diferencia = $fechaHoy->diff($fechaUsuario);
 
         if(($diferencia->y)>=18){
-            return false;
+            return true;
         }else{
+            return false;
+        }
+    }
+    function letraDni($dni){
+        $letras = array('T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E');
+
+        if($letras[substr($dni,0,8)%23] == substr($dni,8,1)){
             return true;
         }
+        return false;
     }
 ?>

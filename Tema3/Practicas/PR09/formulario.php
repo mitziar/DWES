@@ -37,7 +37,7 @@
     </div>
    
         <h3>Formulario y expresiones regulares</h3><hr>
-        <form action="formulario.php" method="get" enctype="multipart/form-data">
+        <form action="formulario.php" method="post" enctype="multipart/form-data">
             <p>
                 <!-- Pongo el for = que el id para que cuando selecione el label el input tome el foco-->
                 <label for="idNombre">Nombre</label>
@@ -109,7 +109,7 @@
                 <input type="text" name="dni" id="idDni" placeholder="12345678P"value="<?php
                 $patron = '/^[0-9]{8}[A-Z]{1}$/';
 
-                if (!vacio('dni') && enviado() && preg_match($patron,$_REQUEST['dni'])){//si el nombre no está vacio y el formulario ha sido enviado         
+                if (!vacio('dni') && enviado() && preg_match($patron,$_REQUEST['dni']) && letraDNI('dni')){//si el nombre no está vacio y el formulario ha sido enviado         
                         echo $_REQUEST['dni'];//el value es
                     }
                 ?>">
@@ -119,7 +119,7 @@
                     ?>
                     <span>Debe introducir DNI</span>
                     <?php
-                    }elseif(vacio('dni') && enviado() && !preg_match($patron,$_REQUEST['dni'])){
+                    }elseif(!vacio('dni') && enviado() && (!preg_match($patron,$_REQUEST['dni']) || !letraDNI('dni'))){
                     ?><span>Introduzca un DNI válido</span><?php
                     }
                 ?>
@@ -139,30 +139,6 @@
                         echo "<span>Introduce email<span>";
                     }elseif(enviado() && existe('email') && !preg_match($patron,$_REQUEST['email'])){
                         ?><span>Introduzca email válido</span><?php
-                    }
-                ?>
-            </p>
-            
-            <p>
-                <label for="idDocumento">Subir documento</label>
-                <input type="file" name="documento" id="idDocumento">
-                <?php
-
-                    if(enviado() && isset($_FILES)){
-                        $rutaGuardado = "./uploads/";
-
-                        // Se le establece el nombre al archivo a guardar
-                        $rutaConNombreFichero = $rutaGuardado .  $_FILES['documento']['name'];
-
-                        // Si se mueve el fichero del sitio temporal a la ruta especificada...
-                        if(move_uploaded_file( $_FILES['documento']['tmp_name'],$rutaConNombreFichero))
-                        {
-                        echo "<br>El fichero se ha guardado correctamente.<br>";
-                        echo "<img src='" . $rutaConNombreFichero . "' alt='Imagen' width='100px' height='100px'>";
-                        }
-                    }
-                    if(enviado() && empty($_FILES)){
-                        echo "<span>Introduce documento<span>";
                     }
                 ?>
             </p>
