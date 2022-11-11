@@ -46,4 +46,55 @@
         }
         return false;
     }
+    function validaContrasena($cadena){
+        
+        $patron1='/[A-Z]+/';
+        $patron2='/[a-z]+/';
+        $patron3='/[0-9]+/';
+        if(preg_match($patron1,$cadena) && preg_match($patron2,$cadena) && preg_match($patron3,$cadena)){
+            return true;
+        }
+        return false;
+    }
+    function validado(){
+
+        foreach ($_REQUEST as $key => $value) {
+
+            if (vacio($key)){
+                return false;
+            }else{
+                if($key=='contrasena'){
+                    if(!validaContrasena($_REQUEST['contrasena']))
+                    return false;
+                }else{
+                    switch ($key){
+                        case "nombre":
+                            $patron='/\D{3,}/';
+                            break;
+                        case "apellidos":
+                            $patron='/\D{3,}(\s)\D{3,}/';
+                            break;
+                        case "fecha":
+                            $patron='/\d{4}(\-)\d{2}(\-)\d{2}/';
+                            break;
+                        case "dni":
+                            $patron = '/^[0-9]{8}[A-Z]{1}$/';
+                            break;
+                        case "email":
+                            $patron="/^\D+(@)\D+(\.)\D{2,}$/";
+                            break;
+                        case "imagen":
+                            $patron='/^[\D|\d]+(\.)(jpg)|(bmp)|(png)$/';
+                        default:
+                            break;
+                    }
+                    if(preg_match($patron,$_REQUEST[$key])){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 ?>

@@ -1,7 +1,8 @@
 <?php
     require("./validaciones.php");
 ?>
-<html lang="en"><head>
+<html lang="en">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,21 +10,19 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-<link rel="stylesheet" href="css/estilos.css">
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
     <title>DWES-Itziar</title>
-
-
   </head>
 
   <body>
-    <!-- Main jumbotron for a primary marketing message or call to action -->
+
     <div class="jumbotron" style="background-color: bisque;">
       <div class="container">
         <h1><a href="../index.html">Desarrollo Web en Entorno Servidor</a></h1>
@@ -34,10 +33,29 @@
     <div class="container">
     <div class="row">
             <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a>/PR09-Formulario y expresiones regulares</h4>
-    </div>
-   
-        <h3>Formulario y expresiones regulares</h3><hr>
-        <form action="formulario.php" method="post" enctype="multipart/form-data">
+    </div><?php
+        if(enviado() && validado()){
+            echo "<H3>Datos recogidos del formulario</H3>";
+            echo "<hr>";
+            foreach ($_REQUEST as $key => $value) {
+                echo "<label>".$key.":</label>".$value."<br>";
+            }
+            //fichero este bien y existe; la subo; la muestro
+            /**
+             *  $directorio='./uploads/';
+                            $rutaImagen=$directorio.$_FILES['imagen']['name'];
+                            if(move_uploaded_file($_FILES['imagen']['tmp_name'],$rutaImagen)){
+                                echo "<img src='" . $rutaImagen. "' alt='Imagen' width='100px' height='100px'>";
+                            }else{
+                                echo "<span>No se ha podido guardar el documento</span>";
+                            }
+             */
+
+
+        }else{?>
+    
+            <h3>Formulario y expresiones regulares</h3><hr>
+            <form action="formulario.php" method="post" enctype="multipart/form-data">
             <p>
                 <!-- Pongo el for = que el id para que cuando selecione el label el input tome el foco-->
                 <label for="idNombre">Nombre</label>
@@ -87,8 +105,8 @@
                 <!-- Pongo el for = que el id para que cuando selecione el label el input tome el foco-->
                 <label for="idContrasena">Contraseña</label>
                 <input type="password" name="contrasena" id="idContrasena" value="<?php
-                $patron='/[A-Z]+[a-z]+[0-9]+/';
-                if (!vacio('contrasena') && preg_match($patron,$_REQUEST['contrasena']) && enviado()){//si el nombre no está vacio y el formulario ha sido enviado         
+                
+                if (!vacio('contrasena') && validaContrasena($_REQUEST['contrasena']) && enviado()){//si el nombre no está vacio y el formulario ha sido enviado         
                         echo $_REQUEST['contrasena'];//el value es
                     }
                 ?>">
@@ -98,7 +116,7 @@
                     ?>
                     <span>Debe introducir una contraseña</span>
                     <?php
-                    }elseif(existe('contrasena') && !preg_match($patron,$_REQUEST['contrasena'])){
+                    }elseif(existe('contrasena') && !validaContrasena($_REQUEST['contrasena'])){
                         ?>
                         <span>La contraseña debe contener al menos una mayúscula, una minúscula y un número</span>
                         <?php
@@ -190,26 +208,24 @@
                 <input type="file" name="imagen" id="idImagen">
                 <?php
 
-                    if(enviado() && empty($_FILES)){
+                    if(enviado() && empty($_FILES['imagen']['name'])){
                         echo "<span>Introduce documento</span>";
                     }
                     if(existe('fichero')&& enviado()){
                         echo "<img src='" . $_REQUEST['fichero']. "' alt='Imagen' width='100px' height='100px'>";
-                        echo "<input type='hidden' name='fichero' value='".$_REQUEST['fichero']."'>";
                     }
-                    if(isset($_FILES) && enviado()){
+                    if(!empty($_FILES['imagen']['name']) && enviado()){
                         $patron='/^[\D|\d]+(\.)(jpg)|(bmp)|(png)$/';
                        
-                        if( !existe('fichero') && preg_match($patron,$_FILES['imagen']['name'])){
+                        if( preg_match($patron,$_FILES['imagen']['name'])){
                             $directorio='./uploads/';
                             $rutaImagen=$directorio.$_FILES['imagen']['name'];
                             if(move_uploaded_file($_FILES['imagen']['tmp_name'],$rutaImagen)){
-                                echo "<input type='hidden' name='fichero' value='".$rutaImagen."'>";
                                 echo "<img src='" . $rutaImagen. "' alt='Imagen' width='100px' height='100px'>";
                             }else{
                                 echo "<span>No se ha podido guardar el documento</span>";
                             }
-                        }elseif(existe('fichero') && !preg_match($patron,$_FILES['imagen']['name'])){
+                        }elseif(enviado() && !empty($_FILES['imagen']) && !preg_match($patron,$_FILES['imagen']['name'])){
                             echo "<span>El documento no tiene un formato válido</span>";
                         }
                     }
@@ -219,7 +235,10 @@
                 <input type="submit" value="Enviar" name="enviar">
             </p>
         </form>
-    </div> <!-- /container -->
+    
+        <?php
+    }?>
+       </div> <!-- /container -->
     <footer class="container" style="background-color: bisque;">
     <p><center>Página de Itziar</center></p>
     </footer>
