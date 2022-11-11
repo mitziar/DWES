@@ -96,5 +96,14 @@
         }
         return false;
     }
+    function validaFormulario(){
+        if(!empty($_FILES['imagen']['name'])){
+            $patron='/^[\D|\d]+(\.)(jpg)|(bmp)|(png)$/';                     
+            if( preg_match($patron,$_FILES['imagen']['name'])){
+                return true;
+            }
+        }
+        return false;
+    }
 
 ?>
