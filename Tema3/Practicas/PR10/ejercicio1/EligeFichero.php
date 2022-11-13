@@ -17,6 +17,7 @@
 
     <title>DWES-Itziar</title>
 
+
   </head>
 
   <body>
@@ -30,41 +31,35 @@
 
     <div class="container">
     <div class="row">
-            <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a>/PR010-Ficheros</h4>
+    <h4><a href="../../../">Tema 3</a><a href="../../">/Prácticas</a><a href=../>/PR010</a>Ejercicio 1</h4>
     </div>
     <div class="row">
-        <?php
-            $nombre=$_REQUEST['fichero'];
-        ?>
-        <form action="leer.php" method="get"><?php
-                    if(isset($_REQUEST['editar'])){
-                        header('Location: ./editar.php?fichero='.$nombre);
-                        exit();
-                    }elseif(isset($_REQUEST['volver'])){
-                        header('Location: ./EligeFichero.php');
-                        exit(); 
-                    }
-            ?>
-            <input type="hidden" name="fichero" value="<? echo $nombre?>">
-            <textarea readonly><?php 
-                if(!file_exists('miarchivo.txt')){
-                    echo "<br><H2>El fichero no existe</H2>";
-                }else{
-                    if(!$fp=fopen($nombre,"r")){
-                        echo "<h2>No se ha podido abrir. No such file or directorio</h2>";
-                    }else{
-                        //miestras pueda leer una linea en el fichero
-                        while($lea = fgets($fp,filesize($nombre))){
-                            echo $lea;
+        <form action="EligeFichero.php" method="get">
+            <p>
+                <!-- Pongo el for = que el id para que cuando selecione el label el input tome el foco-->
+                <label for="idNombre">Nombre</label>
+                <input type="text" name="nombre" id="idNombre"><?php
+                    if(empty($_REQUEST['nombre']) && isset($_REQUEST['leer'])){
+                        ?><span>Escribe el nombre del fichero a leer</span><?php
+                    }elseif(!empty($_REQUEST['nombre']) && isset($_REQUEST['leer'])){
+                        if(!file_exists($_REQUEST['nombre'])){?>
+                            <span>El archivo no existe o no tiene permisos</span><?php
+                        }else{
+                                //redirige a otra página 
+                                header('Location: ./leer.php?fichero='.$_REQUEST['nombre']);
+                                exit();
                         }
-                        fclose($fp);
                     }
-            }
-            ?>
+                    if(isset($_REQUEST['editar'])){
 
-            </textarea>
-            <br>
-            <input type="submit" name="volver" value="Volver a elegir fichero">
+                                header('Location: ./editar.php?fichero='.$_REQUEST['nombre']);
+                                exit();
+                            
+                    }
+                    
+                ?>
+            </p>
+            <input type="submit" name="leer" value="Leer">
             <input type="submit" name="editar" value="Editar">
         </form>    
     </div> <!-- /container -->

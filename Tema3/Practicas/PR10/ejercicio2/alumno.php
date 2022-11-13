@@ -23,50 +23,33 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" style="background-color: bisque;">
       <div class="container">
-        <h1><a href="../index.html">Desarrollo Web en Entorno Servidor</a></h1>
-        <h2><center>FICHEROS</center></h2>
+        <h1><a href="../../../../index.html">Desarrollo Web en Entorno Servidor</a></h1>
+        <h2><center>Fichero csv</center></h2>
       </div>
     </div>
 
     <div class="container">
-    <div class="row">
-            <h4><a href="../../">Tema 3</a><a href="../">/Prácticas</a>/PR010-Ficheros</h4>
-    </div>
-    <div class="row">
+        <div class="row">
+                <h4><a href="../../../">Tema 3</a><a href="../../">/Prácticas</a><a href=../>/PR010/</a>Ejercicio 2</h4>
+        </div>
+        <div class="row">            
         <?php
-            $nombre=$_REQUEST['fichero'];
-        ?>
-        <form action="leer.php" method="get"><?php
-        echo $nombre;
-                    if(isset($_REQUEST['editar'])){
-                        header('Location: ./editar.php?fichero='.$nombre);
-                        exit();
-                    }elseif(isset($_REQUEST['volver'])){
-                        header('Location: ./EligeFichero.php');
-                        exit(); 
-                    }
-            ?>
-            <textarea><?php 
-                if(!file_exists('miarchivo.txt')){
-                    echo "<br><H2>El fichero no existe</H2>";
-                }else{
-                    if(!$fp=fopen($nombre,"r")){
-                        echo "<h2>No se ha podido abrir. No such file or directorio</h2>";
-                    }else{
-                        //miestras pueda leer una linea en el fichero
-                        while($lea = fgets($fp,filesize($nombre))){
-                            echo $lea;
-                        }
-                        fclose($fp);
-                    }
-            }
-            ?>
+        if(isset($_REQUEST['guardar'])){
+            
 
-            </textarea>
-            <br>
-            <input type="submit" name="volver" value="Volver a elegir fichero">
-            <input type="submit" name="guardar" value="Guardar">
-        </form>    
+        }else{
+            $notasAlumno=$_REQUEST['notasAlumno'];
+            ?><form action='alumno.php' method='get'>
+                <label>Alumno</label>
+                <input type="text" readonly name="alumno" value="<?php echo $notasAlumno[0]?>"><br>
+                <label>Notas</label>
+                <input type="text" name="nota1" value="<?php echo $notasAlumno[1]?>">
+                <input type="text" name="nota2" value="<?php echo $notasAlumno[2]?>">
+                <input type="text" name="nota3" value="<?php echo $notasAlumno[3]?>">
+                <input type="submit" value="guardar" name='guardar'>
+            </form>
+            <?}?>
+        </div>    
     </div> <!-- /container -->
     <footer class="container" style="background-color: bisque;">
     <p><center>Página de Itziar</center></p>
