@@ -50,13 +50,22 @@
                                 exit();
                         }
                     }
-                    if(isset($_REQUEST['editar'])){
-
+                    if(empty($_REQUEST['nombre']) && isset($_REQUEST['editar'])){
+                        ?><span>Escribe el nombre del fichero a editar</span><?php
+                    }elseif(!empty($_REQUEST['nombre']) && isset($_REQUEST['editar'])){
+                        if(!file_exists($_REQUEST['nombre'])){
+                            if($fp=fopen($_REQUEST['nombre'],"w")){
+                                echo "<h2>No se ha podido crear</h2>";
+                                fclose($fp);
+                                //redirige a otra página 
                                 header('Location: ./editar.php?fichero='.$_REQUEST['nombre']);
                                 exit();
-                            
-                    }
-                    
+                            }
+                        }else{
+                            header('Location: ./editar.php?fichero='.$_REQUEST['nombre']);
+                            exit();
+                        }
+                    }                  
                 ?>
             </p>
             <input type="submit" name="leer" value="Leer">

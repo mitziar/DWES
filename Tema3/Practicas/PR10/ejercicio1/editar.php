@@ -1,4 +1,3 @@
-
 <html lang="en"><head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,7 +37,7 @@
             }
         ?>
         <form action="editar.php" method="post"><?php
-                    if(isset($_REQUEST['guardar'])&&!empty($_REQUEST['fichero'])){
+                    if(isset($_REQUEST['guardar'])){
                         if(!$fp=fopen($nombre,"w")){
                             echo "<h2>No se ha podido abrir. No such file or directorio</h2>";
                         }else{
@@ -47,38 +46,33 @@
                         }
                         header('Location: ./leer.php?fichero='.$nombre);
                         exit();
-                    }elseif(isset($_REQUEST['guardar'])&&empty($_REQUEST['fichero'])){
-                        ?><span>Es obligatorio el nombre del fichero</span>
-                        <label for='idNombreFichero'>Nombre del fichero</label>
-                        <input name="fichero" id='idNombreFichero'><?php
                     }elseif(isset($_REQUEST['volver'])){
                         header('Location: ./EligeFichero.php');
                         exit(); 
-                    }elseif(!isset($_REQUEST['guardar']) && !empty($_REQUEST['fichero'])){
-                        ?><input type="hidden" name="fichero" value="<? echo $nombre?>"><?
-                    }elseif(!isset($_REQUEST['guardar']) && empty($_REQUEST['fichero'])){
-                        ?><label for='idNombreFichero'>Nombre del fichero</label>
-                        <input name="fichero" id='idNombreFichero'><?
-                    }?>
-                <textarea name='textoNuevo'><?php 
-                if(!empty($_REQUEST['fichero'])){
-                    if(file_exists($nombre)){
-                        if(!$fp=fopen($nombre,"r")){
-                            echo "<h2>No se ha podido abrir. No such file or directorio</h2>";
-                        }else{
-                            //miestras pueda leer una linea en el fichero
-                            while($lea = fgets($fp,filesize($nombre))){
-                                echo $lea;
+                     }else{
+                         ?><input type="hidden" name="fichero" value="<? echo $nombre?>">
+                          <textarea name='textoNuevo'><?php 
+                            if(!empty($_REQUEST['fichero'])){
+                                if(file_exists($nombre)){
+                                    if(!$fp=fopen($nombre,"r")){
+                                        echo "<h2>No se ha podido abrir. No such file or directorio</h2>";
+                                    }else{
+                                        //miestras pueda leer una linea en el fichero
+                                        while($lea = fgets($fp,filesize($nombre))){
+                                            echo $lea;
+                                        }
+                                        fclose($fp);
+                                    }
+                                }
                             }
-                            fclose($fp);
-                        }
-                    }
-                }
-            ?></textarea>
-            <br>
-            <input type="submit" name="volver" value="Volver a elegir fichero">
-            <input type="submit" name="guardar" value="Guardar">
-        </form>
+                    ?></textarea>
+                    <br>
+                    <input type="submit" name="volver" value="Volver a elegir fichero">
+                    <input type="submit" name="guardar" value="Guardar">
+                </form><?php
+                    } 
+                    ?>
+               
     </div>
     </div> <!-- /container -->
     <footer class="container" style="background-color: bisque;">
