@@ -51,7 +51,7 @@
                         foreach ($notas as $key => $value) {
                             ?><td><?
                             if($key==0){
-                                echo "<a href='alumno.php?notasAlumno=".$value."'>".$value."</a>";
+                                echo "<a href='alumno.php?alumno=".$value."'>".$value."</a>";
                             }else{
                                 echo $value;
                             }
