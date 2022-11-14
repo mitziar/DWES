@@ -260,7 +260,7 @@ foreach ($notas as $key => $value){
     $notatis = array("Cristian"=>10,"Lucia"=>10,"Itziar"=>10);
     echo "Current".current($notatis);
 
-    echo "<br> ultimo: ".end(($notatis));
+    echo "<br> ultimo: ".end($notatis);
     echo "Current".current($notatis);
 
 

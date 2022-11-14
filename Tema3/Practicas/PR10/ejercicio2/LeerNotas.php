@@ -30,7 +30,7 @@
 
     <div class="container">
     <div class="row">
-            <h4><a href="../../../">Tema 3</a><a href="../../">/Prácticas</a><a href=../>/PR010</a>Ejercicio 2</h4>
+            <h4><a href="../../../">Tema 3</a><a href="../../">/Prácticas</a><a href="../">/PR010/</a>Ejercicio 2</h4>
     </div>
     <div class="row">            
         <table>
@@ -51,11 +51,11 @@
                         foreach ($notas as $key => $value) {
                             ?><td><?
                             if($key==0){
-                                echo "<a href='alumno.php?notasAlumno=".$notas."'>".$value."</a>";
+                                echo "<a href='alumno.php?notasAlumno=".$value."'>".$value."</a>";
                             }else{
                                 echo $value;
                             }
-                            ?><td><?php
+                            ?></td><?php
                         }
                         ?></tr><?php
                         }

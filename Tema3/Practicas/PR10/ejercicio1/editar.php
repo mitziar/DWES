@@ -30,7 +30,7 @@
 
     <div class="container">
     <div class="row">
-            <h4><a href="../../../">Tema 3</a><a href="../../">/Prácticas</a><a href=../>/PR010</a>Ejercicio 1</h4>
+            <h4><a href="../../../">Tema 3</a><a href="../../">/Prácticas</a><a href="../">/PR010/</a>Ejercicio 1</h4>
     <div class="row">
         <?php
             if(!empty($_REQUEST['fichero'])){
@@ -62,9 +62,7 @@
                     }?>
                 <textarea name='textoNuevo'><?php 
                 if(!empty($_REQUEST['fichero'])){
-                    if(!file_exists($nombre)){
-                    echo "<br><H2>El fichero no existe</H2>";
-                    }else{
+                    if(file_exists($nombre)){
                         if(!$fp=fopen($nombre,"r")){
                             echo "<h2>No se ha podido abrir. No such file or directorio</h2>";
                         }else{

@@ -88,7 +88,7 @@
 
     //creamos un objeto de la clase cuadrado
     $objeto= new Cuadrado();
-    cambiarLado($objeto,6);
+    /*cambiarLado($objeto,6); DABA ERROR!!!!*/
     echo "<br>Objeto: ".$objeto->lado;//para que efectue cambios fuera hay que pasar por referencia
 
     ?>
