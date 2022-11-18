@@ -53,7 +53,7 @@
                          ?><input type="hidden" name="fichero" value="<? echo $nombre?>">
                           <textarea name='textoNuevo'><?php 
                             if(!empty($_REQUEST['fichero'])){
-                                if(file_exists($nombre)){
+                                if(file_exists($nombre) && filesize($nombre)>0){
                                     if(!$fp=fopen($nombre,"r")){
                                         echo "<h2>No se ha podido abrir. No such file or directorio</h2>";
                                     }else{
