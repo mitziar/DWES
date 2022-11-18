@@ -10,6 +10,7 @@
 
 <header>
   <?php
+  phpinfo();
   include ("header.html");
   ?>
   <hr>
