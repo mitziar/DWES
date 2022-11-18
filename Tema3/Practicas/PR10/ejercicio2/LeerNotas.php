@@ -38,8 +38,6 @@
         <?php
             $nombre='notas.csv';
             $notas= array();
-            //header('Location: ./editar.php?fichero='.$nombre);
-            //exit();
                 if(!file_exists($nombre)){
                     echo "<br><H2>El fichero no existe o no tiene permisos</H2>";
                 }else{

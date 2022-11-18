@@ -36,12 +36,32 @@ include('validaciones.php');
         </div>
         <div class="row">            
         <?php
+        
         if(isset($_REQUEST['guardar']) && validado()){
-
-
+          $nombreAlumno=$_REQUEST['nombreAlumno'];
+          $nuevasNotas=($nombreAlumno.';'.$_REQUEST['nota1'].';'.$_REQUEST['nota2'].';'.$_REQUEST['nota3'].'\n');
+          if(!file_exists('notas.csv')){
+            echo "<span>El fichero no existe</span>";
+          }else{
+            if( !$fp=fopen('notas.csv','r+')  || filesize('notas.csv')==0){
+               echo "<span>No se puede abrir el fichero</span>";  
+            }else{
+                
+                while($notas=fgetcsv($fp,0,";")){
+                  foreach ($notas as $key => $value) {
+                    if($value==$nombreAlumno){
+                      fwrite($fp,$nuevasNotas);
+                    }
+                  }
+                }
+                fclose($fp);
+                header('Location: ./LeerNotas');
+                exit();
+            }
+          }
         }else{
+          $nombreAlumno=$_REQUEST['alumno'];
             $cadenaMostrar;
-            $nombreAlumno=$_REQUEST['alumno'];
             if(!file_exists('notas.csv')){
               echo "<h3>No existe el fichero notas</h3>";
             }else{
@@ -67,34 +87,50 @@ include('validaciones.php');
 
             ?><form action='alumno.php' method='get'>
                 <label>Alumno</label>
-                <input type="text" readonly name="nombreAlumno" value="<?php echo $cadenaMostrar[0]?>"><br>
+                <input type="text" readonly name="nombreAlumno" value="<?php 
+                if(isset($_REQUEST['guardar']))
+                {
+                  echo $_REQUEST['nombreAlumno'];
+                }else{
+                  echo $cadenaMostrar[0];
+                }?>"><br>
                 <label>Notas</label>
                 <input type="text" name="nota1" value="<?php
-                  if(!enviado()){
+                  if(!isset($_REQUEST['nota1'])){
                     echo $cadenaMostrar[1];
+                  }else{
+                    echo $_REQUEST['nota1'];
+                  }
                     ?>"><?
-                  }elseif(enviado() && ((int)$_REQUEST['nota1']<0 || (int)$_REQUEST['nota1']>10) && preg_match($patron,$_REQUEST['nota1'])){
-                    echo ">";
-                    $errores.array_push('Nota uno no válida <br>');
+                  if(enviado() && ($_REQUEST['nota1']<0 || $_REQUEST['nota1']>10) && !preg_match($patron,$_REQUEST['nota1'])){
+                    array_push($errores,'Nota uno no válida <br>');
                   }
                 ?>
-                <input type="text" name="nota2" value="<?php echo $cadenaMostrar[2]?>"><?php
-                  if(enviado() && ($_REQUEST['nota2']<0 || $_REQUEST['nota2']>10) && preg_match($patron,$_REQUEST['nota2'])){
-                    echo ">";
-                    $errores.array_push('Nota dos no válida <br>');
+                <input type="text" name="nota2" value="<?php
+                if(!isset($_REQUEST['nota2'])){
+                  echo $cadenaMostrar[2];
+                }else{
+                  echo $_REQUEST['nota2'];
+                }?>"><?php
+                  if(enviado() && ($_REQUEST['nota2']<0 || $_REQUEST['nota2']>10) && !preg_match($patron,$_REQUEST['nota2'])){
+                    array_push($errores,'Nota dos no válida <br>');
                   } 
                 ?>
-                <input type="text" name="nota3" value="<?php echo $cadenaMostrar[3]?>"><?php
-                  if(enviado() && ($_REQUEST['nota3']<0 || $_REQUEST['nota3']>10) && preg_match($patron,$_REQUEST['nota'])){
-                    echo ">";
-                    $errores.array_push('Nota tres no válida <br>');
+                <input type="text" name="nota3" value="<?php
+                if(!isset($_REQUEST['nota3'])){
+                  echo $cadenaMostrar[3];
+                }else{
+                  echo $_REQUEST['nota3'];
+                }?>"><?php
+                  if(enviado() && ($_REQUEST['nota3']<0 || $_REQUEST['nota3']>10) && !preg_match($patron,$_REQUEST['nota3'])){
+                    array_push($errores,'Nota tres no válida <br>');
                   } 
                 ?>
                 <input type="submit" value="guardar" name='guardar'>
             </form><?
-            if(!$errores.length==0){
-              for($indice in $errores){
-                echo <span>$errores[$indice]</span>;
+            if(count($errores)!=0){
+              foreach ($errores as $key => $value) {
+                echo '<span>'.$value.'</span>';
               }
             }
             ?>
