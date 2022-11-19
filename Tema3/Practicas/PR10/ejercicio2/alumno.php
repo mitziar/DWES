@@ -40,9 +40,7 @@ include('validaciones.php');
         if(isset($_REQUEST['guardar']) && validado()){
           $nombreAlumno=$_REQUEST['nombreAlumno'];
           $nuevasNotas=($nombreAlumno.';'.$_REQUEST['nota1'].';'.$_REQUEST['nota2'].';'.$_REQUEST['nota3'].'\n');
-          if(!file_exists('notas.csv')){
-            echo "<span>El fichero no existe</span>";
-          }else{
+
             if( !$fp=fopen('notas.csv','r+')  || filesize('notas.csv')==0){
                echo "<span>No se puede abrir el fichero</span>";  
             }else{
@@ -58,7 +56,7 @@ include('validaciones.php');
                 header('Location: ./LeerNotas');
                 exit();
             }
-          }
+          
         }else{
           $nombreAlumno=$_REQUEST['alumno'];
             $cadenaMostrar;
