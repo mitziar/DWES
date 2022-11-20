@@ -38,46 +38,44 @@ include('validaciones.php');
         <?php
         
         if(isset($_REQUEST['guardar']) && validado()){
+          $posicion;
           $nombreAlumno=$_REQUEST['nombreAlumno'];
-          $nuevasNotas=($nombreAlumno.';'.$_REQUEST['nota1'].';'.$_REQUEST['nota2'].';'.$_REQUEST['nota3'].'\n');
-
-            if( !$fp=fopen('notas.csv','r+')  || filesize('notas.csv')==0){
-               echo "<span>No se puede abrir el fichero</span>";  
+          $nuevasNotas=($nombreAlumno.';'.$_REQUEST['nota1'].';'.$_REQUEST['nota2'].';'.$_REQUEST['nota3']);
+            if( $fp=fopen('notas.csv','r+')){
+              while($notas=fgetcsv($fp,0,";")){
+                $posicion=ftell($fp);
+                foreach ($notas as $key => $value) {
+                  if($value==$nombreAlumno){
+                    fseek($fp,$posicion);
+                    fwrite($fp,$nuevasNotas);
+                  }
+                }
+              }
+              fclose($fp);
+              header('Location: ./LeerNotas.php');
+              exit();
+               
             }else{
-                
-                while($notas=fgetcsv($fp,0,";")){
-                  foreach ($notas as $key => $value) {
-                    if($value==$nombreAlumno){
-                      fwrite($fp,$nuevasNotas);
+              echo "<span>No se puede abrir el fichero</span>";  
+            }
+        }else{
+            if(isset($_REQUEST['alumno'])){
+              $nombreAlumno=$_REQUEST['alumno'];
+            }else{
+              $nombreAlumno=$_REQUEST['nombreAlumno'];
+            }
+            $cadenaMostrar;
+            if(!$fp=fopen('notas.csv','r')){
+              echo "<h3>No se puede abrir el fichero</h3>";
+            }else{
+              while($notas=fgetcsv($fp,0,";")){
+                foreach ($notas as $element) {
+                    if($notas[0]==$nombreAlumno){
+                      $cadenaMostrar=$notas;
                     }
                   }
                 }
                 fclose($fp);
-                header('Location: ./LeerNotas');
-                exit();
-            }
-          
-        }else{
-          $nombreAlumno=$_REQUEST['alumno'];
-            $cadenaMostrar;
-            if(!file_exists('notas.csv')){
-              echo "<h3>No existe el fichero notas</h3>";
-            }else{
-              if(!$fp=fopen('notas.csv','r')){
-                echo "<h3>No se puede abrir el fichero</h3>";
-              }else{
-                while($notas=fgetcsv($fp,0,";")){
-                  //Si notas
-      
-                  foreach ($notas as $element) {
-                      if($notas[0]==$nombreAlumno){
-                        $cadenaMostrar=$notas;
-                      }
-                    }
-
-                  }
-                  fclose($fp);
-                }
               }
             }
             $patron='/^[0-9]{1,2}$/';
