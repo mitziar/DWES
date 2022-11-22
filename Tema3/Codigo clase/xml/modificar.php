@@ -17,7 +17,7 @@ foreach ($raiz->childNodes as $elementos) {
         //aquí accedemos a los elementos de tipo1: que será etiqueta equipo
         echo "<br> Un hijo que es: ".$elementos->nodeName;
         foreach($elementos->childNodes as $datos){
-            if($elementos->nodeType==1){
+            if($elementos->nodeType==1 && $datos->nodeValue=='Francia'){
                 if($datos->nodeValue=='Pepe')
                 $datos->nodeValue="Joau";
             }

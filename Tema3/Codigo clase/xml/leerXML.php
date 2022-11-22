@@ -26,7 +26,7 @@ foreach ($raiz->childNodes as $elementos) {
         //aquí accedemos a los elementos de tipo1: que será etiqueta departamento
         echo "<br> Un hijo que es: ".$elementos->nodeName;
         foreach($elementos->childNodes as $datos){
-            if($elementos->nodeType==1){
+            if($datos->nodeType==1){
                 echo "<br>\t Un hijo que es: ".$datos->nodeName." y valor: ".$datos->nodeValue;
             }
         }
