@@ -19,6 +19,9 @@ $equipo = $mundial->addChild('Equipo');
 $equipo->addChild('Nombre','Italia');
 $equipo->addChild('Entrenador','Alexandro');
 
+
 $mundial->asXML('mundial2.xml');
+
+
 
 ?>
