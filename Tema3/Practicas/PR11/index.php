@@ -21,56 +21,28 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" style="background-color: bisque;">
       <div class="container">
-        <h1><a href="../../../../">Desarrollo Web en Entorno Servidor</a></h1>
+      <h1><a href="../../../../">Desarrollo Web en Entorno Servidor</a></h1>
         <h2><center>Prácticas</center></h2>
       </div>
     </div>
 
     <div class="container">
         <div class="row">
-            <h4><a href="../">Tema 3</a>/Prácticas</h4>
+            <h4><a href="../../">Tema 3</a><a href='../'>/Prácticas</a>/PR11</h4>
         </div>
       <!-- Example row of columns -->
     <div class="row">
         <div class="col-md-4">
-            <h2>PR04-Practica04</h2>
-            <p>Dibujar figuras, cambio de monedas, etc.</p>
-            <p><a class="btn btn-default" href="PR04/index.html" role="button">Ver »</a></p>
+            <h2>Transformar csv a xml</h2>
+            <p><a class="btn btn-default" href="TransformarFichero.php" role="button">Ver »</a></p>
         </div>
         <div class="col-md-4">
-            <h2>PR05-Practica05</h2>
-            <p>Arrays</p>
-            <p><a class="btn btn-default" href="PR05/index.html" role="button">Ver »</a></p>
+            <h2>Leer fichero xml y mostrar en una tabla</h2>
+            <p><a class="btn btn-default" href="LeerFicheroXML.php" role="button">Ver »</a></p>
         </div>
         <div class="col-md-4">
-          <h2>PR06-Practica06</h2>
-          <p>Tabla Liga</p>
-          <p><a class="btn btn-default" href="PR06/index.html" role="button">Ver »</a></p>
-      </div>
-      <div class="col-md-4">
-        <h2>PR07-Practica07</h2>
-        <p>Funciones br(), p($cadena), etc.</p>
-        <p><a class="btn btn-default" href="PR07/index.php" role="button">Ver »</a></p>
-      </div>
-      <div class="col-md-4">
-        <h2>PR08-Practica08</h2>
-        <p>Formulario y validaciones</p>
-        <p><a class="btn btn-default" href="PR08/formulario.php" role="button">Ver »</a></p>
-      </div>
-      <div class="col-md-4">
-        <h2>PR09-Practica09</h2>
-        <p>Formulario y validaciones con patrones</p>
-        <p><a class="btn btn-default" href="PR09/formulario.php" role="button">Ver »</a></p>
-      </div>
-      <div class="col-md-4">
-        <h2>PR10-Practica10</h2>
-        <p>Ficheros</p>
-        <p><a class="btn btn-default" href="PR10/" role="button">Ver »</a></p>
-      </div>
-      <div class="col-md-4">
-        <h2>PR11-Practica11</h2>
-        <p>Ficheros xml. Lectura desde csv. Creación de xml a partir del csv y modificación de datos del xml.</p>
-        <p><a class="btn btn-default" href="PR11/index.php" role="button">Ver »</a></p>
+          <h2>Editar contenido del xml</h2>
+          <p><a class="btn btn-default" href="EditarAlumno.php" role="button">Ver »</a></p>
       </div>
     </div> <!-- /container -->
     <footer class="container" style="background-color: bisque;">
