@@ -1,0 +1,88 @@
+
+* :cero o mas veces
+? :opcional
+$ :final de cadena
+^ :pricipio de cadena o Negar lo que está dentro
+():todo lo que está dentro
++:se repite una o mas veces
+.:cualquier cosa, es un comodín
+\:caracteres especiales
+[]: valor opcional o conjuntos de valores
+[|]: uno u otro
+{}: numero de veces 
+    {n} indica el numero de repeticiones del caracter que lo precede
+    {n,m} Las minimas y maximas
+
+
+
+ARRAYS
+
+•Eliminar elementos de un array utilizando la función "unset"
+•La función "array_values" recibe un array como parámetro, y devuelve un nuevo array con los mismos elementos y
+con índices numéricos consecutivos con base 0.
+•Para comprobar si una variable es de tipo array: "is_array"
+•Para obtener el número de elementos que contiene un array: "count"
+•Si quieres buscar un elemento concreto dentro de un array: "in_array". Devuelve true si
+encontró el elemento o false en caso contrario.
+•La función "array_search", que recibe los mismos parámetros pero devuelve la clave correspondiente al elemento,
+o false si no lo encuentra.
+•buscar es un clave en un array:"array_key_exists", que devuelve true o false.
+
+CADENAS
+
+chr — Devuelve un caracter específico
+◦ explode — Divide un string en varios string. 
+        $entrada1 = "hola";
+        $entrada2 = "hola,qué tal";
+        var_dump( explode( ',', $entrada1 ) );//array con un elemento
+        var_dump( explode( ',', $entrada2 ) );//array de dos elementos
+◦ implode — Une elementos de un array en un string
+        $array = ['lastname', 'email', 'phone'];
+        implode(",", $array); // string(20) "lastname,email,phone"
+        // El separador es opcional:
+        implode(['a', 'b', 'c']); // string(3) "abc"
+
+◦ str_contains: determina si una cadena contiene una subcadena determinada
+        $string = 'The lazy fox jumped over the fence';
+
+        if (str_contains($string, 'lazy')) {
+            echo "The string 'lazy' was found in the string\n";
+        }
+◦ str_replace — Reemplaza todas las apariciones del string buscado con el string de reemplazo
+        // Produce: You should eat pizza, beer, and ice cream every day
+        $phrase  = "You should eat fruits, vegetables, and fiber every day.";
+        $healthy = array("fruits", "vegetables", "fiber");
+        $yummy   = array("pizza", "beer", "ice cream");
+
+        $newphrase = str_replace($healthy, $yummy, $phrase);
+◦ str_split — Convierte un string en un array
+        $str = "Hello Friend";
+
+        $arr1 = str_split($str);
+        $arr2 = str_split($str, 3);
+        Array
+            (
+                [0] => H
+                [1] => e
+                [2] => l
+                [3] => l
+                [4] => o
+                [5] =>
+                [6] => F
+                [7] => r
+                [8] => i
+                [9] => e
+                [10] => n
+                [11] => d
+            )
+
+            Array
+            (
+                [0] => Hel
+                [1] => lo
+                [2] => Fri
+                [3] => end
+            )
+◦ strlen — Obtiene la longitud de un string
+◦ trim — Elimina espacio en blanco (u otro tipo de caracteres) del inicio y el final de la cadena
+-substr($_REQUEST[$dni],0,8): Devuelve desde la posicion 0 los 8 caracteres siguientes
