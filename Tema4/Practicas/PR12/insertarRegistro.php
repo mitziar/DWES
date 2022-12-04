@@ -1,4 +1,7 @@
-<html lang="es"><head>
+<?php
+include ('./funcionesBD.php');
+?>
+<html lang="en"><head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,9 +16,7 @@
 <link rel="stylesheet" href="">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-
     <title>DWES-Itziar</title>
-
 
   </head>
 
@@ -23,28 +24,22 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" style="background-color: bisque;">
       <div class="container">
-        <h1><a href="../index.html">Desarrollo Web en Entorno Servidor</a></h1>
-        <h2><center>Tema 4</center></h2>
+        <h1><a href="../../../index.html">Desarrollo Web en Entorno Servidor</a></h1>
+        <h2><center>Prácticas del Tema 4</center></h2>
       </div>
     </div>
 
     <div class="container">
+        <div class="row">
+            <h4><a href="../../">Tema4</a><a href="../">/Practicas</a><a href="index.php">/PR12</a>/Insertar Registro</h4>
+        </div>
       <!-- Example row of columns -->
       <div class="row">
-        <div class="col-md-4">
-          <h2>Código de clase</h2>
-          <p>Archivos con prácticas de clase</p>
-          <p><a class="btn btn-default" href="./Codigo Clase/" role="button">Ver »</a></p>
+     
       </div>
-      <div class="col-md-4">
-        <h2>Prácticas</h2>
-        <p>Prácticas para entregar</p>
-        <p><a class="btn btn-default" href="./Practicas/" role="button">Ver »</a></p>
-    </div>
-      </div> <!-- /container -->
-      <footer class="container" style="background-color: bisque;">
-        <p><center>Página de Itziar</center></p>
-      </footer>
+    </div> <!-- /container -->
+    <footer class="container" style="background-color: bisque;">
+    <p><center>Página de Itziar</center></p>
+    </footer>
     
-
 </body></html>
