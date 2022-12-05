@@ -131,21 +131,58 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
     }
  }
 
- function obtenerRegistroPorCampo(/**$nombreTabla,$nombreBaseDatos,$nombreCampo,$valorCampo*/){
-    $nombreBaseDatos='alumnos';
-    $nombreTabla='notas';
-    $nombreCampo='nombre';
-    $valorCampo='Maria';
+ /**
+  * Devuelve los registros buscados por un campo
+  * @param mixed $nombreTabla tabla en la que se va a buscar
+  * @param mixed $nombreBaseDatos base de datos donde se encuentra la tabla en la que buscar
+  * @param mixed $nombreCampo campor por el que se desea buscar
+  * @param mixed $valorCampo valor que vamos a buscar.
+  * @return array|string los registros de la consulta | mensaje de error
+  */
+ function obtenerRegistroPorCampo($nombreTabla,$nombreBaseDatos,$nombreCampo,$valorCampo){
+
     $resultados= array();
 
     try{
         $conexion = mysqli_connect($_SERVER['SERVER_ADDR'], USER, PASS,$nombreBaseDatos);
-        $sql="select * from ".$nombreTabla." where ".$nombreCampo." = ? ";
+        $sql="select * from ".$nombreTabla." where ".$nombreCampo." LIKE ? ";
                 
         $consulta_preparada= mysqli_stmt_init($conexion);
         mysqli_stmt_prepare($consulta_preparada,$sql);
              
         mysqli_stmt_bind_param($consulta_preparada,'s', $valorCampo);
+        mysqli_stmt_execute($consulta_preparada);
+        mysqli_stmt_bind_result($consulta_preparada,$r_id,$r_nombre,$r_nota,$r_fecha);
+        while (mysqli_stmt_fetch($consulta_preparada)) {
+            array_push($resultados,array($r_id,$r_nombre,$r_nota,$r_fecha));
+        }
+
+        mysqli_close($conexion);
+        return $resultados;
+
+    }catch(Exception $errores){
+        return obtenerMensajeError($errores);
+    }  
+ }
+ /**
+  * Obtiene el registro de la base de datos según el id que reciba.
+  * @param mixed $nombreTabla tabla en la que se busca el registro
+  * @param mixed $nombreBaseDatos base de datos donde está la tabla con el registro a buscar
+  * @param mixed $valorCampo id del registro a buscar
+  * @return array|string array con la fila del registro || mensaje de error en caso de que falle.
+  */
+ function obtenerRegistroPorId($nombreTabla,$nombreBaseDatos,$valorCampo){
+
+    $resultados= array();
+
+    try{
+        $conexion = mysqli_connect($_SERVER['SERVER_ADDR'], USER, PASS,$nombreBaseDatos);
+        $sql="select * from ".$nombreTabla." where id = ? ";
+                
+        $consulta_preparada= mysqli_stmt_init($conexion);
+        mysqli_stmt_prepare($consulta_preparada,$sql);
+             
+        mysqli_stmt_bind_param($consulta_preparada,'i', $valorCampo);
         mysqli_stmt_execute($consulta_preparada);
         mysqli_stmt_bind_result($consulta_preparada,$r_id,$r_nombre,$r_nota,$r_fecha);
         while (mysqli_stmt_fetch($consulta_preparada)) {

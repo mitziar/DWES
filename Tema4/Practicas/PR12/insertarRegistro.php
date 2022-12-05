@@ -34,8 +34,42 @@ include ('./funcionesBD.php');
             <h4><a href="../../">Tema4</a><a href="../">/Practicas</a><a href="index.php">/PR12</a>/Insertar Registro</h4>
         </div>
       <!-- Example row of columns -->
-      <div class="row">
-     
+      <div class="row"><?php
+      if(isset($_REQUEST['id'])){
+        $registro=obtenerRegistroPorId('notas','alumnos',$_REQUEST['id']);
+        if(is_array($registro)){
+          echo "<form action='leerTabla.php' method='get'>";
+          echo "<label for='nombre'>Nombre: </label>";
+          echo "<input type='text' value='".$registro[0][1]."' name='nombre' />";
+          echo "<br>";
+          echo "<label for='nota'>Nota: </label>";
+          echo "<input type='text' value='".$registro[0][2]."' name='nota' />";
+          echo "<br>";
+          echo "<label for='fecha'>Fecha: </label>";
+          echo "<input type='text' value='".$registro[0][3]."' name='fecha' />";
+          echo "<br>";
+          echo "<input type='submit' value='Eliminar Registro'>";
+          echo "<input type='submit' value='Guardar cambios Registro'>";
+          echo "</form>";
+        }else{
+          echo "<h3>".$registro."</h3>";
+        }
+        
+      }else{
+        echo "<form action='leerTabla.php' method='get'>";
+        echo "<label for='nombre'>Nombre: </label>";
+        echo "<input type='text' name='nombre' />";
+        echo "<br>";
+        echo "<label for='nota'>Nota: </label>";
+        echo "<input type='text' name='nota' />";
+        echo "<br>";
+        echo "<label for='fecha'>Fecha: </label>";
+        echo "<input type='text' name='fecha' />";
+        echo "<br>";
+        echo "<input type='submit' value='Guardar Registro'>";
+        echo "</form>";
+      }
+      ?>
       </div>
     </div> <!-- /container -->
     <footer class="container" style="background-color: bisque;">
