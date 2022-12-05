@@ -1,8 +1,8 @@
 create database alumnos;
-create user usuario identified by 'usuario';
+/*create user usuario identified by 'usuario';*/
 use alumnos;
 
-grant all on alumnos.* to usuario;
+/*grant all on alumnos.* to usuario;*/
 --
 CREATE TABLE notas (
   id INT primary key,

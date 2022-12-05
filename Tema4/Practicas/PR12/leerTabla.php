@@ -84,7 +84,7 @@ include ('./funcionesBD.php');
           $registros=obtenerTodosRegistros('notas', 'alumnos');
           if(is_array($registros)){
             foreach ($registros as $key => $value) {
-                echo "<tr><td>".$value[0]."</td><td>".$value[1]."</td><td>".$value[2]."</td><td>".$value[3]."</td><td><a href=''><input type='button' value='Modificar/Borrar'></a></td></tr>";
+                echo "<tr><td>".$value[0]."</td><td>".$value[1]."</td><td>".$value[2]."</td><td>".$value[3]."</td><td><a href='insertarRegistro.php?id=".$value[0]."'><input type='button' value='Modificar/Borrar'></a></td></tr>";
             }
           }
           echo "</table>";

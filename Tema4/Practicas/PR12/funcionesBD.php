@@ -345,11 +345,11 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
  function eliminarBaseDatos($nombreBBDD){
     try{
 
-        $sentencia="drop database ".$nombreBBDD;
+        $sentencia="drop database ?";
         $conexion = mysqli_connect($_SERVER['SERVER_ADDR'], USER, PASS);
         $consulta_preparada= mysqli_stmt_init($conexion);
         mysqli_stmt_prepare($consulta_preparada,$sentencia);  
-        mysqli_stmt_bind_param($consulta_preparada,'i', $id);
+        mysqli_stmt_bind_param($consulta_preparada,'s', $nombreBBDD);
         mysqli_stmt_execute($consulta_preparada);
         mysqli_close($conexion);
         return true;
@@ -357,14 +357,15 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
         return obtenerMensajeError($errores);
     }
  }
+
  function eliminarTabla($nombreBBDD,$nombreTabla){
     try{
 
-        $sentencia="drop table ".$nombreTabla;
+        $sentencia="drop table ?";
         $conexion = mysqli_connect($_SERVER['SERVER_ADDR'], USER, PASS,$nombreBBDD);
         $consulta_preparada= mysqli_stmt_init($conexion);
         mysqli_stmt_prepare($consulta_preparada,$sentencia);  
-        mysqli_stmt_bind_param($consulta_preparada,'i', $id);
+        mysqli_stmt_bind_param($consulta_preparada,'s', $nombreTabla);
         mysqli_stmt_execute($consulta_preparada);
         mysqli_close($conexion);
         return true;
@@ -380,8 +381,7 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
             break;
         case 1046:
             $mensaje = "No se ha seleccionado BD";
-            break;
-            
+            break;        
         case 1049:
             $mensaje = "Base de datos no existe";
             break;
@@ -400,10 +400,12 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
         case 1295:
             $mensaje="Comando no implementado en consultas preparadas";
             break;
+        case 1396:
+            $mensaje="Error al crear usuario";
+            break;    
         case 2031:
             $mensaje="No se han suministrado los datos para la consulta";
             break;
-            
        default:
             $mensaje= $excepcion->getCode()." ".$excepcion->getMessage();
            break;

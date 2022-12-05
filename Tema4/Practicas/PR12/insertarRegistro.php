@@ -1,5 +1,6 @@
 <?php
 include ('./funcionesBD.php');
+include ('./validaciones.php');
 ?>
 <html lang="en"><head>
     <meta charset="utf-8">
@@ -13,7 +14,7 @@ include ('./funcionesBD.php');
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-<link rel="stylesheet" href="">
+<link rel="stylesheet" href="./css/estilos.css">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     <title>DWES-Itziar</title>
@@ -35,40 +36,88 @@ include ('./funcionesBD.php');
         </div>
       <!-- Example row of columns -->
       <div class="row"><?php
-      if(isset($_REQUEST['id'])){
-        $registro=obtenerRegistroPorId('notas','alumnos',$_REQUEST['id']);
-        if(is_array($registro)){
+      if(enviado()&&validado()){
+
+      }else{
+        if(isset($_REQUEST['id'])){
+          $registro=obtenerRegistroPorId('notas','alumnos',$_REQUEST['id']);
+          if(is_array($registro)){
+            echo "<form action='insertarRegistro.php' method='get'>";
+            echo "<input type='hidden' name='id' value='".$registro[0][0]."'/>"; 
+            echo "<label for='nombre'>Nombre: </label>";
+            echo "<input type='text' name='nombre' value='";
+            $patron='/^[A-Z]{1}[a-z]{1,}$/';
+            if(!enviado()){
+              echo $registro[0][1]."'  />";
+            }elseif(enviado() && preg_match($patron,$_REQUEST['nombre'])){
+              echo $_REQUEST['nombre']."'  />";
+            }elseif(enviado() && !preg_match($patron,$_REQUEST['nombre'])){
+              echo "' />";
+              echo "<span>El nombre debe contener una mayúscula y al menos una minúscula. No admite números.</span>";
+            }
+            echo "<br>";
+            echo "<label for='nota'>Nota: </label>";
+            echo "<input type='text' name='nota' value='";
+            $patron='/^[0-9]{1,2}\.[0-9]{1,2}$/';
+            if(!enviado()){
+              echo $registro[0][2]."'  />";
+            }elseif(enviado() && preg_match($patron,$_REQUEST['nota'])){
+              echo $_REQUEST['nota']."'  />";
+            }elseif(enviado() && !preg_match($patron,$_REQUEST['nota'])){
+              echo "' />";
+              echo "<span>La nota debe contener uno o dos dígitos enteros, y uno o dos dígitos decimales. Indicar decimales con '.'</span>";
+            }
+            echo "<br>";
+            echo "<label for='fecha'>Fecha: </label>";
+            echo "<input type='text' name='fecha' value='";
+            $patron='/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/';
+            if(!enviado()){
+              echo $registro[0][3]."'  />";
+            }elseif(enviado() && preg_match($patron,$_REQUEST['fecha'])){
+              $fechaExplode=explode('-',$_REQUEST['fecha']);
+              if($fechaExplode[1]>0 && $fechaExplode[1]<=12 && $fechaExplode[2]>0 && $fechaExplode[2]<=31){
+                echo $_REQUEST['fecha']."'  />";
+              }else{
+                echo "' />";
+                echo "<span>La fecha debe guardar el formato: AAAA-MM-DD.</span>";
+              }
+            }elseif(enviado() && !preg_match($patron,$_REQUEST['fecha']) || (!($fechaExplode[1]>0) || !($fechaExplode[1]<=12) || !($fechaExplode[2]>0) || !($fechaExplode[2]<=31))){
+                echo "' />";
+                echo "<span>La fecha debe guardar el formato: AAAA-MM-DD.</span>";
+            }
+            echo "<br>";
+            echo "<input type='submit' name='eliminar'value='eliminar'>";
+            echo "<input type='submit' name='guardar' value='guardar'>";
+            echo "</form>";
+          }else{
+            echo "<h3>".$registro."</h3>";
+          }
+          
+        }else{
           echo "<form action='leerTabla.php' method='get'>";
           echo "<label for='nombre'>Nombre: </label>";
-          echo "<input type='text' value='".$registro[0][1]."' name='nombre' />";
+          echo "<input type='text' name='";
+          $patron='/^[A-Z]{1}[a-z]{1,}$/';
+          if(!enviado()){
+            echo "'  />";
+          }elseif(enviado() && preg_match($patron,$_REQUEST['nombre'])){
+            echo $_REQUEST['nombre']."'  />";
+          }elseif(enviado() && !preg_match($patron,$_REQUEST['nombre'])){
+            echo "' />";
+            echo "<span>El nombre debe contener una mayúscula y al menos una minúscula. No admite números.</span>";
+          }
           echo "<br>";
           echo "<label for='nota'>Nota: </label>";
-          echo "<input type='text' value='".$registro[0][2]."' name='nota' />";
+          echo "<input type='text' name='nota' />";
           echo "<br>";
           echo "<label for='fecha'>Fecha: </label>";
-          echo "<input type='text' value='".$registro[0][3]."' name='fecha' />";
+          echo "<input type='text' name='fecha' />";
           echo "<br>";
-          echo "<input type='submit' value='Eliminar Registro'>";
-          echo "<input type='submit' value='Guardar cambios Registro'>";
+          echo "<input type='submit' value='Guardar'>";
           echo "</form>";
-        }else{
-          echo "<h3>".$registro."</h3>";
         }
-        
-      }else{
-        echo "<form action='leerTabla.php' method='get'>";
-        echo "<label for='nombre'>Nombre: </label>";
-        echo "<input type='text' name='nombre' />";
-        echo "<br>";
-        echo "<label for='nota'>Nota: </label>";
-        echo "<input type='text' name='nota' />";
-        echo "<br>";
-        echo "<label for='fecha'>Fecha: </label>";
-        echo "<input type='text' name='fecha' />";
-        echo "<br>";
-        echo "<input type='submit' value='Guardar Registro'>";
-        echo "</form>";
       }
+      
       ?>
       </div>
     </div> <!-- /container -->
