@@ -34,12 +34,32 @@ include ('./validaciones.php');
         <div class="row">
             <h4><a href="../../">Tema4</a><a href="../">/Practicas</a><a href="index.php">/PR12</a>/Insertar Registro</h4>
         </div>
-      <!-- Example row of columns -->
       <div class="row"><?php
       if(enviado()&&validado()){
-
+        if(isset($_REQUEST['guardar'])){
+          $valores=array($_REQUEST['nombre'],$_REQUEST['nota'],$_REQUEST['fecha']);
+          if(actualizarRegistroPorCampo('notas','alumnos','id',$_REQUEST['id'],$valores,'sds')){
+            header('Location:leerTabla.php');
+            exit();
+          }
+        }
+        if(isset($_REQUEST['eliminar'])){
+          if(eliminarRegistro($_REQUEST['id'],'notas')){
+            header('Location:leerTabla.php');
+            exit();
+          }
+        }
+         if($_REQUEST['insertar']=='insertar'){
+          $valores=array($_REQUEST['nombre'],$_REQUEST['nota'],$_REQUEST['fecha']);
+           if(insertarRegistro('notas','alumnos',$valores,'sds')){
+             echo "ha insertado";
+             header('Location:leerTabla.php');
+             exit();
+           }
+         }
       }else{
         if(isset($_REQUEST['id'])){
+          echo "<h3>Modificar o Borrar</h3>";
           $registro=obtenerRegistroPorId('notas','alumnos',$_REQUEST['id']);
           if(is_array($registro)){
             echo "<form action='insertarRegistro.php' method='get'>";
@@ -51,9 +71,9 @@ include ('./validaciones.php');
               echo $registro[0][1]."'  />";
             }elseif(enviado() && preg_match($patron,$_REQUEST['nombre'])){
               echo $_REQUEST['nombre']."'  />";
-            }elseif(enviado() && !preg_match($patron,$_REQUEST['nombre'])){
+            }elseif(enviado() && (!preg_match($patron,$_REQUEST['nombre'])||vacio($_REQUEST['nombre']))){
               echo "' />";
-              echo "<span>El nombre debe contener una mayúscula y al menos una minúscula. No admite números.</span>";
+              echo "<span>El nombre debe contener una mayúscula y al menos una minúscula. No admite números. Ni el campo vacio.</span>";
             }
             echo "<br>";
             echo "<label for='nota'>Nota: </label>";
@@ -63,9 +83,9 @@ include ('./validaciones.php');
               echo $registro[0][2]."'  />";
             }elseif(enviado() && preg_match($patron,$_REQUEST['nota'])){
               echo $_REQUEST['nota']."'  />";
-            }elseif(enviado() && !preg_match($patron,$_REQUEST['nota'])){
+            }elseif(enviado() && (!preg_match($patron,$_REQUEST['nota'])||vacio($_REQUEST['nota']))){
               echo "' />";
-              echo "<span>La nota debe contener uno o dos dígitos enteros, y uno o dos dígitos decimales. Indicar decimales con '.'</span>";
+              echo "<span>La nota debe contener uno o dos dígitos enteros, y uno o dos dígitos decimales. Indicar decimales con '.'. No dejar vacio</span>";
             }
             echo "<br>";
             echo "<label for='fecha'>Fecha: </label>";
@@ -73,7 +93,7 @@ include ('./validaciones.php');
             $patron='/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/';
             if(!enviado()){
               echo $registro[0][3]."'  />";
-            }elseif(enviado() && preg_match($patron,$_REQUEST['fecha'])){
+            }elseif(enviado() && preg_match($patron,$_REQUEST['fecha']) && isset($_REQUEST['guardar']) ){
               $fechaExplode=explode('-',$_REQUEST['fecha']);
               if($fechaExplode[1]>0 && $fechaExplode[1]<=12 && $fechaExplode[2]>0 && $fechaExplode[2]<=31){
                 echo $_REQUEST['fecha']."'  />";
@@ -81,9 +101,12 @@ include ('./validaciones.php');
                 echo "' />";
                 echo "<span>La fecha debe guardar el formato: AAAA-MM-DD.</span>";
               }
-            }elseif(enviado() && !preg_match($patron,$_REQUEST['fecha']) || (!($fechaExplode[1]>0) || !($fechaExplode[1]<=12) || !($fechaExplode[2]>0) || !($fechaExplode[2]<=31))){
+            }elseif(enviado() && isset($_REQUEST['guardar']) && !preg_match($patron,$_REQUEST['fecha']) || (!($fechaExplode[1]>0) || !($fechaExplode[1]<=12) || !($fechaExplode[2]>0) || !($fechaExplode[2]<=31))){
                 echo "' />";
                 echo "<span>La fecha debe guardar el formato: AAAA-MM-DD.</span>";
+            }elseif(enviado() && vacio($_REQUEST['fecha']) && isset($_REQUEST['guardar'])){
+                echo "' />";
+                echo "<span>La fecha no se puede guardar vacia.</span>";
             }
             echo "<br>";
             echo "<input type='submit' name='eliminar'value='eliminar'>";
@@ -94,26 +117,60 @@ include ('./validaciones.php');
           }
           
         }else{
-          echo "<form action='leerTabla.php' method='get'>";
+          echo "<h3>Insertar</h3>";
+          echo "<form action='insertarRegistro.php' method='get'>";
           echo "<label for='nombre'>Nombre: </label>";
-          echo "<input type='text' name='";
+          echo "<input type='text' name='nombre' value='";
           $patron='/^[A-Z]{1}[a-z]{1,}$/';
           if(!enviado()){
             echo "'  />";
-          }elseif(enviado() && preg_match($patron,$_REQUEST['nombre'])){
+          }elseif(enviado() && vacio($_REQUEST['nombre'])){
+            echo "' />";
+            echo "<span>El nombre no se puede guardar vacio.</span>";
+          }elseif(enviado() && !vacio($_REQUEST['nombre']) && preg_match($patron,$_REQUEST['nombre'])){
             echo $_REQUEST['nombre']."'  />";
-          }elseif(enviado() && !preg_match($patron,$_REQUEST['nombre'])){
+          }elseif(enviado() && !vacio($_REQUEST['nombre']) && !preg_match($patron,$_REQUEST['nombre'])){
             echo "' />";
             echo "<span>El nombre debe contener una mayúscula y al menos una minúscula. No admite números.</span>";
           }
           echo "<br>";
           echo "<label for='nota'>Nota: </label>";
-          echo "<input type='text' name='nota' />";
+          echo "<input type='text' name='nota' value='";
+          $patron='/^[0-9]{1,2}\.[0-9]{1,2}$/';
+          if(!enviado()){
+            echo "'  />";
+          }elseif(enviado() && !vacio($_REQUEST['nota']) && preg_match($patron,$_REQUEST['nota']) && isset($_REQUEST['insertar'])){
+            echo $_REQUEST['nota']."'  />";
+          }elseif(enviado() && !vacio($_REQUEST['nota']) && !preg_match($patron,$_REQUEST['nota']) && isset($_REQUEST['insertar'])){
+            echo "' />";
+            echo "<span>La nota debe tener uno o dos enteros y uno o dos decimale separados por un punto (.).</span>";
+          }else if(enviado() && vacio($_REQUEST['nota']) && isset($_REQUEST['insertar'])){
+            echo "' />";
+            echo "<span>La nota no se puede guardar vacia.</span>";
+          }
           echo "<br>";
           echo "<label for='fecha'>Fecha: </label>";
-          echo "<input type='text' name='fecha' />";
+          echo "<input type='text' name='fecha' value='";
+          $patron='/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/';
+            if(!enviado()){
+              echo "'  />";
+            }elseif(enviado() && !vacio($_REQUEST['fecha']) && preg_match($patron,$_REQUEST['fecha'])){
+              $fechaExplode=explode('-',$_REQUEST['fecha']);
+              if($fechaExplode[1]>0 && $fechaExplode[1]<=12 && $fechaExplode[2]>0 && $fechaExplode[2]<=31){
+                echo $_REQUEST['fecha']."'  />";
+              }else{
+                echo "' />";
+                echo "<span>La fecha debe guardar el formato: AAAA-MM-DD.</span>";
+              }
+            }elseif(enviado() && !preg_match($patron,$_REQUEST['fecha']) || (!($fechaExplode[1]>0) || !($fechaExplode[1]<=12) || !($fechaExplode[2]>0) || !($fechaExplode[2]<=31))){
+                echo "' />";
+                echo "<span>La fecha debe guardar el formato: AAAA-MM-DD.</span>";
+            }elseif(enviado() && vacio($_REQUEST['fecha'])){
+                echo "' />";
+                echo "<span>La fecha no se puede guardar vacia.</span>";
+            }
           echo "<br>";
-          echo "<input type='submit' value='Guardar'>";
+          echo "<input type='submit' name='insertar' value='insertar'>";
           echo "</form>";
         }
       }

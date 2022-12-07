@@ -1,9 +1,11 @@
 <?php
 require './seguro/conexion.php';
 /**
- * Crear BASE DE DATOS
- * 
- */
+ * Ejecuta el script con las sentencias para crear la BD 'alumnos',
+ * la tabla 'notas' e inserta 10 registros en 'notas'.
+ * @return 'ok' si todo ha ido bien.
+ * @return false si no ha ido bien.
+ **/
 function ejecutarScript(){
     try{
         $conexion = mysqli_connect($_SERVER['SERVER_ADDR'],USER,PASS);
@@ -14,7 +16,14 @@ function ejecutarScript(){
     }catch(Exception $errores){
         return obtenerMensajeError($errores);
     }
+    return false;
 }
+/**
+ * Ejecuta la sentencia para crear la BD.
+ * @param $nombreBD string con el nombre de la BD
+ * @return true si crea la BD.
+ * @return false si no crea la BD.
+ **/
 function crearBaseDatos($nombreBD){
     $sentencia="CREATE DATABASE IF NOT EXISTS ".$nombreBD;
     try {
@@ -28,6 +37,7 @@ function crearBaseDatos($nombreBD){
     }catch(Exception $errores){
         return obtenerMensajeError($errores);
     }
+    return false;
 }
 /**
  * ejecuta use $nombreBD para poder trabajar con la base de datos
@@ -49,14 +59,6 @@ function usarBaseDatos($nombreBD){
  * crearTabla
  */
  function crearTabla($nombreTabla,$campos,$nombreBaseDatos){
-    // $nombreBaseDatos='alumnos';
-    // $nombreTabla='notas';
-    // $campos= array(
-    //     'id' => 'int primary key',
-    //     'nombre' => 'varchar(25)',
-    //     'nota' =>  'DECIMAL (4, 2)',// 4 es el total de digitos, y 2 es el numero de digitos decimales
-    //     'fecha' => 'date'/**formato YYYY-MM-DD */
-    // );
 
     $i=1;
     $sentencia="CREATE TABLE ".$nombreTabla." (";
@@ -249,11 +251,8 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
   * @return true si ha insertado el registro
   * @return false si no ha insertados el registro;
   */
- function insertarRegistro(/**$nombreTabla,$nombreBaseDatos,$valores,$tipoDatos*/){
-    $nombreBaseDatos='alumnos';
-    $nombreTabla='notas';
-    $valores = array ('Carlos',8.25,'2022-03-26');
-    $tipoDatos='sds';
+ function insertarRegistro($nombreTabla,$nombreBaseDatos,$valores,$tipoDatos){
+
     $idMaximo=obtenerUltimoId($nombreTabla,$nombreBaseDatos)+1;
     $numeroColumnas=obtenerNumeroColumnas($nombreTabla,$nombreBaseDatos)-1;
 
@@ -285,17 +284,11 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
     }
  }
  /**
-  * Actualiza todos los valores pasados en la tabla indicada de la base de datos indicada segun el campo indicado
-  * @return true si ha actualizado
-  * @return false si no ha actualizado
+  * Actualiza todos los valores de un registro en la tabla indicada de la base de datos indicada segun el campo indicado
+  * @return true|false si ha actualizado. si no ha actualizado
   */
-  function actualizarRegistroPorCampo(/**$nombreTabla,$nombreBaseDatos,$nombreCampo,$valorCampo,$valores,$tipoDatos*/){
-    $nombreBaseDatos='alumnos';
-    $nombreTabla='notas';
-    $nombreCampo= 'nombre';
-    $valorCampo='Carlos';
-    $valores = array ('Carlos',10.00,'2022-03-30');
-    $tipoDatos='sds';
+  function actualizarRegistroPorCampo($nombreTabla,$nombreBaseDatos,$nombreCampo,$valorCampo,$valores,$tipoDatos){
+    
     $numeroColumnas=obtenerNumeroColumnas($nombreTabla,$nombreBaseDatos)-1;
     $cabeceras=obtenerCabeceraTabla();
     $i=1;
@@ -325,8 +318,14 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
     }else{
         return false;//el numero de campos no coincide con el numero de columnas que tiene la tabla sin contar la columna id
     }
+    return false;
  }
-
+/**
+ * Elimina un registro por 'id'.
+ * @param $id identificador del registro a borrar
+ * @return true si elimina el registro
+ * @return false si no elimina el registro
+ */
  function eliminarRegistro($id,$nombreTabla){
     try{
 
@@ -341,7 +340,14 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
     }catch(Exception $errores){
         return obtenerMensajeError($errores);
     }
+    return false;
  }
+ /**
+  * Elimina la base de datos
+  * @param $nombreBBDD string con el nombre de la base a eliminar.
+  * @return true si elimina la base de datos
+  * @return false si no elimina la base de datos
+  **/
  function eliminarBaseDatos($nombreBBDD){
     try{
 
@@ -356,6 +362,7 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
     }catch(Exception $errores){
         return obtenerMensajeError($errores);
     }
+    return false;
  }
 
  function eliminarTabla($nombreBBDD,$nombreTabla){
