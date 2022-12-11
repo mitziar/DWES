@@ -25,7 +25,14 @@ function validado(){
                 $patron='/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}$/';
                 if(vacio($_REQUEST['fecha'])||!preg_match($patron,$_REQUEST['fecha'])){
                     array_push($errores,'Fecha vacia o no cumple patrón');
+                }elseif(!vacio($_REQUEST['fecha'])){
+                         $fechaExplode=explode('-',$_REQUEST['fecha']);
+                        if($fechaExplode[1]>0 && $fechaExplode[1]<=12 && $fechaExplode[2]>0 && $fechaExplode[2]<=31){
+                        }else{
+                            array_push($errores,'Fecha no válida');
+                        }  
                 }
+                
             }
         }
     }
