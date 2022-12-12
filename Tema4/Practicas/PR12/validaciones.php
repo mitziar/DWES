@@ -32,7 +32,6 @@ function validado(){
                             array_push($errores,'Fecha no válida');
                         }  
                 }
-                
             }
         }
     }
