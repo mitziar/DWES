@@ -309,18 +309,16 @@
 
 
 
-<?php 
-        if()
-        if(isset($_REQUEST['cursos']) && intval($_REQUEST['cursos'])!=0){ ?>
-            <br> <label for="checkboxElige">Asignaturas:</label><?php
-                foreach($array[$_REQUEST['curso']] as $asigunatura){
-            ?><input type="checkbox" name="checkboxElige[]" id="idCheckbox1" value="<?php
-                echo $asignatura;
-                if(isset($_REQUEST['cursos']) && $_REQUEST['cursos']==$key){
-                foreach ($_REQUEST['checkboxElige'] as $key) {
-                    if($key=='checkbox1')
-                        echo "checked";
-                }
-            }
-            ?>>
-            ?>
+<!-- <?php 
+        // if(isset($_REQUEST['cursos']) && intval($_REQUEST['cursos'])!=0){ ?>
+        //     <br> <label for="checkboxElige">Asignaturas:</label><?php
+        //         foreach($array[$_REQUEST['curso']] as $asigunatura){
+        //     ?><input type="checkbox" name="checkboxElige[]" id="idCheckbox1" value="<?php
+        //         echo $asignatura;
+        //         if(isset($_REQUEST['cursos']) && $_REQUEST['cursos']==$key){
+        //         foreach ($_REQUEST['checkboxElige'] as $key) {
+        //             if($key=='checkbox1')
+        //                 echo "checked";
+        //         }
+        //     }
+            ?>> -->
