@@ -7,9 +7,9 @@ try{
     $conexion = mysqli_connect($_SERVER['SERVER_ADDR'],USER,PASS, 'mundial');
     mysqli_autocommit($conexion, false);
     // * aqui insertar 3 equipos a la vez, pero el ultimo error porque le doy pk mal 
-    $sql='insert into equipo values(4,\'Alemania\')';
+    $sql='insert into equipo values(7,\'Alemania\')';
     $sql1='insert into equipo values(5,\'Rusia\')';
-    $sql2='insert into equipo values(5,\'Brasil\')';
+    $sql2='insert into equipo values(6,\'Brasil\')';
 
     mysqli_query($conexion, $sql);
     mysqli_query($conexion, $sql1);
