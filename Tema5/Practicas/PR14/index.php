@@ -1,4 +1,7 @@
-<html lang="es"><head>
+<?php
+include ('./funcionesBD.php');
+?>
+<html lang="en"><head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,9 +16,7 @@
 <link rel="stylesheet" href="">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-
     <title>DWES-Itziar</title>
-
 
   </head>
 
@@ -23,46 +24,34 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" style="background-color: bisque;">
       <div class="container">
-        <h1>Desarrollo Web en Entorno Servidor</h1>
-        <h2><center>Itziar</center></h2>
+        <h1><a href="../../../index.html">Desarrollo Web en Entorno Servidor</a></h1>
+        <h2><center>Prácticas del Tema 5</center></h2>
       </div>
     </div>
 
     <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Tema 1</h2>
-          <p>Introducción </p>
-          <p><a class="btn btn-default" href="./Tema1/index.php" role="button">Ver »</a></p>
+        <div class="row">
+            <h4><a href="../../">Tema5</a><a href="../">/Practicas</a>/PR14 Index</h4>
         </div>
-        <div class="col-md-4">
-            <h2>Tema 2</h2>
-            <p>Variables </p>
-            <p><a class="btn btn-default" href="./Tema2/" role="button">Ver »</a></p>
-          </div>
-          <div class="col-md-4">
-            <h2>Tema 3</h2>
-            <p> Bucles, Arrays, Formularios, Ficheros </p>
-            <p><a class="btn btn-default" href="./Tema3/" role="button">Ver »</a></p>
-          </div>
-          <div class="col-md-4">
-            <h2>Tema 4</h2>
-            <p> Persistencia. Acceso a datos. Mysql</p>
-            <p><a class="btn btn-default" href="./Tema4/" role="button">Ver »</a></p>
-          </div>
-          <div class="col-md-4">
-            <h2>Tema 5</h2>
-            <p> Control de accesos de usuarios</p>
-            <p><a class="btn btn-default" href="./Tema5/" role="button">Ver »</a></p>
-          </div>
+      <!-- Example row of columns -->
+      <div class="row"><?php
+      echo "<h3>Índice (elige opción)</h3>";
+      $mensaje=usarBaseDatos('alumnos');
+      if($mensaje!='ok'){
+            echo $mensaje."<br>";
+            echo '<a href="ejecutarScript.php"><input type="button" value="Ejecutar script de creación"></a>';
+            
+      }else{
+        echo '<a href="leerTabla.php"><label>Leer tabla</label></a><br>';
+        echo '<a href="insertarRegistro.php"><label>Insertar registro</label></a>';
+      }
+       
+      
+      ?>
       </div>
-
-      <hr>
-
-      <footer class="container" style="background-color: bisque;">
-        <p><center>Página de Itziar</center></p>
-      </footer>
     </div> <!-- /container -->
-
+    <footer class="container" style="background-color: bisque;">
+    <p><center>Página de Itziar</center></p>
+    </footer>
+    
 </body></html>
