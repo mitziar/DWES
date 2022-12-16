@@ -49,15 +49,13 @@ function usarBaseDatos($nombreBD){
     try {
         $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
         $resultado = $conexion->query($sentencia);
-        if ($resultado!=false){
-            return true;
-        }
-
+        
     }catch(Exception $errores){
         return obtenerMensajeError($errores);
     }finally{
         //cerrar conexion
         unset($conexion);
+        return true;
     }
 }
 /**
@@ -78,16 +76,15 @@ function usarBaseDatos($nombreBD){
 
     try{
         $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
-        $resultado = $conexion->query($sentencia);
-        if ($resultado!=false){
-            return true;
-        }
+        $resultado = $conexion->exec($sentencia);
 
     }catch(Exception $errores){
+        unset($conexion);
         return obtenerMensajeError($errores);
     }finally{
         //cerrar conexion
         unset($conexion);
+        return true;
     }
  }
  /**
@@ -104,18 +101,19 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
         $filas= array();
         $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
         $resultado = $conexion->query($sentencia);
+
+    }catch(Exception $errores){
+        unset($conexion);
+        return obtenerMensajeError($errores);
+    }finally{
+        //cerrar conexion
         if ($resultado!=false){
             while($row = $resultado->fetch(PDO::FETCH_BOTH)){
                 array_push($filas,$row);
             }
+            unset($conexion);
             return $filas; 
         }
-
-    }catch(Exception $errores){
-        return obtenerMensajeError($errores);
-    }finally{
-        //cerrar conexion
-        unset($conexion);
     }
  }
  /**
@@ -134,14 +132,16 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
             while($row = $resultado->fetch(PDO::FETCH_BOTH)){
                 array_push($filas,$row);
             }
-            return $filas; 
+
         }
 
     }catch(Exception $errores){
+        unset($conexion);
         return obtenerMensajeError($errores);
     }finally{
         //cerrar conexion
         unset($conexion);
+        return $filas; 
     }
  }
 
@@ -161,21 +161,20 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
         
         $filas= array();
         $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
-        $preparada= $conexion->prepare($sql);
-        $preparada->execute($valorCampo);
-        $resultado = $preparada->fetchAll();
-
-        if ($resultado!=false){
-            foreach($resultado as $key => $value){
-                array_push($filas,$value);
+        $resultado = $conexion->query($sql);
+        if($resultado!=false){
+            while($row = $resultado->fetch(PDO::FETCH_BOTH)){
+                array_push($filas,$row);
             }
-            return $filas; 
+
         }
     }catch(Exception $errores){
+        unset($conexion);
         return obtenerMensajeError($errores);
     }finally{
         //cerrar conexion
         unset($conexion);
+        return $filas; 
     }
  }
  /**
@@ -200,13 +199,14 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
                 foreach($resultado as $key => $value){
                     array_push($filas,$value);
                 }
-                return $filas; 
             }
         }catch(Exception $errores){
+            unset($conexion);
             return obtenerMensajeError($errores);
         }finally{
             //cerrar conexion
             unset($conexion);
+            return $filas; 
         }     
        
  }
@@ -218,45 +218,47 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
 
     $consulta='Select MAX(id) from '.$nombreTabla.";";
 
-    try{
-        $conexion=mysqli_connect($_SERVER['SERVER_ADDR'],USER,PASS,$nombreBaseDatos);
-        mysqli_stmt_init($conexion);
-        $fila= array();
-        if ($resultado = mysqli_query($conexion, $consulta)) {
-            if ($fila = mysqli_fetch_row($resultado)) {
-                mysqli_close($conexion);
-                return $fila[0];
-            }
-        }else{
-            mysqli_close($conexion);
-            return null;
-        }
+        try{
         
-    }catch(Exception $errores){
-        return obtenerMensajeError($errores);
-    }
+            $filas= array();
+            $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
+            $resultado=$conexion->query($consulta);
+        }catch(Exception $errores){
+            unset($conexion);
+            return obtenerMensajeError($errores);
+        }finally{
+            //cerrar conexion
+            if ($resultado!=false){
+                while($row = $resultado->fetch(PDO::FETCH_BOTH)){
+                    array_push($filas,$row);
+                }
+                unset($conexion);
+                return $filas[0][0]; 
+            }
+        }  
  }
  function obtenerNumeroColumnas($nombreTabla,$nombreBaseDatos){
 
     $consulta='desc '.$nombreTabla.";";
 
     try{
-        $conexion=mysqli_connect($_SERVER['SERVER_ADDR'],USER,PASS,$nombreBaseDatos);
-        mysqli_stmt_init($conexion);
-        $filas= array();
-        if ($resultado = mysqli_query($conexion, $consulta)) {
-            while ($fila = mysqli_fetch_column($resultado)) {
-                array_push($filas,$fila);
-            }
-            mysqli_close($conexion);
-            return count($filas);
-        }else{
-            mysqli_close($conexion);
-        }
         
+        $filas= array();
+        $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
+        $resultado=$conexion->query($consulta);
     }catch(Exception $errores){
+        unset($conexion);
         return obtenerMensajeError($errores);
-    }
+    }finally{
+        //cerrar conexion
+        if ($resultado!=false){
+            while($row = $resultado->fetch(PDO::FETCH_BOTH)){
+                array_push($filas,$row);
+            }
+            unset($conexion);
+            return count($filas); 
+        }
+    }  
  }
  /**
   * Inserta los valores pasados en la tabla indicada de la base de datos indicada
@@ -280,17 +282,26 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
         }
 
         try{
-            $conexion = mysqli_connect($_SERVER['SERVER_ADDR'], USER, PASS,$nombreBaseDatos);
-            $consulta_preparada= mysqli_stmt_init($conexion);
-            mysqli_stmt_prepare($consulta_preparada,$sentencia);
-            echo $sentencia;     
-            mysqli_stmt_bind_param($consulta_preparada,$tipoDatos, $valores[0],$valores[1],$valores[2]);
-            mysqli_stmt_execute($consulta_preparada);
-            mysqli_close($conexion);
-           return true;
-       }catch(Exception $errores){
-        return obtenerMensajeError($errores);
-       }
+        
+            $filas= array();
+            $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
+            $preparada= $conexion->prepare($sentencia);
+            $preparada->execute($valores);
+            $resultado = $preparada->fetchAll();
+    
+            if ($resultado!=false){
+                foreach($resultado as $key => $value){
+                    array_push($filas,$value);
+                }
+            }
+        }catch(Exception $errores){
+            unset($conexion);
+            return obtenerMensajeError($errores);
+        }finally{
+            //cerrar conexion
+            unset($conexion);
+            return true; 
+        } 
     }else{
         return false;//el numero de campos no coincide con el numero de columnas que tiene la tabla sin contar la columna id
     }
@@ -432,7 +443,7 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
         case 1054:
             $mensaje = "Columna desconocida";
             break;
-        case 1064 || "HY093":
+        case 1064:
             $mensaje = "Error sintaxis en la sentencia sql";
             break;
         case 1146:
