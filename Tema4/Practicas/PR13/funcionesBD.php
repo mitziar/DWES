@@ -4,17 +4,15 @@ require './seguro/conexion.php';
  * Ejecuta el script con las sentencias para crear la BD 'alumnos',
  * la tabla 'notas' e inserta 10 registros en 'notas'.
  * @return 'ok' si todo ha ido bien.
- * @return false si no ha ido bien.
  **/
 function ejecutarScript(){
     try{
-        $conexion = new PDO('mysql:host='.HOST,USER,PASS);//Creamos objeto de tipo pdo
+        $conexion = new PDO('mysql:host='.$_SERVER['SERVER_ADDR'].';dbname=',USER,PASS);//Creamos objeto de tipo pdo
         $script = file_get_contents('./notasAlumnos.sql');
-        $resultado = $conexion->query($script);
-        if ($resultado!=false){
-            return 'ok';
-        }
+        $conexion->exec($script);
+
     }catch(Exception $errores){
+        unset($conexion);
         return obtenerMensajeError($errores);
     }finally{
         //cerrar conexion
@@ -25,22 +23,21 @@ function ejecutarScript(){
 /**
  * Ejecuta la sentencia para crear la BD.
  * @param $nombreBD string con el nombre de la BD
- * @return true si crea la BD.
- * @return false si no crea la BD.
+ * @return true|false si crea la BD|si no crea la BD.
  **/
 function crearBaseDatos($nombreBD){
     $sentencia="CREATE DATABASE IF NOT EXISTS ".$nombreBD;
-    try {
-        $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
-        $resultado = $conexion->query($sentencia);
-        if ($resultado!=false){
-            return true;
-        }
+    try{
+        $conexion = new PDO('mysql:host='.$_SERVER['SERVER_ADDR'].';dbname=',USER,PASS);//Creamos objeto de tipo pdo
+        $conexion->exec($sentencia);
+
     }catch(Exception $errores){
+        unset($conexion);
         return obtenerMensajeError($errores);
     }finally{
         //cerrar conexion
         unset($conexion);
+        return 'ok';
     }
 }
 /**
@@ -305,7 +302,7 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
   function actualizarRegistroPorCampo($nombreTabla,$nombreBaseDatos,$nombreCampo,$valorCampo,$valores,$tipoDatos){
     
     $numeroColumnas=obtenerNumeroColumnas($nombreTabla,$nombreBaseDatos)-1;
-    $cabeceras=obtenerCabeceraTabla();
+    $cabeceras=obtenerCabeceraTabla($nombreTabla);
     $i=1;
     if(count($valores)==$numeroColumnas){
         $sentencia= "update ".$nombreTabla." set";
@@ -326,29 +323,14 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
                 $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
                 $preparada= $conexion->prepare($sentencia);
                 $preparada->execute($valores);
-                $resultado = $preparada->fetchAll();
-        
-                if ($resultado!=false){
-                    foreach($resultado as $key => $value){
-                        array_push($filas,$value);
-                    }
-                    
-                    return $filas; 
-                }
+
             }catch(Exception $errores){
+                unset($conexion);
                 return obtenerMensajeError($errores);
             }finally{
                 //cerrar conexion
                 unset($conexion);
-                if ($resultado!=false){
-                    foreach($resultado as $key => $value){
-                        array_push($filas,$value);
-                    }
-                    if(empty($filas)){
-                        return true; 
-                    }
-                    
-                }
+                return true;
             }  
     }
     
@@ -464,6 +446,9 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
             break;    
         case 2031:
             $mensaje="No se han suministrado los datos para la consulta";
+            break;
+        case 2002:
+            $mensaje = "No se puede conectar al servidor";
             break;
        default:
             $mensaje= $excepcion->getCode()." ".$excepcion->getMessage();

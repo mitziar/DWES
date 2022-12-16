@@ -69,7 +69,7 @@ include ('./funcionesBD.php');
           echo $cabecera;
         }
       }else{
-        $cabecera= obtenerCabeceraTabla();
+        $cabecera= obtenerCabeceraTabla('notas');
         if(is_array($cabecera)){
           echo "<table><tr>";
           foreach ($cabecera as $key => $value) {
