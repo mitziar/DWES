@@ -87,7 +87,7 @@ include ('./funcionesBD.php');
                 echo "<tr><td>".$value[0]."</td><td>".$value[1]."</td><td>".$value[2]."</td><td>".$value[3]."</td><td><a href='insertarRegistro.php?id=".$value[0]."'><input type='button' value='Modificar/Borrar'></a></td></tr>";
             }
           }else{
-            echo 'Error al leer registros';
+            echo $registros;
           }
           echo "</table>";
         }else{

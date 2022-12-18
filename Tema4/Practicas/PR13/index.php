@@ -36,17 +36,14 @@ include ('./funcionesBD.php');
       <!-- Example row of columns -->
       <div class="row"><?php
       echo "<h3>Índice (elige opción)</h3>";
-      $mensaje=usarBaseDatos('alumnos');
-      if($mensaje!='ok'){
-            echo $mensaje."<br>";
+      $mensaje=crearBaseDatos('alumnos');
+      if($mensaje=='ok'){
             echo '<a href="ejecutarScript.php"><input type="button" value="Ejecutar script de creación"></a>';
             
       }else{
         echo '<a href="leerTabla.php"><label>Leer tabla</label></a><br>';
         echo '<a href="insertarRegistro.php"><label>Insertar registro</label></a>';
       }
-       
-      
       ?>
       </div>
     </div> <!-- /container -->

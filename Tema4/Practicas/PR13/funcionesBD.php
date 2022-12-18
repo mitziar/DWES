@@ -47,15 +47,20 @@ function crearBaseDatos($nombreBD){
 function usarBaseDatos($nombreBD){
     $sentencia='use '.$nombreBD;
     try {
-        $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
-        $resultado = $conexion->query($sentencia);
+        $conexion = new PDO('mysql:host='.$_SERVER['SERVER_ADDR'].';dbname=',USER,PASS);//Creamos objeto de tipo pdo
+        $resultado=$conexion->exec($sentencia);
         
     }catch(Exception $errores){
+        unset($conexion);
         return obtenerMensajeError($errores);
     }finally{
         //cerrar conexion
         unset($conexion);
-        return true;
+        if ($resultado!=false){
+            return true;
+        }else{
+            echo $resultado;
+        }
     }
 }
 /**
