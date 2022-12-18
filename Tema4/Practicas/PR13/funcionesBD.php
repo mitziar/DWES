@@ -10,14 +10,16 @@ function ejecutarScript(){
         $conexion = new PDO('mysql:host='.$_SERVER['SERVER_ADDR'].';dbname=',USER,PASS);//Creamos objeto de tipo pdo
         $script = file_get_contents('./notasAlumnos.sql');
         $conexion->exec($script);
+        unset($conexion);
+        return 'ok';
 
     }catch(Exception $errores){
         unset($conexion);
         return obtenerMensajeError($errores);
     }finally{
         //cerrar conexion
-        unset($conexion);
-        return 'ok';
+        //unset($conexion);
+        //return 'ok';
     }
 }
 /**
@@ -49,18 +51,19 @@ function usarBaseDatos($nombreBD){
     try {
         $conexion = new PDO('mysql:host='.$_SERVER['SERVER_ADDR'].';dbname=',USER,PASS);//Creamos objeto de tipo pdo
         $resultado=$conexion->exec($sentencia);
-        
+        unset($conexion);
+        return true;
     }catch(Exception $errores){
         unset($conexion);
         return obtenerMensajeError($errores);
     }finally{
         //cerrar conexion
-        unset($conexion);
-        if ($resultado!=false){
-            return true;
-        }else{
-            echo $resultado;
-        }
+        // unset($conexion);
+        // if ($resultado!=false){
+        //     return true;
+        // }else{
+        //     echo $resultado;
+        // }
     }
 }
 /**
@@ -104,21 +107,27 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
     try{
         
         $filas= array();
-        $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
+        $conexion = new PDO('mysql:host='.HOST.';dbname='.$nombreBaseDatos,USER,PASS);//Creamos objeto de tipo pdo
         $resultado = $conexion->query($sentencia);
-
+        if ($resultado!=false){
+                 while($row = $resultado->fetch(PDO::FETCH_BOTH)){
+                     array_push($filas,$row);
+                 }
+                 unset($conexion);
+                return $filas; 
+             }
     }catch(Exception $errores){
         unset($conexion);
         return obtenerMensajeError($errores);
     }finally{
         //cerrar conexion
-        if ($resultado!=false){
-            while($row = $resultado->fetch(PDO::FETCH_BOTH)){
-                array_push($filas,$row);
-            }
-            unset($conexion);
-            return $filas; 
-        }
+        // if ($resultado!=false){
+        //     while($row = $resultado->fetch(PDO::FETCH_BOTH)){
+        //         array_push($filas,$row);
+        //     }
+        //     unset($conexion);
+        //     return $filas; 
+        // }
     }
  }
  /**
@@ -131,7 +140,7 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
     try{
         
         $filas= array();
-        $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
+        $conexion = new PDO('mysql:host='.HOST.';dbname=alumnos',USER,PASS);//Creamos objeto de tipo pdo
         $resultado = $conexion->query($sentencia);
         if ($resultado!=false){
             while($row = $resultado->fetch(PDO::FETCH_BOTH)){
@@ -165,14 +174,19 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
      try{
         
         $filas= array();
-        $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
-        $resultado = $conexion->query($sql);
-        if($resultado!=false){
-            while($row = $resultado->fetch(PDO::FETCH_BOTH)){
-                array_push($filas,$row);
-            }
+        $conexion = new PDO('mysql:host='.HOST.';dbname=alumnos',USER,PASS);//Creamos objeto de tipo pdo
+        $preparada= $conexion->prepare($sql);
+        $preparada->bindParam(1,$valorCampo);
 
-        }
+            $resultado = $conexion->query($preparada);
+            if ($resultado!=false){
+                     while($row = $resultado->fetch(PDO::FETCH_BOTH)){
+                         array_push($filas,$row);
+                     }
+                     unset($conexion);
+                    return $filas; 
+                 }
+
     }catch(Exception $errores){
         unset($conexion);
         return obtenerMensajeError($errores);

@@ -36,8 +36,8 @@ include ('./funcionesBD.php');
       <!-- Example row of columns -->
       <div class="row"><?php
       echo "<h3>Índice (elige opción)</h3>";
-      $mensaje=crearBaseDatos('alumnos');
-      if($mensaje=='ok'){
+      $mensaje=usarBaseDatos('alumnos');
+      if($mensaje!='ok'){
             echo '<a href="ejecutarScript.php"><input type="button" value="Ejecutar script de creación"></a>';
             
       }else{

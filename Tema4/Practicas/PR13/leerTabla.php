@@ -44,7 +44,7 @@ include ('./funcionesBD.php');
             echo "<a href='insertarRegistro.php'><input type='button' value='Introducir Nuevo Registro'></a>";
             echo "<hr>";
       if (isset($_REQUEST['buscado'])){
-        $cabecera= obtenerCabeceraTabla();
+        $cabecera= obtenerCabeceraTabla('notas');
         if(is_array($cabecera)){
           echo "<table><tr>";
           foreach ($cabecera as $key => $value) {
