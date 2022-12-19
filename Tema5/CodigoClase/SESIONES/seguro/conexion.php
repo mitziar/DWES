@@ -4,6 +4,6 @@
  define('HOST','192.168.2.214');
  define('USER','itziar');
  define('PASS','itziar');
- define('BBDD','');//como no tengo base de datos lo dejo vacio
+ define('BBDD','sesiones2');//como no tengo base de datos lo dejo vacio
 
 ?>
