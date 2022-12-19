@@ -4,55 +4,66 @@ require './seguro/conexion.php';
  * Ejecuta el script con las sentencias para crear la BD 'alumnos',
  * la tabla 'notas' e inserta 10 registros en 'notas'.
  * @return 'ok' si todo ha ido bien.
- * @return false si no ha ido bien.
  **/
 function ejecutarScript(){
     try{
-        $conexion = mysqli_connect($_SERVER['SERVER_ADDR'],USER,PASS);
+        $conexion = new PDO('mysql:host='.$_SERVER['SERVER_ADDR'].';dbname=',USER,PASS);//Creamos objeto de tipo pdo
         $script = file_get_contents('./notasAlumnos.sql');
-        mysqli_multi_query($conexion, $script);
-        mysqli_close($conexion);
+        $conexion->exec($script);
+        unset($conexion);
         return 'ok';
+
     }catch(Exception $errores){
+        unset($conexion);
         return obtenerMensajeError($errores);
+    }finally{
+        //cerrar conexion
+        //unset($conexion);
+        //return 'ok';
     }
-    return false;
 }
 /**
  * Ejecuta la sentencia para crear la BD.
  * @param $nombreBD string con el nombre de la BD
- * @return true si crea la BD.
- * @return false si no crea la BD.
+ * @return true|false si crea la BD|si no crea la BD.
  **/
 function crearBaseDatos($nombreBD){
     $sentencia="CREATE DATABASE IF NOT EXISTS ".$nombreBD;
-    try {
-        $conexion = mysqli_connect($_SERVER['SERVER_ADDR'], USER, PASS);
-        $consulta_preparada = mysqli_stmt_init($conexion);
-        mysqli_stmt_prepare($consulta_preparada, $sentencia);
-        mysqli_stmt_execute($consulta_preparada);
-        mysqli_close($conexion);
-        return true;
+    try{
+        $conexion = new PDO('mysql:host='.$_SERVER['SERVER_ADDR'].';dbname=',USER,PASS);//Creamos objeto de tipo pdo
+        $conexion->exec($sentencia);
 
     }catch(Exception $errores){
+        unset($conexion);
         return obtenerMensajeError($errores);
+    }finally{
+        //cerrar conexion
+        unset($conexion);
+        return 'ok';
     }
-    return false;
 }
 /**
  * ejecuta use $nombreBD para poder trabajar con la base de datos
  * @return string 'ok'|'mensaje de error'
  */
 function usarBaseDatos($nombreBD){
-
+    $sentencia='use '.$nombreBD;
     try {
-        $conexion = mysqli_connect($_SERVER['SERVER_ADDR'], USER, PASS,$nombreBD);
-        $consulta_preparada = mysqli_stmt_init($conexion);
-        mysqli_close($conexion);
-        return 'ok';
-
+        $conexion = new PDO('mysql:host='.$_SERVER['SERVER_ADDR'].';dbname=',USER,PASS);//Creamos objeto de tipo pdo
+        $resultado=$conexion->exec($sentencia);
+        unset($conexion);
+        return true;
     }catch(Exception $errores){
+        unset($conexion);
         return obtenerMensajeError($errores);
+    }finally{
+        //cerrar conexion
+        // unset($conexion);
+        // if ($resultado!=false){
+        //     return true;
+        // }else{
+        //     echo $resultado;
+        // }
     }
 }
 /**
@@ -72,15 +83,16 @@ function usarBaseDatos($nombreBD){
     }
 
     try{
-        $conexion = mysqli_connect($_SERVER['SERVER_ADDR'], USER, PASS,$nombreBaseDatos);
-        $consulta_preparada = mysqli_stmt_init($conexion);
-        mysqli_stmt_prepare($consulta_preparada, $sentencia);
-        mysqli_stmt_execute($consulta_preparada);
-        mysqli_close($conexion);
-        return true;
+        $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
+        $resultado = $conexion->exec($sentencia);
 
     }catch(Exception $errores){
+        unset($conexion);
         return obtenerMensajeError($errores);
+    }finally{
+        //cerrar conexion
+        unset($conexion);
+        return true;
     }
  }
  /**
@@ -89,47 +101,61 @@ function usarBaseDatos($nombreBD){
  * @return string de error
  */
 function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
-    // $nombreBaseDatos='alumnos';
-    // $nombreTabla='notas';
+
     $sentencia="Select * from ".$nombreTabla.";";
 
     try{
-        $conexion = mysqli_connect($_SERVER['SERVER_ADDR'], USER, PASS,$nombreBaseDatos);
-        mysqli_stmt_init($conexion);
+        
         $filas= array();
-        if ($resultado = mysqli_query($conexion, $sentencia)) {
-            while ($fila = mysqli_fetch_row($resultado)) {
-                array_push($filas,$fila);
-            }
-        }
-        mysqli_close($conexion);
-
-        return $filas;
+        $conexion = new PDO('mysql:host='.HOST.';dbname='.$nombreBaseDatos,USER,PASS);//Creamos objeto de tipo pdo
+        $resultado = $conexion->query($sentencia);
+        if ($resultado!=false){
+                 while($row = $resultado->fetch(PDO::FETCH_BOTH)){
+                     array_push($filas,$row);
+                 }
+                 unset($conexion);
+                return $filas; 
+             }
     }catch(Exception $errores){
+        unset($conexion);
         return obtenerMensajeError($errores);
+    }finally{
+        //cerrar conexion
+        // if ($resultado!=false){
+        //     while($row = $resultado->fetch(PDO::FETCH_BOTH)){
+        //         array_push($filas,$row);
+        //     }
+        //     unset($conexion);
+        //     return $filas; 
+        // }
     }
  }
  /**
   * Obtiene las cabeceras de la tabla
   */
- function obtenerCabeceraTabla(/**$nombreTabla,$nombreBaseDatos*/){
-    $nombreBaseDatos='alumnos';
-    $nombreTabla='notas';
+ function obtenerCabeceraTabla($nombreTabla){
+    
     $sentencia="Desc ".$nombreTabla;
 
     try{
-        $conexion = mysqli_connect($_SERVER['SERVER_ADDR'], USER, PASS,$nombreBaseDatos);
-        mysqli_stmt_init($conexion);
+        
         $filas= array();
-        if ($resultado = mysqli_query($conexion, $sentencia)) {
-            while ($fila = mysqli_fetch_row($resultado)) {
-                array_push($filas,$fila);
+        $conexion = new PDO('mysql:host='.HOST.';dbname=alumnos',USER,PASS);//Creamos objeto de tipo pdo
+        $resultado = $conexion->query($sentencia);
+        if ($resultado!=false){
+            while($row = $resultado->fetch(PDO::FETCH_BOTH)){
+                array_push($filas,$row);
             }
+
         }
-        mysqli_close($conexion);
-        return $filas;
+
     }catch(Exception $errores){
+        unset($conexion);
         return obtenerMensajeError($errores);
+    }finally{
+        //cerrar conexion
+        unset($conexion);
+        return $filas; 
     }
  }
 
@@ -143,28 +169,29 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
   */
  function obtenerRegistroPorCampo($nombreTabla,$nombreBaseDatos,$nombreCampo,$valorCampo){
 
-    $resultados= array();
+    $sql="select * from ".$nombreTabla." where ".$nombreCampo." LIKE ? ";
 
-    try{
-        $conexion = mysqli_connect($_SERVER['SERVER_ADDR'], USER, PASS,$nombreBaseDatos);
-        $sql="select * from ".$nombreTabla." where ".$nombreCampo." LIKE ? ";
-                
-        $consulta_preparada= mysqli_stmt_init($conexion);
-        mysqli_stmt_prepare($consulta_preparada,$sql);
-             
-        mysqli_stmt_bind_param($consulta_preparada,'s', $valorCampo);
-        mysqli_stmt_execute($consulta_preparada);
-        mysqli_stmt_bind_result($consulta_preparada,$r_id,$r_nombre,$r_nota,$r_fecha);
-        while (mysqli_stmt_fetch($consulta_preparada)) {
-            array_push($resultados,array($r_id,$r_nombre,$r_nota,$r_fecha));
+     try{
+        
+        $filas= array();
+        $conexion = new PDO('mysql:host='.HOST.';dbname=alumnos',USER,PASS);//Creamos objeto de tipo pdo
+        $preparada= $conexion->prepare($sql);
+        $preparada->execute([$valorCampo]);
+        $resultado = $preparada->fetchAll();
+
+        if ($resultado!=false){
+            foreach($resultado as $key => $value){
+                array_push($filas,$value);
+            }
         }
-
-        mysqli_close($conexion);
-        return $resultados;
-
     }catch(Exception $errores){
+        unset($conexion);
         return obtenerMensajeError($errores);
-    }  
+    }finally{
+        //cerrar conexion
+        unset($conexion);
+        return $filas; 
+    }
  }
  /**
   * Obtiene el registro de la base de datos según el id que reciba.
@@ -175,28 +202,29 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
   */
  function obtenerRegistroPorId($nombreTabla,$nombreBaseDatos,$valorCampo){
 
-    $resultados= array();
-
-    try{
-        $conexion = mysqli_connect($_SERVER['SERVER_ADDR'], USER, PASS,$nombreBaseDatos);
         $sql="select * from ".$nombreTabla." where id = ? ";
-                
-        $consulta_preparada= mysqli_stmt_init($conexion);
-        mysqli_stmt_prepare($consulta_preparada,$sql);
-             
-        mysqli_stmt_bind_param($consulta_preparada,'i', $valorCampo);
-        mysqli_stmt_execute($consulta_preparada);
-        mysqli_stmt_bind_result($consulta_preparada,$r_id,$r_nombre,$r_nota,$r_fecha);
-        while (mysqli_stmt_fetch($consulta_preparada)) {
-            array_push($resultados,array($r_id,$r_nombre,$r_nota,$r_fecha));
-        }
-
-        mysqli_close($conexion);
-        return $resultados;
-
-    }catch(Exception $errores){
-        return obtenerMensajeError($errores);
-    }  
+        try{
+        
+            $filas= array();
+            $conexion = new PDO('mysql:host='.HOST.';dbname='.$nombreBaseDatos,USER,PASS);//Creamos objeto de tipo pdo
+            $preparada= $conexion->prepare($sql);
+            $preparada->execute([$valorCampo]);
+            $resultado = $preparada->fetchAll();
+    
+            if ($resultado!=false){
+                foreach($resultado as $key => $value){
+                    array_push($filas,$value);
+                }
+            }
+        }catch(Exception $errores){
+            unset($conexion);
+            return obtenerMensajeError($errores);
+        }finally{
+            //cerrar conexion
+            unset($conexion);
+            return $filas; 
+        }     
+       
  }
  /**
   * Obtiene el id mas alto que existe en la tabla de la base de datos que recibe como argumento
@@ -206,45 +234,47 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
 
     $consulta='Select MAX(id) from '.$nombreTabla.";";
 
-    try{
-        $conexion=mysqli_connect($_SERVER['SERVER_ADDR'],USER,PASS,$nombreBaseDatos);
-        mysqli_stmt_init($conexion);
-        $fila= array();
-        if ($resultado = mysqli_query($conexion, $consulta)) {
-            if ($fila = mysqli_fetch_row($resultado)) {
-                mysqli_close($conexion);
-                return $fila[0];
-            }
-        }else{
-            mysqli_close($conexion);
-            return null;
-        }
+        try{
         
-    }catch(Exception $errores){
-        return obtenerMensajeError($errores);
-    }
+            $filas= array();
+            $conexion = new PDO('mysql:host='.HOST.';dbname='.$nombreBaseDatos,USER,PASS);//Creamos objeto de tipo pdo
+            $resultado=$conexion->query($consulta);
+        }catch(Exception $errores){
+            unset($conexion);
+            return obtenerMensajeError($errores);
+        }finally{
+            //cerrar conexion
+            if ($resultado!=false){
+                while($row = $resultado->fetch(PDO::FETCH_BOTH)){
+                    array_push($filas,$row);
+                }
+                unset($conexion);
+                return $filas[0][0]; 
+            }
+        }  
  }
  function obtenerNumeroColumnas($nombreTabla,$nombreBaseDatos){
 
     $consulta='desc '.$nombreTabla.";";
 
     try{
-        $conexion=mysqli_connect($_SERVER['SERVER_ADDR'],USER,PASS,$nombreBaseDatos);
-        mysqli_stmt_init($conexion);
-        $filas= array();
-        if ($resultado = mysqli_query($conexion, $consulta)) {
-            while ($fila = mysqli_fetch_column($resultado)) {
-                array_push($filas,$fila);
-            }
-            mysqli_close($conexion);
-            return count($filas);
-        }else{
-            mysqli_close($conexion);
-        }
         
+        $filas= array();
+        $conexion = new PDO('mysql:host='.HOST.';dbname='.$nombreBaseDatos,USER,PASS);//Creamos objeto de tipo pdo
+        $resultado=$conexion->query($consulta);
     }catch(Exception $errores){
+        unset($conexion);
         return obtenerMensajeError($errores);
-    }
+    }finally{
+        //cerrar conexion
+        if ($resultado!=false){
+            while($row = $resultado->fetch(PDO::FETCH_BOTH)){
+                array_push($filas,$row);
+            }
+            unset($conexion);
+            return count($filas); 
+        }
+    }  
  }
  /**
   * Inserta los valores pasados en la tabla indicada de la base de datos indicada
@@ -268,17 +298,26 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
         }
 
         try{
-            $conexion = mysqli_connect($_SERVER['SERVER_ADDR'], USER, PASS,$nombreBaseDatos);
-            $consulta_preparada= mysqli_stmt_init($conexion);
-            mysqli_stmt_prepare($consulta_preparada,$sentencia);
-            echo $sentencia;     
-            mysqli_stmt_bind_param($consulta_preparada,$tipoDatos, $valores[0],$valores[1],$valores[2]);
-            mysqli_stmt_execute($consulta_preparada);
-            mysqli_close($conexion);
-           return true;
-       }catch(Exception $errores){
-        return obtenerMensajeError($errores);
-       }
+        
+            $filas= array();
+            $conexion = new PDO('mysql:host='.HOST.';dbname='.$nombreBaseDatos,USER,PASS);//Creamos objeto de tipo pdo
+            $preparada= $conexion->prepare($sentencia);
+            $preparada->execute($valores);
+            $resultado = $preparada->fetchAll();
+    
+            if ($resultado!=false){
+                foreach($resultado as $key => $value){
+                    array_push($filas,$value);
+                }
+            }
+        }catch(Exception $errores){
+            unset($conexion);
+            return obtenerMensajeError($errores);
+        }finally{
+            //cerrar conexion
+            unset($conexion);
+            return true; 
+        } 
     }else{
         return false;//el numero de campos no coincide con el numero de columnas que tiene la tabla sin contar la columna id
     }
@@ -290,7 +329,7 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
   function actualizarRegistroPorCampo($nombreTabla,$nombreBaseDatos,$nombreCampo,$valorCampo,$valores,$tipoDatos){
     
     $numeroColumnas=obtenerNumeroColumnas($nombreTabla,$nombreBaseDatos)-1;
-    $cabeceras=obtenerCabeceraTabla();
+    $cabeceras=obtenerCabeceraTabla($nombreTabla);
     $i=1;
     if(count($valores)==$numeroColumnas){
         $sentencia= "update ".$nombreTabla." set";
@@ -304,22 +343,26 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
 
             }
         }
-        try{
-            $conexion = mysqli_connect($_SERVER['SERVER_ADDR'], USER, PASS,$nombreBaseDatos);
-            $consulta_preparada= mysqli_stmt_init($conexion);
-            mysqli_stmt_prepare($consulta_preparada,$sentencia);  
-            mysqli_stmt_bind_param($consulta_preparada,$tipoDatos, $valores[0],$valores[1],$valores[2]);
-            mysqli_stmt_execute($consulta_preparada);
-            mysqli_close($conexion);
-           return true;
-       }catch(Exception $errores){
-        return obtenerMensajeError($errores);
-       }
-    }else{
-        return false;//el numero de campos no coincide con el numero de columnas que tiene la tabla sin contar la columna id
+        
+            try{
+        
+                $filas= array();
+                $conexion = new PDO('mysql:host='.HOST.';dbname='.$nombreBaseDatos,USER,PASS);//Creamos objeto de tipo pdo
+                $preparada= $conexion->prepare($sentencia);
+                $preparada->execute($valores);
+
+            }catch(Exception $errores){
+                unset($conexion);
+                return obtenerMensajeError($errores);
+            }finally{
+                //cerrar conexion
+                unset($conexion);
+                return true;
+            }  
     }
-    return false;
- }
+    
+}
+
 /**
  * Elimina un registro por 'id'.
  * @param $id identificador del registro a borrar
@@ -327,21 +370,24 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
  * @return false si no elimina el registro
  */
  function eliminarRegistro($id,$nombreTabla){
-    try{
 
         $sentencia="Delete from ".$nombreTabla." where id=?";
-        $conexion = mysqli_connect($_SERVER['SERVER_ADDR'], USER, PASS,'alumnos');
-        $consulta_preparada= mysqli_stmt_init($conexion);
-        mysqli_stmt_prepare($consulta_preparada,$sentencia);  
-        mysqli_stmt_bind_param($consulta_preparada,'i', $id);
-        mysqli_stmt_execute($consulta_preparada);
-        mysqli_close($conexion);
-        return true;
-    }catch(Exception $errores){
-        return obtenerMensajeError($errores);
-    }
-    return false;
- }
+        try{
+        
+            $conexion = new PDO('mysql:host='.HOST.';dbname=alumnos',USER,PASS);//Creamos objeto de tipo pdo
+            $preparada= $conexion->prepare($sentencia);
+            $preparada->execute([$id]);
+            $resultado = $preparada->fetchAll();     
+        }catch(Exception $errores){
+            return obtenerMensajeError($errores);
+        }finally{
+            //cerrar conexion
+            unset($conexion);
+            if (empty($resultado)){
+                return true; 
+            }
+        } 
+    } 
  /**
   * Elimina la base de datos
   * @param $nombreBBDD string con el nombre de la base a eliminar.
@@ -349,36 +395,51 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
   * @return false si no elimina la base de datos
   **/
  function eliminarBaseDatos($nombreBBDD){
-    try{
 
         $sentencia="drop database ?";
-        $conexion = mysqli_connect($_SERVER['SERVER_ADDR'], USER, PASS);
-        $consulta_preparada= mysqli_stmt_init($conexion);
-        mysqli_stmt_prepare($consulta_preparada,$sentencia);  
-        mysqli_stmt_bind_param($consulta_preparada,'s', $nombreBBDD);
-        mysqli_stmt_execute($consulta_preparada);
-        mysqli_close($conexion);
-        return true;
-    }catch(Exception $errores){
-        return obtenerMensajeError($errores);
-    }
-    return false;
+        try{
+        
+            $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
+            $preparada= $conexion->prepare($sentencia);
+            $preparada->execute($nombreBBDD);
+            $resultado = $preparada->fetchAll();
+    
+            if (empty($resultado)){
+                return true; 
+            }
+        }catch(Exception $errores){
+            return obtenerMensajeError($errores);
+        }finally{
+            //cerrar conexion
+            unset($conexion);
+            if (empty($resultado)){
+                return true; 
+            }
+        }  
  }
 
  function eliminarTabla($nombreBBDD,$nombreTabla){
-    try{
-
+  
         $sentencia="drop table ?";
-        $conexion = mysqli_connect($_SERVER['SERVER_ADDR'], USER, PASS,$nombreBBDD);
-        $consulta_preparada= mysqli_stmt_init($conexion);
-        mysqli_stmt_prepare($consulta_preparada,$sentencia);  
-        mysqli_stmt_bind_param($consulta_preparada,'s', $nombreTabla);
-        mysqli_stmt_execute($consulta_preparada);
-        mysqli_close($conexion);
-        return true;
-    }catch(Exception $errores){
-        return obtenerMensajeError($errores);
-    }
+        try{
+
+            $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
+            $preparada= $conexion->prepare($sentencia);
+            $preparada->execute($nombreTabla);
+            $resultado = $preparada->fetchAll();
+    
+            if (empty($resultado)){
+                return true; 
+            }
+        }catch(Exception $errores){
+            return obtenerMensajeError($errores);
+        }finally{
+            //cerrar conexion
+            unset($conexion);
+            if (empty($resultado)){
+                return true; 
+            }
+        }     
  }
 
  function obtenerMensajeError($excepcion){
@@ -412,6 +473,9 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
             break;    
         case 2031:
             $mensaje="No se han suministrado los datos para la consulta";
+            break;
+        case 2002:
+            $mensaje = "No se puede conectar al servidor";
             break;
        default:
             $mensaje= $excepcion->getCode()." ".$excepcion->getMessage();

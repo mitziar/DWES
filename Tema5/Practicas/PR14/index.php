@@ -43,7 +43,10 @@ include ('./funcionesBD.php');
             
       }else{
         echo '<a href="leerTabla.php"><label>Leer tabla</label></a><br>';
-        echo '<a href="insertarRegistro.php"><label>Insertar registro</label></a>';
+        if($_SERVER['PHP_AUTH_USER']=='user' || $_SERVER['PHP_AUTH_USER']=='admin'){
+          echo '<a href="insertarRegistro.php"><label>Insertar registro</label></a>';
+        }
+        
       }
        
       
