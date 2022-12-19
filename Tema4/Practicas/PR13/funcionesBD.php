@@ -177,16 +177,13 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
         $conexion = new PDO('mysql:host='.HOST.';dbname=alumnos',USER,PASS);//Creamos objeto de tipo pdo
         $preparada= $conexion->prepare($sql);
         $preparada->execute([$valorCampo]);
+        $resultado = $preparada->fetchAll();
 
-        $resultado = $preparada->execute();
-            if ($resultado!=false){
-                     while($row = $resultado->fetch()){
-                         array_push($filas,$row);
-                     }
-                     unset($conexion);
-                    return $filas; 
-                 }
-
+        if ($resultado!=false){
+            foreach($resultado as $key => $value){
+                array_push($filas,$value);
+            }
+        }
     }catch(Exception $errores){
         unset($conexion);
         return obtenerMensajeError($errores);
@@ -209,7 +206,7 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
         try{
         
             $filas= array();
-            $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
+            $conexion = new PDO('mysql:host='.HOST.';dbname='.$nombreBaseDatos,USER,PASS);//Creamos objeto de tipo pdo
             $preparada= $conexion->prepare($sql);
             $preparada->execute([$valorCampo]);
             $resultado = $preparada->fetchAll();
@@ -240,7 +237,7 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
         try{
         
             $filas= array();
-            $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
+            $conexion = new PDO('mysql:host='.HOST.';dbname='.$nombreBaseDatos,USER,PASS);//Creamos objeto de tipo pdo
             $resultado=$conexion->query($consulta);
         }catch(Exception $errores){
             unset($conexion);
@@ -263,7 +260,7 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
     try{
         
         $filas= array();
-        $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
+        $conexion = new PDO('mysql:host='.HOST.';dbname='.$nombreBaseDatos,USER,PASS);//Creamos objeto de tipo pdo
         $resultado=$conexion->query($consulta);
     }catch(Exception $errores){
         unset($conexion);
@@ -303,7 +300,7 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
         try{
         
             $filas= array();
-            $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
+            $conexion = new PDO('mysql:host='.HOST.';dbname='.$nombreBaseDatos,USER,PASS);//Creamos objeto de tipo pdo
             $preparada= $conexion->prepare($sentencia);
             $preparada->execute($valores);
             $resultado = $preparada->fetchAll();
@@ -350,7 +347,7 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
             try{
         
                 $filas= array();
-                $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
+                $conexion = new PDO('mysql:host='.HOST.';dbname='.$nombreBaseDatos,USER,PASS);//Creamos objeto de tipo pdo
                 $preparada= $conexion->prepare($sentencia);
                 $preparada->execute($valores);
 
@@ -377,7 +374,7 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
         $sentencia="Delete from ".$nombreTabla." where id=?";
         try{
         
-            $conexion = new PDO('mysql:host='.HOST.';dbname='.BBDD,USER,PASS);//Creamos objeto de tipo pdo
+            $conexion = new PDO('mysql:host='.HOST.';dbname=alumnos',USER,PASS);//Creamos objeto de tipo pdo
             $preparada= $conexion->prepare($sentencia);
             $preparada->execute([$id]);
             $resultado = $preparada->fetchAll();     

@@ -41,12 +41,16 @@ include ('./validaciones.php');
           if(actualizarRegistroPorCampo('notas','alumnos','id',$_REQUEST['id'],$valores,'sds')){
             header('Location:leerTabla.php');
             exit();
+          }else{
+            echo "Error al actualizar registro";
           }
         }
         if(isset($_REQUEST['eliminar'])){
           if(eliminarRegistro($_REQUEST['id'],'notas')){
             header('Location:leerTabla.php');
             exit();
+          } else{
+            echo "Error al eliminar registro";
           }
         }
          if(isset($_REQUEST['insertar'])){
@@ -55,7 +59,9 @@ include ('./validaciones.php');
              echo "ha insertado";
              header('Location:leerTabla.php');
              exit();
-           }
+           }else{
+            echo "Error al insertar registro";
+          }
          }
       }else{
         if(isset($_REQUEST['id'])){
