@@ -176,11 +176,11 @@ function obtenerTodosRegistros($nombreTabla,$nombreBaseDatos){
         $filas= array();
         $conexion = new PDO('mysql:host='.HOST.';dbname=alumnos',USER,PASS);//Creamos objeto de tipo pdo
         $preparada= $conexion->prepare($sql);
-        $preparada->bindParam(1,$valorCampo);
+        $preparada->execute([$valorCampo]);
 
-            $resultado = $conexion->query($preparada);
+        $resultado = $preparada->execute();
             if ($resultado!=false){
-                     while($row = $resultado->fetch(PDO::FETCH_BOTH)){
+                     while($row = $resultado->fetch()){
                          array_push($filas,$row);
                      }
                      unset($conexion);
