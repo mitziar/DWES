@@ -5,7 +5,7 @@
 require("./seguro/conexion.php");
 function validaUser($user,$pass){
     try{
-        $con= new PDO("mysql:host=".HOST.";dbname=".BBDD,USER,PASS);
+        $conexion= new PDO("mysql:host=".HOST.";dbname=".BBDD,USER,PASS);
         $sql = "select * from usuarios usuario = ? and clave = ?";
         //preparo conexion
         $sql_p = $conexion->prepare($sql);
