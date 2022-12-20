@@ -35,43 +35,46 @@ include ('./validaciones.php');
             <h4><a href="../../">Tema5</a><a href="../">/Practicas</a><a href="index.php">/PR14</a>/Insertar Registro</h4>
         </div>
       <div class="row"><?php
-      if(enviado()&&validado()){
-        
-        if(isset($_REQUEST['eliminar'])){
-          if(eliminarRegistro($_REQUEST['id'],'notas')){
-            header('Location:leerTabla.php');
-            exit();
+      if(isset($_SERVER['PHP_AUTH_USER']) && $_SERVER['PHP_AUTH_USER']=='admin'){
+        if(enviado()&&validado()){
+          
+          if(isset($_REQUEST['eliminar'])){
+            if(eliminarRegistro($_REQUEST['id'],'notas')){
+              header('Location:leerTabla.php');
+              exit();
+            }
+          }
+        }else{
+          if(isset($_REQUEST['id'])){
+            echo "<h3>Borrar</h3>";
+            $registro=obtenerRegistroPorId('notas','alumnos',$_REQUEST['id']);
+            if(is_array($registro)){
+              echo "<form action='borrar.php' method='get'>";
+              echo "<input type='hidden' name='id' value='".$registro[0][0]."'/>"; 
+              echo "<label for='nombre'>Nombre: </label>";
+              echo "<input type='text' name='nombre' value='";
+              echo $registro[0][1]."'  />";
+              
+              echo "<br>";
+              echo "<label for='nota'>Nota: </label>";
+              echo "<input type='text' name='nota' value='";
+              echo $registro[0][2]."'  />";
+              
+              echo "<br>";
+              echo "<label for='fecha'>Fecha: </label>";
+              echo "<input type='text' name='fecha' value='";
+              echo $registro[0][3]."'  />";
+              echo "<br>";
+              echo "<input type='submit' name='eliminar'value='eliminar'>";
+              echo "</form>";
+            }else{
+              echo "<h3>".$registro."</h3>";
+            }
+            echo "</form>";
           }
         }
       }else{
-        if(isset($_REQUEST['id'])){
-          echo "<h3>Borrar</h3>";
-          $registro=obtenerRegistroPorId('notas','alumnos',$_REQUEST['id']);
-          if(is_array($registro)){
-            echo "<form action='insertarRegistro.php' method='get'>";
-            echo "<input type='hidden' name='id' value='".$registro[0][0]."'/>"; 
-            echo "<label for='nombre'>Nombre: </label>";
-            echo "<input type='text' name='nombre' value='";
-            echo $registro[0][1]."'  />";
-            
-            echo "<br>";
-            echo "<label for='nota'>Nota: </label>";
-            echo "<input type='text' name='nota' value='";
-            echo $registro[0][2]."'  />";
-            
-            echo "<br>";
-            echo "<label for='fecha'>Fecha: </label>";
-            echo "<input type='text' name='fecha' value='";
-            echo $registro[0][3]."'  />";
-            echo "<br>";
-            echo "<input type='submit' name='eliminar'value='eliminar'>";
-            echo "<input type='submit' name='guardar' value='guardar'>";
-            echo "</form>";
-          }else{
-            echo "<h3>".$registro."</h3>";
-          }
-          echo "</form>";
-        }
+        echo "No está autorizado.";
       }
       
       ?>

@@ -36,20 +36,7 @@ include ('./validaciones.php');
         </div>
       <div class="row"><?php
       if(enviado()&&validado()){
-        if(isset($_REQUEST['guardar'])){
-          $valores=array($_REQUEST['nombre'],$_REQUEST['nota'],$_REQUEST['fecha']);
-          if(actualizarRegistroPorCampo('notas','alumnos','id',$_REQUEST['id'],$valores,'sds')){
-            header('Location:leerTabla.php');
-            exit();
-          }
-        }
-        if(isset($_REQUEST['eliminar'])){
-          if(eliminarRegistro($_REQUEST['id'],'notas')){
-            header('Location:leerTabla.php');
-            exit();
-          }
-        }
-         if($_REQUEST['insertar']=='insertar'){
+         if($_REQUEST['insertar']=='insertar' || $_REQUEST['guardar']=='guardar cambios'){
           $valores=array($_REQUEST['nombre'],$_REQUEST['nota'],$_REQUEST['fecha']);
            if(insertarRegistro('notas','alumnos',$valores,'sds')){
              echo "ha insertado";

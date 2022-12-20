@@ -1,5 +1,14 @@
 <?php
 include ('./funcionesBD.php');
+if(isset($_SERVER['PHP_AUTH_USER']) && $_SERVER['PHP_AUTH_USER']=='user' && $_SERVER['PHP_AUTH_PW']=='user'){
+  header('Location: ./leerTabla.php');
+}elseif(isset($_SERVER['PHP_AUTH_USER']) && $_SERVER['PHP_AUTH_USER']=='admin' && $_SERVER['PHP_AUTH_PW']=='admin'){
+header('Location: ./leerTabla.php');
+}else{
+  header('WWW-Authenticate: Basic Realm="Contenido restringido"');
+  header('HTTP/1.0 401 Unauthorized');
+}
+
 ?>
 <html lang="en"><head>
     <meta charset="utf-8">
@@ -42,14 +51,8 @@ include ('./funcionesBD.php');
             echo '<a href="ejecutarScript.php"><input type="button" value="Ejecutar script de creación"></a>';
             
       }else{
-        echo '<a href="leerTabla.php"><label>Leer tabla</label></a><br>';
-        if($_SERVER['PHP_AUTH_USER']=='user' || $_SERVER['PHP_AUTH_USER']=='admin'){
-          echo '<a href="insertarRegistro.php"><label>Insertar registro</label></a>';
-        }
-        
+        echo '<a href="leerTabla.php"><label>Leer tabla</label></a><br>';        
       }
-       
-      
       ?>
       </div>
     </div> <!-- /container -->
