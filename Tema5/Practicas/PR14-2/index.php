@@ -1,3 +1,6 @@
+<?php
+include ('./funcionesBD.php');
+?>
 <html lang="en"><head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,26 +24,28 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" style="background-color: bisque;">
       <div class="container">
-        <h1><a href="../../index.html">Desarrollo Web en Entorno Servidor</a></h1>
-        <h2><center>Prácticas</center></h2>
+        <h1><a href="../../../index.html">Desarrollo Web en Entorno Servidor</a></h1>
+        <h2><center>Prácticas del Tema 5</center></h2>
       </div>
     </div>
 
     <div class="container">
         <div class="row">
-            <h4><a href="../">Tema 5</a>/Prácticas</h4>
+            <h4><a href="../../">Tema5</a><a href="../">/Practicas</a>/PR14 Index</h4>
         </div>
       <!-- Example row of columns -->
-    <div class="row">
-      <div class="col-md-4">
-        <h2>PR14-1 </h2>
-        <p><a class="btn btn-default" href="./PR14-1/index.php" role="button">Ver »</a></p>
+      <div class="row"><?php
+      echo "<h3>Índice (elige opción)</h3>";
+      $mensaje=usarBaseDatos('alumnos');
+      if($mensaje!='ok'){
+            echo $mensaje."<br>";
+            echo '<a href="ejecutarScript.php"><input type="button" value="Ejecutar script de creación"></a>';
+            
+      }else{
+        echo '<a href="leerTabla.php"><label>Leer tabla</label></a><br>';        
+      }
+      ?>
       </div>
-      <div class="col-md-4">
-        <h2>PR14-2 </h2>
-        <p><a class="btn btn-default" href="./PR14-2/index.php" role="button">Ver »</a></p>
-      </div>
-
     </div> <!-- /container -->
     <footer class="container" style="background-color: bisque;">
     <p><center>Página de Itziar</center></p>
