@@ -57,6 +57,23 @@ include ('./funcionesBD.php');
           echo "<th>Modificar/Borrar</th>";
           echo "</tr>";
           $registros=obtenerRegistroPorCampo('notas', 'alumnos','nombre','%'.$_REQUEST['buscado'].'%');
+          if($_SERVER['PHP_AUTH_USER']=='admin'){
+            if(is_array($registros)){
+            
+              foreach ($registros as $key => $value) {
+                  
+                  echo "<tr><td>".$value[0]."</td><td>".$value[1]."</td><td>".$value[2]."</td><td>".$value[3]."</td><td><a href='insertarRegistro.php?id=".$value[0]."'><input type='button' value='Modificar/Borrar'></a></td></tr>";
+              }
+            }
+          }elseif($_SERVER['PHP_AUTH_USER']=='user'){
+            if(is_array($registros)){
+            
+              foreach ($registros as $key => $value) {
+                  
+                  echo "<tr><td>".$value[0]."</td><td>".$value[1]."</td><td>".$value[2]."</td><td>".$value[3]."</td><td><a href='insertarRegistro.php?id=".$value[0]."'><input type='button' value='Modificar'></a></td></tr>";
+              }
+            }
+          }
           if(is_array($registros)){
             
             foreach ($registros as $key => $value) {

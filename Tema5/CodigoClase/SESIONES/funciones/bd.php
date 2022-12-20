@@ -2,16 +2,16 @@
 /**
  * Necesito:
  */
-require("./seguro/conexion.php");
+require("../seguro/conexion.php");
 function validaUser($user,$pass){
     try{
         $conexion= new PDO("mysql:host=".HOST.";dbname=".BBDD,USER,PASS);
-        $sql = "select * from usuarios usuario = ? and clave = ?";
+        $sql = "select * from usuarios where usuario = ? and clave = ?";
         //preparo conexion
         $sql_p = $conexion->prepare($sql);
         $pass_e = sha1($pass);//encriptamos contraseña
         $array = array($user,$pass_e);
-        $sql_p->execute();
+        $sql_p->execute($array);
 
         
         if($sql_p->rowCount()==1){

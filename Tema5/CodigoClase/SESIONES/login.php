@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
+    <?
+    session_start();
+    ?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,6 +10,12 @@
     <title>Login</title>
 </head>
 <body>
+    <?php
+        if(isset($_SESSION['error'])){
+        echo $_SESSION['error'];
+        }
+        unset($_SESSION['error']);
+    ?>
     <form action="./funciones/valida.php" method="post">
         <label for="user">Usuario</label>
         <input type="text" name="user" id="user">
