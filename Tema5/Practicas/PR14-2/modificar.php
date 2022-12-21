@@ -1,6 +1,6 @@
 <?php
-include('./funcionesBD.php');
-include('./validaciones.php');
+include('../funcionesBD.php');
+include('../validaciones.php');
 ?>
 <html lang="en">
 
@@ -36,16 +36,16 @@ include('./validaciones.php');
 
     <div class="container">
         <div class="row">
-            <h4><a href="../../">Tema5</a><a href="../">/Practicas</a><a href="index.php">/PR14</a>/Insertar Registro</h4>
+            <h4><a href="../../">Tema5</a><a href="../">/Practicas</a><a href="../index.php">/PR14</a>/Modificar Registro</h4>
         </div>
         <div class="row"><?php
-                        if(isset($_SERVER['PHP_AUTH_USER']) && ($_SERVER['PHP_AUTH_USER']=='admin'|| $_SERVER['PHP_AUTH_USER']=='user')){
+                
                             if (enviado() && validado()) {
 
                                 if (isset($_REQUEST['guardar'])) {
                                     $valores = array($_REQUEST['nombre'], $_REQUEST['nota'], $_REQUEST['fecha']);
                                     if (actualizarRegistroPorCampo('notas', 'alumnos', 'id', $_REQUEST['id'], $valores, 'sds')) {
-                                        header('Location:leerTabla.php');
+                                        header('Location: ../leerTabla.php');
                                         exit();
                                     }
                                 }
@@ -78,9 +78,6 @@ include('./validaciones.php');
                                     echo "</form>";
                                 }
                             }
-                        }else{
-                            echo "No estas autorizado";
-                        }
                     ?>
         </div>
     </div> <!-- /container -->

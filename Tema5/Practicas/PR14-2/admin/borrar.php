@@ -32,7 +32,7 @@ include ('../validaciones.php');
 
     <div class="container">
         <div class="row">
-            <h4><a href="../../">Tema5</a><a href="../">/Practicas</a><a href="index.php">/PR14</a>/Insertar Registro</h4>
+            <h4><a href="../../">Tema5</a><a href="../../">/Practicas</a><a href="../index.php">/PR14</a>/borrar.php</h4>
         </div>
       <div class="row"><?php
       
@@ -40,7 +40,7 @@ include ('../validaciones.php');
           
           if(isset($_REQUEST['eliminar'])){
             if(eliminarRegistro($_REQUEST['id'],'notas')){
-              header('Location:leerTabla.php');
+              header('Location: ../leerTabla.php');
               exit();
             }
           }

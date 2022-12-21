@@ -47,6 +47,7 @@ include('./funcionesBD.php');
                       echo "</form>";
                       echo "<a href='insertarRegistro.php'><input type='button' value='Introducir Nuevo Registro'></a>";
                       echo "<hr>";
+                      
                       if (isset($_REQUEST['buscado'])) {
                         $cabecera = obtenerCabeceraTabla('notas');
                         if (is_array($cabecera)) {
@@ -69,8 +70,8 @@ include('./funcionesBD.php');
                               foreach ($registros as $key => $value) {
 
                                 echo "<tr><td>" . $value[0] . "</td><td>" . $value[1] . "</td><td>" . $value[2] . "</td><td>" . $value[3] .
-                                  "</td><td><a href='modificar.php?id=" . $value[0] . "'><input type='button' value='Modificar'></a></td>
-                  <td><a href='borrar.php?id=" . $value[0] . "'><input type='button' value='Borrar'></a></td></tr>";
+                                  "</td><td><a href='./user/modificar.php?id=" . $value[0] . "'><input type='button' value='Modificar'></a></td>
+                  <td><a href='./admin/borrar.php?id=" . $value[0] . "'><input type='button' value='Borrar'></a></td></tr>";
                               }
                             } else {
                               echo $registros;
@@ -92,7 +93,7 @@ include('./funcionesBD.php');
                             }
                           }
                           
-                          echo "<th>Modificar/Borrar</th>";
+                          echo "<th>Modificar</th><th>Borrar</th>";
                           echo "</tr>";
                           $registros = obtenerTodosRegistros('notas', 'alumnos');
                           
@@ -101,8 +102,8 @@ include('./funcionesBD.php');
                               foreach ($registros as $key => $value) {
 
                                 echo "<tr><td>" . $value[0] . "</td><td>" . $value[1] . "</td><td>" . $value[2] . "</td><td>" . $value[3] .
-                                  "</td><td><a href='modificar.php?id=" . $value[0] . "'><input type='button' value='Modificar'></a></td>
-                  <td><a href='borrar.php?id=" . $value[0] . "'><input type='button' value='Borrar'></a></td></tr>";
+                                  "</td><td><a href='user/modificar.php?id=" . $value[0] . "'><input type='button' value='Modificar'></a></td>
+                  <td><a href='admin/borrar.php?id=" . $value[0] . "'><input type='button' value='Borrar'></a></td></tr>";
                               }
                             }
                             echo "</table>";

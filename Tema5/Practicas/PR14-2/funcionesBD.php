@@ -1,5 +1,5 @@
 <?php
-require '../seguro/conexion.php';
+require 'seguro/conexion.php';
 /**
  * Ejecuta el script con las sentencias para crear la BD 'alumnos',
  * la tabla 'notas' e inserta 10 registros en 'notas'.
