@@ -1,0 +1,42 @@
+form{
+    border: 1px solid black;
+    padding: 10px;
+}
+span{
+    color: red;
+}
+img{
+    box-shadow: 1px 1px;
+    width: 200px;
+    height: 200px;
+}
+.derecha {
+    float:right;
+}
+td {
+    border: 1px solid black;
+    text-align: center;
+}
+nav{
+    height: 7%;
+    background-color: rgba(95, 158, 160, 0.599);
+    font-size: xx-large;
+}
+nav > a{
+    color: white;
+    padding: 6px;
+}
+.padre{
+    text-align: center;
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+}
+.hijo{
+    border:1px solid black;
+    margin:1px;
+}
+fieldset{
+    background-color: gainsboro;
+}
+
+
