@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/estilos.css">
     <title>Login</title>
 </head>
 <body>
@@ -23,11 +24,17 @@
             echo $_REQUEST['codigo'];
         }
         ?>'>
-        <label for="user">Usuario</label>
-        <input type="text" name="user" id="user">
-        <label for="pass">Contraseña</label>
-        <input type="password" name="pass" id="pass">
-        <input type="submit" value="Enviar" name="enviar">
+        <div class='login'>
+            <h3>Introduce tus datos</h3>
+            <br>
+            <label for="user">Usuario</label>
+            <input type="text" name="user" id="user">
+            <br>
+            <label for="pass">Contraseña</label>
+            <input type="password" name="pass" id="pass">
+            <br>
+            <input type="submit" value="Enviar" style="width:100px;" name="enviar">
+        </div>
     </form>
     <a href='./paginas/altaUsuario.php'>Obtener cuenta</a>
 </body>
