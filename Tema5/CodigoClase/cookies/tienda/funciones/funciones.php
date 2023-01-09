@@ -23,20 +23,21 @@ function findById($id){
         $conexion= new PDO("mysql:host=".HOST.";dbname=".BBDD,USER,PASS);
         $sql="select * from producto where codigo = ?";
         $prepare = $conexion->prepare($sql);
-
         $devuelve = $prepare->execute(array($id));
+        
         if($devuelve!=false){
-            $devuelve->fetchAll();
+            $array= $devuelve -> fetchAll(PDO::FETCH_ASSOC);
+            unset($conexion);
+            return $array;
         }else{
+            unset($conexion);
             return false;
         }
-        $array= $devuelve -> fetchAll(PDO::FETCH_ASSOC);
-        unset($conexion);
-        return $array;
+        
     }catch(Exception $Ex){
         print_r($conexion);
         unset($conexion);
-        return $false;
+        return false;
     }
 }
 

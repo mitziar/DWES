@@ -3,8 +3,8 @@
 
     session_start();
 
-    include ('./funciones/funciones.php');
-    include ('./funciones/bd.php');
+    require './funciones/funciones.php';
+    require './funciones/bd.php';
    
     ?>
     <head>

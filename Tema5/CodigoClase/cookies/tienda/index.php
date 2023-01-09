@@ -26,7 +26,7 @@ require './seguro/conexion.php';
                     foreach ($lista as $producto) {
                         //print_r($producto);
                         echo "<article class='card'>";
-                            echo "<img src='./webroot/".$producto['baja'].">";
+                            echo "<img src='./webroot/".$producto['baja']."'>";
                             echo "<p>".$producto['nombre']."</p>";
                             echo "<a href='verProducto.php?producto=".$producto['codigo']."'>Ver</a>";
                         echo "</article>";
