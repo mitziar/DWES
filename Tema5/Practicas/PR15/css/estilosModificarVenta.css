@@ -28,7 +28,13 @@ form{
     grid-template-columns: auto auto;
     border: 1px solid black;
     border-radius: 2%;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    margin-left: 20%;
+    margin-right: 20%;
 }
 #enviar{
     grid-area: 6/2/7/3;

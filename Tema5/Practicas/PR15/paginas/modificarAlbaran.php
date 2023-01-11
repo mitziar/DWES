@@ -92,6 +92,7 @@ require('../funciones/funciones.php');
                                 echo "No hay datos para mostrar";
                             }
                             if (is_array($fila)) {
+                                echo '<h2>Modificar Albaran</h2>';
                                 echo "<form action='./modificarAlbaran.php' method='post'>";
                                 echo "<label>Id</label>";
                                 echo "<input type='text' readonly name='id' id='id' value=" . $fila['codigo'] . ">";
@@ -189,8 +190,9 @@ require('../funciones/funciones.php');
                             }
 
                         }else{
-
+                            echo '<h2>Modificar Albaran</h2>';
                             echo "<form action='./modificarAlbaran.php' method='post'>";
+                            
                             echo "<label>Id</label>";
                             echo "<input type='text' readonly name='id' id='id' value=" .$_REQUEST['id']. ">";
                            
@@ -289,6 +291,7 @@ require('../funciones/funciones.php');
                             } else {
                                 echo "'>";
                             }
+                            
                             echo '<input type="submit" value="Enviar" id="enviar" name="enviar">';
                             echo "</form>";
                     

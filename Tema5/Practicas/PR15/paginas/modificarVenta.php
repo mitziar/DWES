@@ -18,7 +18,7 @@ require('../funciones/funciones.php');
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/estilosModificarVenta.css">
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
@@ -89,6 +89,7 @@ require('../funciones/funciones.php');
                         
                             $fila = verVenta($_REQUEST['modificar']);
                             if (is_array($fila)) {
+                                echo '<h2>Modificar venta</h2>';
                                 echo "<form action='./modificarVenta.php' method='post'>";
                                 echo "<label>Id</label>";
                                 echo "<input type='text' readonly name='id' id='id' value=" . $fila['id'] . ">";
@@ -189,7 +190,7 @@ require('../funciones/funciones.php');
                                 } else {
                                     echo $fila['usuario'].'>';
                                 }
-                                echo '<input type="submit" value="Enviar" name="enviar">';
+                                echo '<input type="submit" value="Enviar" id="enviar" name="enviar">';
                                 echo "<form>";
                             
                         }
@@ -205,7 +206,7 @@ require('../funciones/funciones.php');
                             }
 
                         }else{
-
+                            echo '<h2>Modificar venta</h2>';
                             echo "<form action='./modificarVenta.php' method='post'>";
                             echo "<label>Id</label>";
                             echo "<input type='text' readonly name='id' id='id' value=" .$_REQUEST['id']. ">";
@@ -305,7 +306,7 @@ require('../funciones/funciones.php');
                             } else {
                                 echo "'>";
                             }
-                            echo '<input type="submit" value="Enviar" name="enviar">';
+                            echo '<input type="submit" value="Enviar" id="enviar" name="enviar">';
                             echo "</form>";
                     
                         }
