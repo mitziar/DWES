@@ -14,7 +14,7 @@
     <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-<link rel="stylesheet" href="./css/estilosLogin.css">
+<link rel="stylesheet" href="./css/estilosLogin.css"> 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     <title>DWES-Itziar</title>
@@ -36,16 +36,21 @@
         <h4><a href="../../Practicas/">Tema 5</a>/Prácticas</h4>
         <hr>
     </div>
-   
-
+        <div class="row">
+            <nav class="classnav">
+                <a class="claseTransicion" href="./index.php">Index</a>
+            </nav>
+        </div>
+    <div class="row">
          <?php
+
         if(isset($_SESSION['error'])){
         echo $_SESSION['error'];
         }
         unset($_SESSION['error']);
 
-    ?>
-    
+        ?>
+    </div>
     <div class='dos'>
         <form action="./funciones/valida.php" method="post">
             <input type="hidden" name="codigo" value='<?php 
@@ -69,8 +74,6 @@
             </div>
         </form>
     </div>
-    <hr>
-    <a href='./index.php'>Volver</a>
     </div> <!-- /container -->
     <footer class="container" style="background-color: bisque;">
     <p><center>Página de Itziar</center></p>

@@ -39,7 +39,7 @@
         </div>
         <div class="row">
             <nav>
-            <a href="../index.php">Index</a>
+            <a class="claseTransicion" href="../index.php">Index</a>
             </nav>
         </div>
         <?php

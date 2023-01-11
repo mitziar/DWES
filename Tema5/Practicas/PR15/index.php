@@ -73,7 +73,6 @@
                     echo "<a class='claseTransicion' href='./paginas/verVentas.php'>Mis compras</a>";
                     break;
                 default:
-                    echo "<div class='claseTransicion'>PRODUCTOS</div>";
                     break;
                 break;
             }
