@@ -1,5 +1,5 @@
 <?php
-include  ('../seguro/conexion.php');
+
 function enviado(){
     if(isset($_REQUEST['enviar'])){
         return true;

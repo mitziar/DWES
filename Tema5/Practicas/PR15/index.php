@@ -59,20 +59,22 @@
                 switch ($_SESSION['perfil']){
                 case 1:
                     //administrador
-                    echo "<a href='./paginas/verAlbaranes.php'>Albaranes</a>";
-                    echo "<a href='./paginas/verVentas.php'>Ventas</a>";
-                    echo "<a href='./paginas/insertarProducto.php'>Almacen</a>";
+                    echo "<a class='claseTransicion' href='./paginas/verAlbaranes.php'>Albaranes</a>";
+                    echo "<a class='claseTransicion' href='./paginas/verVentas.php'>Ventas</a>";
+                    echo "<a class='claseTransicion' href='./paginas/insertarProducto.php'>Almacen</a>";
                     break;
                 case 2:
                     //moderador
-                    echo "<a href='./paginas/verAlbaranes.php'>Albaranes</a>";
-                    echo "<a href='./paginas/verVentas.php'>Ventas</a>";
+                    echo "<a class='claseTransicion' href='./paginas/verAlbaranes.php'>Albaranes</a>";
+                    echo "<a class='claseTransicion' href='./paginas/verVentas.php'>Ventas</a>";
                     break;
                 case 3:
                     //usuario normal
-                    echo "<a href='./paginas/verVentas.php'>Mis compras</a>";
+                    echo "<a class='claseTransicion' href='./paginas/verVentas.php'>Mis compras</a>";
                     break;
                 default:
+                    echo "<div class='claseTransicion'>PRODUCTOS</div>";
+                    break;
                 break;
             }
             echo "</nav>";
@@ -81,9 +83,7 @@
                 echo $_SESSION['error'];
                 unset($_SESSION['error']);
             }
-            echo "<hr>";
-            echo "<h2>PRODUCTOS</h2>";
-            echo "<hr>";
+           
             echo "</div>";
             
             $resultado=mostrarProductos();
@@ -96,17 +96,15 @@
                     echo "<h4>";
                     echo $value['nombre'];
                     echo "</h4>";
-                    echo "<img style='width: 200px; heigth:200px' src='./uploads/".$value['ruta']."'>";
+                    echo "<img class='imagen' src='./uploads/".$value['ruta']."'>";
                     echo "<br>";
-                    echo $value['descripcion'];
-                    echo "<br>";
-                    echo "Precio: ".$value['precio'];
+                    echo "Precio: ".$value['precio']." €";
                     echo "<br>";
                     echo "Unidades: ".$value['stock'];  
                     
                     if(isset($_SESSION['perfil'])){
                             if($_SESSION['perfil']==1){
-                                echo "<fieldset style='border: 1px solid black;'>";
+                                echo "<fieldset>";
                                 echo "<p style='font-size:10px'>Administrador</p>";
                                 echo '<p><a class="btn btn-default" href="./paginas/modificarProducto.php?codigo='.$value["codigo"].' role="button">Modificar producto»</a></p>';
                                 echo '<p><a class="btn btn-default" href="./paginas/aumentarUnidades.php?codigo='.$value["codigo"].' role="button">Aumentar unidades»</a></p>';

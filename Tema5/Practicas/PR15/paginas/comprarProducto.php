@@ -17,7 +17,7 @@
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-<link rel="stylesheet" href="../css/estilos.css">
+<link rel="stylesheet" href="../css/estilosComprar.css">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
@@ -36,11 +36,11 @@
     </div>
 
     <div class="container">
-    <div class="row">
+    <div >
             <a href="../../PR15/">PR15/</a>Comprar producto
         </div>
         <hr>
-        <div class="row">
+        <div >
         <?php
             if(!estaValidado()){
                 echo "<a href='../login.php' class='derecha'>Login</a>";
@@ -52,7 +52,7 @@
             }
             ?>
         </div>
-        <div class="row">
+        <div >
         
             <?php
             if(isset($_SESSION['perfil'])){
@@ -60,21 +60,21 @@
                 switch ($_SESSION['perfil']){
                 case 1:
                     //administrador
-                    echo "<a href='../index.php'>Index</a>";
-                    echo "<a href='./verVentas.php'>Ventas</a>";
-                    echo "<a href='./insertarProducto.php'>Almacen</a>";
-                    echo "<a href='./verAlbaranes.php'>Albaranes</a>";
+                    echo "<a class='claseTransicion' href='../index.php'>Index</a>";
+                    echo "<a class='claseTransicion' href='./verVentas.php'>Ventas</a>";
+                    echo "<a class='claseTransicion' href='./insertarProducto.php'>Almacen</a>";
+                    echo "<a class='claseTransicion' href='./verAlbaranes.php'>Albaranes</a>";
                     break;
                 case 2:
                     //moderador
-                    echo "<a href='../index.php'>Index</a>";
-                    echo "<a href='./verVentas.php'>Ventas</a>";
-                    echo "<a href='./verAlbaranes.php'>Albaranes</a>";
+                    echo "<a class='claseTransicion' href='../index.php'>Index</a>";
+                    echo "<a class='claseTransicion' href='./verVentas.php'>Ventas</a>";
+                    echo "<a class='claseTransicion' href='./verAlbaranes.php'>Albaranes</a>";
                     break;
                 case 3:
                     //usuario normal
-                    echo "<a href='../index.php'>Index</a>";
-                    echo "<a href='./verVentas.php'>Mis compras</a>";
+                    echo "<a class='claseTransicion' href='../index.php'>Index</a>";
+                    echo "<a class='claseTransicion' href='./verVentas.php'>Mis compras</a>";
                     break;
                 default:
                 break;
@@ -84,11 +84,11 @@
             
        </div>
         <hr>
-        <div class="row">
+        <div>
             <?php
-            if(isset($_REQUEST['comprar'])){
+            if(isset($_REQUEST['comprar']) && $_REQUEST['stock']>=$_REQUEST['unidades']){
                 if(isset($_SESSION['perfil'])){
-                    $resultado=transaccionVenta($_REQUEST['codigo'],$_REQUEST['precio'],$_REQUEST['stock'],$_SESSION['user']);
+                    $resultado=transaccionVenta($_REQUEST['codigo'],$_REQUEST['precio'],$_REQUEST['stock'],$_SESSION['user'],$_REQUEST['unidades']);
                     if($resultado==true){
                         header('Location:./verVentas.php');
                         exit();
@@ -105,36 +105,45 @@
 
             }else{
                 
+                if(isset($_SESSION['error'])){
+                    echo $_SESSION['error'];
+                    unset($_SESSION['error']);
+                }
                     $fila=obtenerProducto($_REQUEST['codigo']);
                 
                 if(is_array($fila)){
-                    echo "<form action='./comprarProducto.php' method='get'>";
-                        echo "<h3>".$fila['nombre']."</h3>";
-                        echo "<img src='../uploads/".$fila['ruta']."'>";
-                        echo "<br>";
+                    echo "<form action='./comprarProducto.php' method='post'>";
+                        echo "<h3 class='titulo'>".$fila['nombre']."</h3>";
+                        echo "<div class='claseProducto'>";
+                        echo "<img class='imagen' src='../uploads/".$fila['ruta']."'>";
+                        echo "<div class='divi'>";
+                        echo "<label>Descripción: </label>".$fila['descripcion'];
+                        
                         echo "<label>Codigo: </label>".$fila['codigo'];
                         echo "<input type='hidden' name='codigo' value='".$fila['codigo']."'>";
-                        echo "<br>";
-                        echo "<label>Precio: </label>".$fila['precio'];
+                       
+                        echo "<label>Precio: </label>".$fila['precio']."€";
                         echo "<input type='hidden' name='precio' value='".$fila['precio']."'>";
-                        echo "<br>";
-                        echo "<label>Unidades: </label>1";
-                        echo "<br>";
+                                            
                         echo "<label>Stock: </label>".$fila['stock'];
                         echo "<input type='hidden' name='stock' value='".$fila['stock']."'>";
-                        echo "<br>";
+
+                        echo "<label>Unidades: </label>";
+                        echo "<input type='number' min='1' name='unidades' value='1'>";
+                        echo "</div>";
+
                         if(isset($_SESSION['perfil'])){
                             if($_SESSION['perfil']==1 || $_SESSION['perfil']==2){
                                 echo '<p><a class="btn btn-default" href="./aumentarUnidades.php?codigo='.$fila["codigo"].' role="button">Aumentar unidades»</a></p>';
                             }
                     }
+                        echo "</div>";
                         echo '<input type="submit" value="Comprar" name="comprar">';
+                        
                     echo "</form>";
                 }else{
                     echo $fila;
                 }
-            
-            
             }
             ?>
         </div>        

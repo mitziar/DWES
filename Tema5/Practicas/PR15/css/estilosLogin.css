@@ -1,0 +1,23 @@
+
+form{
+    grid-area: 2/2/3/3;
+    background-color: rgba(95, 158, 160, 0.599);
+    padding: 10px;
+}
+form > input{
+    margin: 5px;
+
+}
+
+.login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px black solid;
+    border-radius: 2%;
+}
+
+.ancho{
+    width: 50%;
+}

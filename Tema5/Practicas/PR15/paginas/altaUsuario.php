@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="es">
     <?php
     include ('../funciones/bd.php');
     include ('../funciones/funciones.php');
@@ -15,7 +15,7 @@
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-<link rel="stylesheet" href="../css/estilos.css">
+<link rel="stylesheet" href="../css/estilosAlta.css">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
@@ -40,7 +40,7 @@
         <div class="row">
             <nav>
             <a href="../index.php">Index</a>
-</nav>
+            </nav>
         </div>
         <?php
         if(enviado() && validado()){
@@ -61,114 +61,114 @@
             }
 
         }else{
-            echo "<h2>Nuevo usuario</h2>";
+            echo "<div class='contenedor'>";
+            echo "<h2 class='tituloAlta'>Nuevo usuario</h2>";
             ?>
-        <form action="./altaUsuario.php" method="post">
-        <label for="user">Usuario </label>
-        <input type="text" name="user" id="user" value="<?php
-        if(enviado()){
+            <form class="formularioAlta" action="./altaUsuario.php" method="post">
+            <label for="user">Usuario </label>
+            <input type="text" name="user" id="user" value="<?php
+            if(enviado()){
 
-            if(vacio('user')){
-            echo '">';
-            echo 'Introduzca usuario';
-            }else{
-                if(existeUser($_REQUEST['user'])){
-                    echo '">';
-                    echo '<span>El usuario ya existe.</span>';
+                if(vacio('user')){
+                echo '">';
+                echo 'Introduzca usuario';
                 }else{
-                    echo $_REQUEST['user'].'">';
+                    if(existeUser($_REQUEST['user'])){
+                        echo '">';
+                        echo '<span>El usuario ya existe.</span>';
+                    }else{
+                        echo $_REQUEST['user'].'">';
+                    }
                 }
+            }else{
+                echo '">';
             }
-        }else{
-            echo '">';
-        }
         ?>
-        <br>
-        <label for="pass">Contraseña </label>
-        <input type="password" name="pass" id="pass" value="<?php
-        if(enviado()){
+            <label for="pass">Contraseña </label>
+            <input type="password" name="pass" id="pass" value="<?php
+            if(enviado()){
 
-            if(vacio('pass')){
-            echo '">';
-            echo '<span>Introduzca contraseña</span>';
-            }else{
-                if(!contraseñaValida($_REQUEST['pass'])){
-                    echo '">';
-                    echo '<span>Contraseña inválida. Debe contener mínimo 8 caracteres y al final una mayúscula, una minúscula y un número</span>';
+                if(vacio('pass')){
+                echo '">';
+                echo '<span>Introduzca contraseña</span>';
                 }else{
-                    echo $_REQUEST['pass'].'">';
+                    if(!contraseñaValida($_REQUEST['pass'])){
+                        echo '">';
+                        echo '<span>Contraseña inválida. Debe contener mínimo 8 caracteres y al final una mayúscula, una minúscula y un número</span>';
+                    }else{
+                        echo $_REQUEST['pass'].'">';
+                    }
                 }
+            }else{
+                echo '">';
             }
-        }else{
-            echo '">';
-        }
         ?>
-        <br>
+        
         <label for="pass2">Repetir contraseña </label>
         <input type="password" name="pass2" id="pass2" value="<?php
-        if(enviado()){
+            if(enviado()){
 
-            if(vacio('pass2')){
-            echo '">';
-            echo '<span>Introduzca la confirmación de la contraseña.</span>';
-            }else{
-                if($_REQUEST['pass2'] != $_REQUEST['pass']){
-                    echo '">';
-                    echo '<span>Contraseña inválida. Las contraseñas no son iguales.</span>';
+                if(vacio('pass2')){
+                echo '">';
+                echo '<span>Introduzca la confirmación de la contraseña.</span>';
                 }else{
-                    echo $_REQUEST['pass2'].'">';
+                    if($_REQUEST['pass2'] != $_REQUEST['pass']){
+                        echo '">';
+                        echo '<span>Contraseña inválida. Las contraseñas no son iguales.</span>';
+                    }else{
+                        echo $_REQUEST['pass2'].'">';
+                    }
                 }
+            }else{
+                echo '">';
             }
-        }else{
-            echo '">';
-        }
         ?>
-        <br>
+        
         <label for="email">Email </label>
         <input type="text" name="email" id="email" placeholder="alguien@email.com" value="<?php
-        if(enviado()){
+            if(enviado()){
 
-            if(vacio('email')){
-            echo '">';
-            echo '<span>Introduzca email</span>';
-            }else{
-                if(!emailValido($_REQUEST['email'])){
-                    echo '">';
-                    echo '<span>Email inválido.</span>';
+                if(vacio('email')){
+                echo '">';
+                echo '<span>Introduzca email</span>';
                 }else{
-                    echo $_REQUEST['email'].'">';
+                    if(!emailValido($_REQUEST['email'])){
+                        echo '">';
+                        echo '<span>Email inválido.</span>';
+                    }else{
+                        echo $_REQUEST['email'].'">';
+                    }
                 }
+            }else{
+                echo '">';
             }
-        }else{
-            echo '">';
-        }
         ?>
-        <br>
+        
         <label for="fecha">Fecha nacimiento </label>
         <input type="text" name="fecha" id="fecha" placeholder="AAAA-MM-DD" value="<?php
-        if(enviado()){
+            if(enviado()){
 
-            if(vacio('fecha')){
-            echo '">';
-            echo '<span>Introduzca fecha</span>';
-            }else{
-                if(!fechaValida($_REQUEST['fecha'])){
-                    echo '">';
-                    echo '<span>Fecha inválida. Ejemplo de fecha válida: 2023-01-04</span>';
+                if(vacio('fecha')){
+                echo '">';
+                echo '<span>Introduzca fecha</span>';
                 }else{
-                    echo $_REQUEST['fecha'].'">';
+                    if(!fechaValida($_REQUEST['fecha'])){
+                        echo '">';
+                        echo '<span>Fecha inválida. Ejemplo de fecha válida: 2023-01-04</span>';
+                    }else{
+                        echo $_REQUEST['fecha'].'">';
+                    }
                 }
+            }else{
+                echo '">';
             }
-        }else{
-            echo '">';
-        }
+            ?>
+            
+            <input class="enviar" type="submit" value="Enviar" name="enviar">
+            </form><?php
+            }
         ?>
-        <br>
-        <input type="submit" value="Enviar" name="enviar">
-    </form><?php
-        }
-        ?>
-    </div>
+      </div>
       </div> <!-- /container -->
       <footer class="container" style="background-color: bisque;">
         <p><center>Página de Itziar</center></p>

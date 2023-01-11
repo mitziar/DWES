@@ -1,5 +1,5 @@
 <?php
-include ('../seguro/conexion.php');
+
 
 function ejecutarScript(){
     try{
@@ -489,21 +489,28 @@ function modificarAlbaran($id,$fecha,$cantidad,$producto,$usuario){
         unset($conexion);
     }
 }
-function transaccionVenta($codigoProducto,$precio,$udStock,$codigoUsuario){
+function transaccionVenta($codigoProducto,$precio,$udStock,$codigoUsuario,$cantidad){
     try{
-        $conexion = mysqli_connect($_SERVER['SERVER_ADDR'],USER,PASS, BBDD);
+        $conexion = mysqli_connect($_SERVER['SERVER_ADDR'],'itziar','itziar', 'tienda');
         mysqli_autocommit($conexion, false);
        
-        $stock=$udStock-1;
-        $fecha=  date('Y-m-d');
+        $stock=$udStock-$cantidad;
+        if($stock>=0){
+            $fecha=  date('Y-m-d');
         
-        $sql1='update productos set stock='.$stock.' where codigo = '.$codigoProducto;
-        $sql='insert into venta(fecha,cantidad,precio,producto,usuario) values("'.$fecha.'",1,'.doubleval($precio).','.intval($codigoProducto).',"'.$codigoUsuario.'")';
-        mysqli_query($conexion, $sql);
-        mysqli_query($conexion, $sql1);
-        mysqli_commit($conexion);
-        mysqli_close($conexion);
-        return true;
+            $sql1='update productos set stock='.$stock.' where codigo = '.$codigoProducto;
+            $sql='insert into venta(fecha,cantidad,precio,producto,usuario) values("'.$fecha.'",'.$cantidad.','.doubleval($precio).','.intval($codigoProducto).',"'.$codigoUsuario.'")';
+            mysqli_query($conexion, $sql);
+            mysqli_query($conexion, $sql1);
+            mysqli_commit($conexion);
+            mysqli_close($conexion);
+            return true;
+        }else{
+            mysqli_close($conexion);
+            $_SESSION['error']='No hay stock suficiente';
+            return false;
+        }
+        
     
      }catch (Exception $ex){
         echo obtenerMensajeError($ex);
