@@ -22,35 +22,25 @@ nav > a{
 form{
     margin: 6px;
     padding: 6px;;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: auto auto;
     justify-content: center;
     align-items: center;
     border: 1px solid black;
     border-radius: 2%;
-    flex-shrink: 0.5;
 }
-img{
-    flex:30%;
+.imagen{
+    grid-area: 1/1/2/2;
     width: 400px;
     height: 300px;
 }
-.titulo{
-     flex:100% ;
-}
-.divi{
-    display: grid;
-    grid-template-columns: 30% auto;
-}
-.claseProducto{
+
+.informacionProducto{
     display: grid;
     grid-template-columns: auto auto;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    border: 1px solid black;
     margin: 5px;
 }
-.claseProducto > *{
+.informacionProducto > *{
     padding: 10px;
 }
 
@@ -58,10 +48,10 @@ img{
     display: block;
     float:right;
 }
-.unidades{
-    width: 50%;
-}
 
+#enviar{
+    grid-area: 2/2/3/3;
+}
 @media screen and (max-width: 768px){
     .imagen{
         width: 300px;
@@ -70,19 +60,14 @@ img{
     
 }
 @media screen and (max-width: 670px){
-    .divi{
-        grid-template-columns: auto;
-    }
-    .imagen{
-        width: 200px;
-        height: 200px;
-    }
 
-    body {
-        font-size: small;
+    .informacionProducto, form{
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0.5;
     }
-    .claseProducto{
-        grid-template-columns: auto;
+    .informacionProducto>*{
+        flex:100%;
     }
     nav{
         flex-direction: column;
@@ -92,8 +77,11 @@ img{
         flex:100%;
     }
 }
-@media screen and (max-width: 300px){
+@media screen and (max-width: 350px){
     .titulo{
+        font-size: small;
+    }
+    body{
         font-size: small;
     }
     .imagen{

@@ -16,7 +16,7 @@
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-<link rel="stylesheet" href="../css/estilos.css">
+<link rel="stylesheet" href="../css/estilosInsertar.css">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
@@ -41,7 +41,7 @@
         <div class="row">
         <?php
             if(!estaValidado()){
-                echo "<a href='login.php' class='derecha'>Login</a>";
+                echo "<a href='../login.php' class='derecha'>Login</a>";
             }else{
 
                 echo "<a href='../paginas/editarPerfil.php' class='derecha'>Editar perfil</a>";
@@ -58,9 +58,9 @@
                 switch ($_SESSION['perfil']){
                 case 1:
                     //administrador
-                    echo "<a href='../index.php'>Index</a>";
-                    echo "<a href='./verVentas.php'>Ventas</a>";
-                    echo "<a href='./verAlbaranes.php'>Albaranes</a>";
+                    echo "<a class='claseTransicion' href='../index.php'>Index</a>";
+                    echo "<a class='claseTransicion' href='./verVentas.php'>Ventas</a>";
+                    echo "<a class='claseTransicion' href='./verAlbaranes.php'>Albaranes</a>";
                     break;
                 break;
             }
@@ -110,7 +110,7 @@
             echo '">';
         }
         ?>
-        <br>
+        
         <label for="descripcion">Descripción del producto </label>
         <input type="text" name="descripcion" id="descripcion" value="<?php
         if(enviado()){
@@ -125,7 +125,7 @@
             echo '">';
         }
         ?>
-        <br>
+        
         <label for="precio">Precio del producto </label>
         <input type="text" name="precio" id="precio" value="<?php
         if(enviado()){
@@ -146,7 +146,6 @@
             echo '">';
         }
         ?>
-        <br>
         <label for="stock">Unidades</label>
         <input type="text" name="stock" id="stock" value="<?php
         if(enviado()){
@@ -167,7 +166,6 @@
             echo '">';
         }
         ?>
-        <br>
         <label for="documento">Imagen del producto</label>
         <input type="file" name="documento" id="documento">
              <?php
@@ -175,8 +173,8 @@
                      echo "<span>Introduce documento</span>";
                  }
             ?>
-        <br>
-        <input type="submit" value="Enviar" name="enviar">
+       
+        <input type="submit" value="Enviar" id="enviar" name="enviar">
     </form><?php
         }
         ?>

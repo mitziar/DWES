@@ -1,0 +1,72 @@
+.claseTransicion{
+    transition: background-color 1s, font-size 1s, border 1s ;
+}
+.claseTransicion:hover{
+    /* background-color: blueviolet; */
+    font-size: x-large;
+    border: 4px solid black;
+}
+nav{
+    display:flex;
+    font-size: 20px;
+    flex-direction: row;
+}
+nav > a{
+    color: white;
+    padding: 6px;
+    border: white solid;
+    background-color: rgba(95, 158, 160, 0.599);
+}
+
+.tabla{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto auto auto;
+    justify-content: space-around;
+    align-items: center;
+}
+.tabla2{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    justify-content: space-around;
+    align-items: center;
+}
+.cabecera{
+    font-weight: bold;
+}
+
+.dato{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-shrink: 0.5;
+}
+.derecha{
+    display: block;
+    float: right;
+}
+@media screen and (max-width: 600px){
+ 
+    .tabla{
+        grid-template-columns: auto auto auto auto;
+    }
+    .cabecera{
+
+        border-bottom: 2px solid black;
+        text-align: center;
+    }
+    .cabeceras{
+
+        border-bottom: 2px solid black;
+    }
+    nav{
+        flex-direction: column;
+        text-align: center;
+    }
+    nav>a{
+        flex:100%;
+    }
+}
+@media screen and (max-width: 300px){
+    .tabla{
+        grid-template-columns: auto auto;
+    }
+}

@@ -1,3 +1,4 @@
+
 .claseTransicion{
     transition: background-color 1s, font-size 1s, border 1s ;
 }
@@ -7,8 +8,9 @@
     border: 4px solid black;
 }
 nav{
-    display:flex;
+
     font-size: 20px;
+    display:flex;
     flex-direction: row;
 }
 nav > a{
@@ -17,36 +19,47 @@ nav > a{
     border: white solid;
     background-color: rgba(95, 158, 160, 0.599);
 }
-
 form{
-    grid-area: 2/2/3/3;
-    background-color: rgba(95, 158, 160, 0.599);
-    padding: 10px;
-}
-form > input{
-    margin: 5px;
-
-}
-
-.login{
-    display: flex;
-    flex-direction: column;
+    padding: 5%;
+    margin: 10%;
+    display: grid;
+    grid-template-columns: auto auto;
     justify-content: center;
     align-items: center;
-    border: 3px black solid;
+    border: 1px solid black;
     border-radius: 2%;
 }
 
-.ancho{
-    width: 50%;
+#enviar{
+    grid-area: 6/2/7/3;
 }
-@media screen and (max-width: 600px){
+.derecha{
+    display: block;
+    float:right;
+}
 
+
+@media screen and (max-width: 768px){
+   
+    
+}
+@media screen and (max-width: 670px){
+
+    form{
+        display: flex;
+        flex-direction: column;
+    }
+    form>*{
+        flex: 100%;
+    }
     nav{
         flex-direction: column;
         text-align: center;
     }
-    nav>a{
+    nav > a{
         flex:100%;
     }
+}
+@media screen and (max-width: 350px){
+    
 }

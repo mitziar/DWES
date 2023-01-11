@@ -37,7 +37,7 @@
     <div class="row">
         <?php
             if(!estaValidado()){
-                echo "<a href='login.php' class='derecha'>Login</a>";
+                echo "<a href='../login.php' class='derecha'>Login</a>";
             }else{
 
                 echo "<a href='../paginas/editarPerfil.php' class='derecha'>Editar perfil</a>";

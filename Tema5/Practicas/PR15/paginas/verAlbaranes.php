@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="es">
     <?php
     session_start();
     require ('../funciones/bd.php');
@@ -17,7 +17,7 @@
 
 <!-- Optional theme -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-<link rel="stylesheet" href="../css/estilos.css">
+<link rel="stylesheet" href="../css/estilosAlbaranes.css">
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
@@ -43,7 +43,7 @@
         <div class="row">
         <?php
             if(!estaValidado()){
-                echo "<a href='login.php' class='derecha'>Login</a>";
+                echo "<a href='../login.php' class='derecha'>Login</a>";
             }else{
 
                 echo "<a href='../paginas/editarPerfil.php' class='derecha'>Editar perfil</a>";
@@ -79,38 +79,36 @@
        </div>
         <hr>
         <?php echo "<h2>Albaranes</h2>"; ?>
-        <div class="row" style="display: grid; grid-template-columns: 80%;margin:10px;">
+        <div class="row">
             <?php
                 $fila=verAlbaranes();
                 
                 if(is_array($fila)){
-                    echo "<table>";
+                    echo "<div class='tabla'>";
                     if(isset($_SESSION['perfil'])){
                         switch ($_SESSION['perfil']){
                             case 1:
                                 //administrador
-                                echo "<tr><th>Código</th><th>Fecha</th><th>Cantidad</th><th>Codigo Producto</th><th>Usuario</th><th>Borrar</th><th>Modificar</th></tr>";
+                                echo "<div class='cabecera'>Código</div><div class='cabecera'>Fecha</div><div class='cabecera'>Cantidad</div><div class='cabecera'>Codigo Producto</div><div class='cabecera'>Usuario</div><div class='cabecera'>Borrar</div><div class='cabecera'>Modificar</div>";
                                 break;
                             default:
-                                echo "<tr><th>Código</th><th>Fecha</th><th>Cantidad</th>><th>Codigo Producto</th><th>Usuario</th></tr>";
+                                echo "<div class='cabecera'>Código</div><div class='cabecera'>Fecha</div><div class='cabecera'>Cantidad</div>><div class='cabecera'>Codigo Producto</div><div class='cabecera'>Usuario</div>";
                                 break;
                         }
                     
                     foreach ($fila as $key => $value) {
-                        echo "<tr>";
                         switch ($_SESSION['perfil']){
                             case 1:
                                 //administrador
-                                echo "<td>".$value['codigo']."</td><td>".$value['fecha']."</td><td>".$value['cantidad']."</td><td>".$value['producto']."</td><td>".$value['usuario']."</td><td><a href='modificarAlbaran.php?borrar=".$value['codigo']."'>Borrar</a></td><td><a href='modificarAlbaran.php?modificar=".$value['codigo']."'>Modificar</a></td>";
+                                echo "<div class='dato'>".$value['codigo']."</div><div class='dato'>".$value['fecha']."</div><div class='dato'>".$value['cantidad']."</div><div class='dato'>".$value['producto']."</div><div class='dato '>".$value['usuario']."</div><div class='dato '><a href='modificarAlbaran.php?borrar=".$value['codigo']."'>Borrar</a></div><div class='dato cabeceras'><a href='modificarAlbaran.php?modificar=".$value['codigo']."'>Modificar</a></div>";
                                 break;
                             default:
-                                echo "<td>".$value['codigo']."</td><td>".$value['fecha']."</td><td>".$value['cantidad']."</td><td>".$value['producto']."</td><td>".$value['usuario']."</td>";
+                                echo "<div class='dato'>".$value['codigo']."</div><div class='dato'>".$value['fecha']."</div><div class='dato'>".$value['cantidad']."</div><div class='dato'>".$value['producto']."</div><div class='dato cabeceras'>".$value['usuario']."</div>";
                                 break;
                         } 
-                        echo "</tr>";
                     }
                    
-                    echo "<table>";
+                    echo "</div>";
                 }else{
                     echo $fila;
                 }

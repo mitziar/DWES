@@ -383,7 +383,7 @@ function insertarProducto($nombre,$descripcion,$precio,$stock,$ruta){
 function transaccionModificarProducto($codigo,$stock){
     try{
         $fecha=  date('Y-m-d');
-        $conexion = mysqli_connect($_SERVER['SERVER_ADDR'],USER,PASS, BBDD);
+        $conexion = mysqli_connect($_SERVER['SERVER_ADDR'],'itziar','itziar', 'tienda');
         mysqli_autocommit($conexion, false);
        
         $sql1='update productos set stock='.$stock.' where codigo = '.$codigo;

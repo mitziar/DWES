@@ -82,7 +82,9 @@
             }
             echo "</nav>";
             }else{
+                echo "<nav>";
                 echo "<a class='claseTransicion' href='../index.php'>Index</a>";
+                echo "</nav>";
             }?>
             
        </div>

@@ -6,28 +6,9 @@
     font-size: x-large;
     border: 4px solid black;
 }
-.contenedor{
-    display: grid;
-    grid-template-columns: auto;
-    justify-content: space-around;
-    align-items: center;
-}
-.tituloAlta{
-    grid-area: 1/2/2/3;
-}
-.formularioAlta{
-    display: grid;
-    grid-template-columns: auto;
-    grid-area: 2/1/3/4;
-    justify-items: center;
-    background-color: rgba(95, 158, 160, 0.599);
-    padding: 10px;
-    border: 2px black solid;
-    border-radius: 2%;
-}
+
 
 nav{
-
     font-size: 20px;
     display:flex;
     flex-direction: row;
@@ -38,9 +19,19 @@ nav > a{
     border: white solid;
     background-color: rgba(95, 158, 160, 0.599);
 }
-
-form>*{
-    margin: 6px;
+.derecha{
+    display: block;
+    float: right;
+}
+form{
+    display: grid;
+    grid-template-columns: auto auto;
+    border: 1px solid black;
+    border-radius: 2%;
+    justify-content: space-around;
+}
+#enviar{
+    grid-area: 6/2/7/3;
 }
 @media screen and (max-width:600px) {
     nav{
@@ -49,5 +40,8 @@ form>*{
     }
     nav>a{
         flex:100%;
+    }
+    form{
+        grid-template-columns: auto;
     }
 }

@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="es">
 <?php
 session_start();
 require('../funciones/bd.php');
@@ -18,7 +18,7 @@ require('../funciones/funciones.php');
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="../css/estilosModificarAlbaran.css">
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
@@ -46,7 +46,7 @@ require('../funciones/funciones.php');
         <div class="row">
         <?php
             if(!estaValidado()){
-                echo "<a href='login.php' class='derecha'>Login</a>";
+                echo "<a href='../login.php' class='derecha'>Login</a>";
             }else{
 
                 echo "<a href='../paginas/editarPerfil.php' class='derecha'>Editar perfil</a>";
@@ -63,10 +63,10 @@ require('../funciones/funciones.php');
                 switch ($_SESSION['perfil']){
                 case 1:
                     //administrador
-                    echo "<a href='../index.php'>Index</a>";
-                    echo "<a href='./verVentas.php'>Ventas</a>";
-                    echo "<a href='./verAlbaranes.php'>Albaranes</a>";
-                    echo "<a href='./insertarProducto.php'>Almacen</a>";
+                    echo "<a class='claseTransicion' href='../index.php'>Index</a>";
+                    echo "<a class='claseTransicion' href='./verVentas.php'>Ventas</a>";
+                    echo "<a class='claseTransicion' href='./verAlbaranes.php'>Albaranes</a>";
+                    echo "<a class='claseTransicion' href='./insertarProducto.php'>Almacen</a>";
                     break;
                 break;
             }
@@ -95,7 +95,7 @@ require('../funciones/funciones.php');
                                 echo "<form action='./modificarAlbaran.php' method='post'>";
                                 echo "<label>Id</label>";
                                 echo "<input type='text' readonly name='id' id='id' value=" . $fila['codigo'] . ">";
-                                echo "<br>";
+                               
                                 echo "<label for='fecha'>Fecha </label>";
                                 echo "<input type='text' name='fecha' id='fecha' placeholder='AAAA-MM-DD' value=";
     
@@ -115,7 +115,6 @@ require('../funciones/funciones.php');
                                 } else {
                                     echo $fila['fecha'].'>';
                                 }
-                                echo "<br>";
                                 echo "<label for='cantidad'>Cantidad </label>";
                                 echo "<input type='text' name='cantidad' id='cantidad' value=";
     
@@ -136,7 +135,6 @@ require('../funciones/funciones.php');
                                     echo $fila['cantidad'].'>';
                                 }
                                 
-                                echo "<br>";
                                 echo "<label for='producto'>Producto </label>";
                                 echo "<input type='text' name='producto' id='producto' value=";
     
@@ -156,7 +154,6 @@ require('../funciones/funciones.php');
                                 } else {
                                     echo $fila['producto'].'>';
                                 }
-                                echo "<br>";
                                 echo "<label for='usuario'>Usuario </label>";
                                 echo "<input type='text' name='usuario' id='usuario' value=";
     
@@ -176,7 +173,6 @@ require('../funciones/funciones.php');
                                 } else {
                                     echo $fila['usuario'].'>';
                                 }
-                                echo "<br>";
                                 echo '<input type="submit" value="Enviar" name="enviar">';
                                 echo "<form>";
                             
@@ -197,7 +193,7 @@ require('../funciones/funciones.php');
                             echo "<form action='./modificarAlbaran.php' method='post'>";
                             echo "<label>Id</label>";
                             echo "<input type='text' readonly name='id' id='id' value=" .$_REQUEST['id']. ">";
-                            echo "<br>";
+                           
                             echo "<label for='fecha'>Fecha </label>";
                             echo "<input type='text' name='fecha' id='fecha' placeholder='AAAA-MM-DD' value=";
 
@@ -217,7 +213,6 @@ require('../funciones/funciones.php');
                             } else {
                                 echo ">";
                             }
-                            echo "<br>";
                             echo "<label for='cantidad'>Cantidad </label>";
                             echo "<input type='text' name='cantidad' id='cantidad' value=";
 
@@ -237,7 +232,6 @@ require('../funciones/funciones.php');
                             } else {
                                 echo ">";
                             }
-                            echo "<br>";
                             echo "<label for='precio'>Precio </label>";
                             echo "<input type='text' name='precio' id='precio' value=";
 
@@ -257,7 +251,6 @@ require('../funciones/funciones.php');
                             } else {
                                 echo ">";
                             }
-                            echo "<br>";
                             echo "<label for='producto'>Producto </label>";
                             echo "<input type='text' name='producto' id='producto' value=";
 
@@ -277,7 +270,6 @@ require('../funciones/funciones.php');
                             } else {
                                 echo ">";
                             }
-                            echo "<br>";
                             echo "<label for='usuario'>Usuario </label>";
                             echo "<input type='text' name='usuario' id='usuario' value=";
 
@@ -297,8 +289,7 @@ require('../funciones/funciones.php');
                             } else {
                                 echo "'>";
                             }
-                            echo "<br>";
-                            echo '<input type="submit" value="Enviar" name="enviar">';
+                            echo '<input type="submit" value="Enviar" id="enviar" name="enviar">';
                             echo "</form>";
                     
                         }

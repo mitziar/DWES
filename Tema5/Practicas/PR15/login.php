@@ -32,15 +32,20 @@
     </div>
 
     <div class="container">
+
     <div class="row">
         <h4><a href="../../Practicas/">Tema 5</a>/Prácticas</h4>
         <hr>
     </div>
-        <div class="row">
-            <nav class="classnav">
-                <a class="claseTransicion" href="./index.php">Index</a>
-            </nav>
-        </div>
+
+    <div class="row">
+        <nav class="classnav">
+            <a class="claseTransicion" href="./index.php">Index</a>
+        </nav>
+    </div>
+
+    <hr>
+    
     <div class="row">
          <?php
 
