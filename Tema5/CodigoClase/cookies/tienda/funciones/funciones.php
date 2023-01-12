@@ -12,9 +12,9 @@ function findAll(){//controlador mysql
         unset($conexion);
         return $array;
     }catch(Exception $Ex){
-        print_r($conexion);
+        //print_r($conexion);
         unset($conexion);
-        return $false;
+        return false;
     }
 }
 //findById: devuelve uno solo para ver
@@ -26,7 +26,7 @@ function findById($id){
         $devuelve = $prepare->execute(array($id));
         
         if($devuelve!=false){
-            $array= $devuelve -> fetchAll(PDO::FETCH_ASSOC);
+            $array= $prepare -> fetchAll();
             unset($conexion);
             return $array;
         }else{
@@ -40,5 +40,18 @@ function findById($id){
         return false;
     }
 }
-
+function mostrarUltimo(){
+    if(isset($_COOKIE['visto'])){
+        $array=$_COOKIE['visto'];
+        $array=array_reverse($array);
+        foreach ($array as $id) {
+                $producto=findById($id);
+                $producto=$producto[0];
+                echo "<article class='card'>";
+                echo "<a href='./verProducto.php=producto=".$producto['codigo']."'><img src='./webroot/".$producto['baja']."'></a>";
+                echo "<p>".$producto['nombre']."</p>";
+                echo "</article>";
+        }     
+    }
+}
 ?>

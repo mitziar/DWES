@@ -82,7 +82,9 @@
                 echo $_SESSION['error'];
                 unset($_SESSION['error']);
             }
-           
+            echo "<hr>";
+            echo "<h2 class='titulo'>PRODUCTOS</h2>";
+            echo "<hr>";
             echo "</div>";
             
             $resultado=mostrarProductos();
@@ -91,7 +93,7 @@
                 foreach ($resultado as $key => $value) {
                     if($value['stock']>=1){
                       ?><div class="hijo"><?php
-
+                    
                     echo "<h4>";
                     echo $value['nombre'];
                     echo "</h4>";
@@ -118,6 +120,7 @@
                     
                     echo '<p><a class="btn btn-default" href="./paginas/comprarProducto.php?codigo='.$value["codigo"].' role="button">Comprar »</a></p>';
                     ?></div><?php
+
                 }
                 }
             }else{

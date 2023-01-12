@@ -13,7 +13,7 @@ require './seguro/conexion.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link src='./webroot/css/style.css'>
+    <link href='./webroot/css/style.css' rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
@@ -24,7 +24,7 @@ require './seguro/conexion.php';
                 <?php
                     $lista= findAll();
                     foreach ($lista as $producto) {
-                        //print_r($producto);
+
                         echo "<article class='card'>";
                             echo "<img src='./webroot/".$producto['baja']."'>";
                             echo "<p>".$producto['nombre']."</p>";
@@ -35,6 +35,10 @@ require './seguro/conexion.php';
             </section>
             <section class='vistos'>
                 <h3>Vistos</h3>
+                <?php
+                //recogemos de cookies los ids
+                    mostrarUltimo();
+                ?>
             </section>
         </main>
 </body>

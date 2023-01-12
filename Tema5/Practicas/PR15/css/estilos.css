@@ -55,25 +55,22 @@ fieldset{
      transition: 1s linear; 
 }
 
-.imagen:hover {
-    transform: scale(1.1);
+.titulo {
+    transition: 1s linear;
 }
 
-/******************************************************************/
-@media screen and (max-width: 850px){
-    .padre{
-        grid-template-columns: auto auto;
-    }
+.titulo:hover {
+    transform: translate(10%);
 }
-@media screen and (max-width: 600px){
-    .padre{
-        grid-template-columns: auto;
+@media screen and (max-width: 768px){
+    .padre{/*Cada elemento de secciones se verá en columna*/
+      grid-template-columns: auto;
     }
-    nav{
-        flex-direction: column;
-        text-align: center;
+    h2{
+        font-size: medium;
     }
-    nav>a{
-        flex:100%;
+    img{
+        width: 80px;
     }
-}
+    
+}  

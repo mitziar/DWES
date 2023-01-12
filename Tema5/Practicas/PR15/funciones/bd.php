@@ -1,6 +1,5 @@
 <?php
 
-
 function ejecutarScript(){
     try{
         $conexion = new PDO('mysql:host='.$_SERVER['SERVER_ADDR'],'itziar','itziar');//Creamos objeto de tipo pdo
