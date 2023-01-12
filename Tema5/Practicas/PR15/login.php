@@ -65,7 +65,6 @@
         }
         unset($_SESSION['error']);
 
-<<<<<<< HEAD
         ?>
     </div>
     <div class='dos'>

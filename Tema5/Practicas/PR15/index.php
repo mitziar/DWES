@@ -2,7 +2,7 @@
     <?php
 
     session_start();
-
+    //seguro/conexio.ogo
     require './funciones/funciones.php';
     require './funciones/bd.php';
    
