@@ -80,7 +80,7 @@
             
        </div>
         <?php
-        
+        $errores=array();
             if(enviado() && validadoProducto()){
                 
                         if(transaccionModificarProducto($_REQUEST['codigo'],$_REQUEST['stock'])){
@@ -95,8 +95,17 @@
                         }                
 
             }else{
+                if(isset($_SESSION['errores'])){
+                    foreach ($_SESSION['errores']  as $value) {
+                        echo $value."<br>";
+                    } 
+                    unset($_SESSION['errores']);
+                    echo "<br>";
+                }
                 echo "<h2>Aumentar unidades</h2>";
+
                 $fila=obtenerProducto($_REQUEST['codigo']);
+
                 if(is_array($fila)){
                     ?>
                     
@@ -165,13 +174,13 @@
 
                         if(vacio('stock')){
                         echo '">';
-                        echo '<span>Introduzca unidades del producto</span>';
+                        array_push($errores,'Introduzca unidades de producto en stock');
                         }else{
                             if(stockValido($_REQUEST['stock'])){
                                 echo $_REQUEST['stock'].'">';
                             }else{
                                 echo '">';
-                                echo '<span>Stock no válido.</span>';
+                                array_push($errores,'Stock incorrecto');
                             }
                                 
                         }
@@ -188,14 +197,15 @@
                     }else{
                         echo '"imagenPorDefecto.png">';
                     }
-                    
-                    if(enviado() && empty($_FILES)){
-                        echo "<span>Introduce documento</span>";
+                
+                    if(count($errores)>0){
+                        $_SESSION['errores']=$errores;
                     }
                     ?>
                     </div>
                     <input type="submit" value="Aumentar" id="enviar" name="enviar">
                     </form><?php
+                    
                 }else{
                     $_SESSION['error']='No existe producto';
                     header('Location:../index.php');

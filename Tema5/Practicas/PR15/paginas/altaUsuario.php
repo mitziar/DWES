@@ -43,6 +43,10 @@
             </nav>
         </div>
         <?php
+        $errores=array();
+        
+        
+        
         if(enviado() && validado()){
             if(altaUsuario($_REQUEST['user'],$_REQUEST['pass'],$_REQUEST['email'],$_REQUEST['fecha'])){
 
@@ -62,6 +66,7 @@
 
         }else{
             echo "<div class='contenedor'>";
+            
             echo "<h2 class='tituloAlta'>Nuevo usuario</h2>";
             ?>
             <form class="formularioAlta" action="./altaUsuario.php" method="post">
@@ -71,11 +76,11 @@
 
                 if(vacio('user')){
                 echo '">';
-                echo 'Introduzca usuario';
+                array_push($errores,'Introduzca usuario');
                 }else{
                     if(existeUser($_REQUEST['user'])){
                         echo '">';
-                        echo '<span>El usuario ya existe.</span>';
+                        array_push($errores,'El usuario ya existe');
                     }else{
                         echo $_REQUEST['user'].'">';
                     }
@@ -90,11 +95,11 @@
 
                 if(vacio('pass')){
                 echo '">';
-                echo '<span>Introduzca contraseña</span>';
+                array_push($errores,'Introduzca contraseña');
                 }else{
                     if(!contraseñaValida($_REQUEST['pass'])){
                         echo '">';
-                        echo '<span>Contraseña inválida. Debe contener mínimo 8 caracteres y al final una mayúscula, una minúscula y un número</span>';
+                        array_push($errores,'Contraseña inválida. Debe contener mínimo 8 caracteres y al final una mayúscula, una minúscula y un número');
                     }else{
                         echo $_REQUEST['pass'].'">';
                     }
@@ -110,11 +115,13 @@
 
                 if(vacio('pass2')){
                 echo '">';
-                echo '<span>Introduzca la confirmación de la contraseña.</span>';
+                array_push($errores,'Introduzca la confirmación de la contraseña');
+                
                 }else{
                     if($_REQUEST['pass2'] != $_REQUEST['pass']){
                         echo '">';
-                        echo '<span>Contraseña inválida. Las contraseñas no son iguales.</span>';
+                        array_push($errores,'Contraseña inválida. Las contraseñas no son iguales');
+                       
                     }else{
                         echo $_REQUEST['pass2'].'">';
                     }
@@ -130,11 +137,11 @@
 
                 if(vacio('email')){
                 echo '">';
-                echo '<span>Introduzca email</span>';
+                array_push($errores,'Introduzca email');
                 }else{
                     if(!emailValido($_REQUEST['email'])){
                         echo '">';
-                        echo '<span>Email inválido.</span>';
+                        array_push($errores,'Email incorrecto');
                     }else{
                         echo $_REQUEST['email'].'">';
                     }
@@ -150,11 +157,12 @@
 
                 if(vacio('fecha')){
                 echo '">';
-                echo '<span>Introduzca fecha</span>';
+                array_push($errores,'Introduzca fecha');
                 }else{
                     if(!fechaValida($_REQUEST['fecha'])){
                         echo '">';
-                        echo '<span>Fecha inválida. Ejemplo de fecha válida: 2023-01-04</span>';
+                        array_push($errores,'Fecha inválida. Ejemplo de fecha válida: 2023-01-04');
+                        
                     }else{
                         echo $_REQUEST['fecha'].'">';
                     }
@@ -162,10 +170,20 @@
             }else{
                 echo '">';
             }
+            if(count($errores)>0){
+                $_SESSION['errores']=$errores;
+            }
             ?>
             
             <input class="enviar" type="submit" value="Enviar" name="enviar">
             </form><?php
+            if(isset($_SESSION['errores'])){
+                foreach ($_SESSION['errores']  as $value) {
+                    echo $value."<br>";
+                } 
+                unset($_SESSION['errores']);
+                echo "<br>";
+            }
             }
         ?>
       </div>

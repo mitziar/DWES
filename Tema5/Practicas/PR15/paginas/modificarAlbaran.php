@@ -174,7 +174,7 @@ require('../funciones/funciones.php');
                                 } else {
                                     echo $fila['usuario'].'>';
                                 }
-                                echo '<input type="submit" value="Enviar" name="enviar">';
+                                echo '<input type="submit" value="Enviar" id="enviar" name="enviar">';
                                 echo "<form>";
                             
                         }

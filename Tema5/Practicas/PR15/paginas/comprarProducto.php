@@ -109,12 +109,12 @@
                 }
 
             }else{
-                
                 if(isset($_SESSION['error'])){
                     echo $_SESSION['error'];
                     unset($_SESSION['error']);
                 }
-                    $fila=obtenerProducto($_REQUEST['codigo']);
+                
+                $fila=obtenerProducto($_REQUEST['codigo']);
                 
                 if(is_array($fila)){
                     echo "<form action='./comprarProducto.php' method='post'>";
@@ -138,6 +138,7 @@
                         echo "</div>";
 
                         if(isset($_SESSION['perfil'])){
+                            
                             if($_SESSION['perfil']==1 || $_SESSION['perfil']==2){
                                 echo '<p><a class="btn btn-default" href="./aumentarUnidades.php?codigo='.$fila["codigo"].' role="button">Aumentar unidades»</a></p>';
                             }

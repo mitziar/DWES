@@ -23,25 +23,25 @@ nav > a{
     display: block;
     float: right;
 }
-.formulario{
-    display: grid;
-    grid-template-columns: auto auto;
-}
+
 form{
     display: grid;
-    grid-template-rows: auto auto;
+    grid-template-columns: auto auto;
     border: 1px solid black;
     border-radius: 2%;
-    justify-content: center;
     align-items: center;
+    justify-items: stretch;
     padding: 5%;
     margin-top: 10%;
     margin-bottom: 10%;
     margin-left: 20%;
     margin-right: 20%;
 }
+form>*{
+    margin: 2%;
+}
 #enviar{
-    grid-area: 7/2/8/3;
+    grid-area: 6/2/7/3;
 }
 @media screen and (max-width:600px) {
     nav{
@@ -52,6 +52,13 @@ form{
         flex:100%;
     }
     form{
-        grid-template-columns: auto;
+        display:flex;
+        flex-direction: column;
+    }
+    form>*{
+        flex: 100%;
+    }
+    form>input{
+        flex: 80%;
     }
 }

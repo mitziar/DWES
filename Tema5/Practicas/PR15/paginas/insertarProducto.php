@@ -93,6 +93,14 @@
             }
             
         }else{
+            $errores=array();
+            if(isset($_SESSION['errores'])){
+                foreach ($_SESSION['errores']  as $value) {
+                    echo $value."<br>";
+                } 
+                unset($_SESSION['errores']);
+                echo "<br>";
+            }
             echo "<h2>Nuevo producto</h2>";
             ?>
         <form action="./insertarProducto.php" method="post" enctype="multipart/form-data">
@@ -102,7 +110,7 @@
 
             if(vacio('nombre')){
             echo '">';
-            echo '<span>Introduzca nombre del producto</span>';
+            array_push($errores,'Introduzca nombre de producto');
             }else{
                     echo $_REQUEST['nombre'].'">';
             }
@@ -117,7 +125,7 @@
 
             if(vacio('descripcion')){
             echo '">';
-            echo '<span>Introduzca descripcion del producto</span>';
+            array_push($errores,'Introduzca descripción de producto');
             }else{
                     echo $_REQUEST['descripcion'].'">';
             }
@@ -132,13 +140,13 @@
 
             if(vacio('precio')){
             echo '">';
-            echo '<span>Introduzca precio del producto</span>';
+            array_push($errores,'Introduzca precio de producto');
             }else{
                 if(precioValido($_REQUEST['precio'])){
                     echo $_REQUEST['precio'].'">';
                 }else{
                     echo '">';
-                    echo '<span>Precio no válido.</span>';
+                    array_push($errores,'Precio incorrecto');
                 }
                     
             }
@@ -152,13 +160,13 @@
 
             if(vacio('stock')){
             echo '">';
-            echo '<span>Introduzca unidades del producto</span>';
+            array_push($errores,'Introduzca unidades de producto');
             }else{
                 if(stockValido($_REQUEST['stock'])){
                     echo $_REQUEST['stock'].'">';
                 }else{
                     echo '">';
-                    echo '<span>Stock no válido.</span>';
+                    array_push($errores,'Stock incorrecto');
                 }
                     
             }
@@ -170,7 +178,10 @@
         <input type="file" name="documento" id="documento">
              <?php
                  if(enviado() && empty($_FILES)){
-                     echo "<span>Introduce documento</span>";
+                    array_push($errores,'Introduzca imagen del producto');
+                 }
+                 if(count($errores)>0){
+                    $_SESSION['errores']=$errores;
                  }
             ?>
        
