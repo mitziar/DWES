@@ -1,3 +1,6 @@
+.rojo{
+    color: red;
+}
 .claseTransicion{
     transition: background-color 1s, font-size 1s, border 1s ;
 }
@@ -41,7 +44,7 @@ form>*{
     margin: 2%;
 }
 #enviar{
-    grid-area: 6/2/7/3;
+    grid-area: 7/2/8/3;
 }
 @media screen and (max-width:600px) {
     nav{

@@ -19,6 +19,9 @@ nav > a{
     border: white solid;
     background-color: rgba(95, 158, 160, 0.599);
 }
+.rojo{
+    color: red;
+}
 form{
     margin: 6px;
     padding: 6px;;

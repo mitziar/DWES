@@ -33,7 +33,9 @@ nav > a{
 .cabecera{
     font-weight: bold;
 }
-
+.rojo{
+    color: red;
+}
 .dato{
     display: flex;
     flex-wrap: nowrap;

@@ -24,6 +24,9 @@ nav > a{
     justify-content: space-between;
     margin: 10px;
 }
+.rojo{
+    color: red;
+}
 .tabla2{
     display: grid;
     grid-template-columns: auto auto auto auto auto;

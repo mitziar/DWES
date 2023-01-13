@@ -79,8 +79,10 @@
         $errores=array();
         if(isset($_SESSION['errores'])){
             foreach ($_SESSION['errores']  as $value) {
+                echo "<div class='rojo'>";
                 echo $value."<br>";
-            } ;
+                echo "</div>";
+            }
             unset($_SESSION['errores']);
         }
         if(enviado() && validado2()){

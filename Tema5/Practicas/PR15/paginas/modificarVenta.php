@@ -86,9 +86,24 @@ require('../funciones/funciones.php');
                         }
 
                     }elseif (isset($_REQUEST['modificar'])) {
-                        
+                            $errores=array();
+                            if(isset($_SESSION['errores'])){
+                                foreach ($_SESSION['errores']  as $value) {
+                                    echo $value."<br>";
+                                } 
+                                unset($_SESSION['errores']);
+                            }
                             $fila = verVenta($_REQUEST['modificar']);
                             if (is_array($fila)) {
+                                $errores=array();
+                                if(isset($_SESSION['errores'])){
+                                    foreach ($_SESSION['errores']  as $value) {
+                                        echo "<div class='rojo'>";
+                                        echo $value."<br>";
+                                        echo "</div>";
+                                    } 
+                                    unset($_SESSION['errores']);
+                                }
                                 echo '<h2>Modificar venta</h2>';
                                 echo "<form action='./modificarVenta.php' method='post'>";
                                 echo "<label>Id</label>";
@@ -101,11 +116,12 @@ require('../funciones/funciones.php');
     
                                     if (vacio('fecha')) {
                                         echo '>';
-                                        echo '<span>Introduzca fecha</span>';
+                                        array_push($errores,'Introduzca fecha');
                                     } else {
                                         if (!fechaValida($_REQUEST['fecha'])) {
                                             echo '">';
-                                            echo '<span>Fecha inválida. Ejemplo de fecha válida: 2023-01-04</span>';
+                                            array_push($errores,'Fecha inválida. Ejemplo de fecha válida: 2023-01-04');
+                                           
                                         } else {
                                             echo $_REQUEST['fecha'] . '>';
                                         }
@@ -121,11 +137,11 @@ require('../funciones/funciones.php');
     
                                     if (vacio('cantidad')) {
                                         echo '>';
-                                        echo '<span>Introduzca cantidad</span>';
+                                        array_push($errores,'Introduzca cantidad');
                                     } else {
                                         if (!cantidadValida($_REQUEST['cantidad'],$fila['id'])) {
                                             echo '>';
-                                            echo '<span>Cantidad inválida.</span>';
+                                            array_push($errores,'Cantidad incorrecta');
                                         } else {
                                             echo $_REQUEST['cantidad'] . '>';
                                         }
@@ -140,11 +156,11 @@ require('../funciones/funciones.php');
     
                                     if (vacio('precio')) {
                                         echo '>';
-                                        echo '<span>Introduzca cantidad</span>';
+                                        array_push($errores,'Introduzca precio');
                                     } else {
                                         if (!precioValido($_REQUEST['precio'])) {
                                             echo '>';
-                                            echo '<span>Precio incorrecto.</span>';
+                                            array_push($errores,'Precio incorrecto');
                                         } else {
                                             echo $_REQUEST['precio'] . '>';
                                         }
@@ -159,11 +175,11 @@ require('../funciones/funciones.php');
     
                                     if (vacio('producto')) {
                                         echo '>';
-                                        echo '<span>Introduzca el código de producto</span>';
+                                        array_push($errores,'Introduzca código de producto');
                                     } else {
                                         if (!productoValido($_REQUEST['producto'])) {
                                             echo '>';
-                                            echo '<span>Producto no existe.</span>';
+                                            array_push($errores,'Producto no existe');
                                         } else {
                                             echo $_REQUEST['producto'] . '>';
                                         }
@@ -178,17 +194,20 @@ require('../funciones/funciones.php');
     
                                     if (vacio('usuario')) {
                                         echo '>';
-                                        echo '<span>Introduzca usuario.</span>';
+                                        array_push($errores,'Introduzca usuario');
                                     } else {
                                         if (!usuarioValido($_REQUEST['usuario'])) {
                                             echo '>';
-                                            echo '<span>El usuario no existe.</span>';
+                                            array_push($errores,'El usuario no existe');
                                         } else {
                                             echo $_REQUEST['usuario'] . '>';
                                         }
                                     }
                                 } else {
                                     echo $fila['usuario'].'>';
+                                }
+                                if(count($errores)>0){
+                                    $_SESSION['errores']=$errores;
                                 }
                                 echo '<input type="submit" value="Enviar" id="enviar" name="enviar">';
                                 echo "<form>";
@@ -206,6 +225,15 @@ require('../funciones/funciones.php');
                             }
 
                         }else{
+                            $errores=array();
+                            if(isset($_SESSION['errores'])){
+                                foreach ($_SESSION['errores']  as $value) {
+                                    echo "<div class='rojo'>";
+                                    echo $value."<br>";
+                                    echo "</div>";
+                                } 
+                                unset($_SESSION['errores']);
+                            }
                             echo '<h2>Modificar venta</h2>';
                             echo "<form action='./modificarVenta.php' method='post'>";
                             echo "<label>Id</label>";
@@ -218,11 +246,12 @@ require('../funciones/funciones.php');
 
                                 if (vacio('fecha')) {
                                     echo ">";
-                                    echo '<span>Introduzca fecha</span>';
+                                    array_push($errores,'Introduzca fecha');
                                 } else {
                                     if (!fechaValida($_REQUEST['fecha'])) {
                                         echo ">";
-                                        echo '<span>Fecha inválida. Ejemplo: 2023-01-04</span>';
+                                        array_push($errores,'Fecha inválida. Ejemplo: 2023-01-04');
+                                        
                                     } else {
                                         echo $_REQUEST['fecha'].">";
                                     }
@@ -237,13 +266,14 @@ require('../funciones/funciones.php');
 
                                 if (vacio('cantidad')) {
                                     echo ">";
-                                    echo '<span>Introduzca cantidad</span>';
+                                    array_push($errores,'Introduzca cantidad');
                                 } else {
                                     if (cantidadValida($_REQUEST['cantidad'],$_REQUEST['producto'])) {
                                         echo $_REQUEST['cantidad'].">";
                                     } else {
                                         echo ">";
-                                        echo '<span>Cantidad inválida. O producto no asociado.</span>';
+                                        array_push($errores,'Cantidad inválida. O producto no asociado');
+                                        echo '<span></span>';
                                     }
                                 }
                             } else {
@@ -256,11 +286,11 @@ require('../funciones/funciones.php');
 
                                 if (vacio('precio')) {
                                     echo ">";
-                                    echo '<span>Introduzca precio</span>';
+                                    array_push($errores,'Introduzca precio');
                                 } else {
                                     if (!precioValido($_REQUEST['precio'])) {
                                         echo ">";
-                                        echo '<span>Precio incorrecto.</span>';
+                                        array_push($errores,'Precio incorrecto');
                                     } else {
                                         echo $_REQUEST['precio'].">";
                                     }
@@ -275,11 +305,11 @@ require('../funciones/funciones.php');
 
                                 if (vacio('producto')) {
                                     echo ">";
-                                    echo '<span>Introduzca el código de producto</span>';
+                                    array_push($errores,'Introduzca producto');
                                 } else {
                                     if (!productoValido($_REQUEST['producto'])) {
                                         echo ">";
-                                        echo '<span>Producto no existe.</span>';
+                                        array_push($errores,'Producto no existe');
                                     } else {
                                         echo $_REQUEST['producto'] .">";
                                     }
@@ -294,17 +324,20 @@ require('../funciones/funciones.php');
 
                                 if (vacio('usuario')) {
                                     echo ">";
-                                    echo '<span>Introduzca usuario.</span>';
+                                    array_push($errores,'Introduzca usuario');
                                 } else {
                                     if (!usuarioValido($_REQUEST['usuario'])) {
                                         echo '>';
-                                        echo '<span>El usuario no existe.</span>';
+                                        array_push($errores,'El usuario no existe');
                                     } else {
                                         echo $_REQUEST['usuario'] . ">";
                                     }
                                 }
                             } else {
                                 echo "'>";
+                            }
+                            if(count($errores)>0){
+                                $_SESSION['errores']=$errores;
                             }
                             echo '<input type="submit" value="Enviar" id="enviar" name="enviar">';
                             echo "</form>";

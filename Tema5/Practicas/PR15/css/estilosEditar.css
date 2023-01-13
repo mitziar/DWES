@@ -23,7 +23,9 @@ nav > a{
     display: block;
     float: right;
 }
-
+.rojo{
+    color: red;
+}
 form{
     display: grid;
     grid-template-columns: auto auto;

@@ -29,6 +29,9 @@ form{
     border: 1px solid black;
     border-radius: 2%;
 }
+.rojo{
+    color: red;
+}
 .informacionProducto{
     display: grid;
     grid-template-columns: auto auto;

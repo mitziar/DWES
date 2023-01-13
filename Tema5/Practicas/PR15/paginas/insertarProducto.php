@@ -75,32 +75,42 @@
                 $rutaConNombreFichero = $rutaGuardado .  $_FILES['documento']['name'];
                 if(!move_uploaded_file( $_FILES['documento']['tmp_name'],$rutaConNombreFichero))
                 {
-
-                    $_SESSION['error']='No se ha guardado la imagen';
+                    $_SESSION['errores']='No se ha guardado la imagen';
                 }else{
                     if(insertarProducto($_REQUEST['nombre'],$_REQUEST['descripcion'],$_REQUEST['precio'],$_REQUEST['stock'],$_FILES['documento']['name'])){
 
-                    header('Location:../index.php');
-                    exit();
+                        header('Location:../index.php');
+                        exit();
     
                     }else{
-                        $_SESSION['error']= "No se ha podido insertar el producto";
-                        header('Location:../index.php');
+                        $_SESSION['errores']= "No hay stock disponible";
+                        header('Location:./insertarProducto.php');
                         exit();
                     }
                 }
+            }else{
                 
+                $rutaConNombreFichero =  "../uploads/imagenPorDefecto.png";
+                if(!move_uploaded_file( $_FILES['documento']['tmp_name'],$rutaConNombreFichero))
+                {
+                    echo 'No se ha guardado la imagen';
+                }else{
+                    if(insertarProducto($_REQUEST['nombre'],$_REQUEST['descripcion'],$_REQUEST['precio'],$_REQUEST['stock'],$_FILES['documento']['name'])){
+
+                        header('Location:../index.php');
+                        exit();
+    
+                    }else{
+                        $_SESSION['errores']= "No hay stock disponible";
+                        header('Location:./insertarProducto.php');
+                        exit();
+                    }
+                }
             }
             
         }else{
             $errores=array();
-            if(isset($_SESSION['errores'])){
-                foreach ($_SESSION['errores']  as $value) {
-                    echo $value."<br>";
-                } 
-                unset($_SESSION['errores']);
-                echo "<br>";
-            }
+            
             echo "<h2>Nuevo producto</h2>";
             ?>
         <form action="./insertarProducto.php" method="post" enctype="multipart/form-data">
@@ -180,11 +190,20 @@
                  if(enviado() && empty($_FILES)){
                     array_push($errores,'Introduzca imagen del producto');
                  }
-                 if(count($errores)>0){
+                 if(enviado() && count($errores)>0){
                     $_SESSION['errores']=$errores;
+                    if(isset($_SESSION['errores']) && is_array($_SESSION['errores'])){
+                        echo "<p class='rojo'>";
+                        foreach ($_SESSION['errores']  as $value) {
+                            echo $value."<br>";
+                        }
+                        echo "</p>";
+                        unset($_SESSION['errores']);
+                        echo "<br>";
+                    }
                  }
             ?>
-       
+            <p class="rojo"></p>
         <input type="submit" value="Enviar" id="enviar" name="enviar">
     </form><?php
         }

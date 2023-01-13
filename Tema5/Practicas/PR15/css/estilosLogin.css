@@ -1,18 +1,55 @@
-body{
-    display: grid;
-    grid-template-columns: auto auto auto;
-    align-items: center;
-    justify-content: center;
+.claseTransicion{
+    transition: background-color 1s, font-size 1s, border 1s ;
 }
-form{
-    grid-area: 2/2/3/3;
-    border-radius: 10% ;
-    border:1px solid black;
-    padding: 10px;
-    margin: 10px;
-    font-size: larger;
+.claseTransicion:hover{
+    /* background-color: blueviolet; */
+    font-size: x-large;
+    border: 4px solid black;
 }
-a{
-    grid-area: 3/2/3/3;
+.rojo{
+    color: red;
+}
+nav{
+    display:flex;
+    font-size: 20px;
+    flex-direction: row;
+}
+nav > a{
+    color: white;
+    padding: 6px;
+    border: white solid;
+    background-color: rgba(95, 158, 160, 0.599);
 }
 
+form{
+    grid-area: 2/2/3/3;
+    background-color: rgba(95, 158, 160, 0.599);
+    padding: 10px;
+}
+form > input{
+    margin: 5px;
+
+}
+
+.login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 3px black solid;
+    border-radius: 2%;
+}
+
+.ancho{
+    width: 50%;
+}
+@media screen and (max-width: 600px){
+
+    nav{
+        flex-direction: column;
+        text-align: center;
+    }
+    nav>a{
+        flex:100%;
+    }
+}

@@ -16,6 +16,9 @@ td {
     border: 1px solid black;
     text-align: center;
 }
+.rojo{
+    color: red;
+}
 nav{
 
     font-size: 20px;
@@ -32,6 +35,8 @@ nav > a{
     text-align: center;
     display: grid;
     grid-template-columns: 30% 30% 30%;
+    justify-content: center;
+    align-items: center;
 }
 .hijo{
     border:1px solid black;
@@ -52,25 +57,25 @@ fieldset{
 }
 .imagen{
     background-color: white;
-     transition: 1s linear; 
 }
 
-.titulo {
-    transition: 1s linear;
-}
 
-.titulo:hover {
-    transform: translate(10%);
+
+/******************************************************************/
+@media screen and (max-width: 850px){
+    .padre{
+        grid-template-columns: auto auto;
+    }
 }
-@media screen and (max-width: 768px){
-    .padre{/*Cada elemento de secciones se verá en columna*/
-      grid-template-columns: auto;
+@media screen and (max-width: 600px){
+    .padre{
+        grid-template-columns: auto;
     }
-    h2{
-        font-size: medium;
+    nav{
+        flex-direction: column;
+        text-align: center;
     }
-    img{
-        width: 80px;
+    nav>a{
+        flex:100%;
     }
-    
-}  
+}

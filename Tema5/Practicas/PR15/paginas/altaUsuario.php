@@ -66,7 +66,15 @@
 
         }else{
             echo "<div class='contenedor'>";
-            
+            if(isset($_SESSION['errores'])){
+                foreach ($_SESSION['errores']  as $value) {
+                    echo "<div class='rojo'>";
+                    echo $value."<br>";
+                    echo "</div>";
+                }
+                unset($_SESSION['errores']);
+                echo "<br>";
+            }
             echo "<h2 class='tituloAlta'>Nuevo usuario</h2>";
             ?>
             <form class="formularioAlta" action="./altaUsuario.php" method="post">
