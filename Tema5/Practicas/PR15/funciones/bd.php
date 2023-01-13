@@ -59,7 +59,6 @@ function existeUser($user)
         unset($conexion);
     }
 }
-
 function validaUser($user,$pass){
     try{
         $conexion = new PDO("mysql:host=".$_SERVER['SERVER_ADDR'].";dbname=tienda",'itziar','itziar');
@@ -96,6 +95,7 @@ function validaUser($user,$pass){
         unset($con);
     }
 }
+
 function mostrarProductos(){
     try{
         $conexion = new PDO("mysql:host=".$_SERVER['SERVER_ADDR'].";dbname=tienda",'itziar','itziar');

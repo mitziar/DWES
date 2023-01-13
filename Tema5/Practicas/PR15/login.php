@@ -52,17 +52,7 @@
     </div>
 
     <hr>
-    
-    <div class="row">
-         <?php
 
-        if(isset($_SESSION['error'])){
-        echo $_SESSION['error'];
-        }
-        unset($_SESSION['error']);
-
-        ?>
-    </div>
     <div class='dos'>
         <form action="./funciones/valida.php" method="post">
             <input type="hidden" name="codigo" value='<?php 
@@ -73,6 +63,16 @@
             <div class='login'>
                 <h3>Bienvenido</h3>
                 <br>
+                <?php
+
+                if(isset($_SESSION['error'])){
+                    echo "<div class='rojo'>";
+                    echo $_SESSION['error'];
+                    echo "</div>";
+                }
+                unset($_SESSION['error']);
+
+                ?>
                 <label for="user">Usuario</label>
                 <input class="ancho" type="text" name="user" id="user">
                 <br>
@@ -80,6 +80,7 @@
                 <input class="ancho" type="password" name="pass" id="pass">
                 <br>
                 <input type="submit" value="Enviar" name="enviar">
+                <br>
                 <p>
                     <a href='./paginas/altaUsuario.php'>Obtener cuenta</a>
                 </p>

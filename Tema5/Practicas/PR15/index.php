@@ -84,7 +84,6 @@
             }
             echo "<hr>";
             echo "<h2 class='titulo'>PRODUCTOS</h2>";
-            echo "<hr>";
             echo "</div>";
             
             $resultado=mostrarProductos();
@@ -117,8 +116,8 @@
                                 echo "</fieldset>";
                             }
                     }
-                    
-                    echo '<p><a class="btn btn-default" href="./paginas/comprarProducto.php?codigo='.$value["codigo"].' role="button">Comprar »</a></p>';
+                    echo "<a  href='./paginas/comprarProducto.php?codigo='".$value["codigo"]."'><button class='btn btn-primary boton'>Comprar</button></a>";
+
                     ?></div><?php
 
                 }
@@ -127,9 +126,9 @@
                 echo $resultado."<br>";
                 echo "<p><a href='./paginas/ejecutarScript.php'>Establecer datos iniciales</a></p>";
                 echo "<p>Usuario disponibles: <br>";
-                echo "Usuario:admin Pass:adminAd1 <br>";
-                echo "Usuario:moderador Pass:moderadorMo1 <br>";
-                echo "Usuario:usuario Pass:usuarioUs1 </p>";
+                echo "Usuario:admin | Pass:adminAd1 <br>";
+                echo "Usuario:moderador | Pass:moderadorMo1 <br>";
+                echo "Usuario:usuario | Pass:usuarioUs1 </p>";
             }
             ?>
     </div>

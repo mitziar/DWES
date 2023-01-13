@@ -39,14 +39,16 @@ nav > a{
     align-items: center;
 }
 .hijo{
-    border:1px solid black;
+
     margin:5px;
 }
 fieldset{
     background-color: gainsboro;
 }
 
-
+.boton{
+    width: 100%;
+}
 .claseTransicion{
     transition: background-color 1s, font-size 1s, border 1s ;
 }

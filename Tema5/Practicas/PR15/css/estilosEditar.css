@@ -25,6 +25,9 @@ nav > a{
 }
 .rojo{
     color: red;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    /* grid-area: 6/1/7/3; */
 }
 form{
     display: grid;
@@ -41,6 +44,9 @@ form{
 }
 form>*{
     margin: 2%;
+}
+form>input{
+    width: 75%;
 }
 #enviar{
     grid-area: 6/2/7/3;

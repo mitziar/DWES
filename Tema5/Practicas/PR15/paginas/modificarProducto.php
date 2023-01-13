@@ -38,10 +38,13 @@
         <div class="row">
             <a href="../../PR15/">PR15/</a>Aumentar unidades
         </div>
+        <hr>
         <div class="row">
         <?php
             if(!estaValidado()){
                 echo "<a href='../login.php' class='derecha'>Login</a>";
+                header('Location:../index.php');
+                exit();
             }else{
 
                 echo "<a href='./editarPerfil.php' class='derecha'>Editar perfil</a>";
@@ -76,6 +79,7 @@
             }?>
             
        </div>
+       <hr>
         <?php
         
             if(enviado() && validadoProducto()){
@@ -92,7 +96,14 @@
                         }                
 
             }else{
+                $errores=array();
+                if(isset($_SESSION['errores'])){
 
+                    echo "<div class='rojo'>";
+                    echo $_SESSION['errores'];
+                    echo "</div>";
+                    unset($_SESSION['errores']);
+                }
                 echo "<h2>Modificar Producto</h2>";
                 $fila=obtenerProducto($_REQUEST['codigo']);
                 if(is_array($fila)){
@@ -104,7 +115,8 @@
                         echo "<img class='imagen' src='../uploads/".$fila['ruta']."'>";
                         }else{
                         echo "<img class='imagen' src='../uploads/imagenPorDefecto.png'>";
-                        }?>
+                        }
+                        ?>
                     <div class="informacionProducto">
                     <input type="hidden"  name="codigo" id="codigo" value=<?php echo $fila['codigo']?>>
                     <label for="nombre">Nombre del producto </label>
@@ -113,7 +125,7 @@
 
                         if(vacio('nombre')){
                         echo '">';
-                        echo '<span>Introduzca nombre del producto</span>';
+                        array_push($errores,'Introduzca nombre de producto');
                         }else{
                                 echo $_REQUEST['nombre'].'">';
                         }
@@ -128,7 +140,7 @@
 
                         if(vacio('descripcion')){
                         echo '">';
-                        echo '<span>Introduzca descripcion del producto</span>';
+                        array_push($errores,'Introduzca descripción del producto');
                         }else{
                                 echo $_REQUEST['descripcion'].'">';
                         }
@@ -142,13 +154,13 @@
 
                     if(vacio('precio')){
                         echo '">';
-                        echo '<span>Introduzca precio del producto</span>';
+                        array_push($errores,'Introduzca precio de producto');
                         }else{
                             if(precioValido($_REQUEST['precio'])){
                                 echo $_REQUEST['precio'].'">';
                             }else{
                                 echo '">';
-                                echo '<span>Precio no válido.</span>';
+                                array_push($errores,'Precio incorrecto');
                             }
                                 
                         }
@@ -162,13 +174,13 @@
 
                         if(vacio('stock')){
                         echo '">';
-                        echo '<span>Introduzca unidades del producto</span>';
+                        array_push($errores,'Introduzca unidades de producto');
                         }else{
                             if(stockValido($_REQUEST['stock'])){
                                 echo $_REQUEST['stock'].'">';
                             }else{
                                 echo '">';
-                                echo '<span>Stock no válido.</span>';
+                                array_push($errores,'Stock incorrecto');
                             }
                                 
                         }
@@ -184,10 +196,34 @@
                     }else{
                         echo '>';
                     }
+                    if(count($errores)>0){
+                        $_SESSION['errores']=$errores;
+                    }
+                    
                     ?>
                     </div>
+                    <?php 
+                    if(isset($_SESSION['errores'])){
+                        if(count($_SESSION['errores'])>1){
+                            foreach ($_SESSION['errores']  as $value) {
+                                echo "<div class='rojo'>";
+                                echo $value."<br>";
+                                echo "</div>";
+                            }
+                            unset($_SESSION['errores']);
+                        }else{
+                            echo "<div class='rojo'>";
+                            echo $_SESSION['errores'][0];
+                            echo "</div>";
+                            unset($_SESSION['errores']);
+                        }
+                    }
+                    ?>
                     <input type="submit" value="Enviar" id="enviar" name="enviar">
                     </form><?php
+                   
+                                       
+
                 }else{
                     $_SESSION['error']='No existe producto';
                     header('Location:../index.php');

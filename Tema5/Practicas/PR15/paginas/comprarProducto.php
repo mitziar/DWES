@@ -36,7 +36,7 @@
     </div>
 
     <div class="container">
-    <div class="row">
+        <div class="row">
             <a href="../../PR15/">PR15/</a>Comprar producto
         </div>
         <hr>
@@ -91,7 +91,7 @@
         <hr>
         <div>
             <?php
-            if(isset($_REQUEST['comprar']) && $_REQUEST['stock']>=$_REQUEST['unidades']){
+            if(isset($_REQUEST['comprar']) && $_REQUEST['stock']>=$_REQUEST['unidades'] && $_REQUEST['unidades']>=1){
                 if(isset($_SESSION['perfil'])){
                     $resultado=transaccionVenta($_REQUEST['codigo'],$_REQUEST['precio'],$_REQUEST['stock'],$_SESSION['user'],$_REQUEST['unidades']);
                     if($resultado==true){
@@ -109,10 +109,7 @@
                 }
 
             }else{
-                if(isset($_SESSION['error'])){
-                    echo $_SESSION['error'];
-                    unset($_SESSION['error']);
-                }
+                
                 
                 $fila=obtenerProducto($_REQUEST['codigo']);
                 
@@ -134,7 +131,12 @@
                         echo "<input type='hidden' name='stock' value='".$fila['stock']."'>";
 
                         echo "<label>Unidades: </label>";
-                        echo "<input type='number' min='1' name='unidades' value='1'>";
+                        echo "<input type='number' name='unidades' value='1'>";
+                        if(enviado() && $_REQUEST['unidades']>$_REQUEST['stock']){
+                            $_SESSION['error']='No hay stock suficiente';
+                        }elseif(enviado() && $_REQUEST['unidades']<=0){
+                            $_SESSION['error']='Cantidad incorrecta';
+                        }
                         echo "</div>";
 
                         if(isset($_SESSION['perfil'])){
@@ -142,9 +144,16 @@
                             if($_SESSION['perfil']==1 || $_SESSION['perfil']==2){
                                 echo '<p><a class="btn btn-default" href="./aumentarUnidades.php?codigo='.$fila["codigo"].' role="button">Aumentar unidades»</a></p>';
                             }
-                    }
+                        }
+                
                         echo "</div>";
-                        echo '<input type="submit" value="Comprar" name="comprar">';
+                        if(isset($_SESSION['error'])){
+                            echo "<div class='rojo'>";
+                            echo $_SESSION['error'];
+                            echo "</div>";
+                            unset($_SESSION['error']);
+                        }
+                        echo '<input type="submit" value="Comprar" name="comprar" id="comprar">';
                         
                     echo "</form>";
                 }else{

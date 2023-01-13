@@ -33,7 +33,7 @@
         <h2><center>Tema 5</center></h2>
       </div>
     </div>
-
+    <hr>
     <div class="container">
         <div class="row">
             <a href="../../PR15/">PR15/</a>Insertar producto
@@ -42,6 +42,8 @@
         <?php
             if(!estaValidado()){
                 echo "<a href='../login.php' class='derecha'>Login</a>";
+                header('Location:../index.php');
+                exit();
             }else{
 
                 echo "<a href='../paginas/editarPerfil.php' class='derecha'>Editar perfil</a>";
@@ -66,11 +68,11 @@
             }
             echo "</nav>";
             }?>
-            
        </div>
+       <hr>
         <?php
         if(enviado() && validadoProducto()){
-            if(!empty($_FILES)){
+            if(!empty($_FILES['name'])){
                 $rutaGuardado = "../uploads/";
                 $rutaConNombreFichero = $rutaGuardado .  $_FILES['documento']['name'];
                 if(!move_uploaded_file( $_FILES['documento']['tmp_name'],$rutaConNombreFichero))
@@ -89,22 +91,15 @@
                     }
                 }
             }else{
-                
-                $rutaConNombreFichero =  "../uploads/imagenPorDefecto.png";
-                if(!move_uploaded_file( $_FILES['documento']['tmp_name'],$rutaConNombreFichero))
-                {
-                    echo 'No se ha guardado la imagen';
-                }else{
-                    if(insertarProducto($_REQUEST['nombre'],$_REQUEST['descripcion'],$_REQUEST['precio'],$_REQUEST['stock'],$_FILES['documento']['name'])){
+                if(insertarProducto($_REQUEST['nombre'],$_REQUEST['descripcion'],$_REQUEST['precio'],$_REQUEST['stock'],'imagenPorDefecto.png')){
 
-                        header('Location:../index.php');
-                        exit();
-    
-                    }else{
-                        $_SESSION['errores']= "No hay stock disponible";
-                        header('Location:./insertarProducto.php');
-                        exit();
-                    }
+                    header('Location:../index.php');
+                    exit();
+
+                }else{
+                    $_SESSION['errores']= "No hay stock disponible";
+                    header('Location:./insertarProducto.php');
+                    exit();
                 }
             }
             
@@ -190,18 +185,18 @@
                  if(enviado() && empty($_FILES)){
                     array_push($errores,'Introduzca imagen del producto');
                  }
-                 if(enviado() && count($errores)>0){
+                 if(count($errores)>0){
                     $_SESSION['errores']=$errores;
-                    if(isset($_SESSION['errores']) && is_array($_SESSION['errores'])){
-                        echo "<p class='rojo'>";
-                        foreach ($_SESSION['errores']  as $value) {
-                            echo $value."<br>";
-                        }
-                        echo "</p>";
-                        unset($_SESSION['errores']);
-                        echo "<br>";
-                    }
                  }
+                if(isset($_SESSION['errores']) && is_array($_SESSION['errores'])){
+                    echo "<p class='rojo'>";
+                    foreach ($_SESSION['errores']  as $value) {
+                        echo $value."<br>";
+                    }
+                    echo "</p>";
+                    unset($_SESSION['errores']);
+                    echo "<br>";
+                }
             ?>
             <p class="rojo"></p>
         <input type="submit" value="Enviar" id="enviar" name="enviar">

@@ -21,20 +21,22 @@ nav > a{
 }
 .rojo{
     color: red;
+     
+
 }
 form{
     margin: 6px;
     padding: 6px;;
     display: grid;
     grid-template-columns: auto auto;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     border: 1px solid black;
     border-radius: 2%;
 }
 .imagen{
     grid-area: 1/1/2/2;
-    width: 400px;
+    width: 320px;
     height: 300px;
 }
 
@@ -51,9 +53,13 @@ form{
     display: block;
     float:right;
 }
-
+.informacionProducto > input{
+    width: 100%;
+    margin: 2%;
+}
 #enviar{
     grid-area: 2/2/3/3;
+    width: 90%;
 }
 @media screen and (max-width: 768px){
     .imagen{

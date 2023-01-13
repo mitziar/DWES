@@ -16,7 +16,7 @@
     align-items: center;
 }
 .tituloAlta{
-    grid-area: 1/2/2/3;
+    grid-area: 1/1/2/3;
 }
 .formularioAlta{
     display: grid;
@@ -45,6 +45,16 @@ nav > a{
 form>*{
     margin: 6px;
 }
+form>input{
+    width: 40%;
+}
+#enviar{
+    width: 20%;
+}
+.derecha{
+    display: block;
+    float:right;
+}
 @media screen and (max-width:600px) {
     nav{
         flex-direction: column;
@@ -52,5 +62,14 @@ form>*{
     }
     nav>a{
         flex:100%;
+    }
+    body{
+        font-size: small;
+    }
+}
+@media screen and (max-width:300px) {
+
+    body{
+        font-size: small;
     }
 }

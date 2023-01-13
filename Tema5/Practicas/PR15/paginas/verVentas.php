@@ -44,6 +44,8 @@
         <?php
             if(!estaValidado()){
                 echo "<a href='../login.php' class='derecha'>Login</a>";
+                header('Location:../index.php');
+                exit();
             }else{
 
                 echo "<a href='./editarPerfil.php' class='derecha'>Editar perfil</a>";

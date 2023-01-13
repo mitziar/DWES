@@ -60,9 +60,15 @@ img{
 .derecha{
     display: block;
     float:right;
+
 }
 .unidades{
     width: 50%;
+}
+#comprar{
+    width: 75%;
+    margin-bottom: 3%;
+    margin-top:3%;
 }
 
 @media screen and (max-width: 768px){
@@ -72,6 +78,7 @@ img{
     }
     
 }
+
 @media screen and (max-width: 670px){
     .divi{
         grid-template-columns: auto;

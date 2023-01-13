@@ -46,6 +46,8 @@ require('../funciones/funciones.php');
         <?php
             if(!estaValidado()){
                 echo "<a href='../login.php' class='derecha'>Login</a>";
+                header('Location:../index.php');
+                exit();
             }else{
 
                 echo "<a href='../paginas/editarPerfil.php' class='derecha'>Editar perfil</a>";

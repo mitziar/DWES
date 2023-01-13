@@ -24,7 +24,7 @@ form{
     padding: 6px;
     display: grid;
     grid-template-columns: auto auto auto;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     border: 1px solid black;
     border-radius: 2%;
@@ -45,8 +45,12 @@ img{
     width: 400px;
     height: 300px;
 }
+
 #enviar{
+
     grid-area: 2/3/3/4;
+    width: 100%;
+
 }
 .derecha{
     display: block;

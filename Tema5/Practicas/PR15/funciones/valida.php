@@ -5,12 +5,8 @@ require("./bd.php");
 $user = $_REQUEST['user'];
 $pass = $_REQUEST['pass'];
 
-if(empty($user)){
-    $_SESSION['error'] = 'Debe rellenar el nombre';
-    header('Location: ../login.php');
-    exit();
-}elseif(empty($pass)){
-    $_SESSION['error'] = 'Debe rellenar la contraseña';
+if(empty($user)||empty($pass)){
+    $_SESSION['error'] = 'Debe introducir todos los campos';
     header('Location: ../login.php');
     exit();
 }else{

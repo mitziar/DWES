@@ -37,7 +37,7 @@ require('../funciones/funciones.php');
             </h2>
         </div>
     </div>
-
+    <hr>
     <div class="container">
         <div class="row">
             <a href="../../PR15/">PR15/</a>Modificar ventas
@@ -47,6 +47,8 @@ require('../funciones/funciones.php');
         <?php
             if(!estaValidado()){
                 echo "<a href='../login.php' class='derecha'>Login</a>";
+                header('Location:../index.php');
+                exit();
             }else{
 
                 echo "<a href='../paginas/editarPerfil.php' class='derecha'>Editar perfil</a>";
@@ -74,6 +76,7 @@ require('../funciones/funciones.php');
             }?>
             
        </div>
+       <hr>
         <div class="row">
             <?php
                 if (isset($_SESSION['perfil']) == 1) {
@@ -209,6 +212,7 @@ require('../funciones/funciones.php');
                                 if(count($errores)>0){
                                     $_SESSION['errores']=$errores;
                                 }
+                                echo "<span></span>";
                                 echo '<input type="submit" value="Enviar" id="enviar" name="enviar">';
                                 echo "<form>";
                             
@@ -226,14 +230,6 @@ require('../funciones/funciones.php');
 
                         }else{
                             $errores=array();
-                            if(isset($_SESSION['errores'])){
-                                foreach ($_SESSION['errores']  as $value) {
-                                    echo "<div class='rojo'>";
-                                    echo $value."<br>";
-                                    echo "</div>";
-                                } 
-                                unset($_SESSION['errores']);
-                            }
                             echo '<h2>Modificar venta</h2>';
                             echo "<form action='./modificarVenta.php' method='post'>";
                             echo "<label>Id</label>";
@@ -260,7 +256,7 @@ require('../funciones/funciones.php');
                                 echo ">";
                             }
                             echo "<label for='cantidad'>Cantidad </label>";
-                            echo "<input type='text' name='cantidad' id='cantidad' value=";
+                            echo "<input type='number' name='cantidad' id='cantidad' value=";
 
                             if (enviado()) {
 
@@ -272,8 +268,7 @@ require('../funciones/funciones.php');
                                         echo $_REQUEST['cantidad'].">";
                                     } else {
                                         echo ">";
-                                        array_push($errores,'Cantidad inválida. O producto no asociado');
-                                        echo '<span></span>';
+                                        array_push($errores,'Cantidad incorrecta');
                                     }
                                 }
                             } else {
@@ -339,7 +334,16 @@ require('../funciones/funciones.php');
                             if(count($errores)>0){
                                 $_SESSION['errores']=$errores;
                             }
+                            echo "<span></span>";
                             echo '<input type="submit" value="Enviar" id="enviar" name="enviar">';
+                            if(isset($_SESSION['errores'])){
+                                foreach ($_SESSION['errores']  as $value) {
+                                    echo "<div class='rojo'>";
+                                    echo $value."<br>";
+                                    echo "</div>";
+                                } 
+                                unset($_SESSION['errores']);
+                            }
                             echo "</form>";
                     
                         }

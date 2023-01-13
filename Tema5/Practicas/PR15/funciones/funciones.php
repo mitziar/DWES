@@ -1,7 +1,7 @@
 <?php
 
 function enviado(){
-    if(isset($_REQUEST['enviar'])){
+    if(isset($_REQUEST['enviar'])||isset($_REQUEST['comprar'])){
         return true;
     }
     return false;
@@ -105,8 +105,8 @@ function fechaValida($fecha){
     $patron = '/\d{4}(\-)\d{2}(\-)\d{2}/';
     if(preg_match($patron,$fecha)){
         $datosFecha = explode('-',$fecha);
-        if($datosFecha[1]>1&&$datosFecha[1]<13){
-            if($datosFecha[2]>1&&$datosFecha[2]<32){
+        if($datosFecha[1]>0&&$datosFecha[1]<13){
+            if($datosFecha[2]>0&&$datosFecha[2]<32){
                 return true;
             }
         }
@@ -115,15 +115,27 @@ function fechaValida($fecha){
     return false;
 }
 function cantidadValida($cantidad,$producto){
+    $error=array();
     $cantidad=intval($cantidad);
     $infoProducto=obtenerProducto(intval($producto));
     if(is_array($infoProducto)){
-        $patron='/^\d{1,}$/';
-       if(preg_match($patron,$cantidad) && $cantidad>0 && $cantidad<=intval($infoProducto['stock'])){
-        return true;
+       if( $cantidad<0){
+        array_push($error,'Cantidad incorrecta');
        }
+       if($cantidad>intval($infoProducto['stock'])){
+        array_push($error,'No hay suficiente stock para esa cantidad');
+       }
+    }else{
+        array_push($error,'No existe producto para esa cantidad');
     }
-    return false;
+
+    if(count($error)==0){
+        return true;
+    }else{
+        $_SESSION['errores']=$error;
+        return false;
+    }
+    
 }
 function precioValido($precio){
     

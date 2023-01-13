@@ -34,10 +34,13 @@
     </div>
 
     <div class="container">
+    <hr>
     <div class="row">
         <?php
             if(!estaValidado()){
                 echo "<a href='../login.php' class='derecha'>Login</a>";
+                header('Location:../index.php');
+                exit();
             }else{
 
                 echo "<a href='../logout.php' class='derecha'>Logout</a>";
@@ -75,16 +78,10 @@
             }?>
             
        </div>
+       <hr>
         <?php
         $errores=array();
-        if(isset($_SESSION['errores'])){
-            foreach ($_SESSION['errores']  as $value) {
-                echo "<div class='rojo'>";
-                echo $value."<br>";
-                echo "</div>";
-            }
-            unset($_SESSION['errores']);
-        }
+        
         if(enviado() && validado2()){
 
             if(editarUsuario($_REQUEST['user'],$_REQUEST['pass'],$_REQUEST['email'],$_REQUEST['fecha'])){
@@ -114,7 +111,7 @@
         if(enviado()){
 
             if(vacio('pass')){
-            echo '>';
+            echo '">';
             array_push($errores,'Introduzca contraseña');
             }else{
                 if(!contraseñaValida($_REQUEST['pass'])){
@@ -189,7 +186,16 @@
         
         if(count($errores)>0){
             $_SESSION['errores']=$errores;
-        }?>
+        }
+        if(isset($_SESSION['errores'])){
+            foreach ($_SESSION['errores']  as $value) {
+                echo "<div class='rojo'>";
+                echo $value."<br>";
+                echo "</div>";
+            }
+            unset($_SESSION['errores']);
+        }
+        ?>
         <input type="submit" value="Enviar" id="enviar" name="enviar">
     </form><?php
         }

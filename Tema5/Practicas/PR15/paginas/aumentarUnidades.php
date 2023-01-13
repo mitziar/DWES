@@ -38,10 +38,13 @@
         <div class="row">
             <a href="../../PR15/">PR15/</a>Aumentar unidades
         </div>
+        <hr>
         <div class="row">
         <?php
             if(!estaValidado()){
                 echo "<a href='../login.php' class='derecha'>Login</a>";
+                header('Location:../index.php');
+                exit();
             }else{
 
                 echo "<a href='../paginas/editarPerfil.php' class='derecha'>Editar perfil</a>";
@@ -77,7 +80,7 @@
             }
             echo "</nav>";
             }?>
-            
+            <hr>
        </div>
         <?php
         $errores=array();
@@ -95,15 +98,7 @@
                         }                
 
             }else{
-                if(isset($_SESSION['errores'])){
-                    foreach ($_SESSION['errores']  as $value) {
-                        echo "<div class='rojo'>";
-                        echo $value."<br>";
-                        echo "</div>";
-                    }
-                    unset($_SESSION['errores']);
-                    echo "<br>";
-                }
+                
                 echo "<h2>Aumentar unidades</h2>";
 
                 $fila=obtenerProducto($_REQUEST['codigo']);
@@ -202,6 +197,15 @@
                 
                     if(count($errores)>0){
                         $_SESSION['errores']=$errores;
+                    }
+                    if(isset($_SESSION['errores'])){
+                        foreach ($_SESSION['errores']  as $value) {
+                            echo "<div class='rojo'>";
+                            echo $value."<br>";
+                            echo "</div>";
+                        }
+                        unset($_SESSION['errores']);
+                        echo "<br>";
                     }
                     ?>
                     </div>
