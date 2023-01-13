@@ -40,7 +40,7 @@
             <a href="../../PR15/">PR15/</a>Comprar producto
         </div>
         <hr>
-        <div >
+        <div class='row'>
         <?php
             if(!estaValidado()){
                 echo "<a href='../login.php' class='derecha'>Login</a>";
@@ -62,7 +62,7 @@
                     //administrador
                     echo "<a class='claseTransicion' href='../index.php'>Index</a>";
                     echo "<a class='claseTransicion' href='./verVentas.php'>Ventas</a>";
-                    echo "<a class='claseTransicion' href='./insertarProducto.php'>Almacen</a>";
+                    echo "<a class='claseTransicion' href='./insertarProducto.php'>Almacén</a>";
                     echo "<a class='claseTransicion' href='./verAlbaranes.php'>Albaranes</a>";
                     break;
                 case 2:
@@ -121,7 +121,7 @@
                         echo "<div class='divi'>";
                         echo "<label>Descripción: </label>".$fila['descripcion'];
                         
-                        echo "<label>Codigo: </label>".$fila['codigo'];
+                        echo "<label>Código: </label>".$fila['codigo'];
                         echo "<input type='hidden' name='codigo' value='".$fila['codigo']."'>";
                        
                         echo "<label>Precio: </label>".$fila['precio']."€";
@@ -137,15 +137,7 @@
                         }elseif(enviado() && $_REQUEST['unidades']<=0){
                             $_SESSION['error']='Cantidad incorrecta';
                         }
-                        echo "</div>";
-
-                        if(isset($_SESSION['perfil'])){
-                            
-                            if($_SESSION['perfil']==1 || $_SESSION['perfil']==2){
-                                echo '<p><a class="btn btn-default" href="./aumentarUnidades.php?codigo='.$fila["codigo"].' role="button">Aumentar unidades»</a></p>';
-                            }
-                        }
-                
+                        echo "</div>";                
                         echo "</div>";
                         if(isset($_SESSION['error'])){
                             echo "<div class='rojo'>";
@@ -153,7 +145,7 @@
                             echo "</div>";
                             unset($_SESSION['error']);
                         }
-                        echo '<input type="submit" value="Comprar" name="comprar" id="comprar">';
+                        echo '<input type="submit" class="btn btn-primary" value="Comprar" name="comprar" id="comprar">';
                         
                     echo "</form>";
                 }else{

@@ -65,7 +65,7 @@
                     echo "<a class='claseTransicion' href='../index.php'>Index</a>";
                     echo "<a class='claseTransicion' href='./verVentas.php'>Ventas</a>";
                     echo "<a class='claseTransicion' href='./verAlbaranes.php'>Albaranes</a>";
-                    echo "<a class='claseTransicion' href='./insertarProducto.php'>Almacen</a>";
+                    echo "<a class='claseTransicion' href='./insertarProducto.php'>Almacén</a>";
                     break;
                     
                 break;
@@ -209,7 +209,7 @@
                     }
                     ?>
                     </div>
-                    <input type="submit" value="Aumentar" id="enviar" name="enviar">
+                    <input type="submit" class="btn btn-primary" value="Aumentar" id="enviar" name="enviar">
                     </form><?php
                     
                 }else{

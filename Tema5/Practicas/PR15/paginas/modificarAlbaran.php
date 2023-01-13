@@ -67,7 +67,7 @@ require('../funciones/funciones.php');
                     echo "<a class='claseTransicion' href='../index.php'>Index</a>";
                     echo "<a class='claseTransicion' href='./verVentas.php'>Ventas</a>";
                     echo "<a class='claseTransicion' href='./verAlbaranes.php'>Albaranes</a>";
-                    echo "<a class='claseTransicion' href='./insertarProducto.php'>Almacen</a>";
+                    echo "<a class='claseTransicion' href='./insertarProducto.php'>Almacén</a>";
                     break;
                 break;
             }
@@ -184,7 +184,7 @@ require('../funciones/funciones.php');
                                 } else {
                                     echo $fila['usuario'].'>';
                                 }
-                                echo '<input type="submit" value="Enviar" id="enviar" name="enviar">';
+                                echo '<input type="submit" class="btn btn-primary" value="Modifcar" id="enviar" name="enviar">';
                                 echo "<form>";
                             
                         }
@@ -312,7 +312,7 @@ require('../funciones/funciones.php');
                             if(count($errores)>0){
                                 $_SESSION['errores']=$errores;
                             }
-                            echo '<input type="submit" value="Enviar" id="enviar" name="enviar">';
+                            echo '<input type="submit" class="btn btn-primary" value="Modificar" id="enviar" name="enviar">';
                             echo "</form>";
                     
                             

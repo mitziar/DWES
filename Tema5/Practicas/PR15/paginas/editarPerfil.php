@@ -58,7 +58,7 @@
                     echo "<a class='claseTransicion' href='../index.php'>Index</a>";
                     echo "<a class='claseTransicion' href='./verAlbaranes.php'>Albaranes</a>";
                     echo "<a class='claseTransicion'href='./verVentas.php'>Ventas</a>";
-                    echo "<a class='claseTransicion' href='./insertarProducto.php'>Almacen</a>";
+                    echo "<a class='claseTransicion' href='./insertarProducto.php'>Almacén</a>";
                     break;
                 case 2:
                     //moderador
@@ -196,7 +196,7 @@
             unset($_SESSION['errores']);
         }
         ?>
-        <input type="submit" value="Enviar" id="enviar" name="enviar">
+        <input type="submit" class="btn btn-primary" value="Enviar" id="enviar" name="enviar">
     </form><?php
         }
         ?>

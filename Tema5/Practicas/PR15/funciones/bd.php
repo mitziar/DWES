@@ -95,7 +95,6 @@ function validaUser($user,$pass){
         unset($con);
     }
 }
-
 function mostrarProductos(){
     try{
         $conexion = new PDO("mysql:host=".$_SERVER['SERVER_ADDR'].";dbname=tienda",'itziar','itziar');

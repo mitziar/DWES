@@ -193,7 +193,7 @@
                 unset($_SESSION['error']);
                 ?>
             
-            <input class="enviar" type="submit" value="Enviar" id="enviar" name="enviar">
+            <input class="enviar" type="submit" value="Registrar" id="enviar" name="enviar">
         </form><?php
             }
         ?>

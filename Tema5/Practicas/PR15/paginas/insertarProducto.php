@@ -199,7 +199,7 @@
                 }
             ?>
             <p class="rojo"></p>
-        <input type="submit" value="Enviar" id="enviar" name="enviar">
+        <input type="submit" class="btn btn-primary" value="Guardar" id="enviar" name="enviar">
     </form><?php
         }
         ?>

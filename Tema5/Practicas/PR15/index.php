@@ -116,7 +116,7 @@
                                 echo "</fieldset>";
                             }
                     }
-                    echo "<a  href='./paginas/comprarProducto.php?codigo='".$value["codigo"]."'><button class='btn btn-primary boton'>Comprar</button></a>";
+                    echo '<a  href="./paginas/comprarProducto.php?codigo='.$value["codigo"].'"><button class="btn btn-primary boton">Comprar</button></a>';
 
                     ?></div><?php
 

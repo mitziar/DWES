@@ -64,7 +64,7 @@
                     //administrador
                     echo "<a href='../index.php'>Index</a>";
                     echo "<a href='./verVentas.php'>Ventas</a>";
-                    echo "<a href='./insertarProducto.php'>Almacen</a>";
+                    echo "<a href='./insertarProducto.php'>Almacén</a>";
                     break;
                 case 2:
                     //moderador
