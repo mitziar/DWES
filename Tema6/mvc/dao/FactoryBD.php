@@ -16,6 +16,7 @@ Class FactoryBD{
 
 
         }catch (Exception $e){
+                /**AQUI HAY QUE GESTIONAR LOS ERRORES DE LA BD, (EN INSERT, UPDATES,...) INDICAR AL USUARIO DE FORMA VISUAL CORRECTA */
                 $preparada = null;//Devuelve nulo si hay error
                 echo $e;
                 unset($con);

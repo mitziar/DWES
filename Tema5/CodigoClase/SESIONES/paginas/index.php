@@ -3,8 +3,7 @@ session_start();
 require '../funciones/funciones.php';
 if(!estaValidado()){
     //mandar al login o informar no tiene permisos
-    header('Location: ../login.php');
-    exit();
+    
 }
 ?>
 <header>
