@@ -60,4 +60,18 @@ class UsuarioDAO extends FactoryBD implements DAO{
         return true;
     }
 
+    //ES especifico del dao
+    public static function valida($user,$pass){
+        $sql = 'select * from usuarios where usuario = ? and clave = ?;';
+        $pass=sha1($pass);
+        $datos = array($user,$pass);//paso array vacio, porque no necesitas datos para esta consulta
+        $devuelve=parent::ejecuta($sql,$datos);
+        $objeto= $devuelve->fetchObject();
+        if($objeto){
+            $usuario = new Usuario ($objeto->usuario,$objeto->clave, $objeto->nombre,$objeto->correo, $objeto->perfil);
+            return $usuario;
+        }
+        return null;
+    }
+
 }

@@ -1,5 +1,5 @@
 <?
-session_start()
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +36,7 @@ session_start()
               <input type="submit" name='login' class="btn btn-outline-primary me-2" value='login'>Login
           <?}else{?>
             <h2>Hola $_SESSION['user']</h2>
+            <input type="submit" name='miperfil' class="btn btn-outline-primary me-2" value='logout'>Mi perfil
             <input type="submit" name='logout' class="btn btn-outline-primary me-2" value='logout'>Logout
           <?}?>
           </form>
