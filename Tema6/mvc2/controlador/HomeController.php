@@ -1,0 +1,3 @@
+<?
+
+$arrayProductos = ProductoDao::findAll();
