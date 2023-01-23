@@ -1,33 +1,37 @@
 <?
-//todos los requires que necesite el index
+//bbdd
+require_once('./config/conexion.php');
 
-//BBDD
-require_once('./config/conexion.php');//fichero de configuracion de la bd
-//pongo la direccion desde el index, porque es donde se va a requerir
-//require_once('./vista/layout.php');
+//funciones
+require_once('./core/funcionesSesiones.php');
+require_once('./core/valida.php');
 
-//MODELO: por orden
-require_once('./core/funcionesSesion.php');
+
+//modelo 
 require_once('./dao/FactoryBD.php');
 require_once('./dao/DAO.php');
-require_once ('./modelo/Usuario.php');
-require_once ('./dao/UsuarioDAO.php');
-
-
+require_once('./modelo/Usuario.php');
+require_once('./modelo/Producto.php');
+require_once('./dao/UsuarioDAO.php');
+require_once('./dao/ProductoDAO.php');
 
 //controladores
-$controladores = array(
-    'login'=>'./controlador/loginController.php'
+$controladores = array(    
+    'login'=>'./controlador/LoginController.php',
+    'registro' =>'./controlador/RegistroController.php',
+    'home' => './controlador/HomeController.php',
+    'user' => './controlador/UserController.php',
+    'producto' => './controlador/ProductoController.php',
+    'admin' => './controlador/AdminController.php',
 );
 
-
 //vistas
-
-//clave valor de todas las vistas que hay
 $vistas = array(
     'home'=>'homeView.php',
     'login'=>'loginView.php',
-    'user'=>'UserView.php'
+    'user'=>'UserView.php',
+    'registro'=>'registroView.php',
+    'verProducto'=>'verProductoView.php',
+    'admin'=>'adminView.php',
+    'listaProd'=>'listaProductosView.php'
 );
-
-?>

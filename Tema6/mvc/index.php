@@ -1,42 +1,41 @@
- <?
- require './config/configuracion.php';
-  session_start();
+<?
 
-  if(isset($_REQUEST['logout'])){
-    session_destroy();//lleva al login
-  }
-//si no tiene una vista
-//guardada en la sesion va a hom
-if(estaValidado() && !isset($_SESSION['pagina'])){
-    $_SESSION['vista']=$vistas['home'];
+require './config/configuracion.php';
 
-//sino tiene una vista guardada en la sesion va a hombre
+session_start();
 
-}elseif((!estaValidado()&&!isset($_SESSION['pagina'])) || isset($_REQUEST['login'])){
-    //si ha pulsado login
+if (isset($_REQUEST['logout'])) {
+    session_destroy();
+    $_SESSION['controlador'] = $controladores['login'];
+    $_SESSION['vista'] = $vistas['login'];
     $_SESSION['pagina'] = 'login';
-    $_SESSION['controlador']= $controladores['login'];
-    $_SESSION['vista']=$vistas['login'];
+    header('Location: ./index.php');
+    exit;
+} else {
 
-    //le indico el controlador que gestiona la peticion
+    //si no tiene una vista 
+    ///guardad en la sesion va a home
+    if (estaValidado() && !isset($_SESSION['pagina']))
+        $_SESSION['vista'] = $vistas['home'];
+    //si ha pulsado login 
+    elseif ((!estaValidado() && !isset($_SESSION['pagina'])) || isset($_REQUEST['login'])) {
+        $_SESSION['pagina'] = 'login';
+        $_SESSION['controlador'] = $controladores['login'];
+        $_SESSION['vista'] = $vistas['login'];
+    } elseif (isset($_SESSION['pagina'])) {
+        if(esAdmin() && isset($_REQUEST['admProducto'])){
+            
+            $_SESSION['controlador'] = $controladores['admin'];
+            $_SESSION['pagina'] = 'admin';
+            require_once $_SESSION['controlador'];
+            $_SESSION['vista'] = $vistas['admin'];
 
-}elseif(isset($_SESSION['pagina'])){
-    require_once $_SESSION['controlador'];
+        }else{
+            require_once $_SESSION['controlador'];
+        }
+        
+    }
 }
-//  //PRUEBASSS
 
-//  $arrayUsuarios = UsuarioDAO::findAll();
-//  //print_r($arrayUsuarios);
-//  $findById=UsuarioDAO::findById('u1');
-//  //print_r($findById);
-//  $usuario=new Usuario('maria',sha1('maria'),'maria','maria@gmail.com','ADM01');
-//  //UsuarioDAO::insert($usuario);
-//  $usuario->nombre = 'pepito';
-//  if(!UsuarioDAO::update($usuario)){
-//     echo 'No se ha modificado';
-//  }
-//  if(!UsuarioDAO::update($usuario->usuario)){
-//     echo 'No se ha borrado';
-//  }
+
 require_once('./vista/layout.php');
-
