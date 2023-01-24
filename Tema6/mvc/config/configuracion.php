@@ -4,7 +4,7 @@ require_once('./config/conexion.php');
 
 //funciones
 require_once('./core/funcionesSesiones.php');
-require_once('./core/valida.php');
+//require_once('./core/valida.php');
 
 
 //modelo 

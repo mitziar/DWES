@@ -1,6 +1,4 @@
 
-
-
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src='./webroot<?echo $producto->img?>' alt="Card image cap">
         <div class="card-body">

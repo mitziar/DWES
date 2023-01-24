@@ -19,7 +19,7 @@
                 echo "<td>".$value->codProd."</td>";
                 echo "<td>".$value->codProd."</td>";
                 echo "<form action ='./index.php'>";
-                echo "<td> <input type='hidden' name='codProd' value='.$value->codProd.'></td>";
+                echo "<td> <input type='hidden' name='codProd' value='".$value->codProd."'></td>";
                 echo "<td><input type='submit' name='ver' value='ver'></td>";
                 echo "<td><input type='submit' name='editar' value='editar'></td>";
                 echo "<td><input type='submit' name='borrar' value='borrar'></td>";
