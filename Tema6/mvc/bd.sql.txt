@@ -1,4 +1,4 @@
-CREATE TABLE producto(
+CREATE TABLE producto (
     codProd varchar(50) primary key,
     nombre varchar(100),
     descripcion varchar(900),

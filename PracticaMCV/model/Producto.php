@@ -1,21 +1,21 @@
 <?
 
 class Producto{
-    private $codigo;
+    private $codProd;
     private $nombre;
     private $descripcion;
     private $precio;
     private $stock;
-    private $ruta;
+    private $img;
 
-    public function __construct($codigo,$nombre,$descripcion,$precio,$stock,$ruta)
+    public function __construct($codigo,$nombre,$descripcion,$precio,$stock,$img)
     {
         $this->codProd = $codigo;
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;        
         $this->precio = $precio;
         $this->stock = $stock;
-        $this->img = $ruta;
+        $this->img = $img;
     }
     
     public function __get($get){

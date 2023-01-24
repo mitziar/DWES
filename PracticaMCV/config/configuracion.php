@@ -10,9 +10,9 @@ require_once('./core/funcionesSesiones.php');
 require_once('./dao/FactoryBD.php');
 require_once('./dao/DAO.php');
 require_once('./model/Usuario.php');
-// require_once('./modelo/Producto.php');
-// require_once('./dao/UsuarioDAO.php');
-// require_once('./dao/ProductoDAO.php');
+require_once('./model/Producto.php');
+require_once('./dao/UsuarioDao.php');
+require_once('./dao/ProductoDAO.php');
 
 //controladores
 $controladores = array(    
