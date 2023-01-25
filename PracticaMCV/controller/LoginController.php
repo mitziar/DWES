@@ -22,6 +22,8 @@ if (isset($_REQUEST['registro'])) {
                 $_SESSION['controlador'] = $controladores['home'];
                 $_SESSION['pagina'] = 'home';     
                 require  $_SESSION['controlador'];
+            }elseif($usuario == null){
+                $_SESSION['error']='Usuario o contraseña inválidos';
             }
         }
     }

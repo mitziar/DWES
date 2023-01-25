@@ -3,4 +3,4 @@
 define('HOST','192.168.100.127');
 define('USER','itziar');
 define('PASS','itziar');
-define('BBDD','sesiones2');
+define('BBDD','tienda');

@@ -8,9 +8,9 @@ class Producto{
     private $stock;
     private $img;
 
-    public function __construct($codigo,$nombre,$descripcion,$precio,$stock,$img)
+    public function __construct($codProd,$nombre,$descripcion,$precio,$stock,$img)
     {
-        $this->codProd = $codigo;
+        $this->codProd = $codProd;
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;        
         $this->precio = $precio;

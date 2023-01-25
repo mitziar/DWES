@@ -1,18 +1,20 @@
 <?
 class Usuario{
-    private $usuario;
-    private $contrasena;
-    private $email;
+    private $id;
     private $fecha;
-    private $codigo;
+    private $cantidad;
+    private $precio;
+    private $producto;
+    private $usuario;
 
-    public function __construct($usuario,$contrasena,$email,$fecha,$codigo)
+    public function __construct($id,$fecha,$cantidad,$precio,$producto)
     {
-        $this->usuario = $usuario;
-        $this->contrasena = $contrasena;
-        $this->email = $email;
+        $this->id = $id;
         $this->fecha = $fecha;
-        $this->codigo = $codigo;
+        $this->cantidad = $cantidad;
+        $this->precio = $precio;
+        $this->producto = $producto;
+        $this->usuario = $usuario;
     }
     
     public function __get($get){

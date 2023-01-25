@@ -47,7 +47,7 @@ class UsuarioDAO extends FactoryBD implements DAO{
         return true;
     }
     public static function update($objeto){
-        $sql = 'update usuarios set clave = ?,nombre = ?,correo = ?,perfil=? where usuario = ? ';
+        $sql = 'update usuarios set contraseña = ?,email = ?,fecha = ?,codigo=? where usuario = ? ';
         $datos = array($objeto->clave,$objeto->nombre,$objeto->correo,$objeto->perfil,$objeto->usuario);
         $devuelve = parent::ejecuta($sql,$datos); 
         if($devuelve->rowCount() == 0){
@@ -57,13 +57,13 @@ class UsuarioDAO extends FactoryBD implements DAO{
     }
 
     public static function valida($user,$pass){
-        $sql = 'select * from usuarios where usuario = ? and clave = ?;';
+        $sql = 'select * from usuarios where usuario = ? and contraseña = ?;';
         $passh = sha1($pass);
         $datos = array($user,$passh);
         $devuelve = parent::ejecuta($sql,$datos);
         $obj = $devuelve->fetchObject();
         if($obj){
-             $usuario = new Usuario($obj->usuario, $obj->clave, $obj->nombre,$obj->correo, $obj->perfil);
+             $usuario = new Usuario($obj->usuario, $obj->contraseña, $obj->email,$obj->fecha, $obj->codigo);
             return $usuario;
         }  
         return null;

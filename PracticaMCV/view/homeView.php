@@ -5,7 +5,7 @@
     if(is_array($productos)){
         foreach($productos as $producto){?>
             <div class="card" style="width: 18rem; margin:0.5%;">
-                        <img class="card-img-top" src="./webroot<?echo $producto->img?>" alt="Card image cap">
+                        <img class="card-img-top" src="./webroot/uploads/<?echo $producto->img?>" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title"><?echo $producto->nombre?></h5>
                             <p class="card-text"><?echo $producto->descripcion?></p>

@@ -17,7 +17,7 @@ if(isset($_REQUEST['comprar'])){
     $_SESSION['vista'] = $vistas['verProducto'];
     require_once $_SESSION['controlador'];
 }
-if(isset($_REQUEST['home'])){
+if(isset($_REQUEST['home'])||!isset($_SESSION['vista'])){
     $_SESSION['pagina'] = 'home';
     $_SESSION['controlador'] = $controladores['home'];
     $_SESSION['vista'] = $vistas['home'];

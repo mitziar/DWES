@@ -1,18 +1,14 @@
 <?
-class Usuario{
-    private $usuario;
-    private $contrasena;
-    private $email;
-    private $fecha;
-    private $codigo;
 
-    public function __construct($usuario,$contrasena,$email,$fecha,$codigo)
+class Roles{
+    private $codigo;
+    private $rol;
+
+
+    public function __construct($codigo,$rol)
     {
-        $this->usuario = $usuario;
-        $this->contrasena = $contrasena;
-        $this->email = $email;
-        $this->fecha = $fecha;
         $this->codigo = $codigo;
+        $this->rol = $rol;
     }
     
     public function __get($get){
@@ -26,5 +22,4 @@ class Usuario{
             $this->$clave=$valor;
         
     }
-
 }
