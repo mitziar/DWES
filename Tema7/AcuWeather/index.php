@@ -13,12 +13,16 @@
     <label for="provincia">Elige provincia:</label>
 
     <select name="provincia" id="provincia">
-        <option value="Leon Castilla y León">Leon</option>
-        <option value="Zamora Castilla y León">Zamora</option>
-        <option value="Valladolid Castilla y León">Valladolid</option>
-        <option value="Burgos Castilla y León">Burgos</option>
-        <option value="Palencia Castilla y León">Palencia</option>
+        <option value="Le%C3%B3n%20Castilla%20y%20Le%C3%B3n">Leon</option>
+        <option value="Zamora%20Castilla%20y%20Le%C3%B3n">Zamora</option>
+        <option value="Valladolid%20Castilla%20y%20Le%C3%B3n">Valladolid</option>
+        <option value="Burgos%20Castilla%20y%20Le%C3%B3n">Burgos</option>
+        <option value="Palencia%20Castilla%20y%20Le%C3%B3n">Palencia</option>
+        <option value="Soria%20Castilla%20y%20Le%C3%B3n">Soria</option>
+        <option value="Segovia%20Castilla%20y%20Le%C3%B3n">Segovia</option>
+        <option value="Salamanca%20Castilla%20y%20Le%C3%B3n">Salamanca</option>
     </select>
+    <input type="submit" value="Enviar" name="enviar">
     </form>
 
   </body>
