@@ -11,7 +11,7 @@
                             <p class="card-text"><?echo $producto->descripcion?></p>
                             <form action="./index.php" method="POST"> 
                             <input type="hidden" name="codigoProducto" value="<?echo $producto->codProd?>">
-                            <input type="submit" class="btn btn-primary" value="Comprar" name="comprar">
+                            <input type="submit" class="btn btn-primary" value="Comprar" name="ver">
                             </form> 
                         </div>
             </div>

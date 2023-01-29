@@ -15,13 +15,20 @@ if (isset($_REQUEST['registro'])) {
             if ($usuario != null) {
                 $_SESSION['validado'] = true;
                 $_SESSION['user'] = $user;
-                $_SESSION['nombre'] = $usuario->nombre;
-                $_SESSION['perfil'] = $usuario->perfil;
-
-                $_SESSION['vista'] = $vistas['home'];
-                $_SESSION['controlador'] = $controladores['home'];
-                $_SESSION['pagina'] = 'home';     
+                $_SESSION['nombre'] = $usuario->usuario;
+                $_SESSION['perfil'] = $usuario->codigo;
+                if(isset($_SESSION['codigoProducto'])){
+                    $_SESSION['pagina'] = 'verProducto';
+                    $_SESSION['controlador'] = $controladores['producto'];
+                    $_SESSION['vista'] = $vistas['verProducto'];  
+                }else{
+                    $_SESSION['vista'] = $vistas['home'];
+                    $_SESSION['controlador'] = $controladores['home'];
+                    $_SESSION['pagina'] = 'home';     
+                    
+                }
                 require  $_SESSION['controlador'];
+
             }elseif($usuario == null){
                 $_SESSION['error']='Usuario o contraseña inválidos';
             }

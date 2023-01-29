@@ -14,4 +14,25 @@ Class FactoryBD{
             return $preparada;
         }
     }
+    public static function ejecutaTransacion($sql){
+        
+            try{
+                $conexion = mysqli_connect($_SERVER['SERVER_ADDR'],USER,PASS,BBDD);
+                mysqli_autocommit($conexion, false);
+               
+                foreach ($slq as $key => $value) {
+                    mysqli_query($conexion, $value);
+                }
+
+                mysqli_commit($conexion);
+                mysqli_close($conexion);
+                return true;
+            
+             }catch (Exception $ex){
+                echo $ex;
+                mysqli_rollback($conexion);
+                mysqli_close($conexion);
+                return false;
+            }
+    }
 }

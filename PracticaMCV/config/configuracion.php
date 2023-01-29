@@ -13,6 +13,7 @@ require_once('./model/Usuario.php');
 require_once('./model/Producto.php');
 require_once('./dao/UsuarioDao.php');
 require_once('./dao/ProductoDAO.php');
+require_once('./dao/VentaDao.php');
 
 //controladores
 $controladores = array(    
@@ -22,6 +23,7 @@ $controladores = array(
     'user' => './controller/UserController.php',
     'producto' => './controller/ProductoController.php',
     'admin' => './controller/AdminController.php',
+    'venta' => './controller/VentaController.php'
 );
 
 //vistas
@@ -31,6 +33,7 @@ $vistas = array(
     'user'=>'UserView.php',
     'registro'=>'registroView.php',
     'verProducto'=>'verProductoView.php',
+    'verVenta'=>'verVentaView.php',
     'admin'=>'adminView.php',
     'listaProd'=>'listaProductosView.php'
 );

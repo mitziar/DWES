@@ -13,6 +13,10 @@
             <input type="text" name="user" id="user">
             <label for="pass">Contraseña</label>
             <input type="password" name="pass" id="pass">
+            <?if(isset($_REQUEST['codigoProducto'])){
+                echo '<input type="hidden" value="'.$_REQUEST['codigoProducto'].'" name="enviar" class="btn btn-primary m-3">';
+            }
+            ?>
             <input type="submit" value="Enviar" name="enviar" class="btn btn-primary m-3">
         </form>
     </div>

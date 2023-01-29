@@ -44,6 +44,7 @@
         </div>
       </header>
       <main>
+        
          <?
             require_once $_SESSION['vista'];
           ?>

@@ -17,7 +17,7 @@ if (isset($_REQUEST['logout'])) {
         $_SESSION['controlador'] = $controladores['login'];
         require_once $_SESSION['controlador'];
     }
-    if(isset($_REQUEST['comprar'])){
+    if(isset($_REQUEST['ver'])|| isset($_REQUEST['comprar'])){
         $_SESSION['pagina'] = 'verProducto';
         $_SESSION['controlador'] = $controladores['producto'];
         $_SESSION['vista'] = $vistas['verProducto'];
@@ -27,6 +27,12 @@ if (isset($_REQUEST['logout'])) {
         $_SESSION['pagina'] = 'home';
         $_SESSION['controlador'] = $controladores['home'];
         $_SESSION['vista'] = $vistas['home'];
+        require_once $_SESSION['controlador'];
+    }
+    if(isset($_REQUEST['verVenta'])){
+        $_SESSION['pagina'] = 'venta';
+        $_SESSION['controlador'] = $controladores['venta'];
+        $_SESSION['vista'] = $vistas['verVenta'];
         require_once $_SESSION['controlador'];
     }
 }

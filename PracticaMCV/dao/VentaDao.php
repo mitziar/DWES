@@ -3,14 +3,14 @@
 class VentaDao extends FactoryBD implements DAO{
     public static function findAll(){
         $sql = 'select * from venta;';
-        $datos = array();
+        $datos=array();
         $devuelve = parent::ejecuta($sql,$datos);
         $arrayVentas= array();
         while($obj = $devuelve->fetchObject()){         
             $venta = new Venta($obj->id, $obj->fecha, $obj->cantidad,$obj->precio,obj->producto, $obj->usuario);
-            array_push($arrayroVentas,$venta);
+            array_push($arrayVentas,$venta);
         }
-        return $arrayProductos;
+        return $arrayVentas;
     }
     public static function findById($id){
         $sql = 'select * from venta where codigo = ?;';
@@ -22,6 +22,17 @@ class VentaDao extends FactoryBD implements DAO{
             return $venta;
         }  
         return null;
+    }
+    public static function findByUser($user){
+        $sql = 'select * from venta where usuario = ?;';
+        $datos = array($user);
+        $devuelve = parent::ejecuta($sql,$datos);
+        $arrayVentas= array();
+        while($obj = $devuelve->fetchObject()){         
+            $venta = new Venta($obj->id, $obj->fecha, $obj->cantidad,$obj->precio,obj->producto, $obj->usuario);
+            array_push($arrayroVentas,$venta);
+        }
+        return $arrayVentas;
     }
     public static function delete($id){
         $sql = 'delete from venta where codigo = ?;';
@@ -53,5 +64,13 @@ class VentaDao extends FactoryBD implements DAO{
             return false;
         }
         return true;
+    }
+    public static function transacionVenta($codigoProducto, $stock){
+        $fecha=  date('Y-m-d');
+        $sql1='update productos set stock='.$stock.' where codigo = '.$codigoProducto;
+        $sql='insert into venta (fecha,cantidad,producto,usuario) values("'.$fecha.'",'.$stock.','.intval($codigoProducto).',"'.$_SESSION['user'].'")';
+        $arraySentencias = array ($sql1,$sql);
+        $devuelve = parent::ejecutaTransacion($arraySentencias);
+        return $devuelve;
     }
 }

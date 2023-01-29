@@ -7,7 +7,7 @@ class Usuario{
     private $producto;
     private $usuario;
 
-    public function __construct($id,$fecha,$cantidad,$precio,$producto)
+    public function __construct($id,$fecha,$cantidad,$precio,$producto,$usuario)
     {
         $this->id = $id;
         $this->fecha = $fecha;
