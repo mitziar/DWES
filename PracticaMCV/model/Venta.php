@@ -1,5 +1,5 @@
 <?
-class Usuario{
+class Venta{
     private $id;
     private $fecha;
     private $cantidad;
