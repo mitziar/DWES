@@ -1,5 +1,5 @@
 <?
-
+require_once './configuracion/conexion.php';
 
 Class FactoryBD{
     public static function ejecuta($sql,$datos){
@@ -9,7 +9,7 @@ Class FactoryBD{
             $preparada->execute($datos);       
         }catch(Exception $e){
             $preparada = null;
-            echo $e;           
+            echo $e;//podemos lanzar aqui un throw por si se cae           
         }finally{
             unset($con);
             return $preparada;
