@@ -73,7 +73,7 @@ class ConciertoDAO extends FactoryBD implements DAO{
     }
     public static function findByFechaOrder($fecha,$order){
         $sql = 'select * from conciertos where fecha >= ? order by fecha '.$order.';';
-        $datos = array();
+        $datos = array($fecha);
         $devuelve = parent::ejecuta($sql,$datos);
         $arrayC= $devuelve->fetchAll(PDO::FETCH_ASSOC);
         return $arrayC;
@@ -89,12 +89,14 @@ class ConciertoDAO extends FactoryBD implements DAO{
         return true;
     }
     public static function insert($objeto){
-        $sql = 'insert into conciertos values (null,?,?,?,?)';
+        $sql = 'insert into conciertos values (?,?,?,?,?)';
         $objeto = (array) $objeto;
         $datos=array();
         foreach($objeto as $att){
             array_push($datos,$att); 
         }
+
+        //$datos[0] = null;//hacemos esto porque el al pasar los datos a objeto concierto, se crea el id automáticamente, 
         $devuelve = parent::ejecuta($sql,$datos);
         if($devuelve->rowCount() == 0){
             return false;
@@ -102,8 +104,8 @@ class ConciertoDAO extends FactoryBD implements DAO{
         return true;
     }
     public static function update($objeto){
-        $sql = 'update conciertos set grupo = ?, fecha=?, precio=?,luegar=? where id=?';
-        $datos = array();
+        $sql = 'update conciertos set grupo = ?, fecha=?, precio=?, lugar=? where id=?';
+        $datos = array($objeto->grupo,$objeto->fecha,$objeto->precio,$objeto->lugar,$objeto->id);
         $devuelve = parent::ejecuta($sql,$datos); 
         if($devuelve->rowCount() == 0){
             return false;
