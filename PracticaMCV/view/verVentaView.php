@@ -10,7 +10,7 @@
     }else{
         $ventas=VentaDao::findAll();
     }
-        
+    echo "<h1>Mis compras</h1>";    
     if($ventas){
         echo '<table class="table">';
         echo '<thead>';

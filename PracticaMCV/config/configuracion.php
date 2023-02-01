@@ -35,8 +35,11 @@ $vistas = array(
     'registro'=>'registroView.php',
     'verProducto'=>'verProductoView.php',
     'verVenta'=>'verVentaView.php',
-    'admin'=>'adminView.php',
     'listaProd'=>'listaProductosView.php',
     'modificarVenta' => 'modificarVentaView.php',
-    'editarUser'=> 'editarUserView.php'
+    'editarUser'=> 'editarUserView.php',
+    'insertarUser'=> 'insertarUserView.php',
+    'insertarProducto'=> 'insertarProductoView.php',
+    'modificarProducto'=> 'modificarProductoView.php',
+    'administrarProductos'=> 'administrarProductoView.php'
 );

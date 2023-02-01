@@ -4,7 +4,7 @@
         echo $_SESSION['error'];
         unset($_SESSION['error']);
     }
-
+    echo "<h1>Ver producto</h1>";
     if((isset($_REQUEST['codigoProducto']) || isset($_SESSION['codigoProducto'])) && (isset($_REQUEST['comprar'])||isset($_REQUEST['ver']) || isset($_REQUEST['enviar']))){
 
         if(isset($_REQUEST['codigoProducto'])){

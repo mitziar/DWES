@@ -22,4 +22,12 @@ function esModerador(){
     }
     return false;
 }
+function camposVacios(){
+    foreach ($_REQUEST as $key => $value) {
+        if(empty($value)){
+            return true;
+        }
+    }
+    return false;
+}
 

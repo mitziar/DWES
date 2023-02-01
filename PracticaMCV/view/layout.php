@@ -21,11 +21,11 @@
         <?
         if(!estaValidado()){?>
           <input type="submit" name="login" class="btn btn-outline-secondary me-2" value="Login">
-          <input type="submit" name="registro" class="btn btn-outline-secondary me-2" value="Registrarse">
+          <input type="submit" name="insertarUsuario" class="btn btn-outline-secondary me-2" value="Registrarse">
         <?}else{
           if(esAdmin()){?>
             
-            <input type="submit" name="admProducto" class="btn btn-outline-secondary me-2" value="Administrar Productos">
+            <input type="submit" class="btn btn-outline-secondary me-2" name='administrarProductos' value="Administrar Productos">
           <?
           }
           ?>

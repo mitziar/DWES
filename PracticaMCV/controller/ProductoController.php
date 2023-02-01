@@ -15,6 +15,53 @@ if(isset($_REQUEST['comprar'])){
         }
     
 }
+if(isset($_REQUEST['eliminarProducto']) && !empty($_REQUEST['codigoProducto'])){
+    if(ProductoDAO::delete($_REQUEST['codigoProducto'])){
+        require_once $_SESSION['controlador'];
+    }
+}elseif(isset($_REQUEST['modificarProducto'])&&!camposVacios()){
+    $producto=new Producto($_REQUEST['codigoProducto'],$_REQUEST['nombreProducto'],$_REQUEST['descripcion'],$_REQUEST['precio'],$_REQUEST['unidades'],$_FILES['file']['name']);
+    if($producto){
+        if(ProductoDAO::update($producto)){
+            $_SESSION['pagina'] = 'home';
+            $_SESSION['controlador'] = $controladores['home'];
+            $_SESSION['vista'] = $vistas['home'];
+            require_once $_SESSION['controlador'];
+            //albaran
+        }else{
+            $_SESSION['error']='No se ha podido insertar';
+            require_once $_SESSION['controlador'];
+        }
+    }
+}
+if(isset($_REQUEST['insertarProducto'])&& !empty($_REQUEST['nombreProducto'])&&!empty($_REQUEST['descripcion'])&&!empty($_REQUEST['precio'])&&!empty($_REQUEST['unidades'])&&!empty($_FILES['file'])){
+    if(esAdmin()){
+            $rutaGuardado = "./webroot/uploads/";
+            $rutaConNombreFichero = $rutaGuardado .  $_FILES['file']['name'];
+
+            if(!move_uploaded_file( $_FILES['file']['tmp_name'],$rutaConNombreFichero))
+            {
+                $_SESSION['errores']='No se ha guardado la imagen';
+            }else{
+                $producto=new Producto(null,$_REQUEST['nombreProducto'],$_REQUEST['descripcion'],$_REQUEST['precio'],$_REQUEST['unidades'],$_FILES['file']['name']);
+                if($producto){
+                    if(ProductoDAO::insert($producto)){
+                        $_SESSION['pagina'] = 'home';
+                        $_SESSION['controlador'] = $controladores['home'];
+                        $_SESSION['vista'] = $vistas['home'];
+                        require_once $_SESSION['controlador'];
+                        //albaran
+                    }else{
+                        $_SESSION['error']='No se ha podido insertar';
+                        require_once $_SESSION['controlador'];
+                    }
+                }
+            }
+
+    }else{
+        $_SESSION['error']='No tiene permisos para introducir productos';
+    }
+}
 
 
 ?>

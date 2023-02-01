@@ -12,6 +12,19 @@ if(isset($_REQUEST['modificarUsuario'])){
         }
     }
 }
+if(isset($_REQUEST['insertarUsuario'])){
+    if(!empty($_REQUEST['usuario'])&&!empty($_REQUEST['contraseña'])&&!empty($_REQUEST['contraseña2'])&&!empty($_REQUEST['email'])&&!empty($_REQUEST['fecha'])&&!empty($_REQUEST['codigo'])){
+        $usuario= new Usuario($_REQUEST['usuario'],sha1($_REQUEST['contraseña']),$_REQUEST['email'],$_REQUEST['fecha'],$_REQUEST['codigo']);
+        if(UsuarioDao::insert($usuario)){
+                    $_SESSION['vista'] = $vistas['home'];
+                    $_SESSION['controlador'] = $controladores['home'];
+                    $_SESSION['pagina'] = 'home';  
+                    require  $_SESSION['controlador'];
+        }else{
+            $_SESSION['error']='No se ha podido registrar el usuario';
+        }
+    }
+}
 if (isset($_REQUEST['registro'])) {
     $_SESSION['controlador'] = $controladores['registro'];
     $_SESSION['vista'] = $vistas['registro'];

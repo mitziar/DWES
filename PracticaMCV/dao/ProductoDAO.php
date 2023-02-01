@@ -46,7 +46,7 @@ class ProductoDAO extends FactoryBD implements DAO{
         return true;
     }
     public static function update($objeto){
-        $sql = 'update productos set nombre = ?,descripcion = ?,precio = ?,stock=?,ruta=? where codigocodProd = ? ';
+        $sql = 'update productos set nombre = ?,descripcion = ?,precio = ?,stock=?,ruta=? where codigo = ? ';
         $datos = array($objeto->descripcion,$objeto->nombre,$objeto->precio,$objeto->stock,$objeto->img,$objeto->codProd);
         $devuelve = parent::ejecuta($sql,$datos); 
         if($devuelve->rowCount() == 0){

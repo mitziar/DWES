@@ -4,7 +4,7 @@ if(isset($_SESSION['error']))
     echo $_SESSION['error'];
     unset($_SESSION['error']);
 }
-
+echo "<h1>Ventas (mis compras)</h1>";
 if($_REQUEST['codigoVenta']){
     $venta=VentaDao::findById($_REQUEST['codigoVenta']);
     if($venta){?>

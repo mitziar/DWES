@@ -7,6 +7,7 @@
             }
         ?>
     </div>
+    <h1>Entrar como usuario</h1>;
     <div class='row justify-content-center m-3'>
         <form action="./index.php" method="post">
             <label for="user">Usuario</label>

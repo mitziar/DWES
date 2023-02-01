@@ -4,7 +4,7 @@ if(isset($_SESSION['error']))
     echo $_SESSION['error'];
     unset($_SESSION['error']);
 }
-
+echo "<h1>Editar Usuario</h1>";
 if($_SESSION['user']){
     $usuario=UsuarioDao::findByUser($_SESSION['user']);
     if($usuario){?>
@@ -12,8 +12,8 @@ if($_SESSION['user']){
         <div class="row">
             <div class="col-md-8">
                 <div class="card-body text-center">
-                    <h5 class="card-title">Usuario <?echo $usuario->usuario?></h5>
-                    <p class="card-text text-center">Contraseña: <?echo $usuario->contrasena?></p><input type="password" required name="contraseña" value=<?echo  $usuario->contrasena?>>
+                    <h5 class="card-title">Usuario <?echo $usuario->usuario?></h5><input type="password" required name="contraseña" >
+                    <p class="card-text text-center">Contraseña: </p><input type="password" required name="contraseña" >
                     <p class="card-text text-left">Email: <?echo $usuario->email?><input type="email" required name="email" value=<?echo $usuario->email?>></p>
                     <p class="card-text text-left">Fecha de nacimiento: <?echo $usuario->fecha?><input required type="date" name="fecha" value=<?echo $usuario->fecha?> ></p>
                     <p class="card-text text-left">Código Rol: <?echo $usuario->codigo?><input type="number"  readonly name="codigo" value=<?echo $usuario->codigo?>></p>
