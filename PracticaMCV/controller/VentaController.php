@@ -1,13 +1,22 @@
 <?php
-    if(isset($_REQUEST['verVenta'])){
-        //no viene de comprar
-
-    }else{
-
-        //viene de comprar
-        if(isset($_REQUEST['stock'])&&isset($_REQUEST['codigoProducto'])&&isset($_REQUEST['unidades'])){
+     if(isset($_REQUEST['eliminarVenta'])&&isset($_REQUEST['codigoVenta'])){
+        if(!VentaDao::delete($_REQUEST['codigoVenta'])){
+            $_SESSION['error']='No se ha podido eliminar la venta';
+        }
+     }elseif(isset($_REQUEST['modificarDatosVenta'])){
+        if( isset($_REQUEST['codigoVenta']) && isset($_REQUEST['fecha'])&& isset($_REQUEST['cantidad']) && isset($_REQUEST['precio']) && isset($_REQUEST['codigoProducto']) && isset($_REQUEST['usuario'])){
+            $venta=new Venta($_REQUEST['codigoVenta'],$_REQUEST['fecha'],$_REQUEST['cantidad'],$_REQUEST['precio'],$_REQUEST['codigoProducto'],$_REQUEST['usuario']);
+            if(VentaDao::update($venta)){
+                    $_SESSION['pagina'] = 'venta';
+                    $_SESSION['vista'] = $vistas['verVenta'];
+            }else{
+                $_SESSION['error']='No se ha podido modificar la venta';
+            }
+        }
+    }else if(isset($_REQUEST['stock'])&&isset($_REQUEST['codigoProducto'])&&isset($_REQUEST['unidades'])){
+     
             $stock = $_REQUEST['stock'] - $_REQUEST['unidades'];
-            if(VentaDao::transacionVenta( $_REQUEST['codigoProducto'], $stock)) {
+            if(VentaDao::transacionVenta( $_REQUEST['codigoProducto'], $stock, $_REQUEST['unidades'],$_REQUEST['precio'])) {
                 $_SESSION['pagina'] = 'venta';
                 $_SESSION['controlador'] = $controladores['venta'];
                 $_SESSION['vista'] = $vistas['verVenta'];
@@ -15,13 +24,9 @@
             }else{
                 $_SESSION['error']='No se ha podido ejecutar la venta';
             }
-        } else{
-             $_SESSION['vista'] = $vistas['verVenta'];
-             $_SESSION['pagina'] = 'venta';
-        }
-
-        
+        //   $_SESSION['vista'] = $vistas['verVenta'];
+        //   $_SESSION['pagina'] = 'venta';  
     }
-    
-
+        
+             
 ?>

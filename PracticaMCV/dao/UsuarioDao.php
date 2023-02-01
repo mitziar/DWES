@@ -13,17 +13,19 @@ class UsuarioDAO extends FactoryBD implements DAO{
         return $arrayUsuarios;
 
     }
-    public static function findById($id){
+    public static function findByID($id){}
+    public static function findByUser($usuario){
         $sql = 'select * from usuarios where usuario = ?;';
-        $datos = array($id);
+        $datos = array($usuario);
         $devuelve = parent::ejecuta($sql,$datos);
         $obj = $devuelve->fetchObject();
         if($obj){
-             $usuario = new Usuario($obj->usuario, $obj->clave, $obj->nombre,$obj->correo, $obj->perfil);
+             $usuario = new Usuario($obj->usuario, $obj->contraseña, $obj->email,$obj->fecha, $obj->codigo);
             return $usuario;
         }  
         return null;
     }
+
     public static function delete($id){
         $sql = 'delete from usuarios where usuario = ?;';
         $datos = array($id);
@@ -48,7 +50,7 @@ class UsuarioDAO extends FactoryBD implements DAO{
     }
     public static function update($objeto){
         $sql = 'update usuarios set contraseña = ?,email = ?,fecha = ?,codigo=? where usuario = ? ';
-        $datos = array($objeto->clave,$objeto->nombre,$objeto->correo,$objeto->perfil,$objeto->usuario);
+        $datos = array($objeto->contrasena,$objeto->email,$objeto->fecha,$objeto->codigo,$objeto->usuario);
         $devuelve = parent::ejecuta($sql,$datos); 
         if($devuelve->rowCount() == 0){
             return false;

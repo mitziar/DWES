@@ -16,34 +16,56 @@
           <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
         </a>
   
-        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="./index.php?home=home" class="nav-link px-2 link-secondary">Mi Pagina</a></li>
-        </ul>
-  
         <div class="col-md-3 text-end">
         <form action="./index.php" method="POST"> 
         <?
         if(!estaValidado()){?>
-          <input type="submit" name="login" class="btn btn-outline-primary me-2" value="Login">
-          <input type="submit" name="registro" class="btn btn-outline-primary me-2" value="Registrarse">
-
-         <?}
-         else{
-          if(esAdmin()){
-            ?>
-           <input type="submit" name="admProducto" class="btn btn-outline-primary me-2" value="Administrar Productos">
-           <?
+          <input type="submit" name="login" class="btn btn-outline-secondary me-2" value="Login">
+          <input type="submit" name="registro" class="btn btn-outline-secondary me-2" value="Registrarse">
+        <?}else{
+          if(esAdmin()){?>
+            
+            <input type="submit" name="admProducto" class="btn btn-outline-secondary me-2" value="Administrar Productos">
+          <?
           }
           ?>
-          <h2><?echo $_SESSION['user']?></h2>
-          <input type="submit" name="miperfil" class="btn btn-outline-primary me-2" value="Mi perfil">
-        
-          <input type="submit" name="logout" class="btn btn-outline-primary me-2" value="Logout">
-         <?
-         } ?>
-
+        <h2><?echo $_SESSION['user']?></h2>
+        <input type="submit" name="miperfil" class="btn btn-outline-secondary me-2" value="Mi perfil">
+      
+        <input type="submit" name="logout" class="btn btn-outline-secondary me-2" value="Logout">
+          <?
+         }?>
         </div>
       </header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Tenth navbar example">
+            <div class="container-fluid">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="./index.php?home=home">HOME</a>
+                    </li>
+                    <?
+                  if(estaValidado()){?>
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="./index.php?verVenta">Mis compras</a>
+                    </li>
+                  <?}
+                  if(esAdmin()||esModerador()){?>
+                  <li class="nav-item">
+                    <a class="nav-link  active" href="./index.php?albaranes=albaranes">Albaranes</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link  active" href="./index.php?almacen=almacen">Almacen</a>
+                      </li>
+                  <?}?>
+                </ul>
+              </div>
+            </div>
+      </nav>
+
       <main class="d-flex flex-wrap justify-content-center align-items-center py-3 my-4"> 
               <? 
                 echo '<div class="row align-items-center">';

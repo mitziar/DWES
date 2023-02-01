@@ -12,19 +12,51 @@
     }
         
     if($ventas){
-
-        foreach($ventas as $kew => $venta){?>
-            <div class="card" style="width: 18rem;">  
-                <div class="card-body">
-                    <img class="card-img-top card-title m-3 w-75" src='./webroot/uploads/<?echo $ventas->img?>' alt="Card image cap">
-                    <h5 class="card-title">Venta número: <?echo $venta->id?></h5>
-                    <p class="card-text text-left">Fecha: <?echo $venta->fecha?></p>
-                    <p class="card-text text-left">Cantidad: <?echo $venta->cantidad?></p>
-                    <p class="card-text text-left">Precio: <?echo $venta->precio?> €</p>
-                    <p class="card-text text-left">Código Producto: <?echo $venta->codigo?></p>
-                </div>
-            </div>
-        <?}
+        echo '<table class="table">';
+        echo '<thead>';
+        echo '<tr>';
+        echo '<th scope="col">Número</th>';
+        echo '<th scope="col">Fecha</th>';
+        echo '<th scope="col">Cantidad</th>';
+        echo '<th scope="col">Precio</th>';
+        echo '<th scope="col">Código Producto</th>';
+        if(esModerador()||esAdmin()){
+            echo '<th scope="col">Eliminar</th>';
+        }
+        if(esAdmin()){
+            echo '<th scope="col">Modificar</th>';
+        }
+        echo '</tr>';
+        echo '</thead>';
+        echo '<tbody ">';
+        foreach($ventas as $key => $venta){
+        echo '<tr class="text-center">';?>
+            <th scope="row"><?echo $venta->id?></th>
+            <td ><?echo $venta->fecha?></td>
+            <td><?echo $venta->cantidad?></td>
+            <td><?echo $venta->precio?> €</td>
+            <td><?echo $venta->producto?></td><?
+            if(esAdmin()){?>
+                <td>
+                      <form action="./index.php" method="POST">  
+                            <input type="hidden" name='codigoVenta' value="<?echo $venta->id?>">
+                            <button class="btn btn-primary" name="eliminarVenta" type="submit">Eliminar</button>
+                     </form>  
+                </td>
+            <?}
+            if(esModerador()||esAdmin()){?>
+                <td>
+                      <form action="./index.php" method="POST"> 
+                        <input type="hidden" name='codigoVenta' value="<?echo $venta->id?>">
+                        <button class="btn btn-primary" name="modificarVenta" type="submit">Modificar</button>
+                    </form> 
+                </td>
+            <?}
+            
+        echo '</tr>';
+        }
+        echo '</tbody>';
+        echo '</table>';
 
     
     }else{

@@ -1,4 +1,17 @@
 <?
+if(isset($_REQUEST['modificarUsuario'])){
+    if(!empty($_REQUEST['contraseña'])&&!empty($_REQUEST['email'])&&!empty($_REQUEST['fecha'])&&!empty($_REQUEST['codigo'])){
+        $usuario= new Usuario($_SESSION['user'],sha1($_REQUEST['contraseña']),$_REQUEST['email'],$_REQUEST['fecha'],$_REQUEST['codigo']);
+        if(UsuarioDao::update($usuario)){
+                    $_SESSION['vista'] = $vistas['home'];
+                    $_SESSION['controlador'] = $controladores['home'];
+                    $_SESSION['pagina'] = 'home';  
+                    require  $_SESSION['controlador'];
+        }else{
+            $_SESSION['error']='No se ha podido modificar el usuario';
+        }
+    }
+}
 if (isset($_REQUEST['registro'])) {
     $_SESSION['controlador'] = $controladores['registro'];
     $_SESSION['vista'] = $vistas['registro'];

@@ -20,7 +20,7 @@ Class FactoryBD{
                 $conexion = mysqli_connect($_SERVER['SERVER_ADDR'],USER,PASS,BBDD);
                 mysqli_autocommit($conexion, false);
                
-                foreach ($slq as $key => $value) {
+                foreach ($sql as $key => $value) {
                     mysqli_query($conexion, $value);
                 }
 
