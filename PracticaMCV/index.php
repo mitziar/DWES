@@ -59,7 +59,10 @@ if (isset($_REQUEST['logout'])) {
         require_once $_SESSION['controlador'];
     }elseif(isset($_REQUEST['modificarProducto'])){
         require_once $_SESSION['controlador'];
+    }elseif(isset($_REQUEST['comprarProducto'])){
+        require_once $_SESSION['controlador'];
     }
+    
 
     if(isset($_REQUEST['verVenta'])){
         $_SESSION['pagina'] = 'venta';

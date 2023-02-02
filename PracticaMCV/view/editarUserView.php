@@ -12,13 +12,15 @@ if($_SESSION['user']){
         <!-- <div class="row"> -->
             <div class="col-md-8">
                 <div class="card-body text-center">
-                    <h5 class="card-title">Usuario <?echo $usuario->usuario?></h5>
-                    <p class="card-text text-center">Contraseña: </p><input type="password" required name="contraseña" >
+                    <h5 class="card-title">Usuario: <?echo $usuario->usuario?></h5>
+                    <form action='./index.php'>
+                    <p class="card-text text-left">Contraseña: </p><input type="password" required name="contraseña" >
                     <p class="card-text text-left">Email: <?echo $usuario->email?><input type="email" required name="email" value=<?echo $usuario->email?>></p>
                     <p class="card-text text-left">Fecha de nacimiento: <?echo $usuario->fecha?><input required type="date" name="fecha" value=<?echo $usuario->fecha?> ></p>
                     <p class="card-text text-left">Código Rol: <?echo $usuario->codigo?><input type="number"  readonly name="codigo" value=<?echo $usuario->codigo?>></p>
                     <a href="./index.php?home=home"><input type = 'button' class="btn m-2 btn-secondary w-100" value="Volver"></a>
                     <input type='submit' href="./index.php" class="btn m-2 btn-secondary w-100" value = 'Modificar' name ='modificarUsuario'>
+                    </form>
                 </div>
             </div>
         <!-- <div> -->

@@ -13,7 +13,8 @@
                 $_SESSION['error']='No se ha podido modificar la venta';
             }
         }
-    }else if(isset($_REQUEST['stock'])&&isset($_REQUEST['codigoProducto'])&&isset($_REQUEST['unidades'])){
+    }elseif(isset($_REQUEST['comprarProducto'])){
+        if(isset($_REQUEST['stock'])&&isset($_REQUEST['codigoProducto'])&&isset($_REQUEST['unidades'])){
      
             $stock = $_REQUEST['stock'] - $_REQUEST['unidades'];
             if(VentaDao::transacionVenta( $_REQUEST['codigoProducto'], $stock, $_REQUEST['unidades'],$_REQUEST['precio'])) {
@@ -26,6 +27,7 @@
             }
         //   $_SESSION['vista'] = $vistas['verVenta'];
         //   $_SESSION['pagina'] = 'venta';  
+    }
     }
         
              

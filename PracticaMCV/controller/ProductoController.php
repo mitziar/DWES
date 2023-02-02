@@ -1,8 +1,10 @@
 <?php
-if(isset($_REQUEST['comprar'])){
+if(isset($_REQUEST['comprarProducto'])){
 
         if(empty($_REQUEST['unidades'])){
             $_SESSION['error']='Introduzca las unidades que desea comprar';
+            require_once $_SESSION['controlador'];
+
         }elseif(!estaValidado()){
             $_SESSION['error']='Debe hacer login para comprar';
             $_SESSION['controlador'] = $controladores['login'];
@@ -45,14 +47,14 @@ if(isset($_REQUEST['insertarProducto'])&& !empty($_REQUEST['nombreProducto'])&&!
             {
                 $_SESSION['errores']='No se ha guardado la imagen';
             }else{
-                $producto=new Producto(null,$_REQUEST['nombreProducto'],$_REQUEST['descripcion'],$_REQUEST['precio'],$_REQUEST['unidades'],$_FILES['file']['name']);
+                $producto=new Producto(null,$_REQUEST['nombreProducto'],$_REQUEST['descripcion'],$_REQUEST['precio'],$_REQUEST['unidades'],$_FILES['file']['name'],1);
                 if($producto){
                     if(ProductoDAO::insert($producto)){
-                        $_SESSION['pagina'] = 'home';
-                        $_SESSION['controlador'] = $controladores['home'];
-                        $_SESSION['vista'] = $vistas['home'];
+                        $_SESSION['error']='Nuevo producto añadido';
+                        $_SESSION['pagina'] = 'administrarAlbaranes';
+                        $_SESSION['controlador'] = $controladores['albaran'];
+                        $_SESSION['vista'] = $vistas['administrarAlbaranes'];
                         require_once $_SESSION['controlador'];
-                        //albaran
                     }else{
                         $_SESSION['error']='No se ha podido insertar';
                         require_once $_SESSION['controlador'];

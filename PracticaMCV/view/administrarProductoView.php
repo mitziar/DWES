@@ -5,7 +5,7 @@
         echo $_SESSION['error'];
         unset($_SESSION['error']);
     }
-    if(esAdmin()){?>
+    if(esAdmin()||esModerador()){?>
         <div class="row">
             <form action="./index.php" method="POST">  
                 <button class="btn btn-secondary m-4" name="insertarProducto" type="submit">Insertar nuevo producto</button>
@@ -16,7 +16,7 @@
         $productos=ProductoDAO::findAll();   
         if($productos){
 
-        echo '<table class="table">';
+        echo '<table class="table text-center">';
             echo '<thead>';
                 echo '<tr>';
                     echo '<th scope="col">Código</th>';
@@ -26,36 +26,43 @@
                     echo '<th scope="col">Stock</th>';
                     echo '<th scope="col">Ruta Imagen</th>';
                     echo '<th scope="col">Activo</th>';
-                    echo '<th scope="col">Eliminar</th>';
-                    echo '<th scope="col">Modificar</th>';
+                    if(esAdmin()||esModerador()){
+                        echo '<th scope="col">Modificar</th>';
+                    }
+                    if(esAdmin()){
+                        echo '<th scope="col">Eliminar</th>';
+                    }
+                    
                 echo '</tr>';
             echo '</thead>';
             echo '<tbody>';
             foreach($productos as $key => $producto){
-            echo '<tr class="text-center">';?>
-                <th scope="row"><?echo $producto->codProd?></th>
-                <td ><?echo $producto->nombre?></td>
-                <td><?echo $producto->descripcion?></td>
-                <td><?echo $producto->precio?></td>
-                <td><?echo $producto->stock?></td>
-                <td><?echo $producto->img?></td>
-                <td><?echo $producto->activo?></td>
-                <?if($producto->activo){?>
-                <td>
-                    
-                    <form action="./index.php" method="POST">  
-                        <input type="hidden" name='codigoProducto' value="<?echo $producto->codProd?>">
-                        <button class="btn btn-primary" name="eliminarProducto" type="submit">Eliminar</button>
-                    </form>
-                     
-                </td>
+            echo '<tr>';?>
+                <th class="text-center" scope="row"><?echo $producto->codProd?></th>
+                <td class="text-left"><?echo $producto->nombre?></td>
+                <td class="text-left"><?echo $producto->descripcion?></td>
+                <td class="text-center"><?echo $producto->precio?></td>
+                <td class="text-center"><?echo $producto->stock?></td>
+                <td class="text-center"><?echo $producto->img?></td>
+                <td class="text-center"><?echo $producto->activo?></td>
+                <?if($producto->activo&&(esAdmin()||esModerador())){?>
+                
                 <td>
                     <form action="./index.php" method="POST"> 
                         <input type="hidden" name='codigoProducto' value="<?echo $producto->codProd?>">
                         <button class="btn btn-primary" name="modificarProductos" type="submit">Modificar</button>
                     </form> 
                 </td>
+                
+                <? if(esAdmin()){?>
+                <td> 
+                    <form action="./index.php" method="POST">  
+                        <input type="hidden" name='codigoProducto' value="<?echo $producto->codProd?>">
+                        <button class="btn btn-primary" name="eliminarProducto" type="submit">Eliminar</button>
+                    </form>
+                </td>
                 <?}
+                }
             echo '</tr>';
             }
             echo '</tbody>';

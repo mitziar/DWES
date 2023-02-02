@@ -4,7 +4,7 @@
         echo $_SESSION['error'];
         unset($_SESSION['error']);
     }
-    echo "<h1>Ver producto</h1>";
+    echo "<h1>Producto</h1>";
     if((isset($_REQUEST['codigoProducto']) || isset($_SESSION['codigoProducto'])) && (isset($_REQUEST['comprar'])||isset($_REQUEST['ver']) || isset($_REQUEST['enviar']))){
 
         if(isset($_REQUEST['codigoProducto'])){
@@ -24,7 +24,8 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title"><?echo $producto->nombre?></h5>
-                    <p class="card-text text-center"><?echo $producto->descripcion?>...</p>
+                    <form action="./index.php" method="POST">
+                    <p class="card-text text-left">Descipción: <?echo $producto->descripcion?></p>
                     <p class="card-text text-left">Código: <?echo $producto->codProd?></p>
                     <p class="card-text text-left">Precio: <?echo $producto->precio?> €</p>
                     <p class="card-text text-left">Stock: <?echo $producto->stock?> unidades disponibles.</p>
@@ -33,7 +34,8 @@
                     <input type="hidden" name="codigoProducto" value="<?echo $producto->codProd?>">
                     <input type="hidden" name="stock" value="<?echo $producto->stock?>">
                     <input type="hidden" name="precio" value="<?echo $producto->precio?>">
-                    <input type='submit' href="./index.php" class="btn btn-secondary w-100" value = 'Comprar' name ='comprar'>
+                    <input type='submit' href="./index.php" class="btn btn-secondary w-100" value = 'Comprar' name ='comprarProducto'>
+                    </form>
                 </div>
             </div>
         <div>

@@ -1,6 +1,6 @@
 <?php
     if(FactoryBD::existeDB()){
-        echo "<div class='row justify-content-center'>";
+    echo "<div class='row justify-content-center'>";
     $productos = ProductoDAO::findAll();
     if(is_array($productos)){
         foreach($productos as $producto){

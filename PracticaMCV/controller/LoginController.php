@@ -11,9 +11,13 @@ if(isset($_REQUEST['modificarUsuario'])){
             $_SESSION['error']='No se ha podido modificar el usuario';
         }
     }
-}else if(isset($_REQUEST['guardarNuevo'])&&!camposVacios()){
-        $usuario= new Usuario($_REQUEST['usuario'],sha1($_REQUEST['contrasena']),$_REQUEST['email'],$_REQUEST['fecha'],$_REQUEST['codigo']);
+}else if(isset($_REQUEST['guardarNuevo'])&&!camposVacios()&&validPassword($_REQUEST['contraseña'])&&($_REQUEST['contraseña']==$_REQUEST['contraseña2'])){
+        $usuario= new Usuario($_REQUEST['usuario'],sha1($_REQUEST['contraseña']),$_REQUEST['email'],$_REQUEST['fecha'],$_REQUEST['codigo']);
         if(UsuarioDao::insert($usuario)){
+                    $_SESSION['validado'] = true;
+                    $_SESSION['user'] = $usuario->usuario;
+                    $_SESSION['nombre'] = $usuario->usuario;
+                    $_SESSION['perfil'] = $usuario->codigo;
                     $_SESSION['vista'] = $vistas['home'];
                     $_SESSION['controlador'] = $controladores['home'];
                     $_SESSION['pagina'] = 'home';  

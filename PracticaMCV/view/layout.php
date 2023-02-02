@@ -23,11 +23,7 @@
           <input type="submit" name="login" class="btn btn-outline-secondary me-2" value="Login">
           <input type="submit" name="insertarUsuario" class="btn btn-outline-secondary me-2" value="Registrarse">
         <?}else{
-          if(esAdmin()){?>
-            
-            <input type="submit" class="btn btn-outline-secondary me-2" name='administrarProductos' value="Administrar Productos">
-          <?
-          }
+        
           ?>
         <h2><?echo $_SESSION['user']?></h2>
         <input type="submit" name="miperfil" class="btn btn-outline-secondary me-2" value="Mi perfil">
@@ -49,18 +45,21 @@
                       <a class="nav-link active" aria-current="page" href="./index.php?home=home">HOME</a>
                     </li>
                     <?
-                  if(estaValidado()){?>
+                  if(estaValidado()&&!esAdmin()&&!esModerador()){?>
                     <li class="nav-item">
                       <a class="nav-link active" aria-current="page" href="./index.php?verVenta">Mis compras</a>
                     </li>
                   <?}
                   if(esAdmin()||esModerador()){?>
                   <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="./index.php?verVenta">Ventas</a>
+                    </li>
+                  <li class="nav-item">
                     <a class="nav-link  active" href="./index.php?albaran=albaran" href="./index.php?albaranes=albaranes">Albaranes</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link  active" href="./index.php?almacen=almacen">Almacen</a>
-                      </li>
+                  <li>
+                  <a class="nav-link  active" href="./index.php?administrarProductos=administrarProductos">Productos</a>
+                  </li>
                   <?}?>
                 </ul>
               </div>

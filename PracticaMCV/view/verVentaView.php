@@ -10,7 +10,12 @@
     }else{
         $ventas=VentaDao::findAll();
     }
-    echo "<h1>Mis compras</h1>";    
+    if(esAdmin()||esModerador()){
+        echo "<h1>Ventas</h1>";    
+    }else{
+         echo "<h1>Mis compras</h1>";  
+    }
+     
     if($ventas){
         echo '<table class="table">';
         echo '<thead>';
@@ -20,10 +25,9 @@
         echo '<th scope="col">Cantidad</th>';
         echo '<th scope="col">Precio</th>';
         echo '<th scope="col">Código Producto</th>';
-        if(esModerador()||esAdmin()){
-            echo '<th scope="col">Eliminar</th>';
-        }
+                   
         if(esAdmin()){
+            echo '<th scope="col">Eliminar</th>';
             echo '<th scope="col">Modificar</th>';
         }
         echo '</tr>';
@@ -43,16 +47,13 @@
                             <button class="btn btn-primary" name="eliminarVenta" type="submit">Eliminar</button>
                      </form>  
                 </td>
-            <?}
-            if(esModerador()||esAdmin()){?>
                 <td>
                       <form action="./index.php" method="POST"> 
                         <input type="hidden" name='codigoVenta' value="<?echo $venta->id?>">
                         <button class="btn btn-primary" name="modificarVenta" type="submit">Modificar</button>
                     </form> 
                 </td>
-            <?}
-            
+            <?}            
         echo '</tr>';
         }
         echo '</tbody>';

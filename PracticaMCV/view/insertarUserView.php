@@ -12,7 +12,7 @@ if(isset($_SESSION['error']))
                 <div class="card-body">
                     <h5 class="card-title">Nuevo usuario</h5>
                     <form action="./index.php" method="POST" enctype="multipart/form-data">
-                    <p class="card-text text-lef">Usuario:<input type="text" required name="usuario" >
+                    <p class="card-text text-left">Usuario:<input type="text" required name="usuario" >
                     <p class="card-text text-left">Contraseña: </p><input type="password" required name="contraseña" >
                     <p class="card-text text-left">Repite contraseña: </p><input type="password" required name="contraseña2" >
                     <p class="card-text text-left">Email: <input type="email" required name="email"></p>
