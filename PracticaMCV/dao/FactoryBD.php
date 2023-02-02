@@ -35,4 +35,39 @@ Class FactoryBD{
                 return false;
             }
     }
+    public static function ejecutarScript(){
+        try{
+            $conexion = new PDO("mysql:host=".HOST,USER,PASS);
+            $script = file_get_contents('./scriptDatos.sql');
+            $resultado=$conexion->exec($script);
+            if($resultado!=false){
+               unset($conexion);
+                return true; 
+            }else{
+                unset($conexion);
+                return false; 
+            }
+            
+        }catch(Exception $errores){
+            unset($conexion);
+            return false;
+        }
+    }
+    public static function existeDB(){
+        $sql = 'use tienda';
+        try{
+            $con = new PDO("mysql:host=".HOST,USER,PASS);
+            $preparada = $con->prepare($sql);
+            $devuelve=$preparada->execute();
+            if($devuelve){
+                unset($con);
+                return true;
+            }
+            unset($con);
+            return false;      
+        }catch(Exception $e){
+            unset($con);
+            return false;            
+        }
+    }
 }

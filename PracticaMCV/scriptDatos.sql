@@ -12,7 +12,8 @@ CREATE TABLE productos (
   descripcion VARCHAR(75),
   precio numeric(6, 2),
   stock int,
-  ruta varchar(75) DEFAULT 'imagenPorDefecto.png'
+  ruta varchar(75) DEFAULT 'imagenPorDefecto.png',
+  activo boolean
 ) engine =innodb;
 --
 CREATE TABLE usuarios (
@@ -54,16 +55,16 @@ INSERT INTO roles(rol) values ('administrador');
 INSERT INTO roles(rol) values ('moderador');
 INSERT INTO roles(rol) values ('usuario normal');
 --
-INSERT INTO productos(nombre, descripcion, precio, stock,ruta) values ('Televisor LG', 'Televisión LG SmartTV 65"',525.20,20,'television.jfif');
-INSERT INTO productos(nombre, descripcion, precio, stock,ruta) values ('Televisor Samsung', 'Televisión Samsung SmartTV 55"',455.99,25,'television.jfif');
-INSERT INTO productos(nombre, descripcion, precio, stock,ruta) values ('Lavadora Balay', 'Lavadora Balay carga frontal 1200 rpm',876.00,10,'lavadora.jfif');
-INSERT INTO productos(nombre, descripcion, precio, stock,ruta) values ('Lavadora Bosch',  'Lavadora Bosch carga frontal 1400 rpm',925.99,25,'lavadora.jfif');
-INSERT INTO productos(nombre, descripcion, precio, stock,ruta) values ('Lavavajillas Siemens', 'Lavavajillas Siemens 45cm 10 servicios',645.00,16,'lavavajillas.jfif');
-INSERT INTO productos(nombre, descripcion, precio, stock,ruta) values ('Lavavajillas Bosch',  'Lavavajillas Bosch 60cm 13 sevicios',725.99,22,'lavavajillas.jfif');
-INSERT INTO productos(nombre, descripcion, precio, stock,ruta) values ('Aspirador Cecotec', 'Robot aspirador Cecotec. Modelo Conga',249.00,30,'aspirador.jfif');
-INSERT INTO productos(nombre, descripcion, precio, stock,ruta) values ('Aspirador Dyson',  'Aspirador Dyson de escoba',625.99,25,'aspirador.jfif');
-INSERT INTO productos(nombre, descripcion, precio, stock,ruta) values ('Telefono Xiaomi', 'Telefono Xiaomi Redmi Note S10',220.30,16,'movil.jfif');
-INSERT INTO productos(nombre, descripcion, precio, stock,ruta) values ('Telefono Apple Iphone 12',  'Telefono Apple Iphone 12. Pantalla OLED',888.99,22,'movil.jfif');
+INSERT INTO productos(nombre, descripcion, precio, stock,ruta,activo) values ('Televisor LG', 'Televisión LG SmartTV 65"',525.20,20,'television.jfif',1);
+INSERT INTO productos(nombre, descripcion, precio, stock,ruta,activo) values ('Televisor Samsung', 'Televisión Samsung SmartTV 55"',455.99,25,'television.jfif',1);
+INSERT INTO productos(nombre, descripcion, precio, stock,ruta,activo) values ('Lavadora Balay', 'Lavadora Balay carga frontal 1200 rpm',876.00,10,'lavadora.jfif',1);
+INSERT INTO productos(nombre, descripcion, precio, stock,ruta,activo) values ('Lavadora Bosch',  'Lavadora Bosch carga frontal 1400 rpm',925.99,25,'lavadora.jfif',1);
+INSERT INTO productos(nombre, descripcion, precio, stock,ruta,activo) values ('Lavavajillas Siemens', 'Lavavajillas Siemens 45cm 10 servicios',645.00,16,'lavavajillas.jfif',1);
+INSERT INTO productos(nombre, descripcion, precio, stock,ruta,activo) values ('Lavavajillas Bosch',  'Lavavajillas Bosch 60cm 13 sevicios',725.99,22,'lavavajillas.jfif',1);
+INSERT INTO productos(nombre, descripcion, precio, stock,ruta,activo) values ('Aspirador Cecotec', 'Robot aspirador Cecotec. Modelo Conga',249.00,30,'aspirador.jfif',1);
+INSERT INTO productos(nombre, descripcion, precio, stock,ruta,activo) values ('Aspirador Dyson',  'Aspirador Dyson de escoba',625.99,25,'aspirador.jfif',1);
+INSERT INTO productos(nombre, descripcion, precio, stock,ruta,activo) values ('Telefono Xiaomi', 'Telefono Xiaomi Redmi Note S10',220.30,16,'movil.jfif',1);
+INSERT INTO productos(nombre, descripcion, precio, stock,ruta,activo) values ('Telefono Apple Iphone 12',  'Telefono Apple Iphone 12. Pantalla OLED',888.99,22,'movil.jfif',1);
 
 --
 INSERT INTO usuarios(usuario, contraseña,email,fecha,codigo) VALUES ('admin','2bf03fdcf75352a094a84a24426dc399165ae16b','adminAd1@email.com','2002-10-29',1);

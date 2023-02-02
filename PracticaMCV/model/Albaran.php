@@ -9,7 +9,7 @@ class Albaran{
 
     public function __construct($codigo,$fecha,$cantidad,$producto,$usuario)
     {
-        $this->codProd = $codigo;
+        $this->codigo = $codigo;
         $this->fecha = $fecha;
         $this->cantidad = $cantidad;        
         $this->producto = $producto;

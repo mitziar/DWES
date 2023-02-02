@@ -25,6 +25,7 @@
                     echo '<th scope="col">Precio</th>';
                     echo '<th scope="col">Stock</th>';
                     echo '<th scope="col">Ruta Imagen</th>';
+                    echo '<th scope="col">Activo</th>';
                     echo '<th scope="col">Eliminar</th>';
                     echo '<th scope="col">Modificar</th>';
                 echo '</tr>';
@@ -38,18 +39,23 @@
                 <td><?echo $producto->precio?></td>
                 <td><?echo $producto->stock?></td>
                 <td><?echo $producto->img?></td>
+                <td><?echo $producto->activo?></td>
+                <?if($producto->activo){?>
                 <td>
+                    
                     <form action="./index.php" method="POST">  
                         <input type="hidden" name='codigoProducto' value="<?echo $producto->codProd?>">
                         <button class="btn btn-primary" name="eliminarProducto" type="submit">Eliminar</button>
-                    </form>  
+                    </form>
+                     
                 </td>
                 <td>
                     <form action="./index.php" method="POST"> 
                         <input type="hidden" name='codigoProducto' value="<?echo $producto->codProd?>">
                         <button class="btn btn-primary" name="modificarProductos" type="submit">Modificar</button>
                     </form> 
-                </td><?
+                </td>
+                <?}
             echo '</tr>';
             }
             echo '</tbody>';

@@ -8,9 +8,9 @@ class AlbaranDao extends FactoryBD implements DAO{
         $arrayAlbaranes= array();
         while($obj = $devuelve->fetchObject()){         
             $albaran = new Albaran($obj->codigo, $obj->fecha, $obj->cantidad,$obj->producto, $obj->usuario);
-            array_push($arrayroAlbaranes,$albaran);
+            array_push($arrayAlbaranes,$albaran);
         }
-        return $arrayProductos;
+        return $arrayAlbaranes;
     }
     public static function findById($id){
         $sql = 'select * from albaran where codigo = ?;';

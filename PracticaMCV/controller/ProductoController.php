@@ -18,9 +18,11 @@ if(isset($_REQUEST['comprar'])){
 if(isset($_REQUEST['eliminarProducto']) && !empty($_REQUEST['codigoProducto'])){
     if(ProductoDAO::delete($_REQUEST['codigoProducto'])){
         require_once $_SESSION['controlador'];
+    }else{
+        $_SESSION['error'] = 'El producto no se puede eliminar. Está referenciado en otra tabla';
     }
 }elseif(isset($_REQUEST['modificarProducto'])&&!camposVacios()){
-    $producto=new Producto($_REQUEST['codigoProducto'],$_REQUEST['nombreProducto'],$_REQUEST['descripcion'],$_REQUEST['precio'],$_REQUEST['unidades'],$_FILES['file']['name']);
+    $producto=new Producto($_REQUEST['codigoProducto'],$_REQUEST['nombreProducto'],$_REQUEST['descripcion'],$_REQUEST['precio'],$_REQUEST['unidades'],$_REQUEST['imagen'],1);
     if($producto){
         if(ProductoDAO::update($producto)){
             $_SESSION['pagina'] = 'home';
@@ -29,7 +31,7 @@ if(isset($_REQUEST['eliminarProducto']) && !empty($_REQUEST['codigoProducto'])){
             require_once $_SESSION['controlador'];
             //albaran
         }else{
-            $_SESSION['error']='No se ha podido insertar';
+            $_SESSION['error']='No se ha actualizado';
             require_once $_SESSION['controlador'];
         }
     }

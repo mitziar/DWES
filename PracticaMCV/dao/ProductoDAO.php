@@ -7,7 +7,7 @@ class ProductoDAO extends FactoryBD implements DAO{
         $devuelve = parent::ejecuta($sql,$datos);
         $arrayProductos = array();
         while($obj = $devuelve->fetchObject()){         
-            $producto = new Producto($obj->codigo, $obj->nombre, $obj->descripcion,$obj->precio, $obj->stock,$obj->ruta);
+            $producto = new Producto($obj->codigo, $obj->nombre, $obj->descripcion,$obj->precio, $obj->stock,$obj->ruta,$obj->activo);
             array_push($arrayProductos,$producto);
         }
         return $arrayProductos;
@@ -18,13 +18,13 @@ class ProductoDAO extends FactoryBD implements DAO{
         $devuelve = parent::ejecuta($sql,$datos);
         $obj = $devuelve->fetchObject();
         if($obj){
-            $producto = new Producto($obj->codigo, $obj->nombre, $obj->descripcion,$obj->precio, $obj->stock,$obj->ruta);
+            $producto = new Producto($obj->codigo, $obj->nombre, $obj->descripcion,$obj->precio, $obj->stock,$obj->ruta,$obj->activo);
             return $producto;
         }  
         return null;
     }
     public static function delete($id){
-        $sql = 'delete from productos where codigo = ?;';
+        $sql = 'update productos set activo = 0 where codigo = ?;';
         $datos = array($id);
         $devuelve = parent::ejecuta($sql,$datos);
         if($devuelve->rowCount() == 0){
@@ -33,7 +33,7 @@ class ProductoDAO extends FactoryBD implements DAO{
         return true;
     }
     public static function insert($objeto){
-        $sql = 'insert into productos values(?,?,?,?,?,?)';
+        $sql = 'insert into productos values(?,?,?,?,?,?,1)';
         $objeto = (array)$objeto;
         $datos = array();
         foreach($objeto as $att){
@@ -47,7 +47,7 @@ class ProductoDAO extends FactoryBD implements DAO{
     }
     public static function update($objeto){
         $sql = 'update productos set nombre = ?,descripcion = ?,precio = ?,stock=?,ruta=? where codigo = ? ';
-        $datos = array($objeto->descripcion,$objeto->nombre,$objeto->precio,$objeto->stock,$objeto->img,$objeto->codProd);
+        $datos = array($objeto->descripcion,$objeto->nombre,$objeto->precio,$objeto->stock,$objeto->img,$objeto->codProd,);
         $devuelve = parent::ejecuta($sql,$datos); 
         if($devuelve->rowCount() == 0){
             return false;

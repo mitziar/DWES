@@ -7,8 +7,9 @@ class Producto{
     private $precio;
     private $stock;
     private $img;
+    private $activo;
 
-    public function __construct($codProd,$nombre,$descripcion,$precio,$stock,$img)
+    public function __construct($codProd,$nombre,$descripcion,$precio,$stock,$img,$activo)
     {
         $this->codProd = $codProd;
         $this->nombre = $nombre;
@@ -16,6 +17,7 @@ class Producto{
         $this->precio = $precio;
         $this->stock = $stock;
         $this->img = $img;
+        $this->activo = $activo;
     }
     
     public function __get($get){

@@ -77,10 +77,28 @@ if (isset($_REQUEST['logout'])) {
         require_once $_SESSION['controlador'];
     } 
 
+    if(isset($_REQUEST['albaran'])){
+        $_SESSION['pagina'] = 'administrarAlbaranes';
+        $_SESSION['controlador'] = $controladores['albaran'];    
+        $_SESSION['vista'] = $vistas['administrarAlbaranes'];
+        require_once $_SESSION['controlador'];
+    }elseif(isset($_REQUEST['eliminarAlbaran'])){
+        require_once $_SESSION['controlador'];
+    }elseif(isset($_REQUEST['modificarAlbaran'])){
+        $_SESSION['pagina'] = 'modificarAlbaran';
+        $_SESSION['controlador'] = $controladores['albaran'];    
+        $_SESSION['vista'] = $vistas['modificarAlbaran'];
+        require_once $_SESSION['controlador'];
+    }
+
     if(isset($_REQUEST['home'])||!isset($_SESSION['vista'])){
         $_SESSION['pagina'] = 'home';
         $_SESSION['controlador'] = $controladores['home'];
         $_SESSION['vista'] = $vistas['home'];
+        require_once $_SESSION['controlador'];
+    }
+    if(isset($_REQUEST['generarDatos'])){
+        $_SESSION['controlador'] = $controladores['home'];
         require_once $_SESSION['controlador'];
     }
 }

@@ -55,7 +55,7 @@
                   <?}
                   if(esAdmin()||esModerador()){?>
                   <li class="nav-item">
-                    <a class="nav-link  active" href="./index.php?albaranes=albaranes">Albaranes</a>
+                    <a class="nav-link  active" href="./index.php?albaran=albaran" href="./index.php?albaranes=albaranes">Albaranes</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link  active" href="./index.php?almacen=almacen">Almacen</a>
