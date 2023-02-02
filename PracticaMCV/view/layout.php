@@ -36,6 +36,7 @@
           <?
          }?>
         </div>
+        </form>
       </header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Tenth navbar example">
             <div class="container-fluid">

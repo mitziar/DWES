@@ -29,7 +29,8 @@ if (isset($_REQUEST['logout'])) {
     }elseif(isset($_REQUEST['insertarUsuario'])){
         $_SESSION['pagina'] = 'insertarUser';
         $_SESSION['controlador'] = $controladores['login'];
-        $_SESSION['vista'] = $vistas['insertarUser'];
+        $_SESSION['vista'] = $vistas['insertarUser'];        
+    }elseif(isset($_REQUEST['guardarNuevo'])){
         require_once $_SESSION['controlador'];
     }
 
