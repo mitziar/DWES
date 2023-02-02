@@ -5,7 +5,7 @@
         unset($_SESSION['error']);
     }
     echo "<h1>Producto</h1>";
-    if((isset($_REQUEST['codigoProducto']) || isset($_SESSION['codigoProducto'])) && (isset($_REQUEST['comprar'])||isset($_REQUEST['ver']) || isset($_REQUEST['enviar']))){
+    if((isset($_REQUEST['codigoProducto']) || isset($_SESSION['codigoProducto'])) ){
 
         if(isset($_REQUEST['codigoProducto'])){
             $producto=ProductoDAO::findById($_REQUEST['codigoProducto']);

@@ -7,7 +7,7 @@ if(isset($_REQUEST['eliminarAlbaran'])&&isset($_REQUEST['codigoAlbaran'])){
    } 
 }
 
-if(isset($_REQUEST['modificarAlbaran'])&&!camposVacios()){
+if(isset($_REQUEST['modificaAlbaran'])&&isset($_REQUEST['codigoAlbaran'])){
     $albaran=new Albaran($_REQUEST['codigoAlbaran'],$_REQUEST['fecha'],$_REQUEST['cantidad'],$_REQUEST['codigo'],$_REQUEST['usuario']);
     if($albaran){
         if(AlbaranDao::update($albaran)){
@@ -15,10 +15,17 @@ if(isset($_REQUEST['modificarAlbaran'])&&!camposVacios()){
             $_SESSION['vista'] = $vistas['administrarAlbaranes'];
             require_once $_SESSION['controlador'];
         }else{
-            $_SESSION['error'] ='No se ha modificado el albaran';
+            $_SESSION['error'] ='No se ha modificado el albaran. Restricción de clave foránea.';
+            $_SESSION['pagina'] = 'administrarAlbaranes';    
+            $_SESSION['vista'] = $vistas['administrarAlbaranes'];
+            require_once $_SESSION['controlador'];
+            
         }
    }else{
         $_SESSION['error']='No se ha modificado el albaran';
+        $_SESSION['pagina'] = 'administrarAlbaranes';    
+        $_SESSION['vista'] = $vistas['administrarAlbaranes'];
+        require_once $_SESSION['controlador'];
    } 
 }elseif(isset($_REQUEST['modificarAlbaran'])){
     $_SESSION['pagina'] = 'modificarAlbaran';    

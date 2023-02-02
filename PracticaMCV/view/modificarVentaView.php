@@ -13,6 +13,7 @@ if($_REQUEST['codigoVenta']){
             <div class="col-md-8">
                 <div class="card-body text-center">
                     <h5 class="card-title">Código de Venta <?echo $venta->id?></h5>
+                    <form action="./index.php" method="POST">
                     <p class="card-text text-center">Código: <?echo $venta->id?></p><input type="hidden" name="codigoVenta" value=<?echo $venta->id?>>
                     <p class="card-text text-left">Fecha: <?echo $venta->fecha?><input type="date" name="fecha" value=<?echo $venta->fecha?>></p>
                     <p class="card-text text-left">Cantidad: <?echo $venta->cantidad?><input type="number" name="cantidad" value=<?echo $venta->cantidad?>></p>
@@ -20,6 +21,7 @@ if($_REQUEST['codigoVenta']){
                     <p class="card-text text-left">Código producto: <?echo $venta->producto?><input type="number" name="codigoProducto" value=<?echo $venta->producto?>></p>
                     <p class="card-text text-left">Usuario: <?echo $venta->usuario?><input type="text" name="usuario" value=<?echo $venta->usuario?>></p>
                     <input type='submit' href="./index.php" class="btn btn-secondary w-100" value = 'Modificar' name ='modificarDatosVenta'>
+                    <form>
                 </div>
             </div>
         <div>

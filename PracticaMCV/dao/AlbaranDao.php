@@ -46,12 +46,18 @@ class AlbaranDao extends FactoryBD implements DAO{
         return true;
     }
     public static function update($objeto){
-        $sql = 'update albaran set fecha = ?,cantidad = ?,producto = ?,usuario=? where codigo = ? ';
-        $datos = array($objeto->fecha,$objeto->cantidad,$objeto->producto,$objeto->usuario,$objeto->codigo);
-        $devuelve = parent::ejecuta($sql,$datos); 
-        if($devuelve->rowCount() == 0){
+        $sql = 'update albaran set fecha = ?,cantidad = ? where codigo = ? ';
+        $datos = array($objeto->fecha,$objeto->cantidad,$objeto->codigo);
+        try{
+            $devuelve = parent::ejecuta($sql,$datos); 
+            if(!$devuelve){
+                return false;
+            }
+            return true;
+        }catch(Exception $e){
+            $_SESSION['error']='No se puede modificar. Está sujeto a clave foranea';
             return false;
         }
-        return true;
+        
     }
 }

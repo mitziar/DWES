@@ -2,7 +2,7 @@
 if(isset($_REQUEST['comprarProducto'])){
 
         if(empty($_REQUEST['unidades'])){
-            $_SESSION['error']='Introduzca las unidades que desea comprar';
+            $_SESSION['error'] = 'Introduzca las unidades que desea comprar';
             require_once $_SESSION['controlador'];
 
         }elseif(!estaValidado()){
@@ -39,7 +39,7 @@ if(isset($_REQUEST['eliminarProducto']) && !empty($_REQUEST['codigoProducto'])){
     }
 }
 if(isset($_REQUEST['insertarProducto'])&& !empty($_REQUEST['nombreProducto'])&&!empty($_REQUEST['descripcion'])&&!empty($_REQUEST['precio'])&&!empty($_REQUEST['unidades'])&&!empty($_FILES['file'])){
-    if(esAdmin()){
+    if(esAdmin()||esModerador()){
             $rutaGuardado = "./webroot/uploads/";
             $rutaConNombreFichero = $rutaGuardado .  $_FILES['file']['name'];
 

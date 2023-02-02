@@ -1,6 +1,6 @@
 <?
 if(isset($_REQUEST['modificarUsuario'])){
-    if(!empty($_REQUEST['contraseña'])&&!empty($_REQUEST['email'])&&!empty($_REQUEST['fecha'])&&!empty($_REQUEST['codigo'])){
+    if(!empty($_REQUEST['contraseña'])&&!empty($_REQUEST['email'])&&!empty($_REQUEST['fecha'])&&!empty($_REQUEST['codigo'])&&validPassword($_REQUEST['contraseña'])){
         $usuario= new Usuario($_SESSION['user'],sha1($_REQUEST['contraseña']),$_REQUEST['email'],$_REQUEST['fecha'],$_REQUEST['codigo']);
         if(UsuarioDao::update($usuario)){
                     $_SESSION['vista'] = $vistas['home'];

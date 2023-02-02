@@ -50,7 +50,7 @@
                 <td>
                       <form action="./index.php" method="POST"> 
                         <input type="hidden" name='codigoVenta' value="<?echo $venta->id?>">
-                        <button class="btn btn-primary" name="modificarVenta" type="submit">Modificar</button>
+                        <input class="btn btn-primary" name="modificarVenta" type="submit" value="Modificar">
                     </form> 
                 </td>
             <?}            

@@ -34,7 +34,7 @@ if (isset($_REQUEST['logout'])) {
         require_once $_SESSION['controlador'];
     }
 
-    if(isset($_REQUEST['ver'])|| isset($_REQUEST['comprar'])){
+    if(isset($_REQUEST['ver'])){
         $_SESSION['pagina'] = 'verProducto';
         $_SESSION['controlador'] = $controladores['producto'];
         $_SESSION['vista'] = $vistas['verProducto'];
@@ -60,6 +60,9 @@ if (isset($_REQUEST['logout'])) {
     }elseif(isset($_REQUEST['modificarProducto'])){
         require_once $_SESSION['controlador'];
     }elseif(isset($_REQUEST['comprarProducto'])){
+        $_SESSION['pagina'] = 'verProducto';
+        $_SESSION['controlador'] = $controladores['producto'];
+        $_SESSION['vista'] = $vistas['verProducto'];
         require_once $_SESSION['controlador'];
     }
     
@@ -89,6 +92,11 @@ if (isset($_REQUEST['logout'])) {
     }elseif(isset($_REQUEST['eliminarAlbaran'])){
         require_once $_SESSION['controlador'];
     }elseif(isset($_REQUEST['modificarAlbaran'])){
+        $_SESSION['pagina'] = 'modificarAlbaran';
+        $_SESSION['controlador'] = $controladores['albaran'];    
+        $_SESSION['vista'] = $vistas['modificarAlbaran'];
+        require_once $_SESSION['controlador'];
+    }elseif(isset($_REQUEST['modificaAlbaran'])){
         $_SESSION['pagina'] = 'modificarAlbaran';
         $_SESSION['controlador'] = $controladores['albaran'];    
         $_SESSION['vista'] = $vistas['modificarAlbaran'];
