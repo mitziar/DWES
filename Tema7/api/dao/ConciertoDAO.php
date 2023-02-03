@@ -16,8 +16,7 @@ class ConciertoDAO extends FactoryBD implements DAO{
         //     $concierto = new Concierto($obj->grupo,$obj->fecha,$obj->precio,$obj->lugar);
         //     $concierto->id = $obj -> id;
         //     array_push($arrayC,$concierto);
-        // }
-
+        // } 
 
         // while($obj = $devuelve->fetchObject()){         
         //     $concierto = new Concierto($obj->grupo,$obj->fecha,$obj->precio,$obj->lugar);

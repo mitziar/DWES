@@ -85,10 +85,7 @@ class ControladorConciertos extends ControladorPadre{
                     $data,
                     array('Content-Type: application/json', 'HTTP/1.1 200 OK')
                 );
-
         }
-        
-
     }
 
     public function insertar(){
@@ -101,7 +98,7 @@ class ControladorConciertos extends ControladorPadre{
                 //ha ido todo bien
                 self::respuesta(
                     '',
-                    array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+                    array('Content-Type: application/json', 'HTTP/1.1 201 Creado')
                 );
             }
             
@@ -141,7 +138,7 @@ class ControladorConciertos extends ControladorPadre{
                 if(ConciertoDAO::update($concierto)){
                     self::respuesta(
                         '',
-                        array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+                        array('Content-Type: application/json', 'HTTP/1.1 201 Modificado')
                     );
                 }
             }
@@ -177,7 +174,7 @@ class ControladorConciertos extends ControladorPadre{
         }else{
             self::respuesta(
                 '',
-                array('Content-Type: application/json', 'HTTP/1.1 400 Error recurso mal formado')
+                array('Content-Type: application/json', 'HTTP/1.1 204 ')
             );
         }
     }
