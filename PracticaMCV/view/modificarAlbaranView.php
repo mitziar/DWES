@@ -22,15 +22,17 @@
                     <form action="./index.php">
                     <p class="card-textt">Codigo de producto: <?echo $albaran->codigo?> </p>
                     <p><input type="hidden" min="1" name="codigo" id="idProducto" required></p>
-                    <p class="card-text">Fecha: 
-                    <input type="hidden" name="codigoAlbaran" value=<?echo $albaran->codigo?>>
-                    <p class="card-text"><?echo $albaran->fecha?></p>
+                    <p class="card-text">Fecha: <?echo $albaran->fecha?></p>
                     <p><input type="date" name="fecha" required></p>
+                    <input type="hidden" name="codigoAlbaran" value=<?echo $albaran->codigo?>></p>
+                    
+                    
                     <p class="card-text ">Cantidad: <?echo $albaran->cantidad?> uds</p>
                     <p><input type="number"  name="cantidad" required></p>
                     
                     <p class="card-text">Usuario: <?echo $albaran->usuario?></p>
                     <p><input type="hidden"  name="usuario" id="idUsuario"></p>
+                    <a href="./index.php?home=home"><input type = 'button' class="btn m-2 btn-secondary w-100" value="Volver"></a>
                     <input type='submit' class="btn btn-secondary w-100" value = 'Modificar' name ='modificaAlbaran'>
                     </form>
                     

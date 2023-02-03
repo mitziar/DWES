@@ -25,6 +25,7 @@
         echo '<th scope="col">Cantidad</th>';
         echo '<th scope="col">Precio</th>';
         echo '<th scope="col">Código Producto</th>';
+        echo '<th scope="col">Usuario</th>';
                    
         if(esAdmin()){
             echo '<th scope="col">Eliminar</th>';
@@ -39,7 +40,8 @@
             <td ><?echo $venta->fecha?></td>
             <td><?echo $venta->cantidad?></td>
             <td><?echo $venta->precio?> €</td>
-            <td><?echo $venta->producto?></td><?
+            <td><?echo $venta->producto?></td>
+            <td><?echo $venta->usuario?></td><?
             if(esAdmin()){?>
                 <td>
                       <form action="./index.php" method="POST">  

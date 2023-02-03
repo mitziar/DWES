@@ -19,7 +19,8 @@ if($_REQUEST['codigoVenta']){
                     <p class="card-text text-left">Cantidad: <?echo $venta->cantidad?><input type="number" name="cantidad" value=<?echo $venta->cantidad?>></p>
                     <p class="card-text text-left">Precio: <?echo $venta->precio?> € <input type="number" step="any" name="precio" value=<?echo$venta->precio?>></p>
                     <p class="card-text text-left">Código producto: <?echo $venta->producto?><input type="number" name="codigoProducto" value=<?echo $venta->producto?>></p>
-                    <p class="card-text text-left">Usuario: <?echo $venta->usuario?><input type="text" name="usuario" value=<?echo $venta->usuario?>></p>
+                    <p class="card-text text-left">Usuario: <?echo $venta->usuario?><input type="hidden" name="usuario" value=<?echo $venta->usuario?>></p>
+                    <a href="./index.php?home=home"><input type = 'button' class="btn m-2 btn-secondary w-100" value="Volver"></a>
                     <input type='submit' href="./index.php" class="btn btn-secondary w-100" value = 'Modificar' name ='modificarDatosVenta'>
                     <form>
                 </div>
