@@ -1,6 +1,6 @@
 <?php
 //Esto se guarda en la superglobal
-//sabemo si se ha autenticado o no con $_SERVER['PHP_AUTH_USER'] si no existe esta variable, 
+//sabemos si se ha autenticado o no con $_SERVER['PHP_AUTH_USER'] si no existe esta variable, 
 //no abra gente autenticada, si existe está autenticada
 
 if(!isset($_SERVER['PHP_AUTH_USER'])){

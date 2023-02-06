@@ -21,9 +21,7 @@ function post($grupo,$fecha,$precio,$lugar){
         "lugar": "'.$lugar.'"
     }';
 
-  
     
-
     $ch = curl_init();
     $url = 'http://192.168.2.200/tema7/api/conciertos.php/conciertos';
     curl_setopt($ch,CURLOPT_URL,$url);

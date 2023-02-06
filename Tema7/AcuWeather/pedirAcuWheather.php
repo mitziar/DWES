@@ -10,19 +10,17 @@
     //comprobamos si ha devuleto
     if($datos){
         $array = json_decode($datos,true);
+        foreach($array[0] as $key => $value){
 
-        /**
-         * $key=$array[0]->"key";
-         */
-        foreach($array as $key => $value){
-                echo $value;
-                    if($key=="key"){
-                        $key=$value;
-                        echo $key." hio";
-                    }                
-            }           
-           // echo $value['location']['latitude']."<br>";
-        }
+                if($key=="Key"){
+                    echo " Zamora clave: ".$value."<br>";
+                }
+                if($key=="GeoPosition"){
+                    echo " Geoposicion:<br>";
+                    echo "  Latitude:".$value['Latitude']."<br>";
+                    echo "  Longitude:".$value['Longitude']."<br>";
+                }
+        }           
+    }
 ?>
-//"GeoPosition":{"Latitude":42.342,"Longitude":-3.703,
-//"Key":"307142"
+
