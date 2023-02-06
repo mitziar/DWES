@@ -1,4 +1,14 @@
-<form>
+<?php
+require_once '../funcionesCore/funciones.php';
+?>
+
+<form action="../controlador/conciertosControlador.php">
+    <select name="id" id="">
+        <option  value="0">Seleciona grupo</option>
+        <?php
+            cargarConciertos();
+        ?>
+    </select>
     <label for="grupo">
         <input type="text" name="grupo" id="grupo">
     </label>Grupo
@@ -15,5 +25,5 @@
         <input type="text" name="lugar" id="lugar">
     </label>Lugar
     <br>
-    <input type="submit" value="Guardar" name="guardar">
+    <input type="submit" value="Modificar" name="accion">
 </form>

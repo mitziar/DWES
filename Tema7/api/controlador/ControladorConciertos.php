@@ -187,9 +187,9 @@ class ControladorConciertos extends ControladorPadre{
 
         $parametros=get_class_vars('Concierto')
 
-        foreach($dato as $key => $value) {
-             if(in_array())
-        } 
+        // foreach($dato as $key => $value) {
+        //      if(in_array())
+        // } 
          $recurso= self::recurso();
 
         if (count($recurso)==3){
