@@ -9,7 +9,7 @@ class ControladorPadre{
             return $uri;
         }else{
             //retorno error            
-            self::respuesta('',array('HTTP/1.1 400 No se ha indicado recurso'));
+            ControladorPadre::respuesta('',array('HTTP/1.1 400 No se ha indicado recurso'));
             return null;
         }
     }
