@@ -4,13 +4,12 @@ require '../modelo/Concierto.php';
 
 function get(){
     $ch = curl_init();
-    $url = 'http://192.168.2.200/tema7/api/conciertos.php/conciertos';
+    $url = 'http://192.168.100.127/CLASE/api/conciertos.php/conciertos';
     curl_setopt($ch,CURLOPT_URL,$url);
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
     $resultado = curl_exec($ch);
     curl_close($ch);
     return $resultado;
-
 }
 
 function post($grupo,$fecha,$precio,$lugar){
@@ -23,7 +22,7 @@ function post($grupo,$fecha,$precio,$lugar){
 
     
     $ch = curl_init();
-    $url = 'http://192.168.2.200/tema7/api/conciertos.php/conciertos';
+    $url = 'http://192.168.100.127/CLASE/api/conciertos.php/conciertos';
     curl_setopt($ch,CURLOPT_URL,$url);
     curl_setopt($ch,CURLOPT_HTTPHEADER,
     array('Content-Type:application/json'));
@@ -45,7 +44,7 @@ function put($id,$grupo,$fecha,$precio,$lugar){
     }';
 
     $ch = curl_init();
-    $url = 'http://192.168.2.200/tema7/api/conciertos.php/conciertos/'.$id;
+    $url = 'http://192.168.100.127/CLASE/api/conciertos.php/conciertos/'.$id;
     curl_setopt($ch,CURLOPT_URL,$url);
     curl_setopt($ch,CURLOPT_HTTPHEADER,
     array('Content-Type:application/json'));
@@ -60,9 +59,8 @@ function put($id,$grupo,$fecha,$precio,$lugar){
 
 function delete($id){
    
-
     $ch = curl_init();
-    $url = 'http://192.168.2.200/tema7/api/conciertos.php/conciertos/'.$id;
+    $url = 'http://192.168.100.127/CLASE/api/conciertos.php/conciertos/'.$id;
     curl_setopt($ch,CURLOPT_URL,$url);    
     curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
