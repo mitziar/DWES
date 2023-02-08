@@ -3,7 +3,7 @@ class ControladorPadre{
     //comprobar el recurso
     public static function recurso(){
         if(isset($_SERVER['PATH_INFO'])){
-            $uri = $_SERVER['PATH_INFO'];//devuelve /conciertos
+            $uri = $_SERVER['PATH_INFO'];//devuelve ''/conciertos
             $uri= explode('/',$uri);//PARA SABER LOS RECURSOS
             return $uri;
         }else{

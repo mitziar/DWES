@@ -2,10 +2,10 @@
 
 class Persona{
     //PROPIEDADES
-    private $nombre;
-    private $edad;
-    private $email;
-    private $id;
+    protected $nombre;
+    protected $edad;
+    protected $email;
+    protected $id;
 
 
     public function __construct($id,$nombre,$edad,$email){

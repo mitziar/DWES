@@ -185,16 +185,14 @@ class ControladorConciertos extends ControladorPadre{
         $body = file_get_contents('php://input');
         $dato= json_decode($body,true);//me llega un array
 
-        $parametros=get_class_vars('Concierto')
+        $parametros=get_class_vars('Concierto');
 
         // foreach($dato as $key => $value) {
         //      if(in_array())
         // } 
-         $recurso= self::recurso();
+         $recurso= parent::recurso();
 
         if (count($recurso)==3){
-
-
 
             $viejo = ConciertoDAO::findById($recurso[2]);
 

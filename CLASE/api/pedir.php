@@ -20,7 +20,7 @@ $json = '{
 //$fields_string = http_build_query($fields);
 $ch = curl_init();
 curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
-curl_setopt($ch, CURLOPT_URL, "http://192.168.2.200/tema7/api/conciertos.php/conciertos");
+curl_setopt($ch, CURLOPT_URL, "http://192.168.100.127/tema7/api/conciertos.php/conciertos");
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $json );
 $data = curl_exec($ch);
