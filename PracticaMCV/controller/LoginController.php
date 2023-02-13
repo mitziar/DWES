@@ -23,7 +23,7 @@ if(isset($_REQUEST['modificarUsuario'])){
                     $_SESSION['pagina'] = 'home';  
                     require  $_SESSION['controlador'];
         }else{
-            $_SESSION['error']='No se ha podido registrar el usuario';
+            $_SESSION['error']='El usuario ya existe.';
         }
 } else if(isset($_REQUEST['registro'])) {
     $_SESSION['controlador'] = $controladores['registro'];

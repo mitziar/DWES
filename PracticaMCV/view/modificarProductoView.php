@@ -20,6 +20,7 @@
                 <input type="hidden" name="codigoProducto" value=<?echo $producto->img?>>
             </div>
 
+            <?if(esAdmin()){?>
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title"><?echo $producto->nombre?></h5>
@@ -40,8 +41,8 @@
                     </form>
                 </div>
             </div>
+            <?}?>
         <div>
-    </div>
     </div>
  <?php }
 }                      

@@ -12,12 +12,12 @@ if(isset($_SESSION['error']))
                 <div class="card-body">
                     <h5 class="card-title">Nuevo usuario</h5>
                     <form action="./index.php" method="POST" enctype="multipart/form-data">
-                    <p class="card-text text-left">Usuario:<input type="text" required name="usuario" >
+                    <p class="card-text text-left">Usuario:</p><input type="text" required name="usuario">
                     <p class="card-text text-left">Contraseña: </p><input type="password" required name="contraseña" >
-                    <p class="card-text text-left">Repite contraseña: </p><input type="password" required name="contraseña2" >
-                    <p class="card-text text-left">Email: <input type="email" required name="email"></p>
-                    <p class="card-text text-left">Fecha de nacimiento: <input required type="date" name="fecha"></p>
-                    <p class="card-text text-left">Código Rol: <input type="number" readonly name="codigo" value='3'></p>
+                    <p class="card-text text-left">Repite contraseña: </p><input type="password" required name="contraseña2">
+                    <p class="card-text text-left">Email: </p><input type="email" required name="email">
+                    <p class="card-text text-left">Fecha de nacimiento: </p><input required type="date" name="fecha">
+                    <p class="card-text text-left">Código Rol: </p><input type="number" readonly name="codigo" value='3'>
                     <a href="./index.php?home=home"><input type = 'button' class="btn m-2 btn-secondary w-100" value="Volver"></a>
                     <input type='submit' href="./index.php" class="btn m-2 btn-secondary w-100" value = 'Registrar' name ='guardarNuevo'>
                     </form>

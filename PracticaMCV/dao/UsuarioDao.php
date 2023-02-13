@@ -43,7 +43,7 @@ class UsuarioDAO extends FactoryBD implements DAO{
             array_push($datos,$att); 
         }
         $devuelve = parent::ejecuta($sql,$datos);
-        if($devuelve->rowCount() == 0){
+        if($devuelve==null || $devuelve->rowCount() == 0){
             return false;
         }
         return true;

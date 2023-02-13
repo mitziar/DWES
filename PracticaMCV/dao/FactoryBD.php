@@ -8,7 +8,7 @@ Class FactoryBD{
             $preparada->execute($datos);       
         }catch(Exception $e){
             $preparada = null;
-            echo $e;           
+            //echo $e;           
         }finally{
             unset($con);
             return $preparada;

@@ -26,10 +26,8 @@
                     echo '<th scope="col">Stock</th>';
                     echo '<th scope="col">Ruta Imagen</th>';
                     echo '<th scope="col">Activo</th>';
-                    if(esAdmin()||esModerador()){
-                        echo '<th scope="col">Modificar</th>';
-                    }
                     if(esAdmin()){
+                        echo '<th scope="col">Modificar</th>';
                         echo '<th scope="col">Eliminar</th>';
                     }
                     
@@ -45,7 +43,7 @@
                 <td class="text-center"><?echo $producto->stock?></td>
                 <td class="text-center"><?echo $producto->img?></td>
                 <td class="text-center"><?echo $producto->activo?></td>
-                <?if($producto->activo&&(esAdmin()||esModerador())){?>
+                <?if($producto->activo&&(esAdmin())){?>
                 
                 <td>
                     <form action="./index.php" method="POST"> 
@@ -53,15 +51,14 @@
                         <button class="btn btn-primary" name="modificarProductos" type="submit">Modificar</button>
                     </form> 
                 </td>
-                
-                <? if(esAdmin()){?>
+
                 <td> 
                     <form action="./index.php" method="POST">  
                         <input type="hidden" name='codigoProducto' value="<?echo $producto->codProd?>">
                         <button class="btn btn-primary" name="eliminarProducto" type="submit">Eliminar</button>
                     </form>
                 </td>
-                <?}
+                <?
                 }
             echo '</tr>';
             }
