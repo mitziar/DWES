@@ -9,7 +9,7 @@
 </head>
   <body>
     <h1>El tiempo</h1>
-    <form method="get" action='./pedirAcuWheather.php'>
+    <form method="post" action='./pedirAcuWheather.php'>
     <label for="provincia">Elige provincia:</label>
 
     <select name="provincia" id="provincia">
