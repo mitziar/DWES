@@ -1,0 +1,288 @@
+{
+  "palos": [
+    {
+      "name": "oros",
+      "id": 1
+    },
+    {
+      "name": "copas",
+      "id": 2
+    },
+    {
+      "name": "espadas",
+      "id": 3
+    },
+    {
+      "name": "bastos",
+      "id": 4
+    }
+  ],
+  "naipes": [
+    {
+      "palo": "oros",
+      "carta": 1,
+      "lugar": "mazo",
+      "id": 1
+    },
+    {
+      "palo": "oros",
+      "carta": 2,
+      "lugar": "mazo",
+      "id": 2
+    },
+    {
+      "palo": "oros",
+      "carta": 3,
+      "lugar": "mazo",
+      "id": 3
+    },
+    {
+      "palo": "oros",
+      "carta": 4,
+      "lugar": "mazo",
+      "id": 4
+    },
+    {
+      "palo": "oros",
+      "carta": 5,
+      "lugar": "mazo",
+      "id": 5
+    },
+    {
+      "palo": "oros",
+      "carta": 6,
+      "lugar": "mazo",
+      "id": 6
+    },
+    {
+      "palo": "oros",
+      "carta": 7,
+      "lugar": "mazo",
+      "id": 7
+    },
+    {
+      "palo": "oros",
+      "carta": 8,
+      "lugar": "mazo",
+      "id": 8
+    },
+    {
+      "palo": "oros",
+      "carta": 9,
+      "lugar": "mazo",
+      "id": 9
+    },
+    {
+      "palo": "oros",
+      "carta": 10,
+      "lugar": "mazo",
+      "id": 10
+    },
+    {
+      "palo": "copas",
+      "carta": 1,
+      "lugar": "mazo",
+      "id": 11
+    },
+    {
+      "palo": "copas",
+      "carta": 2,
+      "lugar": "mazo",
+      "id": 12
+    },
+    {
+      "palo": "copas",
+      "carta": 3,
+      "lugar": "mazo",
+      "id": 13
+    },
+    {
+      "palo": "copas",
+      "carta": 4,
+      "lugar": "mazo",
+      "id": 14
+    },
+    {
+      "palo": "copas",
+      "carta": 5,
+      "lugar": "mazo",
+      "id": 15
+    },
+    {
+      "palo": "copas",
+      "carta": 6,
+      "lugar": "mazo",
+      "id": 16
+    },
+    {
+      "palo": "copas",
+      "carta": 7,
+      "lugar": "mazo",
+      "id": 17
+    },
+    {
+      "palo": "copas",
+      "carta": 8,
+      "lugar": "mazo",
+      "id": 18
+    },
+    {
+      "palo": "copas",
+      "carta": 9,
+      "lugar": "mazo",
+      "id": 19
+    },
+    {
+      "palo": "copas",
+      "carta": 10,
+      "lugar": "mazo",
+      "id": 20
+    },
+    {
+      "palo": "espadas",
+      "carta": 1,
+      "lugar": "mazo",
+      "id": 21
+    },
+    {
+      "palo": "espadas",
+      "carta": 2,
+      "lugar": "mazo",
+      "id": 22
+    },
+    {
+      "palo": "espadas",
+      "carta": 3,
+      "lugar": "mazo",
+      "id": 23
+    },
+    {
+      "palo": "espadas",
+      "carta": 4,
+      "lugar": "mazo",
+      "id": 24
+    },
+    {
+      "palo": "espadas",
+      "carta": 5,
+      "lugar": "mazo",
+      "id": 25
+    },
+    {
+      "palo": "espadas",
+      "carta": 6,
+      "lugar": "mazo",
+      "id": 26
+    },
+    {
+      "palo": "espadas",
+      "carta": 7,
+      "lugar": "mazo",
+      "id": 27
+    },
+    {
+      "palo": "espadas",
+      "carta": 8,
+      "lugar": "mazo",
+      "id": 28
+    },
+    {
+      "palo": "espadas",
+      "carta": 9,
+      "lugar": "mazo",
+      "id": 29
+    },
+    {
+      "palo": "espadas",
+      "carta": 10,
+      "lugar": "mazo",
+      "id": 30
+    },
+    {
+      "palo": "bastos",
+      "carta": 1,
+      "lugar": "mazo",
+      "id": 31
+    },
+    {
+      "palo": "bastos",
+      "carta": 2,
+      "lugar": "mazo",
+      "id": 32
+    },
+    {
+      "palo": "bastos",
+      "carta": 3,
+      "lugar": "mazo",
+      "id": 33
+    },
+    {
+      "palo": "bastos",
+      "carta": 4,
+      "lugar": "mazo",
+      "id": 34
+    },
+    {
+      "palo": "bastos",
+      "carta": 5,
+      "lugar": "mazo",
+      "id": 35
+    },
+    {
+      "palo": "bastos",
+      "carta": 6,
+      "lugar": "mazo",
+      "id": 36
+    },
+    {
+      "palo": "bastos",
+      "carta": 7,
+      "lugar": "mazo",
+      "id": 37
+    },
+    {
+      "palo": "bastos",
+      "carta": 8,
+      "lugar": "mazo",
+      "id": 38
+    },
+    {
+      "palo": "bastos",
+      "carta": 9,
+      "lugar": "mazo",
+      "id": 39
+    },
+    {
+      "palo": "bastos",
+      "carta": 10,
+      "lugar": "mazo",
+      "id": 40
+    }
+  ],
+  "lugar": [
+    {
+      "estado": "jugador 1",
+      "id": 1
+    },
+    {
+      "estado": "jugador 2",
+      "id": 2
+    },
+    {
+      "estado": "jugador 3",
+      "id": 3
+    },
+    {
+      "estado": "jugador 4",
+      "id": 4
+    },
+    {
+      "estado": "mazo",
+      "id": 5
+    },
+    {
+      "estado": "descartada",
+      "id": 6
+    }
+  ]
+}
