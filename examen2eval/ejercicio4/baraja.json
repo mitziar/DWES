@@ -58,7 +58,7 @@
       "id": 7,
       "palo": "oros",
       "carta": "7",
-      "lugar": "Jugador 1"
+      "lugar": "mazo"
     },
     {
       "id": 8,
@@ -76,7 +76,7 @@
       "id": 10,
       "palo": "oros",
       "carta": "12",
-      "lugar": "Jugador 2"
+      "lugar": "mazo"
     },
     {
       "id": 11,
@@ -88,13 +88,13 @@
       "id": 12,
       "palo": "copas",
       "carta": "2",
-      "lugar": "Jugador 1"
+      "lugar": "mazo"
     },
     {
       "id": 13,
       "palo": "copas",
       "carta": "3",
-      "lugar": "Jugador 2"
+      "lugar": "mazo"
     },
     {
       "id": 14,
@@ -142,7 +142,7 @@
       "id": 21,
       "palo": "espadas",
       "carta": "1",
-      "lugar": "Jugador 1"
+      "lugar": "mazo"
     },
     {
       "id": 22,
@@ -196,7 +196,7 @@
       "id": 30,
       "palo": "espadas",
       "carta": "12",
-      "lugar": "Jugador 1"
+      "lugar": "mazo"
     },
     {
       "id": 31,
