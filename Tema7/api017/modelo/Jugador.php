@@ -4,17 +4,17 @@ class Jugador{
     
     private $codJugador;
     private $nombre;
-    private $poscion;
+    private $posicion;
     private $sueldo;
     private $codEquipo;
 
-    public function __construct($codJugador,$nombre,$poscion,$sueldo,$codEquip)
+    public function __construct($codJugador,$nombre,$posicion,$sueldo,$codEquipo)
     {
         $this->codJugador = $codJugador;
         $this->nombre = $nombre;
-        $this->poscion = $poscion;
+        $this->posicion = $posicion;
         $this->sueldo = $sueldo;
-        $this->codEquip = $codEquip;
+        $this->codEquipo = $codEquipo;
     }
 
     public function __get($get){

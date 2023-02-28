@@ -1,6 +1,6 @@
 <?
 
-class Equiop{
+class Equipo{
 
     private $codEquipo;
     private $nombre;

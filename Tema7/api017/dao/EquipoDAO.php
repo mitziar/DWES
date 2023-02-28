@@ -6,7 +6,7 @@ class EquipoDAO extends FactoryBD implements DAO
 {
     public static function findAll()
     {
-        $sql = 'select * from equipos;';
+        $sql = 'select * from equipo;';
         $datos = array();
         $devuelve = parent::ejecuta($sql, $datos);
         $arrayC = $devuelve->fetchAll(PDO::FETCH_ASSOC);
@@ -14,19 +14,20 @@ class EquipoDAO extends FactoryBD implements DAO
     }
     public static function findById($id)
     {
-        $sql = 'select * from equipos where codEquipo = ?;';
+        $sql = 'select * from equipo where codEquipo = ?;';
         $datos = array($id);
         $devuelve = parent::ejecuta($sql, $datos);
         $obj = $devuelve->fetch(PDO::FETCH_ASSOC);
         if ($obj) {
-             return $obj;
+            
+             return array($obj);
         }
         return null;
     }
 
     public static function findByLocalidad($localidad)
     {
-        $sql = 'select * from equidpos where localidad = ?;';
+        $sql = 'select * from equipo where localidad = ?;';
         $datos = array($localidad);
         $devuelve = parent::ejecuta($sql, $datos);
         $arrayC = $devuelve->fetchAll(PDO::FETCH_ASSOC);
@@ -37,7 +38,7 @@ class EquipoDAO extends FactoryBD implements DAO
 
     public static function delete($id)
     {
-        $sql = 'delete from equipos where codEquipo = ?';
+        $sql = 'delete from equipo where codEquipo = ?';
         $datos = array($id);
         $devuelve = parent::ejecuta($sql, $datos);
         if ($devuelve->rowCount() == 0) {
@@ -47,12 +48,10 @@ class EquipoDAO extends FactoryBD implements DAO
     }
     public static function insert($objeto)
     {
-        $sql = 'insert into equipos values (?,?)';
-        $objeto = (array)$objeto;
-        $datos = array();
-        foreach ($objeto as $att) {
-            array_push($datos, $att);
-        }    
+        $sql = 'insert into equipo(nombre,localidad) values (?,?)';
+        
+        $datos = array($objeto->nombre,$objeto->localidad);
+
         $devuelve = parent::ejecuta($sql, $datos);
         if ($devuelve->rowCount() == 0) {
             return false;
@@ -61,8 +60,8 @@ class EquipoDAO extends FactoryBD implements DAO
     }
     public static function update($obj)
     {
-        $sql = 'update equipos set nombre = ?, localidad = ? where id = ?';
-        $datos = array($obj->nombre,$obj->localidad,$obj->id);
+        $sql = 'update equipo set nombre = ?, localidad = ? where codEquipo = ?';
+        $datos = array($obj->nombre,$obj->localidad,$obj->codEquipo);
         $devuelve = parent::ejecuta($sql, $datos);
         if ($devuelve->rowCount() == 0) {
             return false;

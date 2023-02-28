@@ -1,7 +1,7 @@
 
 <?
 
-class EquipoControlador extends ControladorPadre
+class JugadorControlador extends ControladorPadre
 {
     public function controlar()
     {
@@ -34,28 +34,46 @@ class EquipoControlador extends ControladorPadre
         if (count($recurso) == 2) {
             if (!$parametros) {
                 //LISTAR
-                $lista = EquipoDAO::findAll();
+                $lista = JugadorDAO::findAll();
                 $data = json_encode($lista);
                 self::respuesta(
                     $data,
                     array('Content-Type: application/json', 'HTTP/1.1 200 OK')
                 );
-            } 
-        }
-        
-        else if (count($recurso) == 3) {
-            $equipo = EquipoDAO::findById($recurso[2]);
-            $data = json_encode($equipo);
-            self::respuesta(
-                $data,
-                array('Content-Type: application/json', 
-                'HTTP/1.1 200 OK')
-            );
-        }
+            }else{
+                if(isset($_GET['nombre']) && count($_GET)==1){
+                    
+                    $lista = JugadorDAO::findByNombre($_GET['nombre']);
+                    $data = json_encode($lista);
+                    self::respuesta(
+                        $data,
+                        array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+                    );
 
-        else if (count($recurso) == 4) {
-            $jugadores = JugadorDAO::findByEquipo($recurso[2]);
-            $data = json_encode($jugadores);
+                }elseif(isset($_GET['posicion']) && count($_GET)==1){
+
+                    $lista = JugadorDAO::findByPosicion($_GET['posicion']);
+                    $data = json_encode($lista);
+                    self::respuesta(
+                        $data,
+                        array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+                    );
+
+                }elseif(isset($_GET['sueldoMin']) && isset($_GET['sueldoMax']) && count($_GET)==2){
+
+                    $lista = JugadorDAO::findBySueldo($_GET['sueldoMin'],$_GET['sueldoMax']);
+                    $data = json_encode($lista);
+                    self::respuesta(
+                        $data,
+                        array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+                    );
+
+                }
+            }
+        }elseif (count($recurso) == 3) {
+
+            $jugador = JugadorDAO::findById($recurso[2]);
+            $data = json_encode($jugador);
             self::respuesta(
                 $data,
                 array('Content-Type: application/json', 
@@ -68,9 +86,9 @@ class EquipoControlador extends ControladorPadre
     {
         $body = file_get_contents('php://input');
         $dato = json_decode($body, true);
-        if (isset($dato['nombre']) && isset($dato['localidad'])) {
-            $equipo = new Equipo(null, $dato['nombre'], $dato['localidad']);
-            if (EquipoDAO::insert($equipo)) {
+        if (isset($dato['nombre']) && isset($dato['posicion']) && isset($dato['sueldo']) && isset($dato['codEquipo'])) {
+            $jugador = new Jugador(null, $dato['nombre'], $dato['posicion'], $dato['sueldo'], $dato['codEquipo']);
+            if (JugadorDAO::insert($jugador)) {
                 self::respuesta(
                     '',
                     array('Content-Type: application/json', 'HTTP/1.1 201 CREADO')
@@ -90,10 +108,10 @@ class EquipoControlador extends ControladorPadre
         if (count($recurso) == 3) {
             $body = file_get_contents('php://input');
             $dato = json_decode($body, true);
-            if (isset($dato['nombre']) && isset($dato['localidad'])) {
-                $equipo = new Equipo(null, $dato['nombre'], $dato['localidad']);
-                $equipo->codEquipo = $recurso[2];
-                if (EquipoDAO::update($equipo)) {
+            if (isset($dato['nombre']) && isset($dato['posicion']) && isset($dato['sueldo']) && isset($dato['codEquipo'])) {
+                $jugador = new Jugador(null, $dato['nombre'], $dato['posicion'], $dato['sueldo'], intval($dato['codEquipo']));
+                $jugador->codJugador = intval($recurso[2]);
+                if (JugadorDAO::update($jugador)) {
                     self::respuesta(
                         '',
                         array('Content-Type: application/json', 'HTTP/1.1 201 MODIFICADO')
@@ -119,11 +137,11 @@ class EquipoControlador extends ControladorPadre
         $recurso = self::recurso();
         if (count($recurso) == 3) {
             //si no borra ninguno
-            if (!EquipoDAO::delete($recurso[2])) {
+            if (!JugadorDAO::delete($recurso[2])) {
                 self::respuesta(
                     '',
                     array('Content-Type: application/json',
-                     'HTTP/1.1 400 No se ha borrado ninguno')
+                     'HTTP/1.1 204 No se ha borrado ninguno')
                 );
             }else{
                 self::respuesta(
@@ -135,7 +153,7 @@ class EquipoControlador extends ControladorPadre
         } else {
             self::respuesta(
                 '',
-                array('HTTP/1.1 400 El recurso está mal formado /conciertos/{id}')
+                array('HTTP/1.1 400 El recurso está mal formado')
             );
         }
     }

@@ -1,5 +1,5 @@
 <?
-define('HOST','192.168.2.200');
-define('USER','maria');
-define('PASS','maria');
-define('BBDD','conciertos');
+define('HOST','192.168.100.127');
+define('USER','itziar');
+define('PASS','itziar');
+define('BBDD','apiEquipos');
