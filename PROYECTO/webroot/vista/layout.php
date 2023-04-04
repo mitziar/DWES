@@ -14,25 +14,25 @@
         <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
           <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
         </a>
-        <h1>hola</h1>
         <div class="col-md-3 text-end">
         <form action="./index.php" method="POST"> 
-        <?
+        <?php
         if(!estaValidado()){?>
           <input type="submit" name="login" class="btn btn-outline-secondary me-2" value="Login">
           <input type="submit" name="insertarUsuario" class="btn btn-outline-secondary me-2" value="Registrarse">
-        <?}else{
+        <?php }else{
         
           ?>
-        <h2><?echo $_SESSION['user']?></h2>
+        <h2><?php echo $_SESSION['user']?></h2>
         <input type="submit" name="miperfil" class="btn btn-outline-secondary me-2" value="Mi perfil">
       
         <input type="submit" name="logout" class="btn btn-outline-secondary me-2" value="Logout">
-          <?
+          <?php
          }?>
         </div>
         </form>
       </header>
+
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Tenth navbar example">
             <div class="container-fluid">
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,12 +43,12 @@
                     <li class="nav-item">
                       <a class="nav-link active" aria-current="page" href="./index.php?home=home">HOME</a>
                     </li>
-                    <?
+                    <?php
                   if(estaValidado()&&!esAdmin()&&!esModerador()){?>
                     <li class="nav-item">
                       <a class="nav-link active" aria-current="page" href="./index.php?verVenta">Mis compras</a>
                     </li>
-                  <?}
+                  <?php }
                   if(esAdmin()||esModerador()){?>
                   <li class="nav-item">
                       <a class="nav-link active" aria-current="page" href="./index.php?verVenta">Ventas</a>
@@ -59,15 +59,16 @@
                   <li>
                   <a class="nav-link  active" href="./index.php?administrarProductos=administrarProductos">Productos</a>
                   </li>
-                  <?}?>
+                  <?php }?>
                 </ul>
               </div>
             </div>
       </nav>
 
       <main class="d-flex flex-wrap justify-content-center align-items-center py-3 my-4"> 
-              <? 
+              <?php 
                 echo '<div class="row align-items-center">';
+                echo "hola 1";
                 require_once $_SESSION['vista'];
                 echo '</div>';
               ?> 

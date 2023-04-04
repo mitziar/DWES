@@ -1,6 +1,5 @@
-<?
-//define('HOST','192.168.2.214');
+<?php
 define('HOST','192.168.100.136');
 define('USER','itziar');
 define('PASS','itziar');
-define('BBDD','tienda');
+define('BBDD','inventario');
