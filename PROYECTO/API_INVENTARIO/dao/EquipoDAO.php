@@ -1,16 +1,16 @@
 <?php
 
-class EquipoDAO extends FactoryBD implements DAO{
+class EquipoDAO extends FactoryBD implements DAO
+{
     public static function findAll()
     {
-        $sql = 'select * from equipos;';
+        $sql = 'select * from equipos where activo=1;';
         $datos = array();
         $devuelve = parent::ejecuta($sql,$datos);
         $arrayEquipos = array();
-        while ($obj = $devuelve->fetchObject())
+        while ($obj = $devuelve->fetch(PDO::FETCH_ASSOC))
         {
-            $equipo = new Equipo($obj->codigo_equipo,$obj->equipo, $obj->caracteristicas, $obj->estado,$obj->imagen, $obj->imagen_QR,$obj->activo,$obj->codigo_categoria);
-            array_push($arrayEquipos, $equipo);
+            array_push($arrayEquipos, $obj);
         }
         return $arrayEquipos;
     }
@@ -18,12 +18,37 @@ class EquipoDAO extends FactoryBD implements DAO{
     {
         $sql = 'select * from equipos where codigo_equipo= ?;';
         $datos = array($id);
-        $devuelve = parent::ejecuta($sql,$datos);
-        $obj = $devuelve->fetchObject();
-        if($obj){
-            $equipo = new Equipo($obj->codigo_equipo,$obj->equipo, $obj->caracteristicas, $obj->estado,$obj->imagen, $obj->imagen_QR,$obj->activo,$obj->codigo_categoria);
-            return $equipo;
-        }  
+        $devuelve = parent::ejecuta($sql, $datos);
+        $obj = $devuelve->fetch(PDO::FETCH_ASSOC);
+        if ($obj) {
+        
+            return $obj;
+        }
+        return null;
+    }
+    public static function findByFiltro($filtro)
+    {
+        $sql = 'select * from equipos where estado= ? and activo=1;';
+        $datos = array($filtro);
+        $devuelve = parent::ejecuta($sql, $datos);
+        $obj = $devuelve->fetch(PDO::FETCH_ASSOC);
+        $arrayEquipos = array();
+        while ($obj = $devuelve->fetch(PDO::FETCH_ASSOC))
+        {
+            array_push($arrayEquipos, $obj);
+        }
+        return $arrayEquipos;
+    }
+    public static function findMaxId()
+    {
+        $sql = 'select max(codigo_equipo) as max from equipos;';
+        $datos = array();
+        $devuelve = parent::ejecuta($sql, $datos);
+        $obj = $devuelve->fetch(PDO::FETCH_ASSOC);
+        if ($obj) {
+        
+            return $obj;
+        }
         return null;
     }
     public static function delete($id){
@@ -36,23 +61,24 @@ class EquipoDAO extends FactoryBD implements DAO{
         }
         return true;
     }
-    public static function insert($obj){
+    public static function insert($obj)
+    {
          
         $sql1 = 'insert into equipos(equipo,caracteristicas,estado,imagen,imagen_QR,activo,codigo_categoria) values(?,?,?,?,?,?,?)';
         $datos=array($obj->equipo, $obj->caracteristicas, $obj->estado,$obj->imagen, $obj->imagen_QR,$obj->activo,$obj->codigo_categoria);
-        $devuelve = parent::ejecuta($sql1,$datos);
-        if($devuelve){
-            //$fecha=date("Y-m-d"); 
+        $devuelve = parent::ejecuta($sql1, $datos);
+        if ($devuelve) {
+
                 return true;
             }
         
         return false;
     }
     public static function update($obj){
-        $sql = 'update productos set equipo = ?,caracteristicas = ?,estado = ?,imagen=?,imagen_QR=?,activo=?,codigo_categoria=? where codigo_equipo = ? ';
+        $sql = 'update equipos set equipo = ?,caracteristicas = ?,estado = ?,imagen=?,imagen_QR=?,activo=?,codigo_categoria=? where codigo_equipo = ? ';
         $datos = array($obj->equipo, $obj->caracteristicas, $obj->estado,$obj->imagen, $obj->imagen_QR,$obj->activo,$obj->codigo_categoria,$obj->codigo_equipo);
-        $devuelve = parent::ejecuta($sql,$datos); 
-        if($devuelve->rowCount() != 0){
+        $devuelve = parent::ejecuta($sql, $datos);
+        if ($devuelve->rowCount() != 0) {
             return true;
         }
         return false;

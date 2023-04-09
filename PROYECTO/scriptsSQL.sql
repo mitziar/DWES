@@ -3,12 +3,14 @@ use inventario;
 
 CREATE TABLE roles (
   codigo_rol INT primary key auto_increment,
-  rol VARCHAR(20)
+  rol VARCHAR(20),
+  activo boolean
 ) engine =innodb;
 
 CREATE TABLE categorias (
   codigo_categoria INT primary key auto_increment,
-  categoria VARCHAR(20)
+  categoria VARCHAR(20),
+  activo boolean
 ) engine =innodb;
 
 CREATE TABLE usuarios (
@@ -61,12 +63,12 @@ CREATE TABLE incidencias (
   FOREIGN KEY (codigo_equipo) REFERENCES equipos(codigo_equipo)
 ) engine =innodb;
 
-INSERT INTO roles(rol) values ('administrador');
-INSERT INTO roles(rol) values ('usuario');
+INSERT INTO roles(rol,activo) values ('administrador',1);
+INSERT INTO roles(rol,activo) values ('usuario',1);
 
-INSERT INTO categorias(categoria) values ('pantallas');
-INSERT INTO categorias(categoria) values ('teclados');
-INSERT INTO categorias(categoria) values ('ratones');
+INSERT INTO categorias(categoria,activo) values ('Pantallas',1);
+INSERT INTO categorias(categoria,activo) values ('Teclados',1);
+INSERT INTO categorias(categoria,activo) values ('Ratones',1);
 
 INSERT INTO usuarios(usuario,clave,email,activo,codigo_rol) values ('administrador','5e7951aa8f403ff16d0cd453e7d86ee0c99ce5319e01836333b6ba398a20494d7f3e76397e3d99e8fc4702ba7cfd7600d453958c755000cc31ce0150ac819f9e','administrador@email.com',1,1);
 INSERT INTO usuarios(usuario,clave,email,activo,codigo_rol) values ('usuario','d9e94fd2b4c5522e5bb7996aa4df48a3f6b8f1b0c3e7fadb5fcc724e3ab6d85dc401b0a2789fe56c209b80e86102b218ff74ff8614f315599a180691846138b6','usuario@email.com',1,2);

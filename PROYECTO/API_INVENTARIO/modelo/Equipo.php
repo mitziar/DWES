@@ -16,6 +16,7 @@ class Equipo{
         $this->equipo = $equipo;
         $this->caracteristicas = $caracteristicas;
         $this->estado = $estado;
+        $this->imagen = $imagen;
         $this->imagen_QR = $imagen_QR;
         $this->activo = $activo;
         $this->codigo_categoria = $codigo_categoria;

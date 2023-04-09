@@ -1,7 +1,10 @@
 <?php
+require_once './configuracion/conexion.php';
+
 Class FactoryBD{
     public static function ejecuta($sql,$datos){
         try{
+            //$con = new PDO("mysql:host=192.168.100.136;dbname=inventario",'root','');
             $con = new PDO("mysql:host=".HOST.";dbname=".BBDD,USER,PASS);
             $preparada = $con->prepare($sql);
             $preparada->execute($datos);       

@@ -6,12 +6,6 @@ require_once('./configuracion/conexion.php');
 //funciones
 require_once('./core/funcionesSesiones.php');
 
-//dao
-require_once('./dao/FactoryBD.php');
-require_once('./dao/DAO.php');
-require_once('./dao/UsuarioDAO.php');
-require_once('./dao/EquipoDAO.php');
-
 //modelo
 require_once('./modelo/Categoria.php');
 require_once('./modelo/Equipo.php');
@@ -21,13 +15,21 @@ require_once('./modelo/Solicitud.php');
 require_once('./modelo/Usuario.php');
 
 //controladores
-$controladores = array(    
+$controladores = array(
+
     'login'=>'./controlador/LoginControlador.php',
-    'home' => './controlador/HomeControlador.php',
+    'registrar'=>'./controlador/RegistrarControlador.php',
+    'equipos'=>'./controlador/EquiposControlador.php',
+    'perfil' => './controlador/PerfilControlador.php',
     'user' => './controlador/UsusarioControlador.php'
+    
 );
 
 //vistas
 $vistas = array(
-    'login'=>'login.php'
+    'login'=>'login.php',
+    'equipos'=>'equiposVista.php',
+    'equipoNuevo'=>'equipoNuevoVista.php',
+    'perfil'=>'perfilVista.php',
+    'registrar'=>'registrar.php'
 );

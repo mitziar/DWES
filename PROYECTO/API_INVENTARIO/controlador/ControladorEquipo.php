@@ -1,11 +1,11 @@
 <?php
 
-class ControladorUsuario extends ControladorPadre
+class ControladorEquipo extends ControladorPadre
 {
-    //busca en la base de datos
+
     public function controlar()
     {
-        //lo que me ha pasado
+
         $metodo = $_SERVER['REQUEST_METHOD'];
         switch ($metodo) {
             case 'GET':
@@ -31,10 +31,10 @@ class ControladorUsuario extends ControladorPadre
         $recurso = self::recurso();
 
         if (count($recurso) == 2) {
-            //si solo hay ""/equipos
+
             if (!$parametros) {
 
-                $lista = UsuarioDAO::findAll();
+                $lista = EquipoDAO::findAll();
                 $data = json_encode($lista);
                 self::respuesta(
                     $data,
@@ -43,11 +43,19 @@ class ControladorUsuario extends ControladorPadre
                         'HTTP/1.1 200 OK'
                     )
                 );
-            }else{
-                if(isset($_GET['email'])){
-                    $usuario = UsuarioDAO::findByEmail($_GET['email']);
-    
-                    $data = json_encode(array($usuario));
+            } else {
+                if (isset($_GET['filtro'])) {
+                    $equipo = EquipoDAO::findByFiltro($_GET['filtro']);
+
+                    $data = json_encode(array($equipo));
+                    self::respuesta(
+                        $data,
+                        array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+                    );
+                }elseif (isset($_GET['maxId'])) {
+                    $id = EquipoDAO::findMaxId();
+
+                    $data = json_encode(array($id));
                     self::respuesta(
                         $data,
                         array('Content-Type: application/json', 'HTTP/1.1 200 OK')
@@ -55,11 +63,11 @@ class ControladorUsuario extends ControladorPadre
                 }
             }
         } elseif (count(self::recurso()) == 3) {
+
             if (is_int((int)$recurso[2])) {
 
-                $usuario = UsuarioDAO::findById((int)$recurso[2]);
-
-                $data = json_encode(array($usuario));
+                $equipo = EquipoDAO::findById((int)$recurso[2]);
+                $data = json_encode(array($equipo));
                 self::respuesta(
                     $data,
                     array('Content-Type: application/json', 'HTTP/1.1 200 OK')
@@ -73,20 +81,23 @@ class ControladorUsuario extends ControladorPadre
         $body = file_get_contents('php://input');
         $dato = json_decode($body, true); //me llega un objeto estandar
         if (
-            isset($dato['usuario']) && isset($dato['clave']) && isset($dato['email'])
-            && isset($dato['activo']) && isset($dato['codigo_rol'])
+            isset($dato['equipo']) && isset($dato['caracteristicas']) && isset($dato['estado'])
+            && isset($dato['imagen']) && isset($dato['imagen_QR']) && isset($dato['activo'])
+            && isset($dato['codigo_categoria'])
         ) {
 
-            $usuario = new Usuario(
+            $equipo = new Equipo(
                 null,
-                $dato['usuario'],
-                $dato['clave'],
-                $dato['email'],
+                $dato['equipo'],
+                $dato['caracteristicas'],
+                $dato['estado'],
+                $dato['imagen'],
+                $dato['imagen_QR'],
                 $dato['activo'],
-                $dato['codigo_rol']
+                $dato['codigo_categoria']
             );
 
-            if (UsuarioDao::insert($usuario)) {
+            if (EquipoDao::insert($equipo)) {
 
                 self::respuesta(
                     '',
@@ -109,21 +120,23 @@ class ControladorUsuario extends ControladorPadre
         $dato = json_decode($body, true);
 
         if (
-            isset($dato['codigo_usuario']) && isset($dato['usuario']) && isset($dato['clave'])
-            && isset($dato['email']) && isset($dato['activo']) && isset($dato['codigo_rol'])
+            isset($dato['codigo_equipo']) && isset($dato['equipo']) && isset($dato['caracteristicas'])
+            && isset($dato['estado']) && isset($dato['imagen']) && isset($dato['imagen_QR'])
+            && isset($dato['activo']) && isset($dato['codigo_categoria'])
         ) {
 
-            $usuario =
-                new Usuario(
-                    $dato['codigo_usuario'],
-                    $dato['usuario'],
-                    $dato['clave'],
-                    $dato['email'],
-                    $dato['activo'],
-                    $dato['codigo_rol']
-                );
+            $equipo = new Equipo(
+                $dato['codigo_equipo'],
+                $dato['equipo'],
+                $dato['caracteristicas'],
+                $dato['estado'],
+                $dato['imagen'],
+                $dato['imagen_QR'],
+                $dato['activo'],
+                $dato['codigo_categoria']
+            );
 
-            if (UsuarioDao::update($usuario)) {
+            if (EquipoDao::update($equipo)) {
 
                 self::respuesta(
                     '',
@@ -142,7 +155,7 @@ class ControladorUsuario extends ControladorPadre
         $recurso = self::recurso();
         if (count(self::recurso()) == 3) {
             if (is_int((int)$recurso[2])) {
-                if (UsuarioDAO::delete((int)$recurso[2])) {
+                if (EquipoDAO::delete((int)$recurso[2])) {
                     self::respuesta(
                         '',
                         array('Content-Type: application/json', 'HTTP/1.1 200 OK')
