@@ -44,7 +44,7 @@ function getUsuario($email)
 {
     require_once('./peticiones/curl.php');
     $usuario=null;
-    $lista = get('http://192.168.100.136/DWES/PROYECTO/API_INVENTARIO/index.php/usuario?email='.$email);
+    $lista = get(URL.'/DWES/PROYECTO/API_INVENTARIO/index.php/usuario?email='.$email);
     $lista = json_decode($lista, true);
 
     if ($lista != null) {
@@ -57,7 +57,7 @@ function existeUsuario($email)
 {
     require_once('./peticiones/curl.php');
     $existe=false;
-    $lista = get('http://192.168.100.136/DWES/PROYECTO/API_INVENTARIO/index.php/usuario?email='.$email);
+    $lista = get(URL.'/DWES/PROYECTO/API_INVENTARIO/index.php/usuario?email='.$email);
     $lista = json_decode($lista, true);
 
     if ($lista != null) {
@@ -82,7 +82,7 @@ function insertarUsuario()
         "activo": 1,
         "codigo_rol": 2
         }';
-    $resultado = post($json, 'http://192.168.100.136/DWES/PROYECTO/API_INVENTARIO/index.php/usuario');
+    $resultado = post($json, URL.'/DWES/PROYECTO/API_INVENTARIO/index.php/usuario');
 
     return $resultado;
 }
@@ -97,7 +97,7 @@ function modificarUsuario()
         "activo": "'.$_REQUEST['activo'].'",
         "codigo_rol":"'.$_REQUEST['codigo_rol'].'"
         }';
-    $resultado = put($json, 'http://192.168.100.136/DWES/PROYECTO/API_INVENTARIO/index.php/usuario');
+    $resultado = put($json, URL.'/DWES/PROYECTO/API_INVENTARIO/index.php/usuario');
 
     return $resultado;
 }

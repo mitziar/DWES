@@ -10,7 +10,7 @@ if (isset($_REQUEST['entrar'])) {
             $_SESSION['error'] = "Debe rellenar la contraseña";
         } else {
 
-            $lista = get('http://192.168.100.136/DWES/PROYECTO/API_INVENTARIO/index.php/usuario');
+            $lista = get(URL.'/DWES/PROYECTO/API_INVENTARIO/index.php/usuario');
             $lista = json_decode($lista, true);
 
             if ($lista != null) {

@@ -24,14 +24,16 @@ if (isset($_REQUEST['insertarEquipo']) && !camposVacios()) {
         "equipo": "'.$_REQUEST['equipo'].'",
         "caracteristicas": "'.$_REQUEST['caracteristicas'].'",
         "estado": "Disponible",
-        "imagen": "'.$_FILES['file']['imagen'].'",
-        "imagen_QR": "'.$_FILES['file']['imagen_QR'].'",
+        "imagen": "'.$_FILES['imagen']['name'].'",
+        "imagen_QR": "'.$_FILES['imagen_QR']['name'].'",
         "activo": 1,
         "codigo_categoria": '.(int)$_REQUEST['categoria'].'
         }';
 
-    $url='http://192.168.100.136/DWES/PROYECTO/API_INVENTARIO/index.php/equipo';
+    $url=URL.'/DWES/PROYECTO/API_INVENTARIO/index.php/equipo';
     $resultado = post($json, $url);
+
+
     $_SESSION['controlador'] = $controladores['equipos'];
     $_SESSION['vista'] = $vistas['equipos'];
     require_once $_SESSION['controlador'];

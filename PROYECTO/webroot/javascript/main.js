@@ -48,7 +48,7 @@ async function generarMaxId(){
 
     try {
       let maxId;
-      const json = await fetch(`http://192.168.100.136/DWES/PROYECTO/API_INVENTARIO/index.php/equipo?maxId`);
+      const json = await fetch(URL+"/DWES/PROYECTO/API_INVENTARIO/index.php/equipo?maxId");
       const objeto=await json.json();//fetch devuelve un objeto que tiene la propieda json . es de tipo promesa
       objeto.forEach(element => {
                maxId = element.max + 1;

@@ -3,6 +3,8 @@
 //bbdd
 require_once('./configuracion/conexion.php');
 
+require_once('./peticiones/curl.php');
+
 //funciones
 require_once('./core/funcionesSesiones.php');
 

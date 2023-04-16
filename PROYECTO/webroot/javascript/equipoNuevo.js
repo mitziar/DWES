@@ -2,7 +2,7 @@ window.addEventListener('load', function() {
 
     event.preventDefault();
 
-    fetch(`http://192.168.100.136/DWES/PROYECTO/API_INVENTARIO/index.php/categoria`)
+    fetch(URL+'/DWES/PROYECTO/API_INVENTARIO/index.php/categoria')
       .then((response) => {
 
         if (!response.ok) {

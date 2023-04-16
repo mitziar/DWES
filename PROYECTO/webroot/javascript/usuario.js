@@ -1,8 +1,8 @@
-const SERVER="http://192.168.100.136/DWES/PROYECTO/API_INVENTARIO/index.php";
-alert("HOLA");
+const SERVER=URL+"/DWES/PROYECTO/API_INVENTARIO/index.php";
+
 async function getUsuarios(){
 
-  const datos= await fetch("http://192.168.100.136/DWES/PROYECTO/API_INVENTARIO/index.php/usuario");
+  const datos= await fetch(URL+"/DWES/PROYECTO/API_INVENTARIO/index.php/usuario");
   if(!datos.ok){
       throw `Error ${datos.status} ${datos.statusText}`
   }
@@ -15,7 +15,7 @@ window.addEventListener('load', function () {
 
       event.preventDefault(); // anula lo traía por defecto
 
-      fetch(`http://192.168.100.136/DWES/PROYECTO/API_INVENTARIO/index.php/usuario`)
+      fetch(URL+`/DWES/PROYECTO/API_INVENTARIO/index.php/usuario`)
           .then((response) => {
               /**comprobar si la respuesta es ok. Primero trato el error !ok */
               if (!response.ok) {

@@ -1,8 +1,8 @@
 window.addEventListener('load', function() {
 
     event.preventDefault(); // anula lo traía por defecto
-
-    fetch(`http://192.168.100.136/DWES/PROYECTO/API_INVENTARIO/index.php/equipo`)
+    fetch('http://192.168.100.136/DWES/PROYECTO/API_INVENTARIO/index.php/equipo')
+    //fetch(URL+'/DWES/PROYECTO/API_INVENTARIO/index.php/equipo')
         .then((response) => {
             /**comprobar si la respuesta es ok. Primero trato el error !ok */
             if (!response.ok) {
@@ -64,7 +64,7 @@ window.addEventListener('load', function() {
 
                         td3.appendChild(boton2);
                         tr.appendChild(td3);
-                        document.getElementById("idTabla").append(tr3);
+                        document.getElementById("idTabla").append(tr);
 
                     } else {
 
@@ -74,13 +74,14 @@ window.addEventListener('load', function() {
 
 
                     }
-                    document.getElementById("idTabla").append(tr);
+                    
                 }
+                document.getElementById("idTabla").append(tr);
 
             });
 
         })
         .catch(error => {
-            this.alert('error' + error.statusText)
+            this.alert('error 1' + error.statusText)
         });
 });
