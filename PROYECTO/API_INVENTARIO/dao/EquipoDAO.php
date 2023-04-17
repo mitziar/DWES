@@ -28,10 +28,46 @@ class EquipoDAO extends FactoryBD implements DAO
     }
     public static function findByFiltro($filtro)
     {
-        $sql = 'select * from equipos where estado= ? and activo=1;';
+        $sql = 'select * from equipos where estado like ? and activo=1;';
         $datos = array($filtro);
         $devuelve = parent::ejecuta($sql, $datos);
         $obj = $devuelve->fetch(PDO::FETCH_ASSOC);
+        $arrayEquipos = array();
+        while ($obj = $devuelve->fetch(PDO::FETCH_ASSOC))
+        {
+            array_push($arrayEquipos, $obj);
+        }
+        return $arrayEquipos;
+    }
+    public static function findByFiltro2()
+    {
+        $sql = 'select distinct(estado) from equipos where activo=1;';
+        $datos = array();
+        $devuelve = parent::ejecuta($sql, $datos);
+        $arrayEquipos = array();
+        while ($obj = $devuelve->fetch(PDO::FETCH_ASSOC))
+        {
+            array_push($arrayEquipos, $obj);
+        }
+        return $arrayEquipos;
+    }
+    public static function findByFiltro3($filtro)
+    {
+        $sql = 'select * from equipos where estado like ? and activo=1;';
+        $datos = array($filtro);
+        $devuelve = parent::ejecuta($sql, $datos);
+        $arrayEquipos = array();
+        while ($obj = $devuelve->fetch(PDO::FETCH_ASSOC))
+        {
+            array_push($arrayEquipos, $obj);
+        }
+        return $arrayEquipos;
+    }
+    public static function findByCategoria($categoria)
+    {
+        $sql = 'select * from equipos where codigo_categoria = ? and activo=1;';
+        $datos = array($categoria);
+        $devuelve = parent::ejecuta($sql, $datos);
         $arrayEquipos = array();
         while ($obj = $devuelve->fetch(PDO::FETCH_ASSOC))
         {

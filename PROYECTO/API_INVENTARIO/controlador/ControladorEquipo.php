@@ -60,6 +60,30 @@ class ControladorEquipo extends ControladorPadre
                         $data,
                         array('Content-Type: application/json', 'HTTP/1.1 200 OK')
                     );
+                }elseif (isset($_GET['distinct'])) {
+                    $lista = EquipoDAO::findByFiltro2($_GET['distinct']);
+
+                    $data = json_encode($lista);
+                    self::respuesta(
+                        $data,
+                        array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+                    );
+                }elseif (isset($_GET['distinto'])) {
+                    $lista = EquipoDAO::findByFiltro3($_GET['distinto']);
+
+                    $data = json_encode($lista);
+                    self::respuesta(
+                        $data,
+                        array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+                    );
+                }elseif (isset($_GET['categoria'])) {
+                    $lista = EquipoDAO::findByCategoria($_GET['categoria']);
+
+                    $data = json_encode($lista);
+                    self::respuesta(
+                        $data,
+                        array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+                    );
                 }
             }
         } elseif (count(self::recurso()) == 3) {

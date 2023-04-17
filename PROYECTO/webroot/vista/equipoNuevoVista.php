@@ -38,4 +38,5 @@
 <script src="./webroot/javascript/qr/jquery.min.js"></script>
 <script src="./webroot/javascript/qr/qrcode.js"></script>
 <script src="./webroot/javascript/main.js"></script>
+<script src="./webroot/javascript/cargarSelects.js"></script>
 <script src="./webroot/javascript/equipoNuevo.js"></script>
